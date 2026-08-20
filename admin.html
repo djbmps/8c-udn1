@@ -3,147 +3,279 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b3d6b">
 <title>แดชบอร์ดทักษะ 8C — สพป.อุดรธานี เขต 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* พื้นผิวและตัวอักษร */
-  --surface-1:#ffffff; --surface-2:#f2f5f9; --surface-3:#e8eef5;
-  --text-1:#101418; --text-2:#4a5966; --text-3:#7a8894;
-  --line:#dde5ed; --grid:#eef2f7;
-  --navy:#0f4c81; --navy2:#0a3a63;
-  /* แรมป์ลำดับ (ฟ้า) สำหรับข้อมูลชุดเดียวและระดับคุณภาพ */
+  --brand-900:#072a4d; --brand-800:#0b3d6b; --brand-700:#0f4c81;
+  --brand-600:#1565a8; --brand-500:#2a78d6; --brand-100:#e7f0fa;
+  /* แรมป์ลำดับ (ฟ้าเฉดเดียว) — ใช้กับปริมาณและระดับคุณภาพ */
   --seq-1:#86b6ef; --seq-2:#3987e5; --seq-3:#256abf; --seq-4:#104281;
-  --bar:#2a78d6;
-  --r:14px;
+  --bar:#2a78d6; --bar-soft:#e7f0fa;
+  --ink-1:#101a24; --ink-2:#42586c; --ink-3:#6b8095;
+  --bg:#eef2f7; --card:#ffffff; --line:#dde5ee; --soft:#f5f8fc; --grid:#eaf0f6;
+  --r-lg:18px; --r:14px; --r-sm:10px;
+  --sh-1:0 1px 2px rgba(11,61,107,.06), 0 4px 14px rgba(11,61,107,.07);
+  --sh-2:0 2px 6px rgba(11,61,107,.08), 0 14px 34px rgba(11,61,107,.11);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]){
+    --seq-1:#3d6ea8; --seq-2:#3987e5; --seq-3:#5aa0ee; --seq-4:#9cc6f6;
+    --bar:#3987e5; --bar-soft:#1b2c3f; --brand-100:#12283f;
+    --ink-1:#eef4fa; --ink-2:#a8bccd; --ink-3:#7f95a8;
+    --bg:#0c1520; --card:#131f2c; --line:#243546; --soft:#182634; --grid:#1d2c3b;
+    --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
+    --sh-2:0 2px 6px rgba(0,0,0,.34), 0 14px 34px rgba(0,0,0,.4);
+  }
+}
+[data-theme=dark]{
+  --seq-1:#3d6ea8; --seq-2:#3987e5; --seq-3:#5aa0ee; --seq-4:#9cc6f6;
+  --bar:#3987e5; --bar-soft:#1b2c3f; --brand-100:#12283f;
+  --ink-1:#eef4fa; --ink-2:#a8bccd; --ink-3:#7f95a8;
+  --bg:#0c1520; --card:#131f2c; --line:#243546; --soft:#182634; --grid:#1d2c3b;
+  --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
+  --sh-2:0 2px 6px rgba(0,0,0,.34), 0 14px 34px rgba(0,0,0,.4);
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--surface-2);color:var(--text-1);
-  font-family:'Sarabun',-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.6}
-.wrap{max-width:1240px;margin:0 auto;padding:0 16px 60px}
-a{color:var(--navy)}
+body{margin:0;background:var(--bg);color:var(--ink-1);
+  font-family:'Sarabun',-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.6;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1300px;margin:0 auto;padding:0 18px 60px}
+a{color:var(--brand-600)}
+.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;vertical-align:-.16em}
 
-/* ---------- header ---------- */
-header{background:linear-gradient(135deg,var(--navy),var(--navy2) 65%,#0a5a5a);color:#fff;padding:22px 16px}
-header .wrap{padding-bottom:0;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-header h1{margin:0;font-size:1.32rem;font-weight:700}
-header .k{font-size:.82rem;opacity:.85}
-header button{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
-  color:#fff;font-family:inherit;font-size:.88rem;padding:8px 15px;border-radius:9px;cursor:pointer}
-header button:hover{background:rgba(255,255,255,.26)}
+/* ============ HEADER ============ */
+header{position:relative;overflow:hidden;color:#fff;padding:22px 18px 24px;
+  background:
+    radial-gradient(760px 300px at 8% -20%, rgba(18,164,157,.5), transparent 62%),
+    radial-gradient(700px 340px at 92% -10%, rgba(90,105,225,.45), transparent 60%),
+    linear-gradient(135deg,#072a4d 0%,#0f4c81 48%,#0d6f77 100%)}
+header .wrap{padding-bottom:0;display:flex;justify-content:space-between;align-items:center;
+  gap:16px;flex-wrap:wrap;position:relative;z-index:1}
+header h1{margin:4px 0 0;font-size:1.4rem;font-weight:800;letter-spacing:-.01em;
+  display:flex;align-items:center;gap:10px}
+header h1 .ic{width:1.05em;height:1.05em;opacity:.9}
+header .k{font-size:.8rem;opacity:.85}
+.hbtns{display:flex;gap:8px;flex-wrap:wrap}
+header button{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26);
+  color:#fff;font-family:inherit;font-size:.87rem;font-weight:500;padding:9px 15px;border-radius:10px;
+  cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.15s;backdrop-filter:blur(6px)}
+header button:hover{background:rgba(255,255,255,.26);transform:translateY(-1px)}
+header button .ic{width:1.05em;height:1.05em}
 
-/* ---------- login ---------- */
-.login{max-width:420px;margin:70px auto;background:#fff;border:1px solid var(--line);
-  border-radius:var(--r);padding:30px;text-align:center;box-shadow:0 3px 18px rgba(15,76,129,.09)}
-.login h2{margin:0 0 6px;color:var(--navy);font-size:1.2rem}
-.login p{margin:0 0 18px;color:var(--text-2);font-size:.9rem}
-.login input{width:100%;padding:12px;font-size:1rem;font-family:inherit;text-align:center;
-  border:1.5px solid var(--line);border-radius:10px;margin-bottom:12px}
-.login button{width:100%;padding:12px;background:var(--navy);color:#fff;border:none;
-  border-radius:10px;font-family:inherit;font-size:1rem;font-weight:600;cursor:pointer}
-.login .er{color:#b3352c;font-size:.88rem;margin-top:10px;min-height:20px}
+/* ============ LOGIN ============ */
+.login{max-width:430px;margin:9vh auto;background:var(--card);border:1px solid var(--line);
+  border-radius:22px;padding:36px 32px;text-align:center;box-shadow:var(--sh-2)}
+.login .lock{width:60px;height:60px;margin:0 auto 16px;border-radius:18px;display:grid;place-items:center;
+  color:#fff;background:linear-gradient(140deg,#1565a8,#072a4d);
+  box-shadow:0 8px 22px rgba(15,76,129,.35)}
+.login .lock .ic{width:28px;height:28px}
+.login h2{margin:0 0 6px;font-size:1.28rem;font-weight:700}
+.login p{margin:0 0 22px;color:var(--ink-2);font-size:.9rem}
+.login input{width:100%;padding:13px;font-size:1rem;font-family:inherit;text-align:center;
+  border:1.5px solid var(--line);border-radius:12px;margin-bottom:12px;background:var(--card);color:var(--ink-1)}
+.login input:focus{outline:none;border-color:var(--brand-500);box-shadow:0 0 0 4px rgba(42,120,214,.16)}
+.login button{width:100%;padding:13px;background:linear-gradient(135deg,var(--brand-600),var(--brand-800));
+  color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:600;
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  box-shadow:0 4px 16px rgba(15,76,129,.3)}
+.login button:hover{transform:translateY(-1px)}
+.login .er{color:#c0392b;font-size:.88rem;margin-top:12px;min-height:20px}
 
-/* ---------- tabs & filters ---------- */
-.tabs{display:flex;gap:6px;margin-top:18px;flex-wrap:wrap}
-.tab{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 17px;
-  cursor:pointer;font-family:inherit;font-size:.94rem;font-weight:600;color:var(--text-2)}
-.tab.on{background:var(--navy);border-color:var(--navy);color:#fff}
+/* ============ TABS & FILTERS ============ */
+.tabs{display:flex;gap:7px;margin-top:20px;flex-wrap:wrap}
+.tab{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 18px;
+  cursor:pointer;font-family:inherit;font-size:.93rem;font-weight:600;color:var(--ink-2);
+  display:inline-flex;align-items:center;gap:8px;transition:.15s}
+.tab:hover{border-color:var(--brand-500);color:var(--brand-600)}
+.tab .ic{width:1.1em;height:1.1em}
+.tab.on{background:linear-gradient(135deg,var(--brand-600),var(--brand-800));
+  border-color:transparent;color:#fff;box-shadow:0 4px 14px rgba(15,76,129,.3)}
 
-.filters{background:#fff;border:1px solid var(--line);border-radius:var(--r);
-  padding:14px;margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
-.filters .f{display:flex;flex-direction:column;gap:4px;min-width:140px;flex:1}
-.filters label{font-size:.78rem;font-weight:600;color:var(--text-2)}
-.filters select,.filters input{font-family:inherit;font-size:.92rem;padding:8px 10px;
-  border:1.5px solid var(--line);border-radius:8px;background:#fff;width:100%}
-.filters .btn{background:var(--surface-3);border:1px solid var(--line);color:var(--text-1);
-  padding:9px 15px;border-radius:8px;font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer}
-.filters .btn.p{background:var(--navy);border-color:var(--navy);color:#fff}
+.filters{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:16px;margin-top:14px;display:flex;gap:11px;flex-wrap:wrap;align-items:flex-end;
+  box-shadow:var(--sh-1)}
+.filters .f{display:flex;flex-direction:column;gap:5px;min-width:145px;flex:1}
+.filters label{font-size:.76rem;font-weight:600;color:var(--ink-3);display:flex;align-items:center;gap:5px;
+  text-transform:none;letter-spacing:.01em}
+.filters label .ic{width:.95em;height:.95em}
+.filters select,.filters input{font-family:inherit;font-size:.92rem;padding:9px 11px;
+  border:1.5px solid var(--line);border-radius:var(--r-sm);background:var(--card);color:var(--ink-1);width:100%}
+.filters select{appearance:none;-webkit-appearance:none;padding-right:34px;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%236b8095' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center}
+.filters select:focus,.filters input:focus{outline:none;border-color:var(--brand-500);
+  box-shadow:0 0 0 3px rgba(42,120,214,.15)}
+.filters .btn{background:var(--soft);border:1.5px solid var(--line);color:var(--ink-1);
+  padding:10px 16px;border-radius:var(--r-sm);font-family:inherit;font-size:.9rem;font-weight:600;
+  cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.filters .btn:hover{border-color:var(--brand-500);color:var(--brand-600)}
 
-/* ---------- stat tiles ---------- */
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:16px}
-.tile{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
-.tile .lb{font-size:.8rem;color:var(--text-2);font-weight:600}
-.tile .v{font-size:2.1rem;font-weight:700;line-height:1.15;margin-top:2px;letter-spacing:-.02em}
-.tile .s{font-size:.8rem;color:var(--text-3)}
-.tile .meter{height:7px;background:var(--surface-3);border-radius:99px;margin-top:9px;overflow:hidden}
-.tile .meter i{display:block;height:100%;background:var(--bar);border-radius:99px}
+/* ============ STAT TILES ============ */
+.tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:13px;margin-top:16px}
+@media(max-width:1180px){ .tiles{grid-template-columns:repeat(3,1fr)} }
+@media(max-width:700px){ .tiles{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:420px){ .tiles{grid-template-columns:1fr} }
+.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;
+  box-shadow:var(--sh-1);position:relative;overflow:hidden;transition:.18s}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--sh-2)}
+.tile::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg, var(--tc,var(--brand-500)), color-mix(in srgb, var(--tc,var(--brand-500)) 40%, transparent))}
+.tile .hd{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.tile .tic{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;flex:0 0 auto;
+  color:var(--tc,var(--brand-600));background:color-mix(in srgb, var(--tc,var(--brand-500)) 13%, transparent)}
+.tile .tic .ic{width:17px;height:17px}
+.tile .lb{font-size:.79rem;color:var(--ink-2);font-weight:600;line-height:1.35}
+.tile .v{font-size:2rem;font-weight:800;line-height:1.15;letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums}
+.tile .v small{font-size:.95rem;color:var(--ink-3);font-weight:600;letter-spacing:0}
+.tile .s{font-size:.79rem;color:var(--ink-3)}
+.tile .swd{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:6px;
+  vertical-align:.06em}
+.tile .meter{height:7px;background:var(--grid);border-radius:99px;margin-top:10px;overflow:hidden}
+.tile .meter i{display:block;height:100%;border-radius:99px;transition:width .5s ease;
+  background:linear-gradient(90deg, var(--tc,var(--bar)), color-mix(in srgb, var(--tc,var(--bar)) 55%, #fff))}
 
-/* ---------- chart cards ---------- */
+/* ============ PANELS ============ */
 .charts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;align-items:start}
-.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;
+  box-shadow:var(--sh-1)}
 .panel.full{grid-column:1/-1}
-.panel h3{margin:0 0 2px;font-size:1.02rem;color:var(--text-1)}
-.panel .cap{margin:0 0 16px;font-size:.82rem;color:var(--text-3)}
+.panel h3{margin:0 0 3px;font-size:1.03rem;font-weight:700;display:flex;align-items:center;gap:9px}
+.panel h3 .ic{width:1.1em;height:1.1em;color:var(--brand-600)}
+.panel .cap{margin:0 0 18px;font-size:.81rem;color:var(--ink-3);padding-left:28px}
 
 /* แถบแนวนอน */
-.hb{display:grid;grid-template-columns:auto 1fr auto;gap:9px 11px;align-items:center}
-.hb .nm{font-size:.88rem;color:var(--text-2);text-align:right;max-width:220px}
-.hb .track{background:var(--grid);border-radius:5px;height:16px;position:relative}
+.hb{display:grid;grid-template-columns:auto 1fr auto;gap:10px 12px;align-items:center}
+.hb .nm{font-size:.87rem;color:var(--ink-2);text-align:right;max-width:230px;
+  display:flex;align-items:center;gap:7px;justify-content:flex-end}
+.hb .nm .sw{width:9px;height:9px;border-radius:3px;flex:0 0 auto}
+.hb .track{background:var(--grid);border-radius:5px;height:16px}
 .hb .fill{height:100%;background:var(--bar);border-radius:0 5px 5px 0;min-width:3px;
-  transition:width .35s ease}
-.hb .val{font-size:.86rem;font-weight:700;color:var(--text-1);font-variant-numeric:tabular-nums;
-  min-width:44px;text-align:right}
-.hb .sub{font-size:.74rem;color:var(--text-3)}
+  transition:width .45s ease}
+.hb .val{font-size:.86rem;font-weight:700;font-variant-numeric:tabular-nums;
+  min-width:46px;text-align:right}
+.hb .sub{font-size:.74rem;color:var(--ink-3);font-weight:500}
 
-/* แถบซ้อน (ระดับคุณภาพ) */
-.sb{display:grid;grid-template-columns:auto 1fr auto;gap:9px 11px;align-items:center}
-.sb .nm{font-size:.88rem;color:var(--text-2);text-align:right}
+/* แถบซ้อน */
+.sb{display:grid;grid-template-columns:auto 1fr auto;gap:10px 12px;align-items:center}
+.sb .nm{font-size:.87rem;color:var(--ink-2);text-align:right}
 .sb .track{display:flex;height:18px;border-radius:5px;overflow:hidden;background:var(--grid);gap:2px}
-.sb .seg{height:100%;transition:width .35s ease}
-.sb .tot{font-size:.86rem;color:var(--text-2);font-variant-numeric:tabular-nums;min-width:40px;text-align:right}
-.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:.82rem;color:var(--text-2)}
-.legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.sb .seg{height:100%;transition:width .45s ease}
+.sb .tot{font-size:.86rem;color:var(--ink-2);font-variant-numeric:tabular-nums;min-width:42px;text-align:right}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:.82rem;color:var(--ink-2);
+  padding-top:14px;border-top:1px solid var(--grid)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
 
-.empty{text-align:center;color:var(--text-3);padding:34px 10px;font-size:.94rem}
+.empty{text-align:center;color:var(--ink-3);padding:38px 10px;font-size:.94rem}
+.empty .ic{width:34px;height:34px;display:block;margin:0 auto 10px;opacity:.45}
 
-/* ---------- table ---------- */
-.tblwrap{background:#fff;border:1px solid var(--line);border-radius:var(--r);
-  margin-top:14px;overflow:auto;max-height:70vh}
-table{border-collapse:collapse;width:100%;font-size:.86rem;white-space:nowrap}
-th{background:var(--navy);color:#fff;padding:10px 11px;text-align:left;position:sticky;top:0;
-  font-weight:600;font-size:.8rem;cursor:pointer;z-index:2}
-th:hover{background:var(--navy2)}
-td{padding:9px 11px;border-bottom:1px solid var(--grid)}
-tbody tr:hover{background:#f6f9fd}
+/* ============ TABLE ============ */
+.tblwrap{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  margin-top:14px;overflow:auto;max-height:72vh;box-shadow:var(--sh-1)}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:.85rem;white-space:nowrap}
+th{background:linear-gradient(180deg,#0f4c81,#0b3d6b);color:#fff;padding:11px 12px;text-align:left;
+  position:sticky;top:0;font-weight:600;font-size:.79rem;cursor:pointer;z-index:2;
+  border-bottom:1px solid rgba(255,255,255,.12)}
+th:hover{background:linear-gradient(180deg,#1565a8,#0f4c81)}
+td{padding:10px 12px;border-bottom:1px solid var(--grid);color:var(--ink-1)}
+tbody tr:hover td{background:var(--soft)}
 td.c{text-align:center;font-variant-numeric:tabular-nums}
-.pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.76rem;font-weight:600;color:#fff}
-.q4{background:var(--seq-4)} .q3{background:var(--seq-3)}
-.q2{background:var(--seq-2);color:#0b2b4d} .q1{background:var(--seq-1);color:#0b2b4d}
-.sc{display:inline-flex;width:24px;height:24px;border-radius:6px;align-items:center;
-  justify-content:center;font-weight:700;font-size:.8rem;color:#fff}
-.s4{background:var(--seq-4)} .s3{background:var(--seq-3)}
-.s2{background:var(--seq-2)} .s1{background:var(--seq-1);color:#0b2b4d}
+.pill{display:inline-block;padding:3px 11px;border-radius:99px;font-size:.75rem;font-weight:700}
+.q4{background:var(--seq-4);color:#fff} .q3{background:var(--seq-3);color:#fff}
+.q2{background:var(--seq-2);color:#fff} .q1{background:var(--seq-1);color:#0b2b4d}
+.sc{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:7px;
+  font-weight:700;font-size:.79rem}
+.s4{background:var(--seq-4);color:#fff} .s3{background:var(--seq-3);color:#fff}
+.s2{background:var(--seq-2);color:#fff} .s1{background:var(--seq-1);color:#0b2b4d}
 
-/* ---------- ยังไม่ส่ง ---------- */
-.miss{columns:3;column-gap:22px;font-size:.88rem}
-.miss div{break-inside:avoid;padding:3px 0;color:var(--text-2)}
-.grpbox{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:12px}
-.grpbox h4{margin:0 0 8px;font-size:.96rem;color:var(--navy);
-  display:flex;justify-content:space-between;align-items:center;gap:10px}
-.grpbox .cnt{font-size:.8rem;font-weight:600;color:var(--text-3)}
+/* ============ MISSING ============ */
+.grpbox{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;
+  margin-top:13px;box-shadow:var(--sh-1)}
+.grpbox h4{margin:0 0 11px;font-size:.97rem;font-weight:700;color:var(--brand-600);
+  display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.grpbox h4 .l{display:flex;align-items:center;gap:8px}
+.grpbox .cnt{font-size:.78rem;font-weight:600;color:#fff;background:var(--brand-600);
+  padding:3px 11px;border-radius:99px}
+.miss{columns:3;column-gap:24px;font-size:.87rem}
+.miss div{break-inside:avoid;padding:3px 0;color:var(--ink-2);display:flex;gap:7px;align-items:baseline}
+.miss div::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ink-3);
+  flex:0 0 auto;transform:translateY(-2px)}
 
-footer{text-align:center;color:var(--text-3);font-size:.84rem;padding:24px 16px 40px}
+footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 40px}
 
-@media(max-width:900px){ .charts{grid-template-columns:1fr} .miss{columns:2} }
-@media(max-width:560px){ .miss{columns:1} .hb .nm{max-width:110px} }
+@media(max-width:980px){ .charts{grid-template-columns:1fr} .miss{columns:2} }
+@media(max-width:600px){ .miss{columns:1} .hb .nm{max-width:118px} .panel .cap{padding-left:0}
+  header h1{font-size:1.15rem} }
 
 @media print{
-  header button,.tabs,.filters{display:none!important}
+  header .hbtns,.tabs,.filters{display:none!important}
   body{background:#fff}
-  .panel,.tile{break-inside:avoid}
+  .panel,.tile,.grpbox{break-inside:avoid;box-shadow:none}
 }
 </style>
 </head>
 <body>
 
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<defs>
+  <g id="i-base" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></g>
+</defs>
+<symbol id="ic-c1" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.6-4.6"/><path d="m7.8 10.6 1.9 1.9 3.5-3.5"/></symbol>
+<symbol id="ic-c2" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 21.5h4"/><path d="M12 2.5a6.5 6.5 0 0 0-4.2 11.5c.6.6.9 1.3 1.1 2h6.2c.2-.7.5-1.4 1.1-2A6.5 6.5 0 0 0 12 2.5Z"/></symbol>
+<symbol id="ic-c3" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4"/><path d="M12 2.8c2.6 2.9 2.6 15.5 0 18.4"/><path d="M12 2.8c-2.6 2.9-2.6 15.5 0 18.4"/></symbol>
+<symbol id="ic-c4" viewBox="0 0 24 24"><path d="M15.5 21v-1.8a3.7 3.7 0 0 0-3.7-3.7H6.2a3.7 3.7 0 0 0-3.7 3.7V21"/><circle cx="9" cy="7.5" r="3.7"/><path d="M21.5 21v-1.8a3.7 3.7 0 0 0-2.8-3.6"/><path d="M16 4a3.7 3.7 0 0 1 0 7.2"/></symbol>
+<symbol id="ic-c5" viewBox="0 0 24 24"><path d="M20.5 14.5a2 2 0 0 1-2 2H7.5l-4 4V5.5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2Z"/><path d="M8 8.5h8"/><path d="M8 12h5"/></symbol>
+<symbol id="ic-c6" viewBox="0 0 24 24"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7"/><path d="M12 16.5v4"/><path d="m9.5 8 -1.8 2 1.8 2"/><path d="m14.5 8 1.8 2-1.8 2"/></symbol>
+<symbol id="ic-c7" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5.5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15"/><path d="M2.5 12.5h19"/></symbol>
+<symbol id="ic-c8" viewBox="0 0 24 24"><path d="M12 20.7 4.8 13.6C3.4 12.2 2 10.5 2 8.3A5.3 5.3 0 0 1 7.3 3c1.7 0 2.9.5 4.7 2 1.8-1.5 3-2 4.7-2A5.3 5.3 0 0 1 22 8.3c0 2.2-1.4 3.9-2.8 5.3Z"/></symbol>
+
+<symbol id="ic-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/></symbol>
+<symbol id="ic-school" viewBox="0 0 24 24"><path d="m3 9 9-5.5L21 9"/><path d="M5 10.5V20a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 20v-9.5"/><path d="M10 21.5v-5h4v5"/><circle cx="12" cy="11" r="1.6"/></symbol>
+<symbol id="ic-clipboard" viewBox="0 0 24 24"><rect x="8.5" y="2.5" width="7" height="4" rx="1.4"/><path d="M15.5 4.5H18a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2h2.5"/><path d="m9 14 2 2 4-4"/></symbol>
+<symbol id="ic-user" viewBox="0 0 24 24"><path d="M19.5 21v-2a4 4 0 0 0-4-4h-7a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+<symbol id="ic-notes" viewBox="0 0 24 24"><path d="M5 3.5h14a1.5 1.5 0 0 1 1.5 1.5v14a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19V5A1.5 1.5 0 0 1 5 3.5Z"/><path d="M7.5 8.5h9M7.5 12h9M7.5 15.5h5"/></symbol>
+<symbol id="ic-link" viewBox="0 0 24 24"><path d="M10 13.5a4.6 4.6 0 0 0 7 .5l2.8-2.8a4.6 4.6 0 0 0-6.5-6.5L11.7 6.2"/><path d="M14 10.5a4.6 4.6 0 0 0-7-.5l-2.8 2.8a4.6 4.6 0 0 0 6.5 6.5l1.6-1.6"/></symbol>
+<symbol id="ic-phone" viewBox="0 0 24 24"><path d="M21 16.9v2.6a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.6A2 2 0 0 1 3.3 1.7h2.6a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L7 9.5a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></symbol>
+<symbol id="ic-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="m8.2 12.2 2.6 2.6 5-5.2"/></symbol>
+<symbol id="ic-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M12 7.5v5.2"/><path d="M12 16.4h.01"/></symbol>
+<symbol id="ic-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M12 16.5v-5"/><path d="M12 7.8h.01"/></symbol>
+<symbol id="ic-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3.2v5h5"/></symbol>
+<symbol id="ic-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"/><path d="M21 3.2v5h-5"/></symbol>
+<symbol id="ic-download" viewBox="0 0 24 24"><path d="M20.5 15.5v3.2a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-3.2"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M12 15V3.2"/></symbol>
+<symbol id="ic-print" viewBox="0 0 24 24"><path d="M6.5 9V3.5h11V9"/><path d="M6.5 18.5H5a2 2 0 0 1-2-2v-4.7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4.7a2 2 0 0 1-2 2h-1.5"/><rect x="6.5" y="14.5" width="11" height="6" rx="1.2"/></symbol>
+<symbol id="ic-chart" viewBox="0 0 24 24"><path d="M3.5 3.5v17h17"/><path d="M7.8 17V12"/><path d="M12 17V8"/><path d="M16.2 17v-3"/></symbol>
+<symbol id="ic-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M3 15h18M9.5 9.5V20"/></symbol>
+<symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M12 6.8V12l3.4 1.9"/></symbol>
+<symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m20.5 20.5-4.8-4.8"/></symbol>
+<symbol id="ic-filter" viewBox="0 0 24 24"><path d="M21 4.5H3l7.2 8.5V19l3.6 1.8V13Z"/></symbol>
+<symbol id="ic-lock" viewBox="0 0 24 24"><rect x="3.5" y="10.5" width="17" height="10.5" rx="2.2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/><path d="M12 14.8v2.4"/></symbol>
+<symbol id="ic-login" viewBox="0 0 24 24"><path d="M14.5 3.5H18a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-3.5"/><path d="m10 16.5 4.5-4.5L10 7.5"/><path d="M14.5 12H4"/></symbol>
+<symbol id="ic-award" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="5.6"/><path d="m8.4 13.6-1.1 7.9L12 19l4.7 2.5-1.1-7.9"/></symbol>
+<symbol id="ic-up" viewBox="0 0 24 24"><path d="M21 7.5 13.2 15.3l-4.2-4.2L3 17"/><path d="M15.5 7.5H21V13"/></symbol>
+<symbol id="ic-down" viewBox="0 0 24 24"><path d="M21 16.5 13.2 8.7l-4.2 4.2L3 7"/><path d="M15.5 16.5H21V11"/></symbol>
+<symbol id="ic-cap" viewBox="0 0 24 24"><path d="M21.5 9.2 12 4.3 2.5 9.2 12 14.1Z"/><path d="M6.4 11.4v4.8c0 1.6 2.5 2.9 5.6 2.9s5.6-1.3 5.6-2.9v-4.8"/></symbol>
+<symbol id="ic-users" viewBox="0 0 24 24"><path d="M15.5 21v-1.8a3.7 3.7 0 0 0-3.7-3.7H6.2a3.7 3.7 0 0 0-3.7 3.7V21"/><circle cx="9" cy="7.5" r="3.7"/><path d="M21.5 21v-1.8a3.7 3.7 0 0 0-2.8-3.6"/><path d="M16 4a3.7 3.7 0 0 1 0 7.2"/></symbol>
+<symbol id="ic-spark" viewBox="0 0 24 24"><path d="m12 2.8 2.1 5.6 5.6 2.1-5.6 2.1L12 18.2l-2.1-5.6L4.3 10.5l5.6-2.1Z"/><path d="M18.5 16.5 19.4 19l2.5.9-2.5.9-.9 2.5-.9-2.5-2.5-.9 2.5-.9Z"/></symbol>
+<symbol id="ic-list" viewBox="0 0 24 24"><path d="M8.5 6.5h12M8.5 12h12M8.5 17.5h12"/><path d="M4 6.5h.01M4 12h.01M4 17.5h.01"/></symbol>
+<symbol id="ic-x" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol>
+<symbol id="ic-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M7 21v-7h10v7"/><path d="M7 3v5h7"/></symbol>
+<symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></symbol>
+<symbol id="ic-moon" viewBox="0 0 24 24"><path d="M20.5 14.3A8.6 8.6 0 0 1 9.7 3.5a8.6 8.6 0 1 0 10.8 10.8Z"/></symbol>
+</svg>
+
 <!-- เข้าสู่ระบบ -->
 <div id="login" class="login">
+  <div class="lock"><svg class="ic"><use href="#ic-lock"/></svg></div>
   <h2>แดชบอร์ดทักษะ 8C</h2>
   <p>สำนักงานเขตพื้นที่การศึกษาประถมศึกษาอุดรธานี เขต 1</p>
   <input type="password" id="pass" placeholder="รหัสผ่านผู้ดูแลระบบ" autocomplete="current-password">
-  <button id="btnLogin">เข้าสู่ระบบ</button>
+  <button id="btnLogin"><svg class="ic"><use href="#ic-login"/></svg> เข้าสู่ระบบ</button>
   <div class="er" id="loginErr"></div>
 </div>
 
@@ -153,39 +285,42 @@ footer{text-align:center;color:var(--text-3);font-size:.84rem;padding:24px 16px 
     <div class="wrap">
       <div>
         <div class="k">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาอุดรธานี เขต 1</div>
-        <h1>แดชบอร์ดทักษะแห่งศตวรรษที่ 21 (8C)</h1>
+        <h1><svg class="ic"><use href="#ic-chart"/></svg> แดชบอร์ดทักษะแห่งศตวรรษที่ 21 (8C)</h1>
       </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button id="btnReload">↻ โหลดข้อมูลใหม่</button>
-        <button id="btnCsv">⬇ ส่งออก CSV</button>
-        <button id="btnPrint">🖨 พิมพ์รายงาน</button>
+      <div class="hbtns">
+        <button id="btnTheme" title="สลับโหมดสว่าง / มืด"><svg class="ic"><use href="#ic-moon"/></svg> โหมดมืด</button>
+        <button id="btnReload"><svg class="ic"><use href="#ic-refresh"/></svg> โหลดใหม่</button>
+        <button id="btnCsv"><svg class="ic"><use href="#ic-download"/></svg> ส่งออก CSV</button>
+        <button id="btnPrint"><svg class="ic"><use href="#ic-print"/></svg> พิมพ์รายงาน</button>
       </div>
     </div>
   </header>
 
   <div class="wrap">
     <div class="tabs">
-      <button class="tab on" data-tab="dash">📊 แดชบอร์ด</button>
-      <button class="tab" data-tab="table">📋 ตารางข้อมูล</button>
-      <button class="tab" data-tab="miss">⏳ โรงเรียนที่ยังไม่ส่ง</button>
+      <button class="tab on" data-tab="dash"><svg class="ic"><use href="#ic-chart"/></svg> แดชบอร์ด</button>
+      <button class="tab" data-tab="table"><svg class="ic"><use href="#ic-table"/></svg> ตารางข้อมูล</button>
+      <button class="tab" data-tab="miss"><svg class="ic"><use href="#ic-clock"/></svg> โรงเรียนที่ยังไม่ส่ง</button>
     </div>
 
     <div class="filters">
       <div class="f">
-        <label>ระดับข้อมูล</label>
+        <label><svg class="ic"><use href="#ic-filter"/></svg> ระดับข้อมูล</label>
         <select id="fLevel">
           <option value="school">ระดับโรงเรียน</option>
           <option value="class">ระดับชั้น</option>
         </select>
       </div>
-      <div class="f"><label>ปีการศึกษา</label><select id="fYear"><option value="">ทั้งหมด</option></select></div>
+      <div class="f"><label><svg class="ic"><use href="#ic-calendar"/></svg> ปีการศึกษา</label>
+        <select id="fYear"><option value="">ทั้งหมด</option></select></div>
       <div class="f"><label>ภาคเรียน</label>
         <select id="fTerm"><option value="">ทั้งหมด</option><option value="1">ที่ 1</option><option value="2">ที่ 2</option></select>
       </div>
       <div class="f"><label>อำเภอ</label><select id="fDist"><option value="">ทั้งหมด</option></select></div>
       <div class="f"><label>กลุ่มโรงเรียน</label><select id="fGroup"><option value="">ทั้งหมด</option></select></div>
-      <div class="f" style="flex:2"><label>ค้นหา (โรงเรียน / ผู้กรอก)</label><input type="search" id="fQ" placeholder="พิมพ์คำค้น…"></div>
-      <button class="btn" id="btnClear">ล้างตัวกรอง</button>
+      <div class="f" style="flex:2"><label><svg class="ic"><use href="#ic-search"/></svg> ค้นหา (โรงเรียน / ผู้กรอก)</label>
+        <input type="search" id="fQ" placeholder="พิมพ์คำค้น…"></div>
+      <button class="btn" id="btnClear"><svg class="ic"><use href="#ic-x"/></svg> ล้างตัวกรอง</button>
     </div>
 
     <!-- แดชบอร์ด -->
@@ -194,32 +329,32 @@ footer{text-align:center;color:var(--text-3);font-size:.84rem;padding:24px 16px 
 
       <div class="charts">
         <div class="panel full">
-          <h3>คะแนนเฉลี่ยรายทักษะ 8 ด้าน</h3>
+          <h3><svg class="ic"><use href="#ic-chart"/></svg> คะแนนเฉลี่ยรายทักษะ 8 ด้าน</h3>
           <p class="cap">ค่าเฉลี่ยถ่วงน้ำหนักตามจำนวนนักเรียนที่ประเมิน · เต็ม 4.00 · เรียงจากสูงไปต่ำ</p>
           <div id="chartC"></div>
         </div>
 
         <div class="panel">
-          <h3>คะแนนเฉลี่ย 8C รายอำเภอ</h3>
+          <h3><svg class="ic"><use href="#ic-school"/></svg> คะแนนเฉลี่ย 8C รายอำเภอ</h3>
           <p class="cap">เต็ม 4.00 · ตัวเลขในวงเล็บคือจำนวนรายการที่รายงาน</p>
           <div id="chartD"></div>
         </div>
 
         <div class="panel">
-          <h3 id="hdG">คะแนนเฉลี่ย 8C รายกลุ่มโรงเรียน</h3>
+          <h3><svg class="ic"><use href="#ic-users"/></svg> คะแนนเฉลี่ย 8C รายกลุ่มโรงเรียน</h3>
           <p class="cap">เต็ม 4.00 · เรียงจากสูงไปต่ำ</p>
           <div id="chartG"></div>
         </div>
 
         <div class="panel full">
-          <h3>การกระจายระดับคุณภาพ จำแนกรายอำเภอ</h3>
+          <h3><svg class="ic"><use href="#ic-award"/></svg> การกระจายระดับคุณภาพ จำแนกรายอำเภอ</h3>
           <p class="cap">จำนวนรายการในแต่ละระดับคุณภาพ · แถบยาวเท่ากับจำนวนรายการทั้งหมดของอำเภอนั้น</p>
           <div id="chartQ"></div>
           <div class="legend" id="legendQ"></div>
         </div>
 
         <div class="panel full" id="panelGrade" style="display:none">
-          <h3>คะแนนเฉลี่ย 8C รายระดับชั้น</h3>
+          <h3><svg class="ic"><use href="#ic-cap"/></svg> คะแนนเฉลี่ย 8C รายระดับชั้น</h3>
           <p class="cap">แสดงเฉพาะเมื่อเลือกดูข้อมูล “ระดับชั้น” · เต็ม 4.00</p>
           <div id="chartL"></div>
         </div>
@@ -229,7 +364,8 @@ footer{text-align:center;color:var(--text-3);font-size:.84rem;padding:24px 16px 
     <!-- ตาราง -->
     <div id="tab-table" style="display:none">
       <div class="tblwrap"><table id="tbl"></table></div>
-      <p class="cap" style="color:var(--text-3);font-size:.84rem">คลิกหัวตารางเพื่อเรียงลำดับ</p>
+      <p style="color:var(--ink-3);font-size:.83rem;margin-top:10px">
+        <svg class="ic"><use href="#ic-info"/></svg> คลิกหัวตารางเพื่อเรียงลำดับ</p>
     </div>
 
     <!-- ยังไม่ส่ง -->
@@ -237,9 +373,7 @@ footer{text-align:center;color:var(--text-3);font-size:.84rem;padding:24px 16px 
       <div id="missBox"></div>
     </div>
 
-    <footer>
-      กลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา · สพป.อุดรธานี เขต 1
-    </footer>
+    <footer>กลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา · สพป.อุดรธานี เขต 1</footer>
   </div>
 </div>
 
@@ -252,7 +386,7 @@ const API_URL = "";
 /* เกณฑ์การประเมินทักษะ 8C — ใช้ร่วมกันทั้ง index.html และ admin.html */
 const RUBRIC = [
   {
-    key: 'C1', short: 'คิดวิเคราะห์ แก้ปัญหา', icon: '🧠',
+    key: 'C1', color: '#2a78d6', ink: '#1f63b8', dark: '#3987e5', short: 'คิดวิเคราะห์ แก้ปัญหา', icon: 'ic',
     en: 'Critical Thinking and Problem Solving',
     th: 'คิดวิเคราะห์ แก้ไขปัญหาได้อย่างมีวิจารณญาณ',
     levels: [
@@ -263,7 +397,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C2', short: 'คิดสร้างสรรค์ นวัตกรรม', icon: '💡',
+    key: 'C2', color: '#eb6834', ink: '#c94f1f', dark: '#f07a4b', short: 'คิดสร้างสรรค์ นวัตกรรม', icon: 'ic',
     en: 'Creativity and Innovation',
     th: 'คิดสร้างสรรค์และพัฒนานวัตกรรมใหม่ ๆ',
     levels: [
@@ -274,7 +408,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C3', short: 'เข้าใจต่างวัฒนธรรม', icon: '🌏',
+    key: 'C3', color: '#1baf7a', ink: '#118a5f', dark: '#25c58c', short: 'เข้าใจต่างวัฒนธรรม', icon: 'ic',
     en: 'Cross-Cultural Understanding',
     th: 'เข้าใจความแตกต่างทางวัฒนธรรม',
     levels: [
@@ -285,7 +419,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C4', short: 'ทำงานเป็นทีม ภาวะผู้นำ', icon: '🤝',
+    key: 'C4', color: '#eda100', ink: '#a87200', dark: '#f0b437', short: 'ทำงานเป็นทีม ภาวะผู้นำ', icon: 'ic',
     en: 'Collaboration, Teamwork and Leadership',
     th: 'ทำงานร่วมกับผู้อื่นและมีภาวะผู้นำ',
     levels: [
@@ -296,7 +430,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C5', short: 'สื่อสาร รู้เท่าทันสื่อ', icon: '📣',
+    key: 'C5', color: '#e87ba4', ink: '#c1517d', dark: '#ef92b6', short: 'สื่อสาร รู้เท่าทันสื่อ', icon: 'ic',
     en: 'Communications, Information and Media Literacy',
     th: 'สื่อสารและรู้เท่าทันสื่อ',
     levels: [
@@ -307,7 +441,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C6', short: 'คอมพิวเตอร์และ ICT', icon: '💻',
+    key: 'C6', color: '#008300', ink: '#006b00', dark: '#17a317', short: 'คอมพิวเตอร์และ ICT', icon: 'ic',
     en: 'Computing and ICT Literacy',
     th: 'ใช้คอมพิวเตอร์และเทคโนโลยีสารสนเทศเป็น',
     levels: [
@@ -318,7 +452,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C7', short: 'ทักษะอาชีพ เรียนรู้ด้วยตนเอง', icon: '🎯',
+    key: 'C7', color: '#4a3aa7', ink: '#3a2d85', dark: '#7e6fe0', short: 'ทักษะอาชีพ เรียนรู้ด้วยตนเอง', icon: 'ic',
     en: 'Career and Learning Skills',
     th: 'มีทักษะอาชีพและการเรียนรู้ด้วยตนเอง',
     levels: [
@@ -329,7 +463,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C8', short: 'เมตตา คุณธรรม วินัย', icon: '💗',
+    key: 'C8', color: '#e34948', ink: '#c02f2e', dark: '#ea6c6b', short: 'เมตตา คุณธรรม วินัย', icon: 'ic',
     en: 'Compassion',
     th: 'มีความเมตตา มีคุณธรรม และระเบียบวินัย',
     levels: [
@@ -379,7 +513,7 @@ const QCOLOR  = ['var(--seq-1)','var(--seq-2)','var(--seq-3)','var(--seq-4)'];
 const DISTRICTS = ['เมืองอุดรธานี','หนองวัวซอ','เพ็ญ','สร้างคอม'];
 
 const $ = id => document.getElementById(id);
-let TOKEN = '', DATA = { school: [], class: [] }, SORT = { k:'seq', d:-1 };
+let TOKEN = '', DATA = { school: [], class: [] }, SORT = { k:'seq', d:-1, ci:null };
 
 function districtOf(g){
   g = String(g||'');
@@ -390,6 +524,29 @@ function districtOf(g){
   return '-';
 }
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const icon = n => '<svg class="ic"><use href="#ic-' + n + '"/></svg>';
+const noData = t => '<div class="empty">' + icon('info') + (t || 'ไม่มีข้อมูลตามเงื่อนไขที่เลือก') + '</div>';
+
+/* ---------- โหมดสว่าง / มืด ---------- */
+(function(){
+  var saved = null;
+  try{ saved = localStorage.getItem('theme8c'); }catch(e){}
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+  function label(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    if (!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+    $('btnTheme').innerHTML = cur === 'dark'
+      ? icon('sun') + ' โหมดสว่าง' : icon('moon') + ' โหมดมืด';
+    return cur;
+  }
+  label();
+  $('btnTheme').addEventListener('click', function(){
+    var next = label() === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try{ localStorage.setItem('theme8c', next); }catch(e){}
+    label();
+  });
+})();
 
 /* ---------- เข้าสู่ระบบ ---------- */
 $('btnLogin').addEventListener('click', doLogin);
@@ -471,8 +628,11 @@ $('btnClear').addEventListener('click', function(){
   ['fYear','fTerm','fDist','fGroup'].forEach(id => $(id).value = '');
   $('fQ').value = ''; render();
 });
-$('btnReload').addEventListener('click', function(){ this.textContent = '↻ กำลังโหลด…'; const b=this;
-  load(function(){ b.textContent = '↻ โหลดข้อมูลใหม่'; }); });
+$('btnReload').addEventListener('click', function(){
+  const b = this;
+  b.innerHTML = icon('refresh') + ' กำลังโหลด…';
+  load(function(){ b.innerHTML = icon('refresh') + ' โหลดใหม่'; });
+});
 $('btnPrint').addEventListener('click', () => window.print());
 
 document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', function(){
@@ -482,7 +642,7 @@ document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', funct
 }));
 
 /* ---------- คำนวณ ---------- */
-function wAvg(list, idx){          // ค่าเฉลี่ยถ่วงน้ำหนักตามจำนวนที่ประเมิน
+function wAvg(list, idx){
   let sw = 0, sv = 0;
   list.forEach(function(r){
     const w = Math.max(1, Number(r.nEval) || 1);
@@ -497,64 +657,62 @@ function render(){
   const R = rows();
   const isClass = $('fLevel').value === 'class';
   $('panelGrade').style.display = isClass ? '' : 'none';
-  $('hdG').textContent = 'คะแนนเฉลี่ย 8C รายกลุ่มโรงเรียน';
 
-  /* --- การ์ดสรุป --- */
   const nSchools = new Set(R.map(r => r.school)).size;
   const totalSchools = Object.values(SCHOOLS).reduce((a,b)=>a+b.length, 0);
   const pct = totalSchools ? Math.round(nSchools / totalSchools * 100) : 0;
   const avg = wAvg(R, null);
   const students = R.reduce((a,r)=>a + (Number(r.nEval)||0), 0);
-  const cAvgs = RUBRIC.map((c,i) => ({ i:i, key:c.key, short:c.short, v:wAvg(R,i) }));
+  const cAvgs = RUBRIC.map((c,i) => ({ i:i, key:c.key, short:c.short, color:c.color, ink:c.ink, v:wAvg(R,i) }));
   const sorted = cAvgs.slice().sort((a,b)=>b.v-a.v);
   const best = sorted[0], worst = sorted[sorted.length-1];
 
-  $('tiles').innerHTML = R.length ? `
-    <div class="tile"><div class="lb">รายการที่รายงาน</div>
-      <div class="v">${R.length.toLocaleString('th-TH')}</div>
-      <div class="s">${isClass ? 'ชุดข้อมูลระดับชั้น' : 'ชุดข้อมูลระดับโรงเรียน'}</div></div>
-    <div class="tile"><div class="lb">โรงเรียนที่ส่งข้อมูล</div>
-      <div class="v">${nSchools}<span style="font-size:1rem;color:var(--text-3)"> / ${totalSchools}</span></div>
-      <div class="s">คิดเป็น ${pct}% ของโรงเรียนในเขต</div>
-      <div class="meter"><i style="width:${pct}%"></i></div></div>
-    <div class="tile"><div class="lb">คะแนนเฉลี่ย 8C</div>
-      <div class="v">${avg.toFixed(2)}<span style="font-size:1rem;color:var(--text-3)"> / 4.00</span></div>
-      <div class="s">ระดับคุณภาพ ${qualityOf(avg)}</div>
-      <div class="meter"><i style="width:${avg/4*100}%"></i></div></div>
-    <div class="tile"><div class="lb">นักเรียนที่ได้รับการประเมิน</div>
-      <div class="v">${students.toLocaleString('th-TH')}</div><div class="s">คน</div></div>
-    <div class="tile"><div class="lb">ทักษะที่แข็งแรงที่สุด</div>
-      <div class="v" style="font-size:1.12rem;line-height:1.4">${best.key} ${esc(best.short)}</div>
-      <div class="s">เฉลี่ย ${best.v.toFixed(2)}</div></div>
-    <div class="tile"><div class="lb">ทักษะที่ควรเร่งพัฒนา</div>
-      <div class="v" style="font-size:1.12rem;line-height:1.4">${worst.key} ${esc(worst.short)}</div>
-      <div class="s">เฉลี่ย ${worst.v.toFixed(2)}</div></div>`
-    : '<div class="tile" style="grid-column:1/-1"><div class="empty">ยังไม่มีข้อมูลตามเงื่อนไขที่เลือก</div></div>';
+  function tile(tc, ic, lb, v, s, meter){
+    return '<div class="tile" style="--tc:' + tc + '">' +
+      '<div class="hd"><div class="tic">' + icon(ic) + '</div><div class="lb">' + lb + '</div></div>' +
+      '<div class="v">' + v + '</div><div class="s">' + s + '</div>' +
+      (meter != null ? '<div class="meter"><i style="width:' + meter + '%"></i></div>' : '') + '</div>';
+  }
 
-  /* --- กราฟ 8 ด้าน --- */
+  $('tiles').innerHTML = R.length ? [
+    tile('#2a78d6','clipboard','รายการที่รายงาน', R.length.toLocaleString('th-TH'),
+      isClass ? 'ชุดข้อมูลระดับชั้น' : 'ชุดข้อมูลระดับโรงเรียน'),
+    tile('#0f8b86','school','โรงเรียนที่ส่งข้อมูล',
+      nSchools + ' <small>/ ' + totalSchools + '</small>', 'คิดเป็น ' + pct + '% ของโรงเรียนในเขต', pct),
+    tile('#4a3aa7','award','คะแนนเฉลี่ย 8C',
+      avg.toFixed(2) + ' <small>/ 4.00</small>', 'ระดับคุณภาพ ' + qualityOf(avg), avg/4*100),
+    tile('#1baf7a','cap','นักเรียนที่ได้รับการประเมิน', students.toLocaleString('th-TH'), 'คน'),
+    tile('#1baf7a','up','ทักษะที่แข็งแรงที่สุด',
+      '<span style="font-size:1.08rem;line-height:1.4">' +
+        '<span class="swd" style="background:' + best.color + '"></span>' +
+        best.key + ' ' + esc(best.short) + '</span>',
+      'เฉลี่ย ' + best.v.toFixed(2)),
+    tile('#eb6834','down','ทักษะที่ควรเร่งพัฒนา',
+      '<span style="font-size:1.08rem;line-height:1.4">' +
+        '<span class="swd" style="background:' + worst.color + '"></span>' +
+        worst.key + ' ' + esc(worst.short) + '</span>',
+      'เฉลี่ย ' + worst.v.toFixed(2))
+  ].join('') : '<div class="tile" style="grid-column:1/-1">' + noData('ยังไม่มีข้อมูลตามเงื่อนไขที่เลือก') + '</div>';
+
+  /* กราฟ 8 ด้าน — ชิปสีประจำทักษะช่วยระบุตัว ส่วนความยาวแถบใช้สีเดียวเพื่อเทียบขนาดได้ตรง */
   $('chartC').innerHTML = R.length
-    ? bars(sorted.map(c => ({ nm: c.key + ' · ' + c.short, v: c.v, tx: c.v.toFixed(2) })), 4)
-    : '<div class="empty">ไม่มีข้อมูล</div>';
+    ? bars(sorted.map(c => ({ nm: c.key + ' · ' + c.short, sw: c.color, v: c.v, tx: c.v.toFixed(2) })), 4)
+    : noData();
 
-  /* --- รายอำเภอ --- */
   const byD = DISTRICTS.map(function(d){
     const L = R.filter(r => r.district === d);
     return { nm: d, v: wAvg(L,null), n: L.length };
   }).filter(x => x.n > 0);
   $('chartD').innerHTML = byD.length
-    ? bars(byD.map(x => ({ nm: x.nm, v: x.v, tx: x.v.toFixed(2), sub: '(' + x.n + ')' })), 4)
-    : '<div class="empty">ไม่มีข้อมูล</div>';
+    ? bars(byD.map(x => ({ nm: x.nm, v: x.v, tx: x.v.toFixed(2), sub: '(' + x.n + ')' })), 4) : noData();
 
-  /* --- รายกลุ่มโรงเรียน --- */
   const byG = Object.keys(SCHOOLS).map(function(g){
     const L = R.filter(r => r.schoolGroup === g);
     return { nm: g.replace(/\s*\(.*\)$/,''), v: wAvg(L,null), n: L.length };
   }).filter(x => x.n > 0).sort((a,b)=>b.v-a.v);
   $('chartG').innerHTML = byG.length
-    ? bars(byG.map(x => ({ nm: x.nm, v: x.v, tx: x.v.toFixed(2), sub: '(' + x.n + ')' })), 4)
-    : '<div class="empty">ไม่มีข้อมูล</div>';
+    ? bars(byG.map(x => ({ nm: x.nm, v: x.v, tx: x.v.toFixed(2), sub: '(' + x.n + ')' })), 4) : noData();
 
-  /* --- การกระจายระดับคุณภาพ --- */
   const qRows = DISTRICTS.map(function(d){
     const L = R.filter(r => r.district === d);
     const c = [0,0,0,0];
@@ -568,27 +726,26 @@ function render(){
       x.c.map(function(v,i){
         return v ? '<div class="seg" style="width:' + (v / x.n * 100) + '%;background:' + QCOLOR[i] +
           '" title="' + QUALITY[i] + ' ' + v + ' รายการ"></div>' : '';
-      }).join('') + '</div>' +
-      '<div class="tot">' + x.n + '</div>';
-  }).join('') + '</div>' : '<div class="empty">ไม่มีข้อมูล</div>';
+      }).join('') + '</div><div class="tot">' + x.n + '</div>';
+  }).join('') + '</div>' : noData();
 
-  $('legendQ').innerHTML = QUALITY.map(function(q,i){
+  $('legendQ').innerHTML = qRows.length ? QUALITY.map(function(q,i){
     const n = qRows.reduce((a,x)=>a + x.c[i], 0);
     return '<span><i style="background:' + QCOLOR[i] + '"></i>' + q + ' — ' + n + ' รายการ</span>';
-  }).join('');
+  }).join('') : '';
 
-  /* --- รายระดับชั้น --- */
   if (isClass){
-    const GR = [...new Set(R.map(r=>r.grade))].filter(Boolean);
     const order = ['อนุบาล 1','อนุบาล 2','อนุบาล 3','ประถมศึกษาปีที่ 1','ประถมศึกษาปีที่ 2',
       'ประถมศึกษาปีที่ 3','ประถมศึกษาปีที่ 4','ประถมศึกษาปีที่ 5','ประถมศึกษาปีที่ 6',
       'มัธยมศึกษาปีที่ 1','มัธยมศึกษาปีที่ 2','มัธยมศึกษาปีที่ 3'];
-    GR.sort((a,b)=>order.indexOf(a)-order.indexOf(b));
+    const GR = [...new Set(R.map(r=>r.grade))].filter(Boolean)
+      .sort((a,b)=>order.indexOf(a)-order.indexOf(b));
     const byL = GR.map(function(g){
       const L = R.filter(r => r.grade === g);
-      return { nm: g, v: wAvg(L,null), tx: wAvg(L,null).toFixed(2), sub: '(' + L.length + ')' };
+      const v = wAvg(L,null);
+      return { nm: g, v: v, tx: v.toFixed(2), sub: '(' + L.length + ')' };
     });
-    $('chartL').innerHTML = byL.length ? bars(byL, 4) : '<div class="empty">ไม่มีข้อมูล</div>';
+    $('chartL').innerHTML = byL.length ? bars(byL, 4) : noData();
   }
 
   renderTable(R, isClass);
@@ -599,7 +756,8 @@ function render(){
 function bars(list, max){
   return '<div class="hb">' + list.map(function(x){
     const w = Math.max(1, x.v / max * 100);
-    return '<div class="nm">' + esc(x.nm) + '</div>' +
+    return '<div class="nm">' + (x.sw ? '<span class="sw" style="background:' + x.sw + '"></span>' : '') +
+      esc(x.nm) + '</div>' +
       '<div class="track"><div class="fill" style="width:' + w + '%" title="' + esc(x.nm) + ' — ' + x.tx + '"></div></div>' +
       '<div class="val">' + x.tx + (x.sub ? ' <span class="sub">' + x.sub + '</span>' : '') + '</div>';
   }).join('') + '</div>';
@@ -651,12 +809,12 @@ function renderTable(R, isClass){
         if (c.k === 'avg')      return '<td class="c"><b>' + Number(r.avg).toFixed(2) + '</b></td>';
         if (c.k === 'quality'){ const q = QUALITY.indexOf(qualityOf(r.avg)) + 1;
           return '<td class="c"><span class="pill q' + q + '">' + qualityOf(r.avg) + '</span></td>'; }
-        if (c.k === 'evidence') return '<td>' + (r.evidence ? '<a href="' + esc(r.evidence) + '" target="_blank" rel="noopener">เปิดดู</a>' : '-') + '</td>';
+        if (c.k === 'evidence') return '<td>' + (r.evidence
+          ? '<a href="' + esc(r.evidence) + '" target="_blank" rel="noopener">เปิดดู</a>' : '-') + '</td>';
         const v = r[c.k];
         return '<td' + (c.c ? ' class="c"' : '') + '>' + esc(v === '' || v == null ? '-' : v) + '</td>';
       }).join('') + '</tr>';
-    }).join('') : '<tr><td colspan="' + cols.length + '"><div class="empty">ไม่มีข้อมูลตามเงื่อนไขที่เลือก</div></td></tr>') +
-    '</tbody>';
+    }).join('') : '<tr><td colspan="' + cols.length + '">' + noData() + '</td></tr>') + '</tbody>';
 
   $('tbl').querySelectorAll('th').forEach(th => th.addEventListener('click', function(){
     const k = this.dataset.k;
@@ -670,20 +828,28 @@ function renderTable(R, isClass){
 /* ---------- โรงเรียนที่ยังไม่ส่ง ---------- */
 function renderMissing(R){
   const sent = new Set(R.map(r => r.school));
+  const total = Object.values(SCHOOLS).reduce((a,b)=>a+b.length,0);
   let html = '', totalMiss = 0;
   Object.keys(SCHOOLS).forEach(function(g){
     const miss = SCHOOLS[g].filter(s => !sent.has(s)).sort((a,b)=>a.localeCompare(b,'th'));
     totalMiss += miss.length;
     if (!miss.length) return;
-    html += '<div class="grpbox"><h4>' + esc(g) +
-      '<span class="cnt">ยังไม่ส่ง ' + miss.length + ' / ' + SCHOOLS[g].length + ' โรงเรียน</span></h4>' +
-      '<div class="miss">' + miss.map(s => '<div>• ' + esc(s) + '</div>').join('') + '</div></div>';
+    html += '<div class="grpbox"><h4><span class="l">' + icon('users') + esc(g) + '</span>' +
+      '<span class="cnt">ยังไม่ส่ง ' + miss.length + ' / ' + SCHOOLS[g].length + '</span></h4>' +
+      '<div class="miss">' + miss.map(s => '<div>' + esc(s) + '</div>').join('') + '</div></div>';
   });
+  const done = total - totalMiss;
   $('missBox').innerHTML =
-    '<div class="tiles"><div class="tile"><div class="lb">โรงเรียนที่ยังไม่ส่งข้อมูล</div>' +
-    '<div class="v">' + totalMiss + '</div><div class="s">จากทั้งหมด ' +
-    Object.values(SCHOOLS).reduce((a,b)=>a+b.length,0) + ' โรงเรียน (ตามตัวกรองปัจจุบัน)</div></div></div>' +
-    (html || '<div class="grpbox"><div class="empty">🎉 ทุกโรงเรียนส่งข้อมูลครบแล้ว</div></div>');
+    '<div class="tiles">' +
+    '<div class="tile" style="--tc:#eb6834"><div class="hd"><div class="tic">' + icon('clock') +
+      '</div><div class="lb">โรงเรียนที่ยังไม่ส่งข้อมูล</div></div>' +
+      '<div class="v">' + totalMiss + '</div><div class="s">จากทั้งหมด ' + total + ' โรงเรียน</div></div>' +
+    '<div class="tile" style="--tc:#1baf7a"><div class="hd"><div class="tic">' + icon('check') +
+      '</div><div class="lb">ส่งข้อมูลแล้ว</div></div>' +
+      '<div class="v">' + done + '</div><div class="s">คิดเป็น ' + Math.round(done/total*100) + '%</div>' +
+      '<div class="meter"><i style="width:' + (done/total*100) + '%"></i></div></div>' +
+    '</div>' +
+    (html || '<div class="grpbox"><div class="empty">' + icon('check') + 'ทุกโรงเรียนส่งข้อมูลครบแล้ว</div></div>');
 }
 
 /* ---------- ส่งออก CSV ---------- */

@@ -1,7 +1,7 @@
 /* เกณฑ์การประเมินทักษะ 8C — ใช้ร่วมกันทั้ง index.html และ admin.html */
 const RUBRIC = [
   {
-    key: 'C1', short: 'คิดวิเคราะห์ แก้ปัญหา', icon: '🧠',
+    key: 'C1', color: '#2a78d6', ink: '#1f63b8', dark: '#3987e5', short: 'คิดวิเคราะห์ แก้ปัญหา', icon: 'ic',
     en: 'Critical Thinking and Problem Solving',
     th: 'คิดวิเคราะห์ แก้ไขปัญหาได้อย่างมีวิจารณญาณ',
     levels: [
@@ -12,7 +12,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C2', short: 'คิดสร้างสรรค์ นวัตกรรม', icon: '💡',
+    key: 'C2', color: '#eb6834', ink: '#c94f1f', dark: '#f07a4b', short: 'คิดสร้างสรรค์ นวัตกรรม', icon: 'ic',
     en: 'Creativity and Innovation',
     th: 'คิดสร้างสรรค์และพัฒนานวัตกรรมใหม่ ๆ',
     levels: [
@@ -23,7 +23,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C3', short: 'เข้าใจต่างวัฒนธรรม', icon: '🌏',
+    key: 'C3', color: '#1baf7a', ink: '#118a5f', dark: '#25c58c', short: 'เข้าใจต่างวัฒนธรรม', icon: 'ic',
     en: 'Cross-Cultural Understanding',
     th: 'เข้าใจความแตกต่างทางวัฒนธรรม',
     levels: [
@@ -34,7 +34,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C4', short: 'ทำงานเป็นทีม ภาวะผู้นำ', icon: '🤝',
+    key: 'C4', color: '#eda100', ink: '#a87200', dark: '#f0b437', short: 'ทำงานเป็นทีม ภาวะผู้นำ', icon: 'ic',
     en: 'Collaboration, Teamwork and Leadership',
     th: 'ทำงานร่วมกับผู้อื่นและมีภาวะผู้นำ',
     levels: [
@@ -45,7 +45,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C5', short: 'สื่อสาร รู้เท่าทันสื่อ', icon: '📣',
+    key: 'C5', color: '#e87ba4', ink: '#c1517d', dark: '#ef92b6', short: 'สื่อสาร รู้เท่าทันสื่อ', icon: 'ic',
     en: 'Communications, Information and Media Literacy',
     th: 'สื่อสารและรู้เท่าทันสื่อ',
     levels: [
@@ -56,7 +56,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C6', short: 'คอมพิวเตอร์และ ICT', icon: '💻',
+    key: 'C6', color: '#008300', ink: '#006b00', dark: '#17a317', short: 'คอมพิวเตอร์และ ICT', icon: 'ic',
     en: 'Computing and ICT Literacy',
     th: 'ใช้คอมพิวเตอร์และเทคโนโลยีสารสนเทศเป็น',
     levels: [
@@ -67,7 +67,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C7', short: 'ทักษะอาชีพ เรียนรู้ด้วยตนเอง', icon: '🎯',
+    key: 'C7', color: '#4a3aa7', ink: '#3a2d85', dark: '#7e6fe0', short: 'ทักษะอาชีพ เรียนรู้ด้วยตนเอง', icon: 'ic',
     en: 'Career and Learning Skills',
     th: 'มีทักษะอาชีพและการเรียนรู้ด้วยตนเอง',
     levels: [
@@ -78,7 +78,7 @@ const RUBRIC = [
     ]
   },
   {
-    key: 'C8', short: 'เมตตา คุณธรรม วินัย', icon: '💗',
+    key: 'C8', color: '#e34948', ink: '#c02f2e', dark: '#ea6c6b', short: 'เมตตา คุณธรรม วินัย', icon: 'ic',
     en: 'Compassion',
     th: 'มีความเมตตา มีคุณธรรม และระเบียบวินัย',
     levels: [
