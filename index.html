@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ระบบเก็บข้อมูลทักษะ 8C — สพป.อุดรธานี เขต 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f4c81; --navy2:#0a3a63; --teal:#1a9e8f; --amber:#e8a33d;
+  --ink:#1c2733; --muted:#67788a; --line:#dfe6ee; --bg:#f2f5f9; --card:#fff;
+  --l1:#e05c5c; --l2:#e8a33d; --l3:#3f8fd1; --l4:#1a9e8f;
+  --r:14px; --sh:0 2px 10px rgba(15,76,129,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Sarabun',-apple-system,'Segoe UI',sans-serif;font-size:16px;line-height:1.65}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px 80px}
+
+/* ---------- header ---------- */
+header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#0a5a5a 100%);color:#fff;padding:30px 16px 34px}
+header .wrap{padding-bottom:0}
+.kicker{font-size:.86rem;letter-spacing:.06em;opacity:.85;margin:0 0 6px}
+h1{margin:0;font-size:1.72rem;font-weight:700;line-height:1.3}
+.sub{margin:8px 0 0;opacity:.9;font-size:1rem}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
+  padding:5px 11px;border-radius:999px;font-size:.82rem}
+
+/* ---------- cards ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:22px;margin-top:18px;box-shadow:var(--sh)}
+.card h2{margin:0 0 4px;font-size:1.16rem;color:var(--navy);display:flex;align-items:center;gap:9px}
+.card h2 .n{background:var(--navy);color:#fff;width:27px;height:27px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;font-size:.86rem;flex:0 0 auto}
+.card .hint{margin:0 0 16px;color:var(--muted);font-size:.9rem}
+
+/* ---------- form ---------- */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid.g3{grid-template-columns:1fr 1fr 1fr}
+.f{display:flex;flex-direction:column;gap:6px}
+.f.full{grid-column:1/-1}
+label{font-weight:600;font-size:.92rem}
+label .req{color:#d94848}
+input,select,textarea{font-family:inherit;font-size:1rem;padding:10px 12px;
+  border:1.5px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);
+  box-shadow:0 0 0 3px rgba(15,76,129,.12)}
+textarea{resize:vertical;min-height:76px}
+.note{font-size:.83rem;color:var(--muted)}
+
+/* ---------- level switch ---------- */
+.switch{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.switch label{cursor:pointer;border:2px solid var(--line);border-radius:12px;padding:14px;
+  display:block;transition:.15s;background:#fff}
+.switch input{display:none}
+.switch .t{font-weight:700;font-size:1rem}
+.switch .d{font-size:.85rem;color:var(--muted);margin-top:3px}
+.switch input:checked + .box{border-color:var(--navy);background:#eef4fa}
+.switch .box{border:2px solid var(--line);border-radius:12px;padding:14px;transition:.15s}
+
+/* ---------- rubric ---------- */
+.rub{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px;background:#fff}
+.rub.done{border-color:#bfe3dd;background:#f7fdfc}
+.rub .top{display:flex;gap:11px;align-items:flex-start;margin-bottom:12px}
+.rub .ic{font-size:1.5rem;line-height:1}
+.rub .ttl{font-weight:700;font-size:1.04rem;color:var(--navy)}
+.rub .en{font-size:.81rem;color:var(--muted);font-style:italic}
+.rub .de{font-size:.9rem;color:#3d4c5c;margin-top:2px}
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.opts label{cursor:pointer;margin:0}
+.opts input{display:none}
+.opt{border:1.5px solid var(--line);border-radius:10px;padding:10px;height:100%;
+  display:flex;flex-direction:column;gap:5px;transition:.15s;background:#fff}
+.opt:hover{border-color:#b9c8d8;background:#fafcfe}
+.opt .lv{display:flex;align-items:center;gap:6px;font-weight:700;font-size:.85rem}
+.opt .dot{width:19px;height:19px;border-radius:50%;color:#fff;font-size:.72rem;
+  display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+.opt .tx{font-size:.79rem;color:#4a5a6a;line-height:1.45}
+.o1 .dot{background:var(--l1)} .o2 .dot{background:var(--l2)}
+.o3 .dot{background:var(--l3)} .o4 .dot{background:var(--l4)}
+.opts input:checked + .opt{background:#eef4fa;border-color:var(--navy);
+  box-shadow:0 0 0 2px rgba(15,76,129,.13)}
+.opts input:checked + .opt .tx{color:var(--ink)}
+
+/* ---------- live score ---------- */
+.score{position:sticky;bottom:0;z-index:5;margin-top:18px;
+  background:linear-gradient(135deg,var(--navy),#0a5a5a);color:#fff;
+  border-radius:var(--r);padding:15px 18px;display:flex;align-items:center;
+  gap:16px;flex-wrap:wrap;box-shadow:0 -3px 16px rgba(0,0,0,.14)}
+.score .big{font-size:2rem;font-weight:700;line-height:1}
+.score .lb{font-size:.82rem;opacity:.85}
+.score .badge{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+  padding:5px 14px;border-radius:999px;font-weight:600}
+.score .bar{flex:1;min-width:150px;height:9px;background:rgba(255,255,255,.22);border-radius:99px;overflow:hidden}
+.score .bar i{display:block;height:100%;background:#7fe3d3;width:0;transition:width .3s}
+
+/* ---------- buttons ---------- */
+.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:20px}
+button{font-family:inherit;font-size:1.02rem;font-weight:600;padding:13px 26px;
+  border-radius:10px;border:none;cursor:pointer;transition:.15s}
+.btn1{background:var(--navy);color:#fff;flex:1;min-width:200px}
+.btn1:hover{background:var(--navy2)}
+.btn1:disabled{background:#9fb1c2;cursor:not-allowed}
+.btn2{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.btn2:hover{border-color:var(--navy)}
+
+/* ---------- messages ---------- */
+.msg{margin-top:16px;padding:15px 18px;border-radius:11px;display:none;font-size:.96rem}
+.msg.on{display:block}
+.msg.ok{background:#e9f8f4;border:1px solid #9fd9cd;color:#0d6b5c}
+.msg.err{background:#fdeceb;border:1px solid #f2b7b3;color:#a52f26}
+.msg .ref{font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:1.12rem;
+  background:#fff;padding:3px 10px;border-radius:7px;display:inline-block;margin-top:6px}
+.setup{background:#fff7e6;border:1px solid #f0d194;color:#7a5510;padding:15px 18px;
+  border-radius:11px;margin-top:18px;display:none;font-size:.92rem}
+.setup.on{display:block}
+footer{text-align:center;color:var(--muted);font-size:.86rem;padding:26px 16px 40px;line-height:1.8}
+
+@media(max-width:760px){
+  .grid,.grid.g3,.switch{grid-template-columns:1fr}
+  .opts{grid-template-columns:1fr 1fr}
+  h1{font-size:1.35rem}
+  .card{padding:17px}
+  .score{padding:13px 15px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาอุดรธานี เขต 1</p>
+    <h1>ระบบเก็บข้อมูลทักษะแห่งศตวรรษที่ 21 (8C)</h1>
+    <p class="sub">แบบประเมินทักษะผู้เรียน 8 ด้าน ด้วยรูบริก 4 ระดับ</p>
+    <div class="chips" id="chips"></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="setup" id="setup">
+    ⚠️ <b>ยังไม่ได้ตั้งค่าระบบ</b> — ผู้ดูแลระบบต้องนำ URL ของ Google Apps Script Web App
+    มาใส่ในตัวแปร <code>API_URL</code> ที่ส่วนท้ายของไฟล์นี้ก่อนเปิดใช้งาน
+  </div>
+
+  <!-- 1. ข้อมูลพื้นฐาน -->
+  <div class="card">
+    <h2><span class="n">1</span> ข้อมูลพื้นฐาน</h2>
+    <p class="hint">เลือกปีการศึกษา ภาคเรียน และระดับของข้อมูลที่ต้องการรายงาน</p>
+
+    <div class="grid g3">
+      <div class="f">
+        <label>ปีการศึกษา <span class="req">*</span></label>
+        <select id="year"></select>
+      </div>
+      <div class="f">
+        <label>ภาคเรียน <span class="req">*</span></label>
+        <select id="term">
+          <option value="1">ภาคเรียนที่ 1</option>
+          <option value="2">ภาคเรียนที่ 2</option>
+        </select>
+      </div>
+      <div class="f">
+        <label>วันที่ประเมิน</label>
+        <input type="date" id="assessDate">
+      </div>
+    </div>
+
+    <div class="f full" style="margin-top:16px">
+      <label>ระดับของข้อมูล <span class="req">*</span></label>
+      <div class="switch">
+        <label>
+          <input type="radio" name="lv" value="school" checked>
+          <div class="box">
+            <div class="t">🏫 ระดับโรงเรียน</div>
+            <div class="d">สรุปภาพรวมทั้งโรงเรียน 1 ชุดข้อมูล — ผู้รับผิดชอบของโรงเรียนเป็นผู้กรอก</div>
+          </div>
+        </label>
+        <label>
+          <input type="radio" name="lv" value="class">
+          <div class="box">
+            <div class="t">📚 ระดับชั้น</div>
+            <div class="d">แยกตามระดับชั้น อ.1 – ม.3 กรอกทีละชั้น — ครูประจำชั้น/ครูผู้สอนเป็นผู้กรอก</div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. โรงเรียน -->
+  <div class="card">
+    <h2><span class="n">2</span> ข้อมูลโรงเรียน</h2>
+    <p class="hint" id="schHint">เลือกกลุ่มโรงเรียนก่อน แล้วรายชื่อโรงเรียนในกลุ่มจะแสดงให้เลือก</p>
+
+    <div class="grid">
+      <div class="f">
+        <label>กลุ่มโรงเรียน <span class="req">*</span></label>
+        <select id="sgroup"><option value="">— เลือกกลุ่มโรงเรียน —</option></select>
+      </div>
+      <div class="f">
+        <label>โรงเรียน <span class="req">*</span></label>
+        <select id="school" disabled><option value="">— เลือกกลุ่มโรงเรียนก่อน —</option></select>
+      </div>
+
+      <div class="f" id="wrapSize">
+        <label>ขนาดโรงเรียน</label>
+        <select id="size">
+          <option value="">— ไม่ระบุ —</option>
+          <option>ขนาดเล็ก (ไม่เกิน 120 คน)</option>
+          <option>ขนาดกลาง (121–600 คน)</option>
+          <option>ขนาดใหญ่ (601–1,500 คน)</option>
+          <option>ขนาดใหญ่พิเศษ (1,501 คนขึ้นไป)</option>
+        </select>
+      </div>
+      <div class="f" id="wrapGrade" style="display:none">
+        <label>ระดับชั้น <span class="req">*</span></label>
+        <select id="grade"><option value="">— เลือกระดับชั้น —</option></select>
+      </div>
+
+      <div class="f">
+        <label id="lbNAll">จำนวนนักเรียนทั้งหมด (คน)</label>
+        <input type="number" id="nAll" min="0" max="5000" placeholder="เช่น 250">
+      </div>
+      <div class="f">
+        <label>จำนวนนักเรียนที่ประเมิน (คน) <span class="req">*</span></label>
+        <input type="number" id="nEval" min="1" max="5000" placeholder="เช่น 245">
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. รูบริก -->
+  <div class="card">
+    <h2><span class="n">3</span> ผลการประเมินทักษะ 8C</h2>
+    <p class="hint">
+      พิจารณาจาก<b>ภาพรวมของผู้เรียนส่วนใหญ่</b> แล้วเลือกระดับคุณภาพที่ตรงที่สุดในแต่ละด้าน
+      โดยใช้หลักฐานเชิงประจักษ์ประกอบ เช่น ชิ้นงาน แบบบันทึกพฤติกรรม ผลการปฏิบัติ
+    </p>
+    <div id="rubrics"></div>
+
+    <div class="score" id="score">
+      <div>
+        <div class="lb">คะแนนเฉลี่ย 8C</div>
+        <div class="big"><span id="avg">–</span> <span style="font-size:1rem;opacity:.7">/ 4.00</span></div>
+      </div>
+      <div class="bar"><i id="bar"></i></div>
+      <div class="badge" id="qual">ยังประเมินไม่ครบ</div>
+      <div class="lb" id="cnt">เลือกแล้ว 0 / 8 ด้าน</div>
+    </div>
+  </div>
+
+  <!-- 4. ข้อมูลเพิ่มเติม -->
+  <div class="card">
+    <h2><span class="n">4</span> จุดเด่น จุดที่ควรพัฒนา และหลักฐาน</h2>
+    <p class="hint">ไม่บังคับ แต่ช่วยให้เขตพื้นที่นำข้อมูลไปวางแผนนิเทศได้ตรงจุดมากขึ้น</p>
+    <div class="grid">
+      <div class="f">
+        <label>จุดเด่นด้านทักษะ 8C</label>
+        <textarea id="strength" maxlength="500" placeholder="เช่น ผู้เรียนมีวินัยและจิตอาสาโดดเด่น มีกิจกรรมชุมนุมสร้างสรรค์ต่อเนื่อง"></textarea>
+      </div>
+      <div class="f">
+        <label>จุดที่ควรพัฒนา / ต้องการรับการนิเทศ</label>
+        <textarea id="improve" maxlength="500" placeholder="เช่น ต้องการพัฒนาทักษะการเขียนโปรแกรมและการรู้เท่าทันสื่อ"></textarea>
+      </div>
+      <div class="f full">
+        <label>ลิงก์หลักฐานประกอบ (Google Drive / เว็บไซต์โรงเรียน)</label>
+        <input type="url" id="evidence" placeholder="https://drive.google.com/...">
+        <span class="note">ตั้งค่าการแชร์เป็น “ผู้ที่มีลิงก์” ก่อนวาง เพื่อให้ผู้นิเทศเปิดดูได้</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. ผู้กรอก -->
+  <div class="card">
+    <h2><span class="n">5</span> ผู้กรอกข้อมูล</h2>
+    <p class="hint">สำหรับติดต่อกลับกรณีข้อมูลไม่ครบถ้วน</p>
+    <div class="grid">
+      <div class="f">
+        <label>ชื่อ – สกุล <span class="req">*</span></label>
+        <input type="text" id="reporter" maxlength="80" placeholder="เช่น นางสาวสมหญิง ใจดี">
+      </div>
+      <div class="f">
+        <label>ตำแหน่ง <span class="req">*</span></label>
+        <select id="position">
+          <option value="">— เลือกตำแหน่ง —</option>
+          <option>ผู้อำนวยการสถานศึกษา</option>
+          <option>รองผู้อำนวยการสถานศึกษา</option>
+          <option>ครูวิชาการโรงเรียน</option>
+          <option>ครูประจำชั้น</option>
+          <option>ครูผู้สอน</option>
+          <option>ครูผู้ช่วย</option>
+          <option>พนักงานราชการ / ครูอัตราจ้าง</option>
+          <option>ศึกษานิเทศก์</option>
+          <option>อื่น ๆ</option>
+        </select>
+      </div>
+      <div class="f">
+        <label>เบอร์โทรศัพท์ <span class="req">*</span></label>
+        <input type="tel" id="phone" maxlength="15" placeholder="0812345678">
+      </div>
+      <div class="f">
+        <label>อีเมล หรือ ID Line</label>
+        <input type="text" id="contact" maxlength="80" placeholder="ไม่บังคับ">
+      </div>
+      <div class="f full">
+        <label>หมายเหตุ</label>
+        <input type="text" id="note" maxlength="200" placeholder="ไม่บังคับ">
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn1" id="send">บันทึกข้อมูล</button>
+      <button class="btn2" id="reset" type="button">ล้างแบบฟอร์ม</button>
+    </div>
+
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <footer>
+    กลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา<br>
+    สำนักงานเขตพื้นที่การศึกษาประถมศึกษาอุดรธานี เขต 1
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   ⚙️ ตั้งค่า — วาง URL ของ Web App (ลงท้ายด้วย /exec) ที่นี่
+   ============================================================ */
+const API_URL = "";
+
+/* ---------- ข้อมูลเกณฑ์และโรงเรียน ---------- */
+/* เกณฑ์การประเมินทักษะ 8C — ใช้ร่วมกันทั้ง index.html และ admin.html */
+const RUBRIC = [
+  {
+    key: 'C1', short: 'คิดวิเคราะห์ แก้ปัญหา', icon: '🧠',
+    en: 'Critical Thinking and Problem Solving',
+    th: 'คิดวิเคราะห์ แก้ไขปัญหาได้อย่างมีวิจารณญาณ',
+    levels: [
+      'ผู้เรียนตอบคำถามจากการจดจำ ยังแยกข้อเท็จจริงกับความคิดเห็นไม่ได้ และรอให้ครูบอกวิธีแก้ปัญหา',
+      'ตั้งคำถามและระบุปัญหาได้เมื่อครูชี้แนะ ให้เหตุผลประกอบคำตอบได้บ้าง แก้ปัญหาตามขั้นตอนที่กำหนดให้',
+      'วิเคราะห์ข้อมูล แยกข้อเท็จจริงจากความคิดเห็น เลือกวิธีแก้ปัญหาด้วยตนเองและอธิบายเหตุผลได้',
+      'ตั้งคำถามเชิงลึก ประเมินความน่าเชื่อถือของข้อมูล ออกแบบวิธีแก้ปัญหาใหม่ ตรวจสอบผลและปรับปรุงได้เอง เป็นแบบอย่างแก่เพื่อน'
+    ]
+  },
+  {
+    key: 'C2', short: 'คิดสร้างสรรค์ นวัตกรรม', icon: '💡',
+    en: 'Creativity and Innovation',
+    th: 'คิดสร้างสรรค์และพัฒนานวัตกรรมใหม่ ๆ',
+    levels: [
+      'ทำงานตามตัวอย่างที่ครูให้เท่านั้น ยังไม่แสดงความคิดที่แตกต่าง',
+      'เสนอความคิดใหม่ได้เมื่อมีตัวอย่างหรือคำชี้แนะ ดัดแปลงผลงานเดิมได้เล็กน้อย',
+      'คิดริเริ่มผลงานหรือวิธีการของตนเอง ต่อยอดความคิดของผู้อื่นได้ มีชิ้นงานสร้างสรรค์ในระดับห้องเรียน/โรงเรียน',
+      'สร้างสรรค์ชิ้นงานหรือนวัตกรรมที่แปลกใหม่และใช้ได้จริง เผยแพร่หรือได้รับการยอมรับตั้งแต่ระดับกลุ่มโรงเรียนขึ้นไป'
+    ]
+  },
+  {
+    key: 'C3', short: 'เข้าใจต่างวัฒนธรรม', icon: '🌏',
+    en: 'Cross-Cultural Understanding',
+    th: 'เข้าใจความแตกต่างทางวัฒนธรรม',
+    levels: [
+      'รู้จักวัฒนธรรมของตนเองเพียงบางส่วน ยังไม่สนใจความแตกต่างของผู้อื่น',
+      'บอกความเหมือน–ต่างของวัฒนธรรมท้องถิ่นกับวัฒนธรรมอื่นได้เมื่อมีการชี้แนะ',
+      'ยอมรับและปฏิบัติต่อผู้ที่แตกต่างด้วยความเคารพ เข้าร่วมกิจกรรมวัฒนธรรมท้องถิ่น/นานาชาติ สื่อสารภาษาต่างประเทศพื้นฐานได้',
+      'อธิบายและถ่ายทอดวัฒนธรรมไทยและท้องถิ่นแก่ผู้อื่นได้ ทำงานร่วมกับผู้มีพื้นเพต่างกันได้ดี เป็นผู้นำกิจกรรมแลกเปลี่ยนวัฒนธรรม'
+    ]
+  },
+  {
+    key: 'C4', short: 'ทำงานเป็นทีม ภาวะผู้นำ', icon: '🤝',
+    en: 'Collaboration, Teamwork and Leadership',
+    th: 'ทำงานร่วมกับผู้อื่นและมีภาวะผู้นำ',
+    levels: [
+      'ร่วมงานกลุ่มโดยรอให้เพื่อนมอบหมาย ยังไม่รับผิดชอบบทบาทของตน',
+      'ร่วมงานกลุ่มและทำหน้าที่ที่ได้รับมอบหมายจนสำเร็จเมื่อมีครูกำกับ',
+      'วางแผนแบ่งบทบาทกับเพื่อนได้ รับฟังความเห็นต่าง แก้ไขข้อขัดแย้งได้ ทำหน้าที่หัวหน้ากลุ่มได้',
+      'เป็นผู้นำและผู้ตามได้ตามสถานการณ์ ประสานงานให้ทีมบรรลุเป้าหมาย สะท้อนผลการทำงานของทีมและพัฒนาอย่างต่อเนื่อง'
+    ]
+  },
+  {
+    key: 'C5', short: 'สื่อสาร รู้เท่าทันสื่อ', icon: '📣',
+    en: 'Communications, Information and Media Literacy',
+    th: 'สื่อสารและรู้เท่าทันสื่อ',
+    levels: [
+      'สื่อสารได้ไม่ชัดเจน เชื่อข้อมูลจากสื่อโดยไม่ตรวจสอบ',
+      'พูดและเขียนสื่อสารได้ตามรูปแบบที่กำหนด เริ่มตั้งข้อสงสัยกับข้อมูลจากสื่อ',
+      'นำเสนอข้อมูลอย่างเป็นระบบ เลือกใช้สื่อให้เหมาะกับผู้ฟัง ตรวจสอบแหล่งที่มาก่อนเชื่อหรือแชร์',
+      'สื่อสารได้อย่างมั่นใจทั้งภาษาไทยและภาษาต่างประเทศ ผลิตสื่อสร้างสรรค์พร้อมอ้างอิงแหล่งข้อมูล รู้เท่าทันข่าวลวงและเตือนผู้อื่นได้'
+    ]
+  },
+  {
+    key: 'C6', short: 'คอมพิวเตอร์และ ICT', icon: '💻',
+    en: 'Computing and ICT Literacy',
+    th: 'ใช้คอมพิวเตอร์และเทคโนโลยีสารสนเทศเป็น',
+    levels: [
+      'ใช้อุปกรณ์พื้นฐานได้เมื่อมีผู้ช่วยเหลือ',
+      'ใช้โปรแกรมพื้นฐาน เช่น พิมพ์งาน ค้นข้อมูล ได้ตามขั้นตอนที่กำหนด',
+      'เลือกใช้โปรแกรมหรือแอปพลิเคชันให้เหมาะกับงาน จัดการไฟล์และข้อมูลได้ เขียนโปรแกรมอย่างง่าย/วิทยาการคำนวณตามระดับชั้น',
+      'ใช้เทคโนโลยีสร้างชิ้นงาน แก้ปัญหาด้วยแนวคิดเชิงคำนวณ ใช้ AI และเครื่องมือดิจิทัลอย่างรู้เท่าทันและปลอดภัย ช่วยแนะนำเพื่อนได้'
+    ]
+  },
+  {
+    key: 'C7', short: 'ทักษะอาชีพ เรียนรู้ด้วยตนเอง', icon: '🎯',
+    en: 'Career and Learning Skills',
+    th: 'มีทักษะอาชีพและการเรียนรู้ด้วยตนเอง',
+    levels: [
+      'ยังไม่ทราบความถนัดและความสนใจของตนเอง เรียนรู้เมื่อครูสั่งเท่านั้น',
+      'บอกความถนัดและอาชีพที่สนใจได้ ทำงานที่ได้รับมอบหมายจนเสร็จ',
+      'ตั้งเป้าหมายการเรียน วางแผนการเรียนรู้ด้วยตนเอง มีทักษะอาชีพพื้นฐานหรือผลงานอาชีพในโรงเรียน',
+      'กำกับการเรียนรู้ของตนเองอย่างต่อเนื่อง มีแฟ้มสะสมงานหรือรายได้ระหว่างเรียน เชื่อมโยงการเรียนกับเส้นทางอาชีพได้ชัดเจน'
+    ]
+  },
+  {
+    key: 'C8', short: 'เมตตา คุณธรรม วินัย', icon: '💗',
+    en: 'Compassion',
+    th: 'มีความเมตตา มีคุณธรรม และระเบียบวินัย',
+    levels: [
+      'ปฏิบัติตามระเบียบเมื่อมีผู้กำกับ ยังไม่ใส่ใจผู้อื่น',
+      'มีมารยาท ช่วยเหลือผู้อื่นเมื่อได้รับการร้องขอ ปฏิบัติตามข้อตกลงของห้องเรียน',
+      'มีวินัย ซื่อสัตย์ รับผิดชอบ ช่วยเหลือเพื่อนและส่วนรวมด้วยความเต็มใจ',
+      'เป็นแบบอย่างด้านคุณธรรมและวินัย ริเริ่มกิจกรรมจิตอาสาหรือช่วยเหลือชุมชน จนได้รับการยกย่อง'
+    ]
+  }
+];
+
+const LEVEL_NAME = ['ควรพัฒนา', 'พอใช้', 'ดี', 'ดีเยี่ยม'];
+
+function qualityOf(avg) {
+  if (avg >= 3.51) return 'ดีเยี่ยม';
+  if (avg >= 2.51) return 'ดี';
+  if (avg >= 1.51) return 'พอใช้';
+  return 'ควรพัฒนา';
+}
+
+
+const SCHOOLS = {
+  "กลุ่มเมือง 1": ["บ้านหมากแข้ง", "ชุมชนบ้านเดื่อวิทยา", "บ้านหนองขาม(ค่ายเสนีย์อุปถัมภ์)", "บ้านดงอุดม", "บ้านเก่าน้อย#เรียนรวมทุกชั้น", "บ้านหนองเหล็ก", "บ้านหนองตุ", "บ้านม่วงสว่างสามัคคี", "บ้านดอนอุดม(เนยอุปถัมภ์)", "บ้านหนองบัว"],
+  "กลุ่มเมือง 2": ["อนุบาลอุดรธานี", "บ้านศรีเชียงใหม่", "บ้านกุดลิงง้อหนองแก", "บ้านดงเค็ง (นําวัฒนาอุปถัมภ์)", "บ้านคำกลิ้ง", "บ้านหนองตูม", "บ้านจั่นศรีวิไล", "บ้านเลี่ยมพิลึก", "ค่ายประจักษ์ศิลปาคม"],
+  "กลุ่มเมือง 3": ["นิคมสร้างตนเองเชียงพิณ 3", "นิคมสร้างตนเองเชียงพิณ 5", "บ้านนาสมบูรณ์", "บ้านโคกสะอาดศรีบูรพา", "บ้านหนองสวรรค์ (ไชยเชียงพิณ)", "บ้านหนองโอนหนองฮาง", "บ้านเชียงพิณ", "นาคลองหนองศรีคามวิทยา", "บ้านโนนสวรรค์#เรียนรวมทุกชั้น", "บ้านนาแอง", "บ้านนิคมพัฒนา", "บ้านหนองขุ่นเหล่าหลักวิทยา", "บ้านปากดงส่งเสริมธรรม"],
+  "กลุ่มเมือง 4": ["บ้านเชียงพัง", "ชุมชนนากว้างพัฒนศึกษา", "บ้านนาทาม#เรียนรวมทุกชั้น บ้านเชียงพัง", "บ้านเม่น", "บ้านขาว", "บ้านดู่", "บ้านหัวบึง", "บ้านพรานเหมือน", "บ้านเลื่อม", "หนองสำโรงวิทยา"],
+  "กลุ่มเมือง 5": ["บ้านตาด", "บ้านกกสะทอนเครือหวายดิน", "บ้านโนนเดื่อ", "บ้านสุขสมบูรณ์", "บ้านศรีบุญเรือง", "เจ ซี บ้านอินทร์แปลง", "ผ่านศึกสงเคราะห์", "บ้านหลุบหวายป่าขาม", "บ้านโสกน้ำขาว", "หนองไฮวิทยา", "บ้านโนนสะอาดผาสุข", "บ้านดงมะกรูดทรายทอง", "บ้านโคกลาด"],
+  "กลุ่มเมือง 6": ["ชุมชนสามพร้าว", "บ้านหนองบุนาหล่ำ", "บ้านหนองบั่วประชาสรรค์", "บ้านดอนหาดดงเหล่าต้อง", "บ้านอี่เลี่ยน", "บ้านเซประชาอุทิศ", "บ้านโก่ย", "บ้านจำปาโนนสะอาด", "บ้านหนองนาคำ", "บ้านหนองหว้าหนองไผ่", "บ้านหนองแก", "บ้านถ่อนน้อยหนองไผ่คำ"],
+  "กลุ่มเมือง 7": ["บ้านท่าตูมดงสระพัง", "มิตรภาพ 6", "บ้านโนนยางโนนบ่อ", "บ้านขมิ้นบ่อโคลน", "บ้านดอนหวาย", "บ้านหมากตูมดอนยานาง", "ไทยรัฐวิทยา ๙๒ (ชุมชนนาข่า)", "บ้านถ่อนใหญ่ถ่อนน้อย", "บ้านเหล่าดอนแตง", "บ้านนาคำหลวง", "บ้านงอยเลิงทอง", "ประชาสามัคคี"],
+  "กลุ่มเมือง 8": ["บ้านเชียงยืน", "บ้านอีหลุ่ง", "บ้านจำปา", "บ้านป่องมหิดลอนุสรณ์ 6", "บ้านหนองน้ำเค็ม", "บ้านหนองหลอด", "บ้านหนองตอสูงแคน", "บ่อน้อยประชาสรรค์", "บ้านนาเยีย"],
+  "กลุ่มเมือง 9": ["ชุมชนโนนสูง", "บ้านหนองโสกดาว", "บ้านข้าวสาร", "บ้านชัยพรมิตรภาพที่ 67", "บ้านแม่นนท์", "บ้านหนองไผ่หนองหิน", "บ้านหนองนาเจริญ", "บ้านหนองบัวเงินหนองบัวทอง", "บ้านหนองตะไก้"],
+  "กลุ่มหนองวัวซอ 1 (หนองวัวซอ น้ำพ่น หนองบัวบาน)": ["อนุบาลหนองวัวซอ", "บ้านหนองแซงสร้อย", "บ้านหนองแวงเดิดเกษตรสมบูรณ์", "บ้านน้ำพ่น", "บ้านเลา", "บ้านหนองบัวบาน", "นิคมสร้างตนเองเชียงพิณ 1", "บ้านหนองอ้อน้อย", "บ้านโคกก่องหนองแวงยาว"],
+  "กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)": ["รัฐประชา 509", "บ้านโนนหวาย", "บ้านหนองเม็กห้วยทราย", "บ้านโคกหนองแซง", "บ้านเสาเล้า", "บ้านหนองอ้อ", "บ้านโนนสำราญ", "ชุมชนหนองแสง", "บ้านหนองแวงฮีคำหมากคูณ", "บ้านหมากหญ้า", "บ้านผาสิงห์"],
+  "กลุ่มหนองวัวซอ 3 (กุดหมากไฟ อูบมุง)": ["ชุมชนกุดหมากไฟ", "บ้านโคกล่าม", "บ้านหนองแวงจุมพล", "บ้านดงบัง", "บ้านโนนชัยศรี", "บ้านหนองบัวเงิน", "บ้านอูบมุง", "บ้านห้วยไร่", "บ้านโคกผักหอม"],
+  "กลุ่มเพ็ญ 1": ["อนุบาลเพ็ญประชานุกูล", "บ้านนาส่อนโพนทัน", "บ้านใหม่", "บ้านศรีสุวรรณโพนสว่าง", "บ้านโพนงามหนองตุ", "สุมเส้าวิทยา", "บ้านดงปอ", "บ้านหนองนาไฮโนนสะอาด", "บ้านแพงศรี", "บ้านหนองบัวบาน", "บ้านหนองแสนตอโนนสร้างคำ", "ดงยางวังโตนวิทยา"],
+  "กลุ่มเพ็ญ 2": ["ชุมชนบ้านธาตุ", "บ้านสังซาวังน้ำขาว", "บ้านถิ่นสุขาวิทยา", "นิคมโนนสมบูรณ์", "บ้านนาคอมนาดอกไม้", "บ้านดอนแก้ว", "บ้านยามกาใหญ่", "บ้านนาพูนทรัพย์", "บ้านหมูม่นโพนโนนสะอาด", "บ้านยามกาโนนคำ"],
+  "กลุ่มเพ็ญ 3": ["บ้านเชียงหวางสร้างลาน", "บ้านนาดี", "บ้านสร้างหลวงสร้างคำ", "ดงใหญ่เจริญพัฒน์", "บ้านดอนข่าคำผักหนามประชาสามัคคี", "บ้านโพนเลาโพนทอง", "บ้านด่าน", "บ้านนาพู่", "บ้านป่าก้าวดอนแดง", "บ้านหลวงหัวสวย", "บ้านศรีบุญเรือง", "บ้านกิ่วดงมะไฟ", "บ้านหนองนกเขียนโพนทัน"],
+  "กลุ่มเพ็ญ 4": ["บ้านโนนสวาง", "บ้านคอนเลียบ", "บ้านนาพัง", "บ้านเตาไห", "บ้านหม้อ", "บ้านคอนสวรรค์สินเจริญ", "บ้านเหล่าดอนเงิน", "บ้านหนองผง", "บ้านยาง (คุรุราษฎร์วิทยา)", "บ้านโคกสว่าง", "บ้านหนองกุง", "บ้านดงขันทอง", "บ้านดงศรีสําราญ"],
+  "กลุ่มเพ็ญ 5": ["บ้านนาบัวไผ่วิทยา", "บ้านยางซอง", "บ้านนาทรายนาม่วง", "บ้านดอนกลอยดอนอุดม", "บ้านท่าหนาด", "บ้านโนนรังหนองผือวิทยา", "บ้านทอนดอนยาว", "บ้านสร้างแป้น", "บ้านหว้าน"],
+  "กลุ่มเพ็ญ 6": ["บ้านนาสีนวล", "บ้านโคกกลาง", "บ้านดอนจันทร์โพนสวรรค์คำเจริญ", "บ้านจอมศรี", "บ้านข่าทุ่งม่วงโนนศรีสมบูรณ์", "บ้านหนองบ่อ", "บ้านสะอาดนาพังศรีเจริญ", "จอมตาลโนนดู่โนนสำราญ", "บ้านดงยางนารายณ์"],
+  "กลุ่มสร้างคอม 1 (สร้างคอม)": ["อนุบาลสร้างคอม", "บ้านเชียงดา", "บ้านแมดวิทยาคม", "บ้านนาหว้า(สันติราษฎร์พิทยาคม)", "บ้านไชยฟอง", "บ้านนาสะอาด", "บ้านโนนนกหอ(เพ็งแสนวิทยา)#เรียนรวมทุกชั้น", "บ้านดงผักเทียม", "บ้านท่าเสียว", "บ้านโนนชาดวรุบลวิทยา", "บ้านโคกสว่าง#เรียนรวมทุกชั้น อนุบาลสร้างคอม"],
+  "กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)": ["บ้านดอนเดื่อ", "บ้านดอนบาก", "โคกโพธิ์วิทยา", "บ้านนาน้ำชุ่ม", "บ้านยวด", "บ้านชาด", "บ้านนามั่ง", "บ้านน้ำเที่ยง", "บ้านตลิ่งชัน-สร้างแก้ว", "บ้านศรีชมชื่นบุญชิตวิทยา", "บ้านหินโงม"]
+};
+
+const GRADES = ['อนุบาล 1','อนุบาล 2','อนุบาล 3',
+  'ประถมศึกษาปีที่ 1','ประถมศึกษาปีที่ 2','ประถมศึกษาปีที่ 3',
+  'ประถมศึกษาปีที่ 4','ประถมศึกษาปีที่ 5','ประถมศึกษาปีที่ 6',
+  'มัธยมศึกษาปีที่ 1','มัธยมศึกษาปีที่ 2','มัธยมศึกษาปีที่ 3'];
+
+const $ = id => document.getElementById(id);
+
+/* ---------- header chips ---------- */
+(function(){
+  const g = Object.keys(SCHOOLS);
+  const n = g.reduce((a,k)=>a+SCHOOLS[k].length,0);
+  $('chips').innerHTML =
+    ['ทักษะ 8 ด้าน','รูบริก 4 ระดับ', g.length+' กลุ่มโรงเรียน', n+' โรงเรียน','บันทึกซ้ำเพื่อแก้ไขได้']
+    .map(t=>'<span class="chip">'+t+'</span>').join('');
+})();
+
+/* ---------- ปีการศึกษา ---------- */
+(function(){
+  const thisYear = new Date().getFullYear() + 543;
+  const sel = $('year');
+  for (let y = thisYear + 1; y >= thisYear - 3; y--) sel.appendChild(new Option(y, y));
+  sel.value = thisYear;
+  $('assessDate').valueAsDate = new Date();
+})();
+
+/* ---------- กลุ่มโรงเรียน → โรงเรียน ---------- */
+(function(){
+  const gs = Object.keys(SCHOOLS);
+  gs.forEach(g => $('sgroup').appendChild(new Option(g + ' (' + SCHOOLS[g].length + ' โรงเรียน)', g)));
+  GRADES.forEach(g => $('grade').appendChild(new Option(g, g)));
+})();
+
+$('sgroup').addEventListener('change', function(){
+  const s = $('school');
+  s.innerHTML = '';
+  if (!this.value) {
+    s.disabled = true;
+    s.appendChild(new Option('— เลือกกลุ่มโรงเรียนก่อน —',''));
+    return;
+  }
+  s.disabled = false;
+  s.appendChild(new Option('— เลือกโรงเรียน —',''));
+  SCHOOLS[this.value].slice().sort((a,b)=>a.localeCompare(b,'th'))
+    .forEach(n => s.appendChild(new Option(n,n)));
+  $('schHint').textContent = 'กลุ่มนี้มี ' + SCHOOLS[this.value].length + ' โรงเรียน';
+});
+
+/* ---------- สลับระดับข้อมูล ---------- */
+document.querySelectorAll('input[name=lv]').forEach(r => r.addEventListener('change', function(){
+  const isClass = this.value === 'class';
+  $('wrapSize').style.display  = isClass ? 'none' : '';
+  $('wrapGrade').style.display = isClass ? '' : 'none';
+  $('lbNAll').textContent = isClass ? 'จำนวนนักเรียนในชั้น (คน)' : 'จำนวนนักเรียนทั้งหมด (คน)';
+}));
+
+/* ---------- สร้างการ์ดรูบริก ---------- */
+(function(){
+  $('rubrics').innerHTML = RUBRIC.map((c,i) => `
+    <div class="rub" id="rub_${c.key}">
+      <div class="top">
+        <div class="ic">${c.icon}</div>
+        <div>
+          <div class="ttl">${c.key} · ${c.short}</div>
+          <div class="en">${c.en}</div>
+          <div class="de">${c.th}</div>
+        </div>
+      </div>
+      <div class="opts">
+        ${c.levels.map((tx,j) => `
+          <label>
+            <input type="radio" name="${c.key}" value="${j+1}">
+            <div class="opt o${j+1}">
+              <div class="lv"><span class="dot">${j+1}</span> ${LEVEL_NAME[j]}</div>
+              <div class="tx">${tx}</div>
+            </div>
+          </label>`).join('')}
+      </div>
+    </div>`).join('');
+
+  document.querySelectorAll('.opts input').forEach(r => r.addEventListener('change', function(){
+    $('rub_' + this.name).classList.add('done');
+    recalc();
+  }));
+})();
+
+function scores(){
+  return RUBRIC.map(c => {
+    const el = document.querySelector('input[name=' + c.key + ']:checked');
+    return el ? Number(el.value) : 0;
+  });
+}
+
+function recalc(){
+  const s = scores(), done = s.filter(x=>x>0);
+  $('cnt').textContent = 'เลือกแล้ว ' + done.length + ' / 8 ด้าน';
+  if (done.length < 8){
+    $('avg').textContent = '–';
+    $('bar').style.width = (done.length/8*100) + '%';
+    $('qual').textContent = 'ยังประเมินไม่ครบ';
+    return;
+  }
+  const avg = s.reduce((a,b)=>a+b,0)/8;
+  $('avg').textContent = avg.toFixed(2);
+  $('bar').style.width = (avg/4*100) + '%';
+  $('qual').textContent = 'ระดับคุณภาพ: ' + qualityOf(avg);
+}
+
+/* ---------- ส่งข้อมูล ---------- */
+if (!API_URL) $('setup').classList.add('on');
+
+function show(type, html){
+  const m = $('msg');
+  m.className = 'msg on ' + type;
+  m.innerHTML = html;
+  m.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+$('reset').addEventListener('click', function(){
+  if (!confirm('ล้างข้อมูลทั้งหมดในแบบฟอร์ม?')) return;
+  document.querySelectorAll('input[type=radio].x').forEach(()=>{});
+  document.querySelectorAll('.opts input').forEach(r => r.checked = false);
+  document.querySelectorAll('.rub').forEach(r => r.classList.remove('done'));
+  ['nAll','nEval','strength','improve','evidence','reporter','phone','contact','note']
+    .forEach(id => $(id).value = '');
+  $('sgroup').value = ''; $('sgroup').dispatchEvent(new Event('change'));
+  $('position').value = ''; $('size').value = ''; $('grade').value = '';
+  $('msg').className = 'msg';
+  recalc();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+$('send').addEventListener('click', async function(){
+  if (!API_URL){ show('err','ยังไม่ได้ตั้งค่า API_URL ในไฟล์ กรุณาติดต่อผู้ดูแลระบบ'); return; }
+
+  const isClass = document.querySelector('input[name=lv]:checked').value === 'class';
+  const d = {
+    action:'submit',
+    level: isClass ? 'class' : 'school',
+    year: $('year').value,
+    term: $('term').value,
+    schoolGroup: $('sgroup').value,
+    school: $('school').value,
+    size: $('size').value,
+    grade: $('grade').value,
+    nAll: $('nAll').value,
+    nEval: $('nEval').value,
+    strength: $('strength').value.trim(),
+    improve: $('improve').value.trim(),
+    evidence: $('evidence').value.trim(),
+    reporter: $('reporter').value.trim(),
+    position: $('position').value,
+    phone: $('phone').value.trim(),
+    contact: $('contact').value.trim(),
+    note: $('note').value.trim()
+  };
+
+  /* ตรวจสอบฝั่งเว็บ */
+  if (!d.schoolGroup) return show('err','กรุณาเลือกกลุ่มโรงเรียน');
+  if (!d.school)      return show('err','กรุณาเลือกโรงเรียน');
+  if (isClass && !d.grade) return show('err','กรุณาเลือกระดับชั้น');
+  if (!(Number(d.nEval) > 0)) return show('err','กรุณากรอกจำนวนนักเรียนที่ประเมิน');
+  if (Number(d.nAll) > 0 && Number(d.nEval) > Number(d.nAll))
+    return show('err','จำนวนที่ประเมินมากกว่าจำนวนนักเรียนทั้งหมด');
+
+  const s = scores();
+  const miss = RUBRIC.filter((c,i) => !s[i]).map(c => c.key);
+  if (miss.length){
+    show('err','กรุณาให้คะแนนให้ครบทั้ง 8 ด้าน — ยังขาด ' + miss.join(', '));
+    document.getElementById('rub_' + miss[0]).scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  RUBRIC.forEach((c,i) => d[c.key] = s[i]);
+
+  if (!d.reporter) return show('err','กรุณากรอกชื่อ – สกุล ผู้กรอกข้อมูล');
+  if (!d.position) return show('err','กรุณาเลือกตำแหน่ง');
+  if (!/^0\d{8,9}$/.test(d.phone.replace(/[-\s]/g,'')))
+    return show('err','เบอร์โทรศัพท์ไม่ถูกต้อง (ตัวเลข 9–10 หลัก ขึ้นต้นด้วย 0)');
+  if (d.evidence && !/^https?:\/\//i.test(d.evidence))
+    return show('err','ลิงก์หลักฐานต้องขึ้นต้นด้วย http:// หรือ https://');
+
+  const btn = $('send');
+  btn.disabled = true; btn.textContent = 'กำลังบันทึก…';
+  try{
+    const res = await fetch(API_URL, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify(d)
+    });
+    const r = await res.json();
+    if (r.ok){
+      show('ok',
+        '✅ <b>' + (r.updated ? 'ปรับปรุงข้อมูลเดิมเรียบร้อย' : 'บันทึกข้อมูลเรียบร้อย') + '</b><br>' +
+        (isClass ? d.grade + ' · ' : '') + d.school + ' · ปีการศึกษา ' + d.year + ' ภาคเรียนที่ ' + d.term + '<br>' +
+        'คะแนนเฉลี่ย 8C <b>' + r.avg.toFixed(2) + '</b> — ระดับคุณภาพ <b>' + r.quality + '</b><br>' +
+        'รหัสอ้างอิง <span class="ref">' + r.refCode + '</span><br>' +
+        '<span class="note">หากต้องการแก้ไข ให้กรอกโรงเรียน/ปีการศึกษา/ภาคเรียนเดิมแล้วบันทึกใหม่ ระบบจะทับข้อมูลเดิมให้</span>');
+    } else {
+      show('err','❌ ' + (r.message || 'บันทึกไม่สำเร็จ'));
+    }
+  }catch(err){
+    show('err','❌ เชื่อมต่อระบบไม่สำเร็จ: ' + err.message + '<br>กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่');
+  }finally{
+    btn.disabled = false; btn.textContent = 'บันทึกข้อมูล';
+  }
+});
+
+recalc();
+</script>
+</body>
+</html>

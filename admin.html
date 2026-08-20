@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แดชบอร์ดทักษะ 8C — สพป.อุดรธานี เขต 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* พื้นผิวและตัวอักษร */
+  --surface-1:#ffffff; --surface-2:#f2f5f9; --surface-3:#e8eef5;
+  --text-1:#101418; --text-2:#4a5966; --text-3:#7a8894;
+  --line:#dde5ed; --grid:#eef2f7;
+  --navy:#0f4c81; --navy2:#0a3a63;
+  /* แรมป์ลำดับ (ฟ้า) สำหรับข้อมูลชุดเดียวและระดับคุณภาพ */
+  --seq-1:#86b6ef; --seq-2:#3987e5; --seq-3:#256abf; --seq-4:#104281;
+  --bar:#2a78d6;
+  --r:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-2);color:var(--text-1);
+  font-family:'Sarabun',-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:0 16px 60px}
+a{color:var(--navy)}
+
+/* ---------- header ---------- */
+header{background:linear-gradient(135deg,var(--navy),var(--navy2) 65%,#0a5a5a);color:#fff;padding:22px 16px}
+header .wrap{padding-bottom:0;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+header h1{margin:0;font-size:1.32rem;font-weight:700}
+header .k{font-size:.82rem;opacity:.85}
+header button{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+  color:#fff;font-family:inherit;font-size:.88rem;padding:8px 15px;border-radius:9px;cursor:pointer}
+header button:hover{background:rgba(255,255,255,.26)}
+
+/* ---------- login ---------- */
+.login{max-width:420px;margin:70px auto;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r);padding:30px;text-align:center;box-shadow:0 3px 18px rgba(15,76,129,.09)}
+.login h2{margin:0 0 6px;color:var(--navy);font-size:1.2rem}
+.login p{margin:0 0 18px;color:var(--text-2);font-size:.9rem}
+.login input{width:100%;padding:12px;font-size:1rem;font-family:inherit;text-align:center;
+  border:1.5px solid var(--line);border-radius:10px;margin-bottom:12px}
+.login button{width:100%;padding:12px;background:var(--navy);color:#fff;border:none;
+  border-radius:10px;font-family:inherit;font-size:1rem;font-weight:600;cursor:pointer}
+.login .er{color:#b3352c;font-size:.88rem;margin-top:10px;min-height:20px}
+
+/* ---------- tabs & filters ---------- */
+.tabs{display:flex;gap:6px;margin-top:18px;flex-wrap:wrap}
+.tab{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 17px;
+  cursor:pointer;font-family:inherit;font-size:.94rem;font-weight:600;color:var(--text-2)}
+.tab.on{background:var(--navy);border-color:var(--navy);color:#fff}
+
+.filters{background:#fff;border:1px solid var(--line);border-radius:var(--r);
+  padding:14px;margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.filters .f{display:flex;flex-direction:column;gap:4px;min-width:140px;flex:1}
+.filters label{font-size:.78rem;font-weight:600;color:var(--text-2)}
+.filters select,.filters input{font-family:inherit;font-size:.92rem;padding:8px 10px;
+  border:1.5px solid var(--line);border-radius:8px;background:#fff;width:100%}
+.filters .btn{background:var(--surface-3);border:1px solid var(--line);color:var(--text-1);
+  padding:9px 15px;border-radius:8px;font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer}
+.filters .btn.p{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* ---------- stat tiles ---------- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:16px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.tile .lb{font-size:.8rem;color:var(--text-2);font-weight:600}
+.tile .v{font-size:2.1rem;font-weight:700;line-height:1.15;margin-top:2px;letter-spacing:-.02em}
+.tile .s{font-size:.8rem;color:var(--text-3)}
+.tile .meter{height:7px;background:var(--surface-3);border-radius:99px;margin-top:9px;overflow:hidden}
+.tile .meter i{display:block;height:100%;background:var(--bar);border-radius:99px}
+
+/* ---------- chart cards ---------- */
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;align-items:start}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.panel.full{grid-column:1/-1}
+.panel h3{margin:0 0 2px;font-size:1.02rem;color:var(--text-1)}
+.panel .cap{margin:0 0 16px;font-size:.82rem;color:var(--text-3)}
+
+/* แถบแนวนอน */
+.hb{display:grid;grid-template-columns:auto 1fr auto;gap:9px 11px;align-items:center}
+.hb .nm{font-size:.88rem;color:var(--text-2);text-align:right;max-width:220px}
+.hb .track{background:var(--grid);border-radius:5px;height:16px;position:relative}
+.hb .fill{height:100%;background:var(--bar);border-radius:0 5px 5px 0;min-width:3px;
+  transition:width .35s ease}
+.hb .val{font-size:.86rem;font-weight:700;color:var(--text-1);font-variant-numeric:tabular-nums;
+  min-width:44px;text-align:right}
+.hb .sub{font-size:.74rem;color:var(--text-3)}
+
+/* แถบซ้อน (ระดับคุณภาพ) */
+.sb{display:grid;grid-template-columns:auto 1fr auto;gap:9px 11px;align-items:center}
+.sb .nm{font-size:.88rem;color:var(--text-2);text-align:right}
+.sb .track{display:flex;height:18px;border-radius:5px;overflow:hidden;background:var(--grid);gap:2px}
+.sb .seg{height:100%;transition:width .35s ease}
+.sb .tot{font-size:.86rem;color:var(--text-2);font-variant-numeric:tabular-nums;min-width:40px;text-align:right}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:.82rem;color:var(--text-2)}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+
+.empty{text-align:center;color:var(--text-3);padding:34px 10px;font-size:.94rem}
+
+/* ---------- table ---------- */
+.tblwrap{background:#fff;border:1px solid var(--line);border-radius:var(--r);
+  margin-top:14px;overflow:auto;max-height:70vh}
+table{border-collapse:collapse;width:100%;font-size:.86rem;white-space:nowrap}
+th{background:var(--navy);color:#fff;padding:10px 11px;text-align:left;position:sticky;top:0;
+  font-weight:600;font-size:.8rem;cursor:pointer;z-index:2}
+th:hover{background:var(--navy2)}
+td{padding:9px 11px;border-bottom:1px solid var(--grid)}
+tbody tr:hover{background:#f6f9fd}
+td.c{text-align:center;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.76rem;font-weight:600;color:#fff}
+.q4{background:var(--seq-4)} .q3{background:var(--seq-3)}
+.q2{background:var(--seq-2);color:#0b2b4d} .q1{background:var(--seq-1);color:#0b2b4d}
+.sc{display:inline-flex;width:24px;height:24px;border-radius:6px;align-items:center;
+  justify-content:center;font-weight:700;font-size:.8rem;color:#fff}
+.s4{background:var(--seq-4)} .s3{background:var(--seq-3)}
+.s2{background:var(--seq-2)} .s1{background:var(--seq-1);color:#0b2b4d}
+
+/* ---------- ยังไม่ส่ง ---------- */
+.miss{columns:3;column-gap:22px;font-size:.88rem}
+.miss div{break-inside:avoid;padding:3px 0;color:var(--text-2)}
+.grpbox{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:12px}
+.grpbox h4{margin:0 0 8px;font-size:.96rem;color:var(--navy);
+  display:flex;justify-content:space-between;align-items:center;gap:10px}
+.grpbox .cnt{font-size:.8rem;font-weight:600;color:var(--text-3)}
+
+footer{text-align:center;color:var(--text-3);font-size:.84rem;padding:24px 16px 40px}
+
+@media(max-width:900px){ .charts{grid-template-columns:1fr} .miss{columns:2} }
+@media(max-width:560px){ .miss{columns:1} .hb .nm{max-width:110px} }
+
+@media print{
+  header button,.tabs,.filters{display:none!important}
+  body{background:#fff}
+  .panel,.tile{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- เข้าสู่ระบบ -->
+<div id="login" class="login">
+  <h2>แดชบอร์ดทักษะ 8C</h2>
+  <p>สำนักงานเขตพื้นที่การศึกษาประถมศึกษาอุดรธานี เขต 1</p>
+  <input type="password" id="pass" placeholder="รหัสผ่านผู้ดูแลระบบ" autocomplete="current-password">
+  <button id="btnLogin">เข้าสู่ระบบ</button>
+  <div class="er" id="loginErr"></div>
+</div>
+
+<!-- แอป -->
+<div id="app" style="display:none">
+  <header>
+    <div class="wrap">
+      <div>
+        <div class="k">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาอุดรธานี เขต 1</div>
+        <h1>แดชบอร์ดทักษะแห่งศตวรรษที่ 21 (8C)</h1>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button id="btnReload">↻ โหลดข้อมูลใหม่</button>
+        <button id="btnCsv">⬇ ส่งออก CSV</button>
+        <button id="btnPrint">🖨 พิมพ์รายงาน</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="tabs">
+      <button class="tab on" data-tab="dash">📊 แดชบอร์ด</button>
+      <button class="tab" data-tab="table">📋 ตารางข้อมูล</button>
+      <button class="tab" data-tab="miss">⏳ โรงเรียนที่ยังไม่ส่ง</button>
+    </div>
+
+    <div class="filters">
+      <div class="f">
+        <label>ระดับข้อมูล</label>
+        <select id="fLevel">
+          <option value="school">ระดับโรงเรียน</option>
+          <option value="class">ระดับชั้น</option>
+        </select>
+      </div>
+      <div class="f"><label>ปีการศึกษา</label><select id="fYear"><option value="">ทั้งหมด</option></select></div>
+      <div class="f"><label>ภาคเรียน</label>
+        <select id="fTerm"><option value="">ทั้งหมด</option><option value="1">ที่ 1</option><option value="2">ที่ 2</option></select>
+      </div>
+      <div class="f"><label>อำเภอ</label><select id="fDist"><option value="">ทั้งหมด</option></select></div>
+      <div class="f"><label>กลุ่มโรงเรียน</label><select id="fGroup"><option value="">ทั้งหมด</option></select></div>
+      <div class="f" style="flex:2"><label>ค้นหา (โรงเรียน / ผู้กรอก)</label><input type="search" id="fQ" placeholder="พิมพ์คำค้น…"></div>
+      <button class="btn" id="btnClear">ล้างตัวกรอง</button>
+    </div>
+
+    <!-- แดชบอร์ด -->
+    <div id="tab-dash">
+      <div class="tiles" id="tiles"></div>
+
+      <div class="charts">
+        <div class="panel full">
+          <h3>คะแนนเฉลี่ยรายทักษะ 8 ด้าน</h3>
+          <p class="cap">ค่าเฉลี่ยถ่วงน้ำหนักตามจำนวนนักเรียนที่ประเมิน · เต็ม 4.00 · เรียงจากสูงไปต่ำ</p>
+          <div id="chartC"></div>
+        </div>
+
+        <div class="panel">
+          <h3>คะแนนเฉลี่ย 8C รายอำเภอ</h3>
+          <p class="cap">เต็ม 4.00 · ตัวเลขในวงเล็บคือจำนวนรายการที่รายงาน</p>
+          <div id="chartD"></div>
+        </div>
+
+        <div class="panel">
+          <h3 id="hdG">คะแนนเฉลี่ย 8C รายกลุ่มโรงเรียน</h3>
+          <p class="cap">เต็ม 4.00 · เรียงจากสูงไปต่ำ</p>
+          <div id="chartG"></div>
+        </div>
+
+        <div class="panel full">
+          <h3>การกระจายระดับคุณภาพ จำแนกรายอำเภอ</h3>
+          <p class="cap">จำนวนรายการในแต่ละระดับคุณภาพ · แถบยาวเท่ากับจำนวนรายการทั้งหมดของอำเภอนั้น</p>
+          <div id="chartQ"></div>
+          <div class="legend" id="legendQ"></div>
+        </div>
+
+        <div class="panel full" id="panelGrade" style="display:none">
+          <h3>คะแนนเฉลี่ย 8C รายระดับชั้น</h3>
+          <p class="cap">แสดงเฉพาะเมื่อเลือกดูข้อมูล “ระดับชั้น” · เต็ม 4.00</p>
+          <div id="chartL"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ตาราง -->
+    <div id="tab-table" style="display:none">
+      <div class="tblwrap"><table id="tbl"></table></div>
+      <p class="cap" style="color:var(--text-3);font-size:.84rem">คลิกหัวตารางเพื่อเรียงลำดับ</p>
+    </div>
+
+    <!-- ยังไม่ส่ง -->
+    <div id="tab-miss" style="display:none">
+      <div id="missBox"></div>
+    </div>
+
+    <footer>
+      กลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา · สพป.อุดรธานี เขต 1
+    </footer>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   ⚙️ ตั้งค่า — วาง URL ของ Web App (ลงท้ายด้วย /exec) ที่นี่
+   ============================================================ */
+const API_URL = "";
+
+/* เกณฑ์การประเมินทักษะ 8C — ใช้ร่วมกันทั้ง index.html และ admin.html */
+const RUBRIC = [
+  {
+    key: 'C1', short: 'คิดวิเคราะห์ แก้ปัญหา', icon: '🧠',
+    en: 'Critical Thinking and Problem Solving',
+    th: 'คิดวิเคราะห์ แก้ไขปัญหาได้อย่างมีวิจารณญาณ',
+    levels: [
+      'ผู้เรียนตอบคำถามจากการจดจำ ยังแยกข้อเท็จจริงกับความคิดเห็นไม่ได้ และรอให้ครูบอกวิธีแก้ปัญหา',
+      'ตั้งคำถามและระบุปัญหาได้เมื่อครูชี้แนะ ให้เหตุผลประกอบคำตอบได้บ้าง แก้ปัญหาตามขั้นตอนที่กำหนดให้',
+      'วิเคราะห์ข้อมูล แยกข้อเท็จจริงจากความคิดเห็น เลือกวิธีแก้ปัญหาด้วยตนเองและอธิบายเหตุผลได้',
+      'ตั้งคำถามเชิงลึก ประเมินความน่าเชื่อถือของข้อมูล ออกแบบวิธีแก้ปัญหาใหม่ ตรวจสอบผลและปรับปรุงได้เอง เป็นแบบอย่างแก่เพื่อน'
+    ]
+  },
+  {
+    key: 'C2', short: 'คิดสร้างสรรค์ นวัตกรรม', icon: '💡',
+    en: 'Creativity and Innovation',
+    th: 'คิดสร้างสรรค์และพัฒนานวัตกรรมใหม่ ๆ',
+    levels: [
+      'ทำงานตามตัวอย่างที่ครูให้เท่านั้น ยังไม่แสดงความคิดที่แตกต่าง',
+      'เสนอความคิดใหม่ได้เมื่อมีตัวอย่างหรือคำชี้แนะ ดัดแปลงผลงานเดิมได้เล็กน้อย',
+      'คิดริเริ่มผลงานหรือวิธีการของตนเอง ต่อยอดความคิดของผู้อื่นได้ มีชิ้นงานสร้างสรรค์ในระดับห้องเรียน/โรงเรียน',
+      'สร้างสรรค์ชิ้นงานหรือนวัตกรรมที่แปลกใหม่และใช้ได้จริง เผยแพร่หรือได้รับการยอมรับตั้งแต่ระดับกลุ่มโรงเรียนขึ้นไป'
+    ]
+  },
+  {
+    key: 'C3', short: 'เข้าใจต่างวัฒนธรรม', icon: '🌏',
+    en: 'Cross-Cultural Understanding',
+    th: 'เข้าใจความแตกต่างทางวัฒนธรรม',
+    levels: [
+      'รู้จักวัฒนธรรมของตนเองเพียงบางส่วน ยังไม่สนใจความแตกต่างของผู้อื่น',
+      'บอกความเหมือน–ต่างของวัฒนธรรมท้องถิ่นกับวัฒนธรรมอื่นได้เมื่อมีการชี้แนะ',
+      'ยอมรับและปฏิบัติต่อผู้ที่แตกต่างด้วยความเคารพ เข้าร่วมกิจกรรมวัฒนธรรมท้องถิ่น/นานาชาติ สื่อสารภาษาต่างประเทศพื้นฐานได้',
+      'อธิบายและถ่ายทอดวัฒนธรรมไทยและท้องถิ่นแก่ผู้อื่นได้ ทำงานร่วมกับผู้มีพื้นเพต่างกันได้ดี เป็นผู้นำกิจกรรมแลกเปลี่ยนวัฒนธรรม'
+    ]
+  },
+  {
+    key: 'C4', short: 'ทำงานเป็นทีม ภาวะผู้นำ', icon: '🤝',
+    en: 'Collaboration, Teamwork and Leadership',
+    th: 'ทำงานร่วมกับผู้อื่นและมีภาวะผู้นำ',
+    levels: [
+      'ร่วมงานกลุ่มโดยรอให้เพื่อนมอบหมาย ยังไม่รับผิดชอบบทบาทของตน',
+      'ร่วมงานกลุ่มและทำหน้าที่ที่ได้รับมอบหมายจนสำเร็จเมื่อมีครูกำกับ',
+      'วางแผนแบ่งบทบาทกับเพื่อนได้ รับฟังความเห็นต่าง แก้ไขข้อขัดแย้งได้ ทำหน้าที่หัวหน้ากลุ่มได้',
+      'เป็นผู้นำและผู้ตามได้ตามสถานการณ์ ประสานงานให้ทีมบรรลุเป้าหมาย สะท้อนผลการทำงานของทีมและพัฒนาอย่างต่อเนื่อง'
+    ]
+  },
+  {
+    key: 'C5', short: 'สื่อสาร รู้เท่าทันสื่อ', icon: '📣',
+    en: 'Communications, Information and Media Literacy',
+    th: 'สื่อสารและรู้เท่าทันสื่อ',
+    levels: [
+      'สื่อสารได้ไม่ชัดเจน เชื่อข้อมูลจากสื่อโดยไม่ตรวจสอบ',
+      'พูดและเขียนสื่อสารได้ตามรูปแบบที่กำหนด เริ่มตั้งข้อสงสัยกับข้อมูลจากสื่อ',
+      'นำเสนอข้อมูลอย่างเป็นระบบ เลือกใช้สื่อให้เหมาะกับผู้ฟัง ตรวจสอบแหล่งที่มาก่อนเชื่อหรือแชร์',
+      'สื่อสารได้อย่างมั่นใจทั้งภาษาไทยและภาษาต่างประเทศ ผลิตสื่อสร้างสรรค์พร้อมอ้างอิงแหล่งข้อมูล รู้เท่าทันข่าวลวงและเตือนผู้อื่นได้'
+    ]
+  },
+  {
+    key: 'C6', short: 'คอมพิวเตอร์และ ICT', icon: '💻',
+    en: 'Computing and ICT Literacy',
+    th: 'ใช้คอมพิวเตอร์และเทคโนโลยีสารสนเทศเป็น',
+    levels: [
+      'ใช้อุปกรณ์พื้นฐานได้เมื่อมีผู้ช่วยเหลือ',
+      'ใช้โปรแกรมพื้นฐาน เช่น พิมพ์งาน ค้นข้อมูล ได้ตามขั้นตอนที่กำหนด',
+      'เลือกใช้โปรแกรมหรือแอปพลิเคชันให้เหมาะกับงาน จัดการไฟล์และข้อมูลได้ เขียนโปรแกรมอย่างง่าย/วิทยาการคำนวณตามระดับชั้น',
+      'ใช้เทคโนโลยีสร้างชิ้นงาน แก้ปัญหาด้วยแนวคิดเชิงคำนวณ ใช้ AI และเครื่องมือดิจิทัลอย่างรู้เท่าทันและปลอดภัย ช่วยแนะนำเพื่อนได้'
+    ]
+  },
+  {
+    key: 'C7', short: 'ทักษะอาชีพ เรียนรู้ด้วยตนเอง', icon: '🎯',
+    en: 'Career and Learning Skills',
+    th: 'มีทักษะอาชีพและการเรียนรู้ด้วยตนเอง',
+    levels: [
+      'ยังไม่ทราบความถนัดและความสนใจของตนเอง เรียนรู้เมื่อครูสั่งเท่านั้น',
+      'บอกความถนัดและอาชีพที่สนใจได้ ทำงานที่ได้รับมอบหมายจนเสร็จ',
+      'ตั้งเป้าหมายการเรียน วางแผนการเรียนรู้ด้วยตนเอง มีทักษะอาชีพพื้นฐานหรือผลงานอาชีพในโรงเรียน',
+      'กำกับการเรียนรู้ของตนเองอย่างต่อเนื่อง มีแฟ้มสะสมงานหรือรายได้ระหว่างเรียน เชื่อมโยงการเรียนกับเส้นทางอาชีพได้ชัดเจน'
+    ]
+  },
+  {
+    key: 'C8', short: 'เมตตา คุณธรรม วินัย', icon: '💗',
+    en: 'Compassion',
+    th: 'มีความเมตตา มีคุณธรรม และระเบียบวินัย',
+    levels: [
+      'ปฏิบัติตามระเบียบเมื่อมีผู้กำกับ ยังไม่ใส่ใจผู้อื่น',
+      'มีมารยาท ช่วยเหลือผู้อื่นเมื่อได้รับการร้องขอ ปฏิบัติตามข้อตกลงของห้องเรียน',
+      'มีวินัย ซื่อสัตย์ รับผิดชอบ ช่วยเหลือเพื่อนและส่วนรวมด้วยความเต็มใจ',
+      'เป็นแบบอย่างด้านคุณธรรมและวินัย ริเริ่มกิจกรรมจิตอาสาหรือช่วยเหลือชุมชน จนได้รับการยกย่อง'
+    ]
+  }
+];
+
+const LEVEL_NAME = ['ควรพัฒนา', 'พอใช้', 'ดี', 'ดีเยี่ยม'];
+
+function qualityOf(avg) {
+  if (avg >= 3.51) return 'ดีเยี่ยม';
+  if (avg >= 2.51) return 'ดี';
+  if (avg >= 1.51) return 'พอใช้';
+  return 'ควรพัฒนา';
+}
+
+
+const SCHOOLS = {
+  "กลุ่มเมือง 1": ["บ้านหมากแข้ง", "ชุมชนบ้านเดื่อวิทยา", "บ้านหนองขาม(ค่ายเสนีย์อุปถัมภ์)", "บ้านดงอุดม", "บ้านเก่าน้อย#เรียนรวมทุกชั้น", "บ้านหนองเหล็ก", "บ้านหนองตุ", "บ้านม่วงสว่างสามัคคี", "บ้านดอนอุดม(เนยอุปถัมภ์)", "บ้านหนองบัว"],
+  "กลุ่มเมือง 2": ["อนุบาลอุดรธานี", "บ้านศรีเชียงใหม่", "บ้านกุดลิงง้อหนองแก", "บ้านดงเค็ง (นําวัฒนาอุปถัมภ์)", "บ้านคำกลิ้ง", "บ้านหนองตูม", "บ้านจั่นศรีวิไล", "บ้านเลี่ยมพิลึก", "ค่ายประจักษ์ศิลปาคม"],
+  "กลุ่มเมือง 3": ["นิคมสร้างตนเองเชียงพิณ 3", "นิคมสร้างตนเองเชียงพิณ 5", "บ้านนาสมบูรณ์", "บ้านโคกสะอาดศรีบูรพา", "บ้านหนองสวรรค์ (ไชยเชียงพิณ)", "บ้านหนองโอนหนองฮาง", "บ้านเชียงพิณ", "นาคลองหนองศรีคามวิทยา", "บ้านโนนสวรรค์#เรียนรวมทุกชั้น", "บ้านนาแอง", "บ้านนิคมพัฒนา", "บ้านหนองขุ่นเหล่าหลักวิทยา", "บ้านปากดงส่งเสริมธรรม"],
+  "กลุ่มเมือง 4": ["บ้านเชียงพัง", "ชุมชนนากว้างพัฒนศึกษา", "บ้านนาทาม#เรียนรวมทุกชั้น บ้านเชียงพัง", "บ้านเม่น", "บ้านขาว", "บ้านดู่", "บ้านหัวบึง", "บ้านพรานเหมือน", "บ้านเลื่อม", "หนองสำโรงวิทยา"],
+  "กลุ่มเมือง 5": ["บ้านตาด", "บ้านกกสะทอนเครือหวายดิน", "บ้านโนนเดื่อ", "บ้านสุขสมบูรณ์", "บ้านศรีบุญเรือง", "เจ ซี บ้านอินทร์แปลง", "ผ่านศึกสงเคราะห์", "บ้านหลุบหวายป่าขาม", "บ้านโสกน้ำขาว", "หนองไฮวิทยา", "บ้านโนนสะอาดผาสุข", "บ้านดงมะกรูดทรายทอง", "บ้านโคกลาด"],
+  "กลุ่มเมือง 6": ["ชุมชนสามพร้าว", "บ้านหนองบุนาหล่ำ", "บ้านหนองบั่วประชาสรรค์", "บ้านดอนหาดดงเหล่าต้อง", "บ้านอี่เลี่ยน", "บ้านเซประชาอุทิศ", "บ้านโก่ย", "บ้านจำปาโนนสะอาด", "บ้านหนองนาคำ", "บ้านหนองหว้าหนองไผ่", "บ้านหนองแก", "บ้านถ่อนน้อยหนองไผ่คำ"],
+  "กลุ่มเมือง 7": ["บ้านท่าตูมดงสระพัง", "มิตรภาพ 6", "บ้านโนนยางโนนบ่อ", "บ้านขมิ้นบ่อโคลน", "บ้านดอนหวาย", "บ้านหมากตูมดอนยานาง", "ไทยรัฐวิทยา ๙๒ (ชุมชนนาข่า)", "บ้านถ่อนใหญ่ถ่อนน้อย", "บ้านเหล่าดอนแตง", "บ้านนาคำหลวง", "บ้านงอยเลิงทอง", "ประชาสามัคคี"],
+  "กลุ่มเมือง 8": ["บ้านเชียงยืน", "บ้านอีหลุ่ง", "บ้านจำปา", "บ้านป่องมหิดลอนุสรณ์ 6", "บ้านหนองน้ำเค็ม", "บ้านหนองหลอด", "บ้านหนองตอสูงแคน", "บ่อน้อยประชาสรรค์", "บ้านนาเยีย"],
+  "กลุ่มเมือง 9": ["ชุมชนโนนสูง", "บ้านหนองโสกดาว", "บ้านข้าวสาร", "บ้านชัยพรมิตรภาพที่ 67", "บ้านแม่นนท์", "บ้านหนองไผ่หนองหิน", "บ้านหนองนาเจริญ", "บ้านหนองบัวเงินหนองบัวทอง", "บ้านหนองตะไก้"],
+  "กลุ่มหนองวัวซอ 1 (หนองวัวซอ น้ำพ่น หนองบัวบาน)": ["อนุบาลหนองวัวซอ", "บ้านหนองแซงสร้อย", "บ้านหนองแวงเดิดเกษตรสมบูรณ์", "บ้านน้ำพ่น", "บ้านเลา", "บ้านหนองบัวบาน", "นิคมสร้างตนเองเชียงพิณ 1", "บ้านหนองอ้อน้อย", "บ้านโคกก่องหนองแวงยาว"],
+  "กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)": ["รัฐประชา 509", "บ้านโนนหวาย", "บ้านหนองเม็กห้วยทราย", "บ้านโคกหนองแซง", "บ้านเสาเล้า", "บ้านหนองอ้อ", "บ้านโนนสำราญ", "ชุมชนหนองแสง", "บ้านหนองแวงฮีคำหมากคูณ", "บ้านหมากหญ้า", "บ้านผาสิงห์"],
+  "กลุ่มหนองวัวซอ 3 (กุดหมากไฟ อูบมุง)": ["ชุมชนกุดหมากไฟ", "บ้านโคกล่าม", "บ้านหนองแวงจุมพล", "บ้านดงบัง", "บ้านโนนชัยศรี", "บ้านหนองบัวเงิน", "บ้านอูบมุง", "บ้านห้วยไร่", "บ้านโคกผักหอม"],
+  "กลุ่มเพ็ญ 1": ["อนุบาลเพ็ญประชานุกูล", "บ้านนาส่อนโพนทัน", "บ้านใหม่", "บ้านศรีสุวรรณโพนสว่าง", "บ้านโพนงามหนองตุ", "สุมเส้าวิทยา", "บ้านดงปอ", "บ้านหนองนาไฮโนนสะอาด", "บ้านแพงศรี", "บ้านหนองบัวบาน", "บ้านหนองแสนตอโนนสร้างคำ", "ดงยางวังโตนวิทยา"],
+  "กลุ่มเพ็ญ 2": ["ชุมชนบ้านธาตุ", "บ้านสังซาวังน้ำขาว", "บ้านถิ่นสุขาวิทยา", "นิคมโนนสมบูรณ์", "บ้านนาคอมนาดอกไม้", "บ้านดอนแก้ว", "บ้านยามกาใหญ่", "บ้านนาพูนทรัพย์", "บ้านหมูม่นโพนโนนสะอาด", "บ้านยามกาโนนคำ"],
+  "กลุ่มเพ็ญ 3": ["บ้านเชียงหวางสร้างลาน", "บ้านนาดี", "บ้านสร้างหลวงสร้างคำ", "ดงใหญ่เจริญพัฒน์", "บ้านดอนข่าคำผักหนามประชาสามัคคี", "บ้านโพนเลาโพนทอง", "บ้านด่าน", "บ้านนาพู่", "บ้านป่าก้าวดอนแดง", "บ้านหลวงหัวสวย", "บ้านศรีบุญเรือง", "บ้านกิ่วดงมะไฟ", "บ้านหนองนกเขียนโพนทัน"],
+  "กลุ่มเพ็ญ 4": ["บ้านโนนสวาง", "บ้านคอนเลียบ", "บ้านนาพัง", "บ้านเตาไห", "บ้านหม้อ", "บ้านคอนสวรรค์สินเจริญ", "บ้านเหล่าดอนเงิน", "บ้านหนองผง", "บ้านยาง (คุรุราษฎร์วิทยา)", "บ้านโคกสว่าง", "บ้านหนองกุง", "บ้านดงขันทอง", "บ้านดงศรีสําราญ"],
+  "กลุ่มเพ็ญ 5": ["บ้านนาบัวไผ่วิทยา", "บ้านยางซอง", "บ้านนาทรายนาม่วง", "บ้านดอนกลอยดอนอุดม", "บ้านท่าหนาด", "บ้านโนนรังหนองผือวิทยา", "บ้านทอนดอนยาว", "บ้านสร้างแป้น", "บ้านหว้าน"],
+  "กลุ่มเพ็ญ 6": ["บ้านนาสีนวล", "บ้านโคกกลาง", "บ้านดอนจันทร์โพนสวรรค์คำเจริญ", "บ้านจอมศรี", "บ้านข่าทุ่งม่วงโนนศรีสมบูรณ์", "บ้านหนองบ่อ", "บ้านสะอาดนาพังศรีเจริญ", "จอมตาลโนนดู่โนนสำราญ", "บ้านดงยางนารายณ์"],
+  "กลุ่มสร้างคอม 1 (สร้างคอม)": ["อนุบาลสร้างคอม", "บ้านเชียงดา", "บ้านแมดวิทยาคม", "บ้านนาหว้า(สันติราษฎร์พิทยาคม)", "บ้านไชยฟอง", "บ้านนาสะอาด", "บ้านโนนนกหอ(เพ็งแสนวิทยา)#เรียนรวมทุกชั้น", "บ้านดงผักเทียม", "บ้านท่าเสียว", "บ้านโนนชาดวรุบลวิทยา", "บ้านโคกสว่าง#เรียนรวมทุกชั้น อนุบาลสร้างคอม"],
+  "กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)": ["บ้านดอนเดื่อ", "บ้านดอนบาก", "โคกโพธิ์วิทยา", "บ้านนาน้ำชุ่ม", "บ้านยวด", "บ้านชาด", "บ้านนามั่ง", "บ้านน้ำเที่ยง", "บ้านตลิ่งชัน-สร้างแก้ว", "บ้านศรีชมชื่นบุญชิตวิทยา", "บ้านหินโงม"]
+};
+
+const QUALITY = ['ควรพัฒนา','พอใช้','ดี','ดีเยี่ยม'];
+const QCOLOR  = ['var(--seq-1)','var(--seq-2)','var(--seq-3)','var(--seq-4)'];
+const DISTRICTS = ['เมืองอุดรธานี','หนองวัวซอ','เพ็ญ','สร้างคอม'];
+
+const $ = id => document.getElementById(id);
+let TOKEN = '', DATA = { school: [], class: [] }, SORT = { k:'seq', d:-1 };
+
+function districtOf(g){
+  g = String(g||'');
+  if (g.indexOf('หนองวัวซอ')>=0) return 'หนองวัวซอ';
+  if (g.indexOf('เพ็ญ')>=0)      return 'เพ็ญ';
+  if (g.indexOf('สร้างคอม')>=0)  return 'สร้างคอม';
+  if (g.indexOf('เมือง')>=0)     return 'เมืองอุดรธานี';
+  return '-';
+}
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+/* ---------- เข้าสู่ระบบ ---------- */
+$('btnLogin').addEventListener('click', doLogin);
+$('pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+function doLogin(){
+  const p = $('pass').value.trim();
+  if (!p) return;
+  if (!API_URL){ $('loginErr').textContent = 'ยังไม่ได้ตั้งค่า API_URL ในไฟล์นี้'; return; }
+  $('loginErr').textContent = 'กำลังตรวจสอบ…';
+  TOKEN = p;
+  load(function(ok, msg){
+    if (ok){
+      $('login').style.display = 'none';
+      $('app').style.display = '';
+      try{ sessionStorage.setItem('t8c', p); }catch(e){}
+    } else {
+      $('loginErr').textContent = msg || 'เข้าสู่ระบบไม่สำเร็จ';
+    }
+  });
+}
+
+/* ---------- เรียก API แบบ JSONP ---------- */
+function jsonp(params, cb){
+  const name = 'cb_' + Math.random().toString(36).slice(2);
+  const s = document.createElement('script');
+  const t = setTimeout(function(){ cleanup(); cb({ ok:false, message:'หมดเวลาเชื่อมต่อ' }); }, 25000);
+  function cleanup(){ clearTimeout(t); try{ delete window[name]; }catch(e){} s.remove(); }
+  window[name] = function(r){ cleanup(); cb(r); };
+  s.src = API_URL + '?' + params + '&callback=' + name;
+  s.onerror = function(){ cleanup(); cb({ ok:false, message:'เชื่อมต่อไม่สำเร็จ' }); };
+  document.body.appendChild(s);
+}
+
+function load(after){
+  jsonp('action=list&token=' + encodeURIComponent(TOKEN), function(r){
+    if (!r.ok){ if (after) after(false, r.message); return; }
+    DATA.school = r.school || [];
+    DATA.class  = r.klass  || [];
+    buildFilters();
+    render();
+    if (after) after(true);
+  });
+}
+
+/* ---------- ตัวกรอง ---------- */
+function buildFilters(){
+  const all = DATA.school.concat(DATA.class);
+  const years = [...new Set(all.map(r=>r.year))].filter(Boolean).sort().reverse();
+  fill($('fYear'), years, 'ทั้งหมด');
+  fill($('fDist'), DISTRICTS.filter(d => all.some(r=>r.district===d)), 'ทั้งหมด');
+  fill($('fGroup'), Object.keys(SCHOOLS), 'ทั้งหมด');
+}
+function fill(sel, arr, first){
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">' + first + '</option>';
+  arr.forEach(v => sel.appendChild(new Option(v, v)));
+  if (arr.indexOf(cur) >= 0) sel.value = cur;
+}
+
+function rows(){
+  const lv = $('fLevel').value;
+  const y = $('fYear').value, t = $('fTerm').value,
+        d = $('fDist').value, g = $('fGroup').value,
+        q = $('fQ').value.trim().toLowerCase();
+  return (lv === 'class' ? DATA.class : DATA.school).filter(function(r){
+    if (y && r.year !== y) return false;
+    if (t && r.term !== t) return false;
+    if (d && r.district !== d) return false;
+    if (g && r.schoolGroup !== g) return false;
+    if (q && (r.school + ' ' + r.reporter + ' ' + (r.grade||'')).toLowerCase().indexOf(q) < 0) return false;
+    return true;
+  });
+}
+
+['fLevel','fYear','fTerm','fDist','fGroup'].forEach(id => $(id).addEventListener('change', render));
+$('fQ').addEventListener('input', render);
+$('btnClear').addEventListener('click', function(){
+  ['fYear','fTerm','fDist','fGroup'].forEach(id => $(id).value = '');
+  $('fQ').value = ''; render();
+});
+$('btnReload').addEventListener('click', function(){ this.textContent = '↻ กำลังโหลด…'; const b=this;
+  load(function(){ b.textContent = '↻ โหลดข้อมูลใหม่'; }); });
+$('btnPrint').addEventListener('click', () => window.print());
+
+document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', function(){
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+  this.classList.add('on');
+  ['dash','table','miss'].forEach(t => $('tab-'+t).style.display = (t === this.dataset.tab) ? '' : 'none');
+}));
+
+/* ---------- คำนวณ ---------- */
+function wAvg(list, idx){          // ค่าเฉลี่ยถ่วงน้ำหนักตามจำนวนที่ประเมิน
+  let sw = 0, sv = 0;
+  list.forEach(function(r){
+    const w = Math.max(1, Number(r.nEval) || 1);
+    const v = (idx == null) ? r.avg : r.c[idx];
+    if (v > 0){ sw += w; sv += v * w; }
+  });
+  return sw ? sv / sw : 0;
+}
+
+/* ---------- วาดภาพ ---------- */
+function render(){
+  const R = rows();
+  const isClass = $('fLevel').value === 'class';
+  $('panelGrade').style.display = isClass ? '' : 'none';
+  $('hdG').textContent = 'คะแนนเฉลี่ย 8C รายกลุ่มโรงเรียน';
+
+  /* --- การ์ดสรุป --- */
+  const nSchools = new Set(R.map(r => r.school)).size;
+  const totalSchools = Object.values(SCHOOLS).reduce((a,b)=>a+b.length, 0);
+  const pct = totalSchools ? Math.round(nSchools / totalSchools * 100) : 0;
+  const avg = wAvg(R, null);
+  const students = R.reduce((a,r)=>a + (Number(r.nEval)||0), 0);
+  const cAvgs = RUBRIC.map((c,i) => ({ i:i, key:c.key, short:c.short, v:wAvg(R,i) }));
+  const sorted = cAvgs.slice().sort((a,b)=>b.v-a.v);
+  const best = sorted[0], worst = sorted[sorted.length-1];
+
+  $('tiles').innerHTML = R.length ? `
+    <div class="tile"><div class="lb">รายการที่รายงาน</div>
+      <div class="v">${R.length.toLocaleString('th-TH')}</div>
+      <div class="s">${isClass ? 'ชุดข้อมูลระดับชั้น' : 'ชุดข้อมูลระดับโรงเรียน'}</div></div>
+    <div class="tile"><div class="lb">โรงเรียนที่ส่งข้อมูล</div>
+      <div class="v">${nSchools}<span style="font-size:1rem;color:var(--text-3)"> / ${totalSchools}</span></div>
+      <div class="s">คิดเป็น ${pct}% ของโรงเรียนในเขต</div>
+      <div class="meter"><i style="width:${pct}%"></i></div></div>
+    <div class="tile"><div class="lb">คะแนนเฉลี่ย 8C</div>
+      <div class="v">${avg.toFixed(2)}<span style="font-size:1rem;color:var(--text-3)"> / 4.00</span></div>
+      <div class="s">ระดับคุณภาพ ${qualityOf(avg)}</div>
+      <div class="meter"><i style="width:${avg/4*100}%"></i></div></div>
+    <div class="tile"><div class="lb">นักเรียนที่ได้รับการประเมิน</div>
+      <div class="v">${students.toLocaleString('th-TH')}</div><div class="s">คน</div></div>
+    <div class="tile"><div class="lb">ทักษะที่แข็งแรงที่สุด</div>
+      <div class="v" style="font-size:1.12rem;line-height:1.4">${best.key} ${esc(best.short)}</div>
+      <div class="s">เฉลี่ย ${best.v.toFixed(2)}</div></div>
+    <div class="tile"><div class="lb">ทักษะที่ควรเร่งพัฒนา</div>
+      <div class="v" style="font-size:1.12rem;line-height:1.4">${worst.key} ${esc(worst.short)}</div>
+      <div class="s">เฉลี่ย ${worst.v.toFixed(2)}</div></div>`
+    : '<div class="tile" style="grid-column:1/-1"><div class="empty">ยังไม่มีข้อมูลตามเงื่อนไขที่เลือก</div></div>';
+
+  /* --- กราฟ 8 ด้าน --- */
+  $('chartC').innerHTML = R.length
+    ? bars(sorted.map(c => ({ nm: c.key + ' · ' + c.short, v: c.v, tx: c.v.toFixed(2) })), 4)
+    : '<div class="empty">ไม่มีข้อมูล</div>';
+
+  /* --- รายอำเภอ --- */
+  const byD = DISTRICTS.map(function(d){
+    const L = R.filter(r => r.district === d);
+    return { nm: d, v: wAvg(L,null), n: L.length };
+  }).filter(x => x.n > 0);
+  $('chartD').innerHTML = byD.length
+    ? bars(byD.map(x => ({ nm: x.nm, v: x.v, tx: x.v.toFixed(2), sub: '(' + x.n + ')' })), 4)
+    : '<div class="empty">ไม่มีข้อมูล</div>';
+
+  /* --- รายกลุ่มโรงเรียน --- */
+  const byG = Object.keys(SCHOOLS).map(function(g){
+    const L = R.filter(r => r.schoolGroup === g);
+    return { nm: g.replace(/\s*\(.*\)$/,''), v: wAvg(L,null), n: L.length };
+  }).filter(x => x.n > 0).sort((a,b)=>b.v-a.v);
+  $('chartG').innerHTML = byG.length
+    ? bars(byG.map(x => ({ nm: x.nm, v: x.v, tx: x.v.toFixed(2), sub: '(' + x.n + ')' })), 4)
+    : '<div class="empty">ไม่มีข้อมูล</div>';
+
+  /* --- การกระจายระดับคุณภาพ --- */
+  const qRows = DISTRICTS.map(function(d){
+    const L = R.filter(r => r.district === d);
+    const c = [0,0,0,0];
+    L.forEach(r => { const q = QUALITY.indexOf(qualityOf(r.avg)); if (q >= 0) c[q]++; });
+    return { nm: d, c: c, n: L.length };
+  }).filter(x => x.n > 0);
+  const maxQ = Math.max(1, ...qRows.map(x => x.n));
+  $('chartQ').innerHTML = qRows.length ? '<div class="sb">' + qRows.map(function(x){
+    return '<div class="nm">' + esc(x.nm) + '</div>' +
+      '<div class="track" style="width:' + (x.n / maxQ * 100) + '%">' +
+      x.c.map(function(v,i){
+        return v ? '<div class="seg" style="width:' + (v / x.n * 100) + '%;background:' + QCOLOR[i] +
+          '" title="' + QUALITY[i] + ' ' + v + ' รายการ"></div>' : '';
+      }).join('') + '</div>' +
+      '<div class="tot">' + x.n + '</div>';
+  }).join('') + '</div>' : '<div class="empty">ไม่มีข้อมูล</div>';
+
+  $('legendQ').innerHTML = QUALITY.map(function(q,i){
+    const n = qRows.reduce((a,x)=>a + x.c[i], 0);
+    return '<span><i style="background:' + QCOLOR[i] + '"></i>' + q + ' — ' + n + ' รายการ</span>';
+  }).join('');
+
+  /* --- รายระดับชั้น --- */
+  if (isClass){
+    const GR = [...new Set(R.map(r=>r.grade))].filter(Boolean);
+    const order = ['อนุบาล 1','อนุบาล 2','อนุบาล 3','ประถมศึกษาปีที่ 1','ประถมศึกษาปีที่ 2',
+      'ประถมศึกษาปีที่ 3','ประถมศึกษาปีที่ 4','ประถมศึกษาปีที่ 5','ประถมศึกษาปีที่ 6',
+      'มัธยมศึกษาปีที่ 1','มัธยมศึกษาปีที่ 2','มัธยมศึกษาปีที่ 3'];
+    GR.sort((a,b)=>order.indexOf(a)-order.indexOf(b));
+    const byL = GR.map(function(g){
+      const L = R.filter(r => r.grade === g);
+      return { nm: g, v: wAvg(L,null), tx: wAvg(L,null).toFixed(2), sub: '(' + L.length + ')' };
+    });
+    $('chartL').innerHTML = byL.length ? bars(byL, 4) : '<div class="empty">ไม่มีข้อมูล</div>';
+  }
+
+  renderTable(R, isClass);
+  renderMissing(R);
+}
+
+/* แถบแนวนอน — ชุดข้อมูลเดียว สีเดียว มีป้ายค่ากำกับทุกแถบ */
+function bars(list, max){
+  return '<div class="hb">' + list.map(function(x){
+    const w = Math.max(1, x.v / max * 100);
+    return '<div class="nm">' + esc(x.nm) + '</div>' +
+      '<div class="track"><div class="fill" style="width:' + w + '%" title="' + esc(x.nm) + ' — ' + x.tx + '"></div></div>' +
+      '<div class="val">' + x.tx + (x.sub ? ' <span class="sub">' + x.sub + '</span>' : '') + '</div>';
+  }).join('') + '</div>';
+}
+
+/* ---------- ตาราง ---------- */
+function renderTable(R, isClass){
+  const cols = [
+    { k:'refCode', t:'รหัสอ้างอิง' },
+    { k:'year',    t:'ปี' },
+    { k:'term',    t:'ภาค' },
+    { k:'district',t:'อำเภอ' },
+    { k:'schoolGroup', t:'กลุ่มโรงเรียน' },
+    { k:'school',  t:'โรงเรียน' },
+    isClass ? { k:'grade', t:'ระดับชั้น' } : { k:'size', t:'ขนาด' },
+    { k:'nEval',   t:'ประเมิน', c:1 }
+  ].concat(RUBRIC.map((c,i) => ({ k:'c'+i, t:c.key, c:1, ci:i })))
+   .concat([
+    { k:'avg',     t:'เฉลี่ย', c:1 },
+    { k:'quality', t:'ระดับคุณภาพ', c:1 },
+    { k:'strength',t:'จุดเด่น' },
+    { k:'improve', t:'จุดที่ควรพัฒนา' },
+    { k:'evidence',t:'หลักฐาน' },
+    { k:'reporter',t:'ผู้กรอก' },
+    { k:'position',t:'ตำแหน่ง' },
+    { k:'phone',   t:'โทรศัพท์' },
+    { k:'created', t:'วันที่บันทึก' },
+    { k:'updated', t:'แก้ไขล่าสุด' }
+  ]);
+
+  const val = (r,c) => (c.ci != null) ? r.c[c.ci] : r[c.k];
+  const S = R.slice().sort(function(a,b){
+    const x = val(a, {k:SORT.k, ci: SORT.ci}), y = val(b, {k:SORT.k, ci: SORT.ci});
+    const nx = Number(x), ny = Number(y);
+    if (!isNaN(nx) && !isNaN(ny) && x !== '' && y !== '') return (nx-ny) * SORT.d;
+    return String(x||'').localeCompare(String(y||''),'th') * SORT.d;
+  });
+
+  $('tbl').innerHTML =
+    '<thead><tr>' + cols.map(c =>
+      '<th data-k="' + c.k + '"' + (c.ci!=null ? ' data-ci="'+c.ci+'"' : '') + '>' + c.t +
+      (SORT.k === c.k ? (SORT.d>0 ? ' ▲' : ' ▼') : '') + '</th>').join('') + '</tr></thead>' +
+    '<tbody>' + (S.length ? S.map(function(r){
+      return '<tr>' + cols.map(function(c){
+        if (c.ci != null){
+          const v = r.c[c.ci];
+          return '<td class="c"><span class="sc s' + (v||1) + '">' + (v||'-') + '</span></td>';
+        }
+        if (c.k === 'avg')      return '<td class="c"><b>' + Number(r.avg).toFixed(2) + '</b></td>';
+        if (c.k === 'quality'){ const q = QUALITY.indexOf(qualityOf(r.avg)) + 1;
+          return '<td class="c"><span class="pill q' + q + '">' + qualityOf(r.avg) + '</span></td>'; }
+        if (c.k === 'evidence') return '<td>' + (r.evidence ? '<a href="' + esc(r.evidence) + '" target="_blank" rel="noopener">เปิดดู</a>' : '-') + '</td>';
+        const v = r[c.k];
+        return '<td' + (c.c ? ' class="c"' : '') + '>' + esc(v === '' || v == null ? '-' : v) + '</td>';
+      }).join('') + '</tr>';
+    }).join('') : '<tr><td colspan="' + cols.length + '"><div class="empty">ไม่มีข้อมูลตามเงื่อนไขที่เลือก</div></td></tr>') +
+    '</tbody>';
+
+  $('tbl').querySelectorAll('th').forEach(th => th.addEventListener('click', function(){
+    const k = this.dataset.k;
+    SORT.d = (SORT.k === k) ? -SORT.d : -1;
+    SORT.k = k;
+    SORT.ci = this.dataset.ci != null ? Number(this.dataset.ci) : null;
+    render();
+  }));
+}
+
+/* ---------- โรงเรียนที่ยังไม่ส่ง ---------- */
+function renderMissing(R){
+  const sent = new Set(R.map(r => r.school));
+  let html = '', totalMiss = 0;
+  Object.keys(SCHOOLS).forEach(function(g){
+    const miss = SCHOOLS[g].filter(s => !sent.has(s)).sort((a,b)=>a.localeCompare(b,'th'));
+    totalMiss += miss.length;
+    if (!miss.length) return;
+    html += '<div class="grpbox"><h4>' + esc(g) +
+      '<span class="cnt">ยังไม่ส่ง ' + miss.length + ' / ' + SCHOOLS[g].length + ' โรงเรียน</span></h4>' +
+      '<div class="miss">' + miss.map(s => '<div>• ' + esc(s) + '</div>').join('') + '</div></div>';
+  });
+  $('missBox').innerHTML =
+    '<div class="tiles"><div class="tile"><div class="lb">โรงเรียนที่ยังไม่ส่งข้อมูล</div>' +
+    '<div class="v">' + totalMiss + '</div><div class="s">จากทั้งหมด ' +
+    Object.values(SCHOOLS).reduce((a,b)=>a+b.length,0) + ' โรงเรียน (ตามตัวกรองปัจจุบัน)</div></div></div>' +
+    (html || '<div class="grpbox"><div class="empty">🎉 ทุกโรงเรียนส่งข้อมูลครบแล้ว</div></div>');
+}
+
+/* ---------- ส่งออก CSV ---------- */
+$('btnCsv').addEventListener('click', function(){
+  const R = rows(), isClass = $('fLevel').value === 'class';
+  if (!R.length){ alert('ไม่มีข้อมูลให้ส่งออก'); return; }
+  const head = ['รหัสอ้างอิง','ปีการศึกษา','ภาคเรียน','อำเภอ','กลุ่มโรงเรียน','โรงเรียน',
+    isClass ? 'ระดับชั้น' : 'ขนาดโรงเรียน','จำนวนนักเรียนทั้งหมด','จำนวนที่ประเมิน']
+    .concat(RUBRIC.map(c => c.key + ' ' + c.short))
+    .concat(['คะแนนเฉลี่ย','ระดับคุณภาพ','จุดเด่น','จุดที่ควรพัฒนา','ลิงก์หลักฐาน',
+      'ผู้กรอก','ตำแหน่ง','โทรศัพท์','อีเมล/Line','หมายเหตุ','วันที่บันทึก','แก้ไขล่าสุด']);
+  const q = s => '"' + String(s == null ? '' : s).replace(/"/g,'""') + '"';
+  const lines = [head.map(q).join(',')].concat(R.map(function(r){
+    return [r.refCode,r.year,r.term,r.district,r.schoolGroup,r.school,
+      isClass ? r.grade : r.size, r.nAll, r.nEval]
+      .concat(r.c)
+      .concat([Number(r.avg).toFixed(2), qualityOf(r.avg), r.strength, r.improve, r.evidence,
+        r.reporter, r.position, r.phone, r.contact, r.note, r.created, r.updated])
+      .map(q).join(',');
+  }));
+  const blob = new Blob(['﻿' + lines.join('\r\n')], { type:'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '8C_' + (isClass ? 'ระดับชั้น' : 'ระดับโรงเรียน') + '_' +
+    new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+/* ---------- เข้าระบบอัตโนมัติจาก session เดิม ---------- */
+(function(){
+  var t = null;
+  try{ t = sessionStorage.getItem('t8c'); }catch(e){}
+  if (t && API_URL){
+    TOKEN = t;
+    load(function(ok){ if (ok){ $('login').style.display='none'; $('app').style.display=''; } });
+  }
+})();
+</script>
+</body>
+</html>
