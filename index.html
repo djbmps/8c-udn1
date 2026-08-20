@@ -19,6 +19,7 @@
   --r-lg:20px; --r:14px; --r-sm:10px;
   --sh-1:0 1px 2px rgba(11,61,107,.06), 0 4px 14px rgba(11,61,107,.07);
   --sh-2:0 2px 6px rgba(11,61,107,.08), 0 14px 34px rgba(11,61,107,.11);
+  --gloss-soft:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.25) 48%,rgba(0,0,0,.02) 52%,rgba(0,0,0,.05));
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme=light]){
@@ -28,6 +29,7 @@
     --l3:#3987e5; --l4:#17b083;
     --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
     --sh-2:0 2px 6px rgba(0,0,0,.34), 0 14px 34px rgba(0,0,0,.4);
+    --gloss-soft:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 48%,rgba(0,0,0,.10) 52%,rgba(0,0,0,.20));
   }
 }
 [data-theme=dark]{
@@ -37,6 +39,7 @@
   --l3:#3987e5; --l4:#17b083;
   --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
   --sh-2:0 2px 6px rgba(0,0,0,.34), 0 14px 34px rgba(0,0,0,.4);
+  --gloss-soft:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 48%,rgba(0,0,0,.10) 52%,rgba(0,0,0,.20));
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -206,6 +209,28 @@ button .ic{width:1.15em;height:1.15em}
 .btn1:disabled{background:#93a8bb;box-shadow:none;transform:none;cursor:not-allowed}
 .btn2{background:var(--soft);color:var(--ink-1);border:1.5px solid var(--line)}
 .btn2:hover{border-color:var(--brand-500);color:var(--brand-600)}
+
+/* ---------- shiny (ผิวมันวาว + แสงกวาดตอนชี้เมาส์) ---------- */
+.btn1,.btn2,.themer{position:relative;overflow:hidden;isolation:isolate}
+.btn1::before,.btn2::before,.themer::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.06) 46%,
+    rgba(255,255,255,0) 52%,rgba(0,0,0,.07))}
+.btn2::before{background:var(--gloss-soft)}
+.btn1::after,.btn2::after,.themer::after{
+  content:"";position:absolute;top:-10%;left:-150%;width:55%;height:120%;pointer-events:none;z-index:-1;
+  transform:skewX(-20deg);
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55) 45%,rgba(255,255,255,.75),
+    rgba(255,255,255,.55) 55%,transparent)}
+.btn2::after{background:linear-gradient(100deg,transparent,rgba(42,120,214,.16) 50%,transparent)}
+.btn1:hover::after,.btn2:hover::after,.themer:hover::after,
+.btn1:focus-visible::after,.btn2:focus-visible::after{animation:sheen .78s ease}
+@keyframes sheen{from{left:-150%} to{left:150%}}
+.btn1{box-shadow:0 4px 16px rgba(15,76,129,.32),inset 0 1px 0 rgba(255,255,255,.34)}
+.btn1:hover{box-shadow:0 8px 24px rgba(15,76,129,.44),inset 0 1px 0 rgba(255,255,255,.45)}
+.btn1:active,.btn2:active{transform:translateY(1px)}
+.themer{box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+button:focus-visible{outline:2px solid var(--brand-500);outline-offset:3px}
 
 /* ============ MESSAGES ============ */
 .msg{margin-top:18px;padding:17px 19px;border-radius:var(--r);display:none;font-size:.96rem;

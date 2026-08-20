@@ -20,6 +20,7 @@
   --r-lg:18px; --r:14px; --r-sm:10px;
   --sh-1:0 1px 2px rgba(11,61,107,.06), 0 4px 14px rgba(11,61,107,.07);
   --sh-2:0 2px 6px rgba(11,61,107,.08), 0 14px 34px rgba(11,61,107,.11);
+  --gloss-soft:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.25) 48%,rgba(0,0,0,.02) 52%,rgba(0,0,0,.05));
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme=light]){
@@ -29,6 +30,7 @@
     --bg:#0c1520; --card:#131f2c; --line:#243546; --soft:#182634; --grid:#1d2c3b;
     --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
     --sh-2:0 2px 6px rgba(0,0,0,.34), 0 14px 34px rgba(0,0,0,.4);
+    --gloss-soft:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 48%,rgba(0,0,0,.10) 52%,rgba(0,0,0,.20));
   }
 }
 [data-theme=dark]{
@@ -38,6 +40,7 @@
   --bg:#0c1520; --card:#131f2c; --line:#243546; --soft:#182634; --grid:#1d2c3b;
   --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
   --sh-2:0 2px 6px rgba(0,0,0,.34), 0 14px 34px rgba(0,0,0,.4);
+  --gloss-soft:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 48%,rgba(0,0,0,.10) 52%,rgba(0,0,0,.20));
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink-1);
@@ -114,6 +117,35 @@ header button .ic{width:1.05em;height:1.05em}
   padding:10px 16px;border-radius:var(--r-sm);font-family:inherit;font-size:.9rem;font-weight:600;
   cursor:pointer;display:inline-flex;align-items:center;gap:7px}
 .filters .btn:hover{border-color:var(--brand-500);color:var(--brand-600)}
+
+/* ---------- shiny (ผิวมันวาว + แสงกวาดตอนชี้เมาส์) ---------- */
+header button,.tab,.filters .btn,.login button{
+  position:relative;overflow:hidden;isolation:isolate}
+header button::before,.tab::before,.filters .btn::before,.login button::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:var(--gloss-soft)}
+header button::before,.tab.on::before,.login button::before{
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.06) 46%,
+    rgba(255,255,255,0) 52%,rgba(0,0,0,.08))}
+header button::after,.tab::after,.filters .btn::after,.login button::after{
+  content:"";position:absolute;top:-10%;left:-150%;width:55%;height:120%;pointer-events:none;z-index:-1;
+  transform:skewX(-20deg);
+  background:linear-gradient(100deg,transparent,rgba(42,120,214,.16) 50%,transparent)}
+header button::after,.tab.on::after,.login button::after{
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5) 45%,rgba(255,255,255,.72),
+    rgba(255,255,255,.5) 55%,transparent)}
+header button:hover::after,.tab:hover::after,.filters .btn:hover::after,.login button:hover::after,
+header button:focus-visible::after,.tab:focus-visible::after,.login button:focus-visible::after{
+  animation:sheen .78s ease}
+@keyframes sheen{from{left:-150%} to{left:150%}}
+header button{box-shadow:inset 0 1px 0 rgba(255,255,255,.24)}
+.tab.on{box-shadow:0 4px 14px rgba(15,76,129,.3),inset 0 1px 0 rgba(255,255,255,.3)}
+.tab.on:hover{box-shadow:0 7px 20px rgba(15,76,129,.4),inset 0 1px 0 rgba(255,255,255,.4)}
+.login button{box-shadow:0 4px 16px rgba(15,76,129,.3),inset 0 1px 0 rgba(255,255,255,.34)}
+.login button:hover{box-shadow:0 8px 24px rgba(15,76,129,.42),inset 0 1px 0 rgba(255,255,255,.45)}
+header button:active,.tab:active,.filters .btn:active,.login button:active{transform:translateY(1px)}
+button:focus-visible{outline:2px solid var(--brand-500);outline-offset:3px}
+header button:focus-visible{outline-color:#fff}
 
 /* ============ STAT TILES ============ */
 .tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:13px;margin-top:16px}
@@ -193,6 +225,53 @@ td.c{text-align:center;font-variant-numeric:tabular-nums}
   font-weight:700;font-size:.79rem}
 .s4{background:var(--seq-4);color:#fff} .s3{background:var(--seq-3);color:#fff}
 .s2{background:var(--seq-2);color:#fff} .s1{background:var(--seq-1);color:#0b2b4d}
+
+/* ============ AREA SUMMARY ============ */
+.hero{background:
+    radial-gradient(620px 260px at 6% -30%, rgba(18,164,157,.5), transparent 60%),
+    radial-gradient(560px 300px at 94% -20%, rgba(90,105,225,.45), transparent 58%),
+    linear-gradient(135deg,#072a4d,#0f4c81 50%,#0d6f77);
+  color:#fff;border-radius:var(--r-lg);padding:24px;margin-top:16px;
+  box-shadow:0 8px 26px rgba(7,42,77,.28)}
+.hero .ttl{font-size:.86rem;opacity:.85;display:flex;align-items:center;gap:8px}
+.hero .row{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-end;margin-top:12px}
+.hero .big{font-size:3rem;font-weight:800;line-height:1;letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums}
+.hero .big small{font-size:1rem;opacity:.7;font-weight:600;letter-spacing:0}
+.hero .qb{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.3);padding:7px 16px;border-radius:999px;font-weight:600}
+.hero .kv{display:flex;flex-direction:column;gap:2px}
+.hero .kv b{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
+.hero .kv span{font-size:.79rem;opacity:.82}
+.hero .meter{height:8px;background:rgba(255,255,255,.22);border-radius:99px;margin-top:14px;overflow:hidden}
+.hero .meter i{display:block;height:100%;background:#7fe3d3;border-radius:99px;transition:width .5s}
+
+.sumtbl{width:100%;border-collapse:separate;border-spacing:0;font-size:.85rem}
+.sumtbl th{background:var(--soft);color:var(--ink-2);font-weight:600;font-size:.76rem;
+  padding:9px 8px;text-align:center;border-bottom:1.5px solid var(--line);white-space:nowrap;
+  position:sticky;top:0;z-index:1}
+.sumtbl th.l,.sumtbl td.l{text-align:left}
+.sumtbl td{padding:9px 8px;text-align:center;border-bottom:1px solid var(--grid);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.sumtbl tbody tr:hover td{background:var(--soft)}
+.sumtbl tfoot td{font-weight:700;border-top:2px solid var(--line);border-bottom:none;
+  background:var(--soft)}
+.sumtbl .rk{width:26px;height:26px;border-radius:8px;display:inline-grid;place-items:center;
+  font-weight:700;font-size:.78rem;background:var(--soft);border:1px solid var(--line);color:var(--ink-2)}
+.sumtbl .rk.top{background:linear-gradient(140deg,#1565a8,#072a4d);color:#fff;border-color:transparent}
+.sumtbl .cell{display:block;padding:6px 0;border-radius:6px;font-weight:700;font-size:.79rem;
+  color:#0b2b4d;min-width:34px}
+.sumtbl .nm{font-weight:600;color:var(--ink-1)}
+.sumtbl .pill{min-width:68px}
+.sumtbl .sub{font-size:.74rem;color:var(--ink-3);font-weight:400}
+.sumtbl .cov{display:inline-block;width:52px;height:6px;background:var(--grid);border-radius:99px;
+  overflow:hidden;vertical-align:middle;margin-right:6px}
+.sumtbl .cov i{display:block;height:100%;background:var(--bar);border-radius:99px}
+.scroller{overflow:auto;max-height:none;margin:0 -4px;padding:0 4px}
+.hmlegend{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:.79rem;color:var(--ink-3);
+  padding-top:13px;border-top:1px solid var(--grid);flex-wrap:wrap}
+.hmlegend .sw{display:flex;border-radius:5px;overflow:hidden}
+.hmlegend .sw i{width:26px;height:12px;display:block}
 
 /* ============ MISSING ============ */
 .grpbox{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;
@@ -299,6 +378,7 @@ footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 4
   <div class="wrap">
     <div class="tabs">
       <button class="tab on" data-tab="dash"><svg class="ic"><use href="#ic-chart"/></svg> แดชบอร์ด</button>
+      <button class="tab" data-tab="area"><svg class="ic"><use href="#ic-award"/></svg> สรุประดับเขต</button>
       <button class="tab" data-tab="table"><svg class="ic"><use href="#ic-table"/></svg> ตารางข้อมูล</button>
       <button class="tab" data-tab="miss"><svg class="ic"><use href="#ic-clock"/></svg> โรงเรียนที่ยังไม่ส่ง</button>
     </div>
@@ -358,6 +438,24 @@ footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 4
           <p class="cap">แสดงเฉพาะเมื่อเลือกดูข้อมูล “ระดับชั้น” · เต็ม 4.00</p>
           <div id="chartL"></div>
         </div>
+      </div>
+    </div>
+
+    <!-- สรุประดับเขต -->
+    <div id="tab-area" style="display:none">
+      <div id="areaHero"></div>
+
+      <div class="panel full" style="margin-top:14px">
+        <h3><svg class="ic"><use href="#ic-school"/></svg> เปรียบเทียบรายอำเภอ</h3>
+        <p class="cap" id="capArea">ค่าเฉลี่ยถ่วงน้ำหนักตามจำนวนนักเรียนที่ประเมิน · เต็ม 4.00 · เรียงจากคะแนนสูงไปต่ำ</p>
+        <div class="scroller"><table class="sumtbl" id="tblDist"></table></div>
+        <div class="hmlegend" id="hmLegend"></div>
+      </div>
+
+      <div class="panel full" style="margin-top:14px">
+        <h3><svg class="ic"><use href="#ic-users"/></svg> เปรียบเทียบรายกลุ่มโรงเรียน</h3>
+        <p class="cap">แถวที่คะแนนต่ำกว่าค่าเฉลี่ยของเขตจะมีเครื่องหมาย ▼ กำกับ — ใช้จัดลำดับความสำคัญในการนิเทศ</p>
+        <div class="scroller"><table class="sumtbl" id="tblGroup"></table></div>
       </div>
     </div>
 
@@ -638,8 +736,9 @@ $('btnPrint').addEventListener('click', () => window.print());
 document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', function(){
   document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
   this.classList.add('on');
-  ['dash','table','miss'].forEach(t => $('tab-'+t).style.display = (t === this.dataset.tab) ? '' : 'none');
+  ['dash','area','table','miss'].forEach(t => $('tab-'+t).style.display = (t === this.dataset.tab) ? '' : 'none');
 }));
+const activeTab = () => (document.querySelector('.tab.on') || {}).dataset?.tab || 'dash';
 
 /* ---------- คำนวณ ---------- */
 function wAvg(list, idx){
@@ -748,8 +847,124 @@ function render(){
     $('chartL').innerHTML = byL.length ? bars(byL, 4) : noData();
   }
 
+  renderArea(R, isClass);
   renderTable(R, isClass);
   renderMissing(R);
+}
+
+/* ---------- สรุประดับเขต ---------- */
+const DIST_TOTAL = (function(){
+  const o = {};
+  Object.keys(SCHOOLS).forEach(g => { const d = districtOf(g); o[d] = (o[d] || 0) + SCHOOLS[g].length; });
+  return o;
+})();
+
+/* แรมป์ฟ้าเฉดเดียว อ่อน→เข้ม ตามขนาดคะแนน (1.00–4.00) — ตัวอักษรสีเข้มทุกช่อง ผ่านเกณฑ์ความคมชัด AA */
+const HEAT = ['#cde2fb','#b7d3f6','#9ec5f4','#86b6ef','#6da7ec','#5598e7'];
+function heat(v){
+  if (!(v > 0)) return 'transparent';
+  const t = Math.max(0, Math.min(1, (v - 1) / 3));
+  return HEAT[Math.round(t * (HEAT.length - 1))];
+}
+
+function agg(list, name, total){
+  const sent = new Set(list.map(r => r.school)).size;
+  return {
+    name: name, total: total, sent: sent, n: list.length,
+    students: list.reduce((a, r) => a + (Number(r.nEval) || 0), 0),
+    c: RUBRIC.map((x, i) => wAvg(list, i)),
+    avg: wAvg(list, null)
+  };
+}
+
+function sumRow(x, i, refAvg, sub){
+  const low = refAvg && x.avg < refAvg;
+  const cov = x.total ? Math.round(x.sent / x.total * 100) : 0;
+  const q = QUALITY.indexOf(qualityOf(x.avg)) + 1;
+  return '<tr>' +
+    '<td><span class="rk' + (i < 3 ? ' top' : '') + '">' + (i + 1) + '</span></td>' +
+    '<td class="l"><span class="nm">' + esc(x.name) + '</span>' +
+      (sub ? '<br><span class="sub">' + esc(sub) + '</span>' : '') + '</td>' +
+    '<td><span class="cov"><i style="width:' + cov + '%"></i></span>' +
+      x.sent + ' / ' + x.total + ' <span class="sub">(' + cov + '%)</span></td>' +
+    '<td>' + x.students.toLocaleString('th-TH') + '</td>' +
+    x.c.map(v => '<td><span class="cell" style="background:' + heat(v) + '">' +
+      (v > 0 ? v.toFixed(2) : '–') + '</span></td>').join('') +
+    '<td><b>' + x.avg.toFixed(2) + '</b>' + (low ? ' <span style="color:#c94f1f">▼</span>' : '') + '</td>' +
+    '<td><span class="pill q' + q + '">' + qualityOf(x.avg) + '</span></td>' +
+    '</tr>';
+}
+
+function sumHead(first){
+  return '<thead><tr><th>#</th><th class="l">' + first + '</th>' +
+    '<th>โรงเรียนที่ส่ง</th><th>นักเรียน</th>' +
+    RUBRIC.map(c => '<th title="' + esc(c.short) + '">' + c.key + '</th>').join('') +
+    '<th>เฉลี่ย</th><th>ระดับคุณภาพ</th></tr></thead>';
+}
+
+function renderArea(R, isClass){
+  const totalSchools = Object.values(SCHOOLS).reduce((a, b) => a + b.length, 0);
+  const all = agg(R, 'รวมทั้งเขต', totalSchools);
+  const y = $('fYear').value, t = $('fTerm').value;
+  const scope = (y ? 'ปีการศึกษา ' + y : 'ทุกปีการศึกษา') +
+    (t ? ' ภาคเรียนที่ ' + t : '') +
+    ' · ข้อมูล' + (isClass ? 'ระดับชั้น' : 'ระดับโรงเรียน');
+
+  /* --- แถบสรุปภาพรวมเขต --- */
+  if (!R.length){
+    $('areaHero').innerHTML = '<div class="panel">' + noData('ยังไม่มีข้อมูลตามเงื่อนไขที่เลือก') + '</div>';
+    $('tblDist').innerHTML = ''; $('tblGroup').innerHTML = ''; $('hmLegend').innerHTML = '';
+    return;
+  }
+  const cov = Math.round(all.sent / totalSchools * 100);
+  const ranked = RUBRIC.map((c, i) => ({ key: c.key, short: c.short, v: all.c[i] }))
+    .sort((a, b) => a.v - b.v);
+  $('areaHero').innerHTML =
+    '<div class="hero">' +
+      '<div class="ttl">' + icon('award') +
+        ' ภาพรวมทักษะ 8C ระดับเขตพื้นที่ · ' + esc(scope) + '</div>' +
+      '<div class="row">' +
+        '<div><div class="big">' + all.avg.toFixed(2) + '<small> / 4.00</small></div></div>' +
+        '<div class="qb">' + icon('check') + ' ระดับคุณภาพ ' + qualityOf(all.avg) + '</div>' +
+        '<div class="kv"><b>' + all.sent + ' / ' + totalSchools + '</b>' +
+          '<span>โรงเรียนที่ส่งข้อมูล</span></div>' +
+        '<div class="kv"><b>' + all.students.toLocaleString('th-TH') + '</b>' +
+          '<span>นักเรียนที่ประเมิน (คน)</span></div>' +
+        '<div class="kv"><b>' + ranked[0].key + '</b>' +
+          '<span>ทักษะที่ต้องเร่งพัฒนา — ' + esc(ranked[0].short) + ' (' + ranked[0].v.toFixed(2) + ')</span></div>' +
+      '</div>' +
+      '<div class="meter"><i style="width:' + cov + '%"></i></div>' +
+      '<div class="ttl" style="margin-top:7px">ความครอบคลุมการรายงาน ' + cov + '% ของโรงเรียนในสังกัด</div>' +
+    '</div>';
+
+  /* --- รายอำเภอ --- */
+  const dist = DISTRICTS.map(function(d){
+    return agg(R.filter(r => r.district === d), d, DIST_TOTAL[d] || 0);
+  }).filter(x => x.n > 0).sort((a, b) => b.avg - a.avg);
+
+  $('tblDist').innerHTML = sumHead('อำเภอ') +
+    '<tbody>' + dist.map((x, i) => sumRow(x, i, all.avg)).join('') + '</tbody>' +
+    '<tfoot><tr><td></td><td class="l">รวมทั้งเขต</td>' +
+      '<td>' + all.sent + ' / ' + totalSchools + '</td>' +
+      '<td>' + all.students.toLocaleString('th-TH') + '</td>' +
+      all.c.map(v => '<td>' + (v > 0 ? v.toFixed(2) : '–') + '</td>').join('') +
+      '<td>' + all.avg.toFixed(2) + '</td>' +
+      '<td><span class="pill q' + (QUALITY.indexOf(qualityOf(all.avg)) + 1) + '">' +
+        qualityOf(all.avg) + '</span></td></tr></tfoot>';
+
+  $('hmLegend').innerHTML = 'ความเข้มของสีในช่อง C1–C8 แทนระดับคะแนน · ' +
+    '<span>1.00</span><span class="sw">' + HEAT.map(c => '<i style="background:' + c + '"></i>').join('') +
+    '</span><span>4.00</span> · ยิ่งอ่อนยิ่งควรเร่งพัฒนา';
+
+  /* --- รายกลุ่มโรงเรียน --- */
+  const grp = Object.keys(SCHOOLS).map(function(g){
+    const a = agg(R.filter(r => r.schoolGroup === g), g.replace(/\s*\(.*\)$/, ''), SCHOOLS[g].length);
+    a.district = districtOf(g);
+    return a;
+  }).filter(x => x.n > 0).sort((a, b) => b.avg - a.avg);
+
+  $('tblGroup').innerHTML = sumHead('กลุ่มโรงเรียน') +
+    '<tbody>' + grp.map((x, i) => sumRow(x, i, all.avg, 'อำเภอ' + x.district)).join('') + '</tbody>';
 }
 
 /* แถบแนวนอน — ชุดข้อมูลเดียว สีเดียว มีป้ายค่ากำกับทุกแถบ */
@@ -853,30 +1068,63 @@ function renderMissing(R){
 }
 
 /* ---------- ส่งออก CSV ---------- */
+function download(name, lines){
+  const blob = new Blob(['﻿' + lines.join('\r\n')], { type:'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+const csvq = s => '"' + String(s == null ? '' : s).replace(/"/g,'""') + '"';
+
+/* สรุประดับเขต → ส่งออกตารางเปรียบเทียบอำเภอและกลุ่มโรงเรียน */
+function exportArea(R, isClass){
+  const totalSchools = Object.values(SCHOOLS).reduce((a,b)=>a+b.length, 0);
+  const all = agg(R, 'รวมทั้งเขต', totalSchools);
+  const head = ['ระดับ','ชื่อ','อำเภอ','โรงเรียนที่ส่ง','โรงเรียนทั้งหมด','ร้อยละความครอบคลุม',
+    'จำนวนรายการ','นักเรียนที่ประเมิน']
+    .concat(RUBRIC.map(c => c.key + ' ' + c.short))
+    .concat(['คะแนนเฉลี่ย 8C','ระดับคุณภาพ']);
+  const line = (lv, x, d) => [lv, x.name, d || '',
+    x.sent, x.total, x.total ? Math.round(x.sent/x.total*100) : 0, x.n, x.students]
+    .concat(x.c.map(v => v > 0 ? v.toFixed(2) : ''))
+    .concat([x.avg.toFixed(2), qualityOf(x.avg)]).map(csvq).join(',');
+
+  const dist = DISTRICTS.map(d => agg(R.filter(r=>r.district===d), d, DIST_TOTAL[d]||0))
+    .filter(x => x.n > 0).sort((a,b)=>b.avg-a.avg);
+  const grp = Object.keys(SCHOOLS).map(function(g){
+    const a = agg(R.filter(r=>r.schoolGroup===g), g.replace(/\s*\(.*\)$/,''), SCHOOLS[g].length);
+    a.district = districtOf(g); return a;
+  }).filter(x => x.n > 0).sort((a,b)=>b.avg-a.avg);
+
+  const lines = [head.map(csvq).join(',')]
+    .concat([line('เขตพื้นที่', all, '')])
+    .concat(dist.map(x => line('อำเภอ', x, x.name)))
+    .concat(grp.map(x => line('กลุ่มโรงเรียน', x, x.district)));
+  download('8C_สรุประดับเขต_' + (isClass ? 'ระดับชั้น' : 'ระดับโรงเรียน') + '_' +
+    new Date().toISOString().slice(0,10) + '.csv', lines);
+}
+
 $('btnCsv').addEventListener('click', function(){
   const R = rows(), isClass = $('fLevel').value === 'class';
   if (!R.length){ alert('ไม่มีข้อมูลให้ส่งออก'); return; }
+  if (activeTab() === 'area'){ exportArea(R, isClass); return; }
   const head = ['รหัสอ้างอิง','ปีการศึกษา','ภาคเรียน','อำเภอ','กลุ่มโรงเรียน','โรงเรียน',
     isClass ? 'ระดับชั้น' : 'ขนาดโรงเรียน','จำนวนนักเรียนทั้งหมด','จำนวนที่ประเมิน']
     .concat(RUBRIC.map(c => c.key + ' ' + c.short))
     .concat(['คะแนนเฉลี่ย','ระดับคุณภาพ','จุดเด่น','จุดที่ควรพัฒนา','ลิงก์หลักฐาน',
       'ผู้กรอก','ตำแหน่ง','โทรศัพท์','อีเมล/Line','หมายเหตุ','วันที่บันทึก','แก้ไขล่าสุด']);
-  const q = s => '"' + String(s == null ? '' : s).replace(/"/g,'""') + '"';
-  const lines = [head.map(q).join(',')].concat(R.map(function(r){
+  const lines = [head.map(csvq).join(',')].concat(R.map(function(r){
     return [r.refCode,r.year,r.term,r.district,r.schoolGroup,r.school,
       isClass ? r.grade : r.size, r.nAll, r.nEval]
       .concat(r.c)
       .concat([Number(r.avg).toFixed(2), qualityOf(r.avg), r.strength, r.improve, r.evidence,
         r.reporter, r.position, r.phone, r.contact, r.note, r.created, r.updated])
-      .map(q).join(',');
+      .map(csvq).join(',');
   }));
-  const blob = new Blob(['﻿' + lines.join('\r\n')], { type:'text/csv;charset=utf-8;' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = '8C_' + (isClass ? 'ระดับชั้น' : 'ระดับโรงเรียน') + '_' +
-    new Date().toISOString().slice(0,10) + '.csv';
-  a.click();
-  URL.revokeObjectURL(a.href);
+  download('8C_' + (isClass ? 'ระดับชั้น' : 'ระดับโรงเรียน') + '_' +
+    new Date().toISOString().slice(0,10) + '.csv', lines);
 });
 
 /* ---------- เข้าระบบอัตโนมัติจาก session เดิม ---------- */
