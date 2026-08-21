@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#3d1f77">
+<title>แดชบอร์ดโรงเรียน — ทักษะ 8C สพป.อุดรธานี เขต 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand-900:#2a1758; --brand-800:#3d1f77; --brand-700:#4c2a96;
+  --brand-600:#5a2ea6; --brand-500:#7c5ad4; --brand-100:#f1eafd;
+  --blue:#3866eb; --pink:#d94f9a; --pink-soft:#f5a3d0;
+  --seq-1:#c0a9f0; --seq-2:#9a7ce2; --seq-3:#6b45c4; --seq-4:#3f2585;
+  --bar:#7c5ad4; --bar-soft:#f1eafd;
+  --l1:#c4407a; --l2:#9540bb; --l3:#6344cf; --l4:#3340b8;
+  --ink-1:#171226; --ink-2:#4d465f; --ink-3:#7a7290;
+  --bg:#f3f0fa; --card:#ffffff; --line:#e3dcf0; --soft:#f8f5fd; --grid:#efeaf8;
+  --r-lg:18px; --r:14px; --r-sm:10px;
+  --sh-1:0 1px 2px rgba(58,31,110,.06), 0 4px 14px rgba(58,31,110,.07);
+  --sh-2:0 2px 6px rgba(58,31,110,.08), 0 14px 34px rgba(58,31,110,.11);
+  --gloss-soft:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.25) 48%,rgba(0,0,0,.02) 52%,rgba(0,0,0,.05));
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]){
+    --seq-1:#59409a; --seq-2:#7c5ad4; --seq-3:#9d80e8; --seq-4:#c3aef3;
+    --bar:#8f6ddc; --bar-soft:#241a45; --brand-100:#241a45;
+    --brand-500:#9d80e8; --brand-600:#8f6ddc;
+    --ink-1:#f2eefb; --ink-2:#b9b0cf; --ink-3:#8d84a8;
+    --bg:#0f0b1c; --card:#181329; --line:#2b2342; --soft:#1e1834; --grid:#241d3b;
+    --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
+    --sh-2:0 2px 6px rgba(0,0,0,.34), 0 14px 34px rgba(0,0,0,.4);
+    --gloss-soft:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 48%,rgba(0,0,0,.10) 52%,rgba(0,0,0,.20));
+  }
+}
+[data-theme=dark]{
+  --seq-1:#59409a; --seq-2:#7c5ad4; --seq-3:#9d80e8; --seq-4:#c3aef3;
+  --bar:#8f6ddc; --bar-soft:#241a45; --brand-100:#241a45;
+  --brand-500:#9d80e8; --brand-600:#8f6ddc;
+  --ink-1:#f2eefb; --ink-2:#b9b0cf; --ink-3:#8d84a8;
+  --bg:#0f0b1c; --card:#181329; --line:#2b2342; --soft:#1e1834; --grid:#241d3b;
+  --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
+  --sh-2:0 2px 6px rgba(0,0,0,.34), 0 14px 34px rgba(0,0,0,.4);
+  --gloss-soft:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 48%,rgba(0,0,0,.10) 52%,rgba(0,0,0,.20));
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink-1);
+  font-family:'Sarabun',-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.6;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 18px 60px}
+a{color:var(--brand-600)}
+.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;vertical-align:-.16em}
+
+header{position:relative;overflow:hidden;color:#fff;padding:22px 18px 24px;
+  background:
+    radial-gradient(760px 300px at 8% -20%, rgba(56,102,235,.5), transparent 62%),
+    radial-gradient(700px 340px at 92% -10%, rgba(217,79,154,.45), transparent 60%),
+    linear-gradient(135deg,#1b2a6b,#4c2a96 50%,#8e2f83)}
+header .wrap{padding-bottom:0;display:flex;justify-content:space-between;align-items:center;
+  gap:16px;flex-wrap:wrap;position:relative;z-index:1}
+header h1{margin:4px 0 0;font-size:1.34rem;font-weight:800;letter-spacing:-.01em;
+  display:flex;align-items:center;gap:10px}
+header h1 .ic{width:1.05em;height:1.05em;opacity:.9}
+header .k{font-size:.8rem;opacity:.85}
+.hbtns{display:flex;gap:8px;flex-wrap:wrap}
+header button{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26);
+  color:#fff;font-family:inherit;font-size:.87rem;font-weight:500;padding:9px 15px;border-radius:10px;
+  cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.15s;
+  position:relative;overflow:hidden;isolation:isolate;box-shadow:inset 0 1px 0 rgba(255,255,255,.24)}
+header button:hover{background:rgba(255,255,255,.26);transform:translateY(-1px)}
+header button::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  z-index:-1;background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.06) 46%,
+    rgba(255,255,255,0) 52%,rgba(0,0,0,.08))}
+header button::after{content:"";position:absolute;top:-10%;left:-150%;width:55%;height:120%;
+  pointer-events:none;z-index:-1;transform:skewX(-20deg);
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5) 45%,rgba(255,255,255,.72),
+    rgba(255,255,255,.5) 55%,transparent)}
+header button:hover::after{animation:sheen .78s ease}
+@keyframes sheen{from{left:-150%} to{left:150%}}
+header button .ic{width:1.05em;height:1.05em}
+
+/* login */
+.login{max-width:440px;margin:8vh auto;background:var(--card);border:1px solid var(--line);
+  border-radius:22px;padding:36px 32px;text-align:center;box-shadow:var(--sh-2)}
+.login .lock{width:60px;height:60px;margin:0 auto 16px;border-radius:18px;display:grid;place-items:center;
+  color:#fff;background:linear-gradient(140deg,#7442c9,#2a1758);box-shadow:0 8px 22px rgba(76,42,150,.35)}
+.login .lock .ic{width:28px;height:28px}
+.login h2{margin:0 0 6px;font-size:1.28rem;font-weight:700}
+.login p{margin:0 0 22px;color:var(--ink-2);font-size:.9rem}
+.login input{width:100%;padding:14px;font-size:1.1rem;font-family:ui-monospace,Menlo,monospace;
+  text-align:center;letter-spacing:.08em;text-transform:uppercase;
+  border:1.5px solid var(--line);border-radius:12px;margin-bottom:12px;background:var(--card);color:var(--ink-1)}
+.login input::placeholder{font-family:'Sarabun',sans-serif;letter-spacing:0;text-transform:none}
+.login input:focus{outline:none;border-color:var(--brand-500);box-shadow:0 0 0 4px rgba(124,90,212,.16)}
+.login button{width:100%;padding:13px;background:linear-gradient(135deg,#7442c9 0%,#5a2ea6 55%,#8e2f83 100%);
+  color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:600;
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  position:relative;overflow:hidden;isolation:isolate;
+  box-shadow:0 4px 16px rgba(76,42,150,.3),inset 0 1px 0 rgba(255,255,255,.34)}
+.login button:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(76,42,150,.42),inset 0 1px 0 rgba(255,255,255,.45)}
+.login button::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  z-index:-1;background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.06) 46%,
+    rgba(255,255,255,0) 52%,rgba(0,0,0,.08))}
+.login button::after{content:"";position:absolute;top:-10%;left:-150%;width:55%;height:120%;
+  pointer-events:none;z-index:-1;transform:skewX(-20deg);
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5) 45%,rgba(255,255,255,.72),
+    rgba(255,255,255,.5) 55%,transparent)}
+.login button:hover::after{animation:sheen .78s ease}
+.login .er{color:#c0392b;font-size:.88rem;margin-top:12px;min-height:20px}
+.login .help{margin-top:18px;font-size:.82rem;color:var(--ink-3);line-height:1.7}
+
+/* filters */
+.filters{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:14px;margin-top:16px;display:flex;gap:11px;flex-wrap:wrap;align-items:flex-end;box-shadow:var(--sh-1)}
+.filters .f{display:flex;flex-direction:column;gap:5px;min-width:150px}
+.filters label{font-size:.76rem;font-weight:600;color:var(--ink-3);display:flex;align-items:center;gap:5px}
+.filters label .ic{width:.95em;height:.95em}
+.filters select{font-family:inherit;font-size:.92rem;padding:9px 32px 9px 11px;
+  border:1.5px solid var(--line);border-radius:var(--r-sm);background:var(--card);color:var(--ink-1);
+  width:100%;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%237a7290' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center}
+.filters select:focus{outline:none;border-color:var(--brand-500);box-shadow:0 0 0 3px rgba(124,90,212,.15)}
+
+/* hero */
+.hero{background:
+    radial-gradient(620px 260px at 6% -30%, rgba(56,102,235,.5), transparent 60%),
+    radial-gradient(560px 300px at 94% -20%, rgba(217,79,154,.45), transparent 58%),
+    linear-gradient(135deg,#2a1758,#4c2a96 50%,#8e2f83);
+  color:#fff;border-radius:var(--r-lg);padding:24px;margin-top:16px;box-shadow:0 8px 26px rgba(42,23,88,.28)}
+.hero .ttl{font-size:.86rem;opacity:.85;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hero .row{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-end;margin-top:12px}
+.hero .big{font-size:3rem;font-weight:800;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.hero .big small{font-size:1rem;opacity:.7;font-weight:600;letter-spacing:0}
+.hero .qb{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.3);padding:7px 16px;border-radius:999px;font-weight:600}
+.hero .kv{display:flex;flex-direction:column;gap:2px}
+.hero .kv b{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
+.hero .kv span{font-size:.79rem;opacity:.82}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;
+  box-shadow:var(--sh-1);margin-top:14px}
+.panel h3{margin:0 0 3px;font-size:1.03rem;font-weight:700;display:flex;align-items:center;gap:9px}
+.panel h3 .ic{width:1.1em;height:1.1em;color:var(--brand-600)}
+.panel .cap{margin:0 0 18px;font-size:.81rem;color:var(--ink-3);padding-left:28px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+
+.hb{display:grid;grid-template-columns:auto 1fr auto;gap:10px 12px;align-items:center}
+.hb .nm{font-size:.87rem;color:var(--ink-2);text-align:right;max-width:230px;
+  display:flex;align-items:center;gap:7px;justify-content:flex-end}
+.hb .nm .sw{width:9px;height:9px;border-radius:3px;flex:0 0 auto}
+.hb .track{background:var(--grid);border-radius:5px;height:16px}
+.hb .fill{height:100%;background:var(--bar);border-radius:0 5px 5px 0;min-width:3px;transition:width .45s ease}
+.hb .val{font-size:.86rem;font-weight:700;font-variant-numeric:tabular-nums;min-width:46px;text-align:right}
+.hb .sub{font-size:.74rem;color:var(--ink-3);font-weight:500}
+
+.sumtbl{width:100%;border-collapse:separate;border-spacing:0;font-size:.85rem}
+.sumtbl th{background:var(--soft);color:var(--ink-2);font-weight:600;font-size:.76rem;
+  padding:9px 8px;text-align:center;border-bottom:1.5px solid var(--line);white-space:nowrap}
+.sumtbl th.l,.sumtbl td.l{text-align:left}
+.sumtbl td{padding:9px 8px;text-align:center;border-bottom:1px solid var(--grid);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.sumtbl tbody tr:hover td{background:var(--soft)}
+.sumtbl tfoot td{font-weight:700;border-top:2px solid var(--line);border-bottom:none;background:var(--soft)}
+.sumtbl .cell{display:block;padding:6px 0;border-radius:6px;font-weight:700;font-size:.79rem;
+  color:#1b0d3d;min-width:34px}
+.sumtbl .nm{font-weight:600;color:var(--ink-1)}
+.sumtbl .sub{font-size:.74rem;color:var(--ink-3);font-weight:400}
+.sumtbl .rm{display:inline-grid;place-items:center;min-width:52px;padding:3px 8px;border-radius:8px;
+  background:var(--brand-100);color:var(--brand-600);font-weight:700;font-size:.82rem}
+.pill{display:inline-block;padding:3px 11px;border-radius:99px;font-size:.75rem;font-weight:700;min-width:68px}
+.q4{background:var(--seq-4);color:#fff} .q3{background:var(--seq-3);color:#fff}
+.q2{background:var(--seq-2);color:#221146} .q1{background:var(--seq-1);color:#221146}
+.scroller{overflow:auto;margin:0 -4px;padding:0 4px}
+.hmlegend{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:.79rem;color:var(--ink-3);
+  padding-top:13px;border-top:1px solid var(--grid);flex-wrap:wrap}
+.hmlegend .sw{display:flex;border-radius:5px;overflow:hidden}
+.hmlegend .sw i{width:26px;height:12px;display:block}
+/* การกระจายนักเรียนตามระดับ */
+.dist{display:grid;grid-template-columns:auto 1fr auto;gap:10px 12px;align-items:center}
+.dist .nm{font-size:.87rem;color:var(--ink-2);text-align:right;display:flex;align-items:center;
+  gap:7px;justify-content:flex-end;max-width:230px}
+.dist .nm .sw{width:9px;height:9px;border-radius:3px;flex:0 0 auto}
+.dist .track{display:flex;height:26px;border-radius:7px;overflow:hidden;background:var(--grid);gap:2px}
+.dist .seg{height:100%;display:grid;place-items:center;color:#fff;font-size:.78rem;font-weight:700;
+  transition:width .45s ease;min-width:0;overflow:hidden}
+.dist .tot{font-size:.86rem;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;
+  min-width:52px;text-align:right}
+.lvlegend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:.82rem;color:var(--ink-2);
+  padding-top:14px;border-top:1px solid var(--grid)}
+.lvlegend span{display:inline-flex;align-items:center;gap:6px}
+.lvlegend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.miss{display:flex;flex-wrap:wrap;gap:8px}
+.miss span{background:var(--soft);border:1px dashed var(--line);color:var(--ink-2);
+  padding:5px 12px;border-radius:999px;font-size:.84rem}
+.empty{text-align:center;color:var(--ink-3);padding:34px 10px;font-size:.94rem}
+.empty .ic{width:34px;height:34px;display:block;margin:0 auto 10px;opacity:.45}
+footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 40px}
+
+@media(max-width:900px){ .two{grid-template-columns:1fr} }
+@media(max-width:600px){ .hb .nm{max-width:118px} .panel .cap{padding-left:0} header h1{font-size:1.1rem} }
+@media print{ header .hbtns,.filters{display:none!important} body{background:#fff}
+  .panel,.hero{break-inside:avoid;box-shadow:none} }
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<defs>
+  <g id="i-base" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></g>
+</defs>
+<symbol id="ic-c1" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.6-4.6"/><path d="m7.8 10.6 1.9 1.9 3.5-3.5"/></symbol>
+<symbol id="ic-c2" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 21.5h4"/><path d="M12 2.5a6.5 6.5 0 0 0-4.2 11.5c.6.6.9 1.3 1.1 2h6.2c.2-.7.5-1.4 1.1-2A6.5 6.5 0 0 0 12 2.5Z"/></symbol>
+<symbol id="ic-c3" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4"/><path d="M12 2.8c2.6 2.9 2.6 15.5 0 18.4"/><path d="M12 2.8c-2.6 2.9-2.6 15.5 0 18.4"/></symbol>
+<symbol id="ic-c4" viewBox="0 0 24 24"><path d="M15.5 21v-1.8a3.7 3.7 0 0 0-3.7-3.7H6.2a3.7 3.7 0 0 0-3.7 3.7V21"/><circle cx="9" cy="7.5" r="3.7"/><path d="M21.5 21v-1.8a3.7 3.7 0 0 0-2.8-3.6"/><path d="M16 4a3.7 3.7 0 0 1 0 7.2"/></symbol>
+<symbol id="ic-c5" viewBox="0 0 24 24"><path d="M20.5 14.5a2 2 0 0 1-2 2H7.5l-4 4V5.5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2Z"/><path d="M8 8.5h8"/><path d="M8 12h5"/></symbol>
+<symbol id="ic-c6" viewBox="0 0 24 24"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7"/><path d="M12 16.5v4"/><path d="m9.5 8 -1.8 2 1.8 2"/><path d="m14.5 8 1.8 2-1.8 2"/></symbol>
+<symbol id="ic-c7" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5.5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15"/><path d="M2.5 12.5h19"/></symbol>
+<symbol id="ic-c8" viewBox="0 0 24 24"><path d="M12 20.7 4.8 13.6C3.4 12.2 2 10.5 2 8.3A5.3 5.3 0 0 1 7.3 3c1.7 0 2.9.5 4.7 2 1.8-1.5 3-2 4.7-2A5.3 5.3 0 0 1 22 8.3c0 2.2-1.4 3.9-2.8 5.3Z"/></symbol>
+
+<symbol id="ic-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/></symbol>
+<symbol id="ic-school" viewBox="0 0 24 24"><path d="m3 9 9-5.5L21 9"/><path d="M5 10.5V20a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 20v-9.5"/><path d="M10 21.5v-5h4v5"/><circle cx="12" cy="11" r="1.6"/></symbol>
+<symbol id="ic-clipboard" viewBox="0 0 24 24"><rect x="8.5" y="2.5" width="7" height="4" rx="1.4"/><path d="M15.5 4.5H18a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2h2.5"/><path d="m9 14 2 2 4-4"/></symbol>
+<symbol id="ic-user" viewBox="0 0 24 24"><path d="M19.5 21v-2a4 4 0 0 0-4-4h-7a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+<symbol id="ic-notes" viewBox="0 0 24 24"><path d="M5 3.5h14a1.5 1.5 0 0 1 1.5 1.5v14a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19V5A1.5 1.5 0 0 1 5 3.5Z"/><path d="M7.5 8.5h9M7.5 12h9M7.5 15.5h5"/></symbol>
+<symbol id="ic-link" viewBox="0 0 24 24"><path d="M10 13.5a4.6 4.6 0 0 0 7 .5l2.8-2.8a4.6 4.6 0 0 0-6.5-6.5L11.7 6.2"/><path d="M14 10.5a4.6 4.6 0 0 0-7-.5l-2.8 2.8a4.6 4.6 0 0 0 6.5 6.5l1.6-1.6"/></symbol>
+<symbol id="ic-phone" viewBox="0 0 24 24"><path d="M21 16.9v2.6a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.6A2 2 0 0 1 3.3 1.7h2.6a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L7 9.5a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></symbol>
+<symbol id="ic-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="m8.2 12.2 2.6 2.6 5-5.2"/></symbol>
+<symbol id="ic-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M12 7.5v5.2"/><path d="M12 16.4h.01"/></symbol>
+<symbol id="ic-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M12 16.5v-5"/><path d="M12 7.8h.01"/></symbol>
+<symbol id="ic-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3.2v5h5"/></symbol>
+<symbol id="ic-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"/><path d="M21 3.2v5h-5"/></symbol>
+<symbol id="ic-download" viewBox="0 0 24 24"><path d="M20.5 15.5v3.2a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-3.2"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M12 15V3.2"/></symbol>
+<symbol id="ic-print" viewBox="0 0 24 24"><path d="M6.5 9V3.5h11V9"/><path d="M6.5 18.5H5a2 2 0 0 1-2-2v-4.7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4.7a2 2 0 0 1-2 2h-1.5"/><rect x="6.5" y="14.5" width="11" height="6" rx="1.2"/></symbol>
+<symbol id="ic-chart" viewBox="0 0 24 24"><path d="M3.5 3.5v17h17"/><path d="M7.8 17V12"/><path d="M12 17V8"/><path d="M16.2 17v-3"/></symbol>
+<symbol id="ic-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M3 15h18M9.5 9.5V20"/></symbol>
+<symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M12 6.8V12l3.4 1.9"/></symbol>
+<symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m20.5 20.5-4.8-4.8"/></symbol>
+<symbol id="ic-filter" viewBox="0 0 24 24"><path d="M21 4.5H3l7.2 8.5V19l3.6 1.8V13Z"/></symbol>
+<symbol id="ic-lock" viewBox="0 0 24 24"><rect x="3.5" y="10.5" width="17" height="10.5" rx="2.2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/><path d="M12 14.8v2.4"/></symbol>
+<symbol id="ic-login" viewBox="0 0 24 24"><path d="M14.5 3.5H18a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-3.5"/><path d="m10 16.5 4.5-4.5L10 7.5"/><path d="M14.5 12H4"/></symbol>
+<symbol id="ic-award" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="5.6"/><path d="m8.4 13.6-1.1 7.9L12 19l4.7 2.5-1.1-7.9"/></symbol>
+<symbol id="ic-up" viewBox="0 0 24 24"><path d="M21 7.5 13.2 15.3l-4.2-4.2L3 17"/><path d="M15.5 7.5H21V13"/></symbol>
+<symbol id="ic-down" viewBox="0 0 24 24"><path d="M21 16.5 13.2 8.7l-4.2 4.2L3 7"/><path d="M15.5 16.5H21V11"/></symbol>
+<symbol id="ic-cap" viewBox="0 0 24 24"><path d="M21.5 9.2 12 4.3 2.5 9.2 12 14.1Z"/><path d="M6.4 11.4v4.8c0 1.6 2.5 2.9 5.6 2.9s5.6-1.3 5.6-2.9v-4.8"/></symbol>
+<symbol id="ic-users" viewBox="0 0 24 24"><path d="M15.5 21v-1.8a3.7 3.7 0 0 0-3.7-3.7H6.2a3.7 3.7 0 0 0-3.7 3.7V21"/><circle cx="9" cy="7.5" r="3.7"/><path d="M21.5 21v-1.8a3.7 3.7 0 0 0-2.8-3.6"/><path d="M16 4a3.7 3.7 0 0 1 0 7.2"/></symbol>
+<symbol id="ic-spark" viewBox="0 0 24 24"><path d="m12 2.8 2.1 5.6 5.6 2.1-5.6 2.1L12 18.2l-2.1-5.6L4.3 10.5l5.6-2.1Z"/><path d="M18.5 16.5 19.4 19l2.5.9-2.5.9-.9 2.5-.9-2.5-2.5-.9 2.5-.9Z"/></symbol>
+<symbol id="ic-list" viewBox="0 0 24 24"><path d="M8.5 6.5h12M8.5 12h12M8.5 17.5h12"/><path d="M4 6.5h.01M4 12h.01M4 17.5h.01"/></symbol>
+<symbol id="ic-x" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol>
+<symbol id="ic-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M7 21v-7h10v7"/><path d="M7 3v5h7"/></symbol>
+<symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></symbol>
+<symbol id="ic-moon" viewBox="0 0 24 24"><path d="M20.5 14.3A8.6 8.6 0 0 1 9.7 3.5a8.6 8.6 0 1 0 10.8 10.8Z"/></symbol>
+</svg>
+
+<!-- เข้าสู่ระบบด้วยรหัสโรงเรียน -->
+<div id="login" class="login">
+  <div class="lock"><svg class="ic"><use href="#ic-school"/></svg></div>
+  <h2>แดชบอร์ดโรงเรียน</h2>
+  <p>สรุปผลการประเมินทักษะ 8C ของโรงเรียนท่าน</p>
+  <input type="text" id="code" placeholder="กรอกรหัสโรงเรียน เช่น UDN-0101-ABCD"
+         autocomplete="off" maxlength="14">
+  <button id="btnLogin"><svg class="ic"><use href="#ic-login"/></svg> เปิดแดชบอร์ด</button>
+  <div class="er" id="loginErr"></div>
+  <div class="help">
+    รหัสโรงเรียนเป็นรหัสเฉพาะของแต่ละแห่ง เขตพื้นที่เป็นผู้แจ้งให้<br>
+    หากยังไม่ทราบรหัส กรุณาติดต่อกลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา
+  </div>
+</div>
+
+<!-- แดชบอร์ด -->
+<div id="app" style="display:none">
+  <header>
+    <div class="wrap">
+      <div>
+        <div class="k" id="hGroup"></div>
+        <h1><svg class="ic"><use href="#ic-school"/></svg> <span id="hSchool"></span></h1>
+      </div>
+      <div class="hbtns">
+        <button id="btnTheme"><svg class="ic"><use href="#ic-moon"/></svg> โหมดมืด</button>
+        <button id="btnReload"><svg class="ic"><use href="#ic-refresh"/></svg> โหลดใหม่</button>
+        <button id="btnCsv"><svg class="ic"><use href="#ic-download"/></svg> ส่งออก CSV</button>
+        <button id="btnPrint"><svg class="ic"><use href="#ic-print"/></svg> พิมพ์รายงาน</button>
+        <button id="btnOut"><svg class="ic"><use href="#ic-x"/></svg> ออก</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="filters">
+      <div class="f"><label><svg class="ic"><use href="#ic-calendar"/></svg> ปีการศึกษา</label>
+        <select id="fYear"><option value="">ทั้งหมด</option></select></div>
+      <div class="f"><label>ภาคเรียน</label>
+        <select id="fTerm"><option value="">ทั้งหมด</option><option value="1">ที่ 1</option><option value="2">ที่ 2</option></select></div>
+      <div class="f"><label>ระดับชั้น</label><select id="fGrade"><option value="">ทั้งหมด</option></select></div>
+    </div>
+
+    <div id="hero"></div>
+
+    <div class="two">
+      <div class="panel">
+        <h3><svg class="ic"><use href="#ic-chart"/></svg> คะแนนเฉลี่ยรายทักษะ 8 ด้าน</h3>
+        <p class="cap">ของทั้งโรงเรียน · ถ่วงน้ำหนักตามจำนวนนักเรียน · เต็ม 4.00</p>
+        <div id="chartC"></div>
+      </div>
+      <div class="panel">
+        <h3><svg class="ic"><use href="#ic-cap"/></svg> คะแนนเฉลี่ยรายระดับชั้น</h3>
+        <p class="cap">รวมทุกห้องในชั้นเดียวกัน · เต็ม 4.00</p>
+        <div id="chartG"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3><svg class="ic"><use href="#ic-users"/></svg> การกระจายนักเรียนตามระดับคุณภาพ รายทักษะ</h3>
+      <p class="cap">จำนวนนักเรียน (คน) ในแต่ละระดับ รวมทุกห้องตามตัวกรอง — เห็นได้ทันทีว่าด้านใดมีนักเรียนกลุ่มควรพัฒนามาก</p>
+      <div id="chartDist"></div>
+      <div class="lvlegend" id="lvLegend"></div>
+    </div>
+
+    <div class="panel">
+      <h3><svg class="ic"><use href="#ic-table"/></svg> ผลรายห้องเรียน</h3>
+      <p class="cap">เรียงตามระดับชั้นและห้อง · ช่อง C1–C8 เข้มมาก = คะแนนสูง</p>
+      <div class="scroller"><table class="sumtbl" id="tblRoom"></table></div>
+      <div class="hmlegend" id="hmLegend"></div>
+    </div>
+
+    <div class="panel">
+      <h3><svg class="ic"><use href="#ic-clock"/></svg> ระดับชั้นที่ยังไม่มีข้อมูล</h3>
+      <p class="cap">ตามตัวกรองปัจจุบัน — ใช้ติดตามครูประจำชั้นที่ยังไม่ได้กรอก</p>
+      <div id="missBox"></div>
+    </div>
+
+    <footer>กลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา · สพป.อุดรธานี เขต 1</footer>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   ⚙️ ตั้งค่า — วาง URL ของ Web App (ลงท้ายด้วย /exec) ที่นี่
+   ============================================================ */
+const API_URL = "https://script.google.com/macros/s/AKfycbx10-4630NSBzbDfEzO2i0n5xh5oAevMXedQk8BkNXSxYCBZne89wKRdgqavS92vQPh/exec";
+
+/* เกณฑ์การประเมินทักษะ 8C — ใช้ร่วมกันทั้ง index.html และ admin.html */
+const RUBRIC = [
+  {
+    key: 'C1', color: '#2a78d6', ink: '#1f63b8', dark: '#3987e5', short: 'คิดวิเคราะห์ แก้ปัญหา', icon: 'ic',
+    en: 'Critical Thinking and Problem Solving',
+    th: 'คิดวิเคราะห์ แก้ไขปัญหาได้อย่างมีวิจารณญาณ',
+    levels: [
+      'ผู้เรียนตอบคำถามจากการจดจำ ยังแยกข้อเท็จจริงกับความคิดเห็นไม่ได้ และรอให้ครูบอกวิธีแก้ปัญหา',
+      'ตั้งคำถามและระบุปัญหาได้เมื่อครูชี้แนะ ให้เหตุผลประกอบคำตอบได้บ้าง แก้ปัญหาตามขั้นตอนที่กำหนดให้',
+      'วิเคราะห์ข้อมูล แยกข้อเท็จจริงจากความคิดเห็น เลือกวิธีแก้ปัญหาด้วยตนเองและอธิบายเหตุผลได้',
+      'ตั้งคำถามเชิงลึก ประเมินความน่าเชื่อถือของข้อมูล ออกแบบวิธีแก้ปัญหาใหม่ ตรวจสอบผลและปรับปรุงได้เอง เป็นแบบอย่างแก่เพื่อน'
+    ]
+  },
+  {
+    key: 'C2', color: '#eb6834', ink: '#c94f1f', dark: '#f07a4b', short: 'คิดสร้างสรรค์ นวัตกรรม', icon: 'ic',
+    en: 'Creativity and Innovation',
+    th: 'คิดสร้างสรรค์และพัฒนานวัตกรรมใหม่ ๆ',
+    levels: [
+      'ทำงานตามตัวอย่างที่ครูให้เท่านั้น ยังไม่แสดงความคิดที่แตกต่าง',
+      'เสนอความคิดใหม่ได้เมื่อมีตัวอย่างหรือคำชี้แนะ ดัดแปลงผลงานเดิมได้เล็กน้อย',
+      'คิดริเริ่มผลงานหรือวิธีการของตนเอง ต่อยอดความคิดของผู้อื่นได้ มีชิ้นงานสร้างสรรค์ในระดับห้องเรียน/โรงเรียน',
+      'สร้างสรรค์ชิ้นงานหรือนวัตกรรมที่แปลกใหม่และใช้ได้จริง เผยแพร่หรือได้รับการยอมรับตั้งแต่ระดับกลุ่มโรงเรียนขึ้นไป'
+    ]
+  },
+  {
+    key: 'C3', color: '#1baf7a', ink: '#118a5f', dark: '#25c58c', short: 'เข้าใจต่างวัฒนธรรม', icon: 'ic',
+    en: 'Cross-Cultural Understanding',
+    th: 'เข้าใจความแตกต่างทางวัฒนธรรม',
+    levels: [
+      'รู้จักวัฒนธรรมของตนเองเพียงบางส่วน ยังไม่สนใจความแตกต่างของผู้อื่น',
+      'บอกความเหมือน–ต่างของวัฒนธรรมท้องถิ่นกับวัฒนธรรมอื่นได้เมื่อมีการชี้แนะ',
+      'ยอมรับและปฏิบัติต่อผู้ที่แตกต่างด้วยความเคารพ เข้าร่วมกิจกรรมวัฒนธรรมท้องถิ่น/นานาชาติ สื่อสารภาษาต่างประเทศพื้นฐานได้',
+      'อธิบายและถ่ายทอดวัฒนธรรมไทยและท้องถิ่นแก่ผู้อื่นได้ ทำงานร่วมกับผู้มีพื้นเพต่างกันได้ดี เป็นผู้นำกิจกรรมแลกเปลี่ยนวัฒนธรรม'
+    ]
+  },
+  {
+    key: 'C4', color: '#eda100', ink: '#a87200', dark: '#f0b437', short: 'ทำงานเป็นทีม ภาวะผู้นำ', icon: 'ic',
+    en: 'Collaboration, Teamwork and Leadership',
+    th: 'ทำงานร่วมกับผู้อื่นและมีภาวะผู้นำ',
+    levels: [
+      'ร่วมงานกลุ่มโดยรอให้เพื่อนมอบหมาย ยังไม่รับผิดชอบบทบาทของตน',
+      'ร่วมงานกลุ่มและทำหน้าที่ที่ได้รับมอบหมายจนสำเร็จเมื่อมีครูกำกับ',
+      'วางแผนแบ่งบทบาทกับเพื่อนได้ รับฟังความเห็นต่าง แก้ไขข้อขัดแย้งได้ ทำหน้าที่หัวหน้ากลุ่มได้',
+      'เป็นผู้นำและผู้ตามได้ตามสถานการณ์ ประสานงานให้ทีมบรรลุเป้าหมาย สะท้อนผลการทำงานของทีมและพัฒนาอย่างต่อเนื่อง'
+    ]
+  },
+  {
+    key: 'C5', color: '#e87ba4', ink: '#c1517d', dark: '#ef92b6', short: 'สื่อสาร รู้เท่าทันสื่อ', icon: 'ic',
+    en: 'Communications, Information and Media Literacy',
+    th: 'สื่อสารและรู้เท่าทันสื่อ',
+    levels: [
+      'สื่อสารได้ไม่ชัดเจน เชื่อข้อมูลจากสื่อโดยไม่ตรวจสอบ',
+      'พูดและเขียนสื่อสารได้ตามรูปแบบที่กำหนด เริ่มตั้งข้อสงสัยกับข้อมูลจากสื่อ',
+      'นำเสนอข้อมูลอย่างเป็นระบบ เลือกใช้สื่อให้เหมาะกับผู้ฟัง ตรวจสอบแหล่งที่มาก่อนเชื่อหรือแชร์',
+      'สื่อสารได้อย่างมั่นใจทั้งภาษาไทยและภาษาต่างประเทศ ผลิตสื่อสร้างสรรค์พร้อมอ้างอิงแหล่งข้อมูล รู้เท่าทันข่าวลวงและเตือนผู้อื่นได้'
+    ]
+  },
+  {
+    key: 'C6', color: '#008300', ink: '#006b00', dark: '#17a317', short: 'คอมพิวเตอร์และ ICT', icon: 'ic',
+    en: 'Computing and ICT Literacy',
+    th: 'ใช้คอมพิวเตอร์และเทคโนโลยีสารสนเทศเป็น',
+    levels: [
+      'ใช้อุปกรณ์พื้นฐานได้เมื่อมีผู้ช่วยเหลือ',
+      'ใช้โปรแกรมพื้นฐาน เช่น พิมพ์งาน ค้นข้อมูล ได้ตามขั้นตอนที่กำหนด',
+      'เลือกใช้โปรแกรมหรือแอปพลิเคชันให้เหมาะกับงาน จัดการไฟล์และข้อมูลได้ เขียนโปรแกรมอย่างง่าย/วิทยาการคำนวณตามระดับชั้น',
+      'ใช้เทคโนโลยีสร้างชิ้นงาน แก้ปัญหาด้วยแนวคิดเชิงคำนวณ ใช้ AI และเครื่องมือดิจิทัลอย่างรู้เท่าทันและปลอดภัย ช่วยแนะนำเพื่อนได้'
+    ]
+  },
+  {
+    key: 'C7', color: '#4a3aa7', ink: '#3a2d85', dark: '#7e6fe0', short: 'ทักษะอาชีพ เรียนรู้ด้วยตนเอง', icon: 'ic',
+    en: 'Career and Learning Skills',
+    th: 'มีทักษะอาชีพและการเรียนรู้ด้วยตนเอง',
+    levels: [
+      'ยังไม่ทราบความถนัดและความสนใจของตนเอง เรียนรู้เมื่อครูสั่งเท่านั้น',
+      'บอกความถนัดและอาชีพที่สนใจได้ ทำงานที่ได้รับมอบหมายจนเสร็จ',
+      'ตั้งเป้าหมายการเรียน วางแผนการเรียนรู้ด้วยตนเอง มีทักษะอาชีพพื้นฐานหรือผลงานอาชีพในโรงเรียน',
+      'กำกับการเรียนรู้ของตนเองอย่างต่อเนื่อง มีแฟ้มสะสมงานหรือรายได้ระหว่างเรียน เชื่อมโยงการเรียนกับเส้นทางอาชีพได้ชัดเจน'
+    ]
+  },
+  {
+    key: 'C8', color: '#e34948', ink: '#c02f2e', dark: '#ea6c6b', short: 'เมตตา คุณธรรม วินัย', icon: 'ic',
+    en: 'Compassion',
+    th: 'มีความเมตตา มีคุณธรรม และระเบียบวินัย',
+    levels: [
+      'ปฏิบัติตามระเบียบเมื่อมีผู้กำกับ ยังไม่ใส่ใจผู้อื่น',
+      'มีมารยาท ช่วยเหลือผู้อื่นเมื่อได้รับการร้องขอ ปฏิบัติตามข้อตกลงของห้องเรียน',
+      'มีวินัย ซื่อสัตย์ รับผิดชอบ ช่วยเหลือเพื่อนและส่วนรวมด้วยความเต็มใจ',
+      'เป็นแบบอย่างด้านคุณธรรมและวินัย ริเริ่มกิจกรรมจิตอาสาหรือช่วยเหลือชุมชน จนได้รับการยกย่อง'
+    ]
+  }
+];
+
+const LEVEL_NAME = ['ควรพัฒนา', 'พอใช้', 'ดี', 'ดีเยี่ยม'];
+
+function qualityOf(avg) {
+  if (avg >= 3.51) return 'ดีเยี่ยม';
+  if (avg >= 2.51) return 'ดี';
+  if (avg >= 1.51) return 'พอใช้';
+  return 'ควรพัฒนา';
+}
+
+
+const QUALITY = ['ควรพัฒนา','พอใช้','ดี','ดีเยี่ยม'];
+const GRADES = ['อนุบาล 1','อนุบาล 2','อนุบาล 3',
+  'ประถมศึกษาปีที่ 1','ประถมศึกษาปีที่ 2','ประถมศึกษาปีที่ 3',
+  'ประถมศึกษาปีที่ 4','ประถมศึกษาปีที่ 5','ประถมศึกษาปีที่ 6',
+  'มัธยมศึกษาปีที่ 1','มัธยมศึกษาปีที่ 2','มัธยมศึกษาปีที่ 3'];
+const HEAT = ['#ece2fd','#ddd0fa','#cdbaf6','#bda3f0','#ad8be9','#a075e3'];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const icon = n => '<svg class="ic"><use href="#ic-' + n + '"/></svg>';
+const noData = t => '<div class="empty">' + icon('info') + (t || 'ยังไม่มีข้อมูลตามเงื่อนไขที่เลือก') + '</div>';
+function heat(v){
+  if (!(v > 0)) return 'transparent';
+  return HEAT[Math.round(Math.max(0, Math.min(1, (v-1)/3)) * (HEAT.length-1))];
+}
+let CODE = '', INFO = {}, ROWS = [];
+
+/* ---------- โหมดสว่าง / มืด ---------- */
+(function(){
+  var saved = null;
+  try{ saved = localStorage.getItem('theme8c'); }catch(e){}
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+  function label(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    if (!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+    $('btnTheme').innerHTML = cur === 'dark' ? icon('sun') + ' โหมดสว่าง' : icon('moon') + ' โหมดมืด';
+    return cur;
+  }
+  label();
+  $('btnTheme').addEventListener('click', function(){
+    var next = label() === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try{ localStorage.setItem('theme8c', next); }catch(e){}
+    label();
+  });
+})();
+
+/* ---------- JSONP ---------- */
+function jsonp(params, cb){
+  const name = 'cb_' + Math.random().toString(36).slice(2);
+  const s = document.createElement('script');
+  const t = setTimeout(function(){ cleanup(); cb({ ok:false, message:'หมดเวลาเชื่อมต่อ' }); }, 25000);
+  function cleanup(){ clearTimeout(t); try{ delete window[name]; }catch(e){} s.remove(); }
+  window[name] = function(r){ cleanup(); cb(r); };
+  s.src = API_URL + '?' + params + '&callback=' + name;
+  s.onerror = function(){ cleanup(); cb({ ok:false, message:'เชื่อมต่อไม่สำเร็จ' }); };
+  document.body.appendChild(s);
+}
+
+/* ---------- เข้าสู่ระบบ ---------- */
+$('btnLogin').addEventListener('click', doLogin);
+$('code').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+function doLogin(){
+  const c = $('code').value.trim().toUpperCase();
+  if (!c) return;
+  if (!API_URL){ $('loginErr').textContent = 'ยังไม่ได้ตั้งค่า API_URL ในไฟล์นี้'; return; }
+  if (!/^UDN-\d{4}-[0-9A-F]{4}$/.test(c)){
+    $('loginErr').textContent = 'รูปแบบรหัสไม่ถูกต้อง ตัวอย่าง UDN-0101-ABCD'; return;
+  }
+  $('loginErr').textContent = 'กำลังตรวจสอบ…';
+  CODE = c;
+  load(function(ok, msg){
+    if (ok){
+      $('login').style.display = 'none';
+      $('app').style.display = '';
+      try{ sessionStorage.setItem('code8c', c); }catch(e){}
+    } else $('loginErr').textContent = msg || 'เข้าสู่ระบบไม่สำเร็จ';
+  });
+}
+
+$('btnOut').addEventListener('click', function(){
+  try{ sessionStorage.removeItem('code8c'); }catch(e){}
+  location.reload();
+});
+
+function load(after){
+  jsonp('action=school&code=' + encodeURIComponent(CODE), function(r){
+    if (!r.ok){ if (after) after(false, r.message); return; }
+    INFO = { school: r.school, group: r.group, district: r.district };
+    ROWS = r.rows || [];
+    $('hSchool').textContent = r.school;
+    $('hGroup').textContent = r.group + ' · อำเภอ' + r.district;
+    buildFilters();
+    render();
+    if (after) after(true);
+  });
+}
+
+/* ---------- ตัวกรอง ---------- */
+function buildFilters(){
+  const years = [...new Set(ROWS.map(r=>r.year))].filter(Boolean).sort().reverse();
+  fill($('fYear'), years);
+  fill($('fGrade'), GRADES.filter(g => ROWS.some(r=>r.grade===g)));
+}
+function fill(sel, arr){
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">ทั้งหมด</option>';
+  arr.forEach(v => sel.appendChild(new Option(v, v)));
+  if (arr.indexOf(cur) >= 0) sel.value = cur;
+}
+['fYear','fTerm','fGrade'].forEach(id => $(id).addEventListener('change', render));
+$('btnReload').addEventListener('click', function(){
+  const b = this; b.innerHTML = icon('refresh') + ' กำลังโหลด…';
+  load(function(){ b.innerHTML = icon('refresh') + ' โหลดใหม่'; });
+});
+$('btnPrint').addEventListener('click', () => window.print());
+
+function rows(){
+  const y = $('fYear').value, t = $('fTerm').value, g = $('fGrade').value;
+  return ROWS.filter(function(r){
+    if (y && r.year !== y) return false;
+    if (t && r.term !== t) return false;
+    if (g && r.grade !== g) return false;
+    return true;
+  });
+}
+
+/* ---------- คำนวณ ---------- */
+function wAvg(list, idx){
+  let sw = 0, sv = 0;
+  list.forEach(function(r){
+    const w = Math.max(1, Number(r.nEval) || 1);
+    const v = (idx == null) ? r.avg : r.c[idx];
+    if (v > 0){ sw += w; sv += v * w; }
+  });
+  return sw ? sv / sw : 0;
+}
+function bars(list, max){
+  return '<div class="hb">' + list.map(function(x){
+    const w = Math.max(1, x.v / max * 100);
+    return '<div class="nm">' + (x.sw ? '<span class="sw" style="background:' + x.sw + '"></span>' : '') +
+      esc(x.nm) + '</div>' +
+      '<div class="track"><div class="fill" style="width:' + w + '%" title="' + esc(x.nm) + ' — ' + x.tx + '"></div></div>' +
+      '<div class="val">' + x.tx + (x.sub ? ' <span class="sub">' + x.sub + '</span>' : '') + '</div>';
+  }).join('') + '</div>';
+}
+
+/* ---------- วาดภาพ ---------- */
+function render(){
+  const R = rows();
+  const y = $('fYear').value, t = $('fTerm').value;
+  const scope = (y ? 'ปีการศึกษา ' + y : 'ทุกปีการศึกษา') + (t ? ' ภาคเรียนที่ ' + t : '');
+
+  if (!R.length){
+    $('hero').innerHTML = '<div class="panel">' + noData('ยังไม่มีข้อมูลของโรงเรียนตามเงื่อนไขที่เลือก') + '</div>';
+    $('chartC').innerHTML = noData(); $('chartG').innerHTML = noData();
+    $('tblRoom').innerHTML = ''; $('hmLegend').innerHTML = '';
+    $('missBox').innerHTML = noData('ยังไม่มีห้องใดส่งข้อมูล');
+    return;
+  }
+
+  const avg = wAvg(R, null);
+  const students = R.reduce((a,r)=>a + (Number(r.nEval)||0), 0);
+  const cAvgs = RUBRIC.map((c,i)=>({ key:c.key, short:c.short, color:c.color, v:wAvg(R,i) }));
+  const weak = cAvgs.slice().sort((a,b)=>a.v-b.v)[0];
+  const gradesWith = [...new Set(R.map(r=>r.grade))].length;
+
+  $('hero').innerHTML =
+    '<div class="hero">' +
+      '<div class="ttl">' + icon('award') + ' ภาพรวมทักษะ 8C ของโรงเรียน · ' + esc(scope) + '</div>' +
+      '<div class="row">' +
+        '<div><div class="big">' + avg.toFixed(2) + '<small> / 4.00</small></div></div>' +
+        '<div class="qb">' + icon('check') + ' ระดับคุณภาพ ' + qualityOf(avg) + '</div>' +
+        '<div class="kv"><b>' + R.length + '</b><span>ห้องเรียนที่ส่งข้อมูล</span></div>' +
+        '<div class="kv"><b>' + gradesWith + '</b><span>ระดับชั้นที่มีข้อมูล</span></div>' +
+        '<div class="kv"><b>' + students.toLocaleString('th-TH') + '</b><span>นักเรียนที่ประเมิน (คน)</span></div>' +
+        '<div class="kv"><b>' + weak.key + '</b><span>ควรเร่งพัฒนา — ' + esc(weak.short) + ' (' + weak.v.toFixed(2) + ')</span></div>' +
+      '</div></div>';
+
+  $('chartC').innerHTML = bars(cAvgs.slice().sort((a,b)=>b.v-a.v)
+    .map(c => ({ nm: c.key + ' · ' + c.short, sw: c.color, v: c.v, tx: c.v.toFixed(2) })), 4);
+
+  /* การกระจายนักเรียนตามระดับ */
+  const LC = ['var(--l1)','var(--l2)','var(--l3)','var(--l4)'];
+  const totals = [0,0,0,0];
+  const distRows = RUBRIC.map(function(c,i){
+    const d = [0,0,0,0];
+    R.forEach(function(r){
+      const dd = (r.dist && r.dist[i]) ? r.dist[i] : null;
+      if (dd) for (let L=0; L<4; L++) d[L] += Number(dd[L]) || 0;
+    });
+    for (let L=0; L<4; L++) totals[L] += d[L];
+    return { key:c.key, short:c.short, color:c.color, d:d, n:d.reduce((a,b)=>a+b,0) };
+  });
+  const maxN = Math.max(1, ...distRows.map(x=>x.n));
+  $('chartDist').innerHTML = distRows.some(x=>x.n>0)
+    ? '<div class="dist">' + distRows.map(function(x){
+        return '<div class="nm"><span class="sw" style="background:' + x.color + '"></span>' +
+          x.key + ' · ' + esc(x.short) + '</div>' +
+          '<div class="track" style="width:' + (x.n/maxN*100) + '%">' +
+          x.d.map(function(v,L){
+            if (!v) return '';
+            const pctW = v / x.n * 100;
+            return '<div class="seg" style="width:' + pctW + '%;background:' + LC[L] +
+              '" title="ระดับ ' + (L+1) + ' ' + LEVEL_NAME[L] + ' — ' + v + ' คน">' +
+              (pctW > 7 ? v : '') + '</div>';
+          }).join('') + '</div>' +
+          '<div class="tot">' + x.n + ' คน</div>';
+      }).join('') + '</div>'
+    : noData('ข้อมูลชุดนี้ยังไม่มีรายละเอียดรายระดับ');
+  $('lvLegend').innerHTML = LEVEL_NAME.map(function(nm,L){
+    return '<span><i style="background:' + LC[L] + '"></i>ระดับ ' + (L+1) + ' ' + nm +
+      ' — ' + totals[L].toLocaleString('th-TH') + ' คน</span>';
+  }).join('');
+
+  const byG = GRADES.map(function(g){
+    const L = R.filter(r => r.grade === g);
+    return { g:g, n:L.length, v: wAvg(L,null) };
+  }).filter(x => x.n > 0);
+  $('chartG').innerHTML = byG.length
+    ? bars(byG.map(x => ({ nm: x.g, v: x.v, tx: x.v.toFixed(2), sub: '(' + x.n + ' ห้อง)' })), 4)
+    : noData();
+
+  /* ตารางรายห้อง */
+  const S = R.slice().sort(function(a,b){
+    const d = GRADES.indexOf(a.grade) - GRADES.indexOf(b.grade);
+    return d !== 0 ? d : (Number(a.room) - Number(b.room));
+  });
+  const all = { c: RUBRIC.map((x,i)=>wAvg(R,i)), avg: avg, n: students };
+  $('tblRoom').innerHTML =
+    '<thead><tr><th class="l">ห้อง</th><th class="l">ครูประจำชั้น</th><th>นักเรียน</th>' +
+    RUBRIC.map(c => '<th title="' + esc(c.short) + '">' + c.key + '</th>').join('') +
+    '<th>เฉลี่ย</th><th>ระดับคุณภาพ</th></tr></thead><tbody>' +
+    S.map(function(r){
+      const q = QUALITY.indexOf(qualityOf(r.avg)) + 1;
+      return '<tr>' +
+        '<td class="l"><span class="rm">' + esc(r.label || r.grade) + '</span></td>' +
+        '<td class="l"><span class="nm">' + esc(r.reporter) + '</span>' +
+          '<br><span class="sub">' + esc(r.position) + '</span></td>' +
+        '<td>' + esc(r.nEval) + '</td>' +
+        r.c.map(v => '<td><span class="cell" style="background:' + heat(v) + '">' +
+          (v > 0 ? v : '–') + '</span></td>').join('') +
+        '<td><b>' + Number(r.avg).toFixed(2) + '</b></td>' +
+        '<td><span class="pill q' + q + '">' + qualityOf(r.avg) + '</span></td></tr>';
+    }).join('') + '</tbody>' +
+    '<tfoot><tr><td class="l">รวมทั้งโรงเรียน</td><td class="l">' + S.length + ' ห้อง</td>' +
+      '<td>' + all.n.toLocaleString('th-TH') + '</td>' +
+      all.c.map(v => '<td>' + (v > 0 ? v.toFixed(2) : '–') + '</td>').join('') +
+      '<td>' + all.avg.toFixed(2) + '</td>' +
+      '<td><span class="pill q' + (QUALITY.indexOf(qualityOf(all.avg)) + 1) + '">' +
+        qualityOf(all.avg) + '</span></td></tr></tfoot>';
+
+  $('hmLegend').innerHTML = 'ความเข้มของสีในช่อง C1–C8 แทนระดับคะแนน · <span>1</span>' +
+    '<span class="sw">' + HEAT.map(c => '<i style="background:' + c + '"></i>').join('') +
+    '</span><span>4</span> · ยิ่งอ่อนยิ่งควรเร่งพัฒนา';
+
+  /* ระดับชั้นที่ยังไม่มีข้อมูล */
+  const have = new Set(R.map(r => r.grade));
+  const miss = GRADES.filter(g => !have.has(g));
+  $('missBox').innerHTML = miss.length
+    ? '<div class="miss">' + miss.map(g => '<span>' + esc(g) + '</span>').join('') + '</div>' +
+      '<p class="cap" style="padding-left:0;margin:14px 0 0">' +
+      'หากโรงเรียนไม่ได้เปิดสอนระดับชั้นเหล่านี้ ให้ข้ามได้</p>'
+    : '<div class="empty">' + icon('check') + 'ทุกระดับชั้นที่เปิดสอนมีข้อมูลครบแล้ว</div>';
+}
+
+/* ---------- ส่งออก CSV ---------- */
+$('btnCsv').addEventListener('click', function(){
+  const R = rows();
+  if (!R.length){ alert('ไม่มีข้อมูลให้ส่งออก'); return; }
+  const q = s => '"' + String(s == null ? '' : s).replace(/"/g,'""') + '"';
+  const head = ['ปีการศึกษา','ภาคเรียน','โรงเรียน','ระดับชั้น','ห้องที่','ชั้น/ห้อง',
+    'จำนวนนักเรียนในห้อง','จำนวนที่ประเมิน']
+    .concat(RUBRIC.map(c => c.key + ' ' + c.short))
+    .concat(['คะแนนเฉลี่ย','ระดับคุณภาพ','จุดเด่น','จุดที่ควรพัฒนา','ลิงก์หลักฐาน',
+      'ครูผู้กรอก','ตำแหน่ง','โทรศัพท์','วันที่บันทึก','แก้ไขล่าสุด']);
+  const lines = [head.map(q).join(',')].concat(R.map(function(r){
+    return [r.year,r.term,INFO.school,r.grade,r.room,r.label,r.nAll,r.nEval]
+      .concat(r.c)
+      .concat([Number(r.avg).toFixed(2), qualityOf(r.avg), r.strength, r.improve, r.evidence,
+        r.reporter, r.position, r.phone, r.created, r.updated]).map(q).join(',');
+  }));
+  const blob = new Blob(['﻿' + lines.join('\r\n')], { type:'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '8C_' + INFO.school + '_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+/* ---------- เข้าระบบอัตโนมัติ / รับรหัสจาก URL ---------- */
+(function(){
+  var c = null;
+  try{ c = sessionStorage.getItem('code8c'); }catch(e){}
+  const q = new URLSearchParams(location.search).get('code');
+  if (q) c = q.toUpperCase();
+  if (c && API_URL){
+    $('code').value = c;
+    CODE = c;
+    load(function(ok){ if (ok){ $('login').style.display='none'; $('app').style.display=''; } });
+  }
+})();
+</script>
+</body>
+</html>

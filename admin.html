@@ -384,16 +384,10 @@ footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 4
       <button class="tab" data-tab="area"><svg class="ic"><use href="#ic-award"/></svg> สรุประดับเขต</button>
       <button class="tab" data-tab="table"><svg class="ic"><use href="#ic-table"/></svg> ตารางข้อมูล</button>
       <button class="tab" data-tab="miss"><svg class="ic"><use href="#ic-clock"/></svg> โรงเรียนที่ยังไม่ส่ง</button>
+      <button class="tab" data-tab="codes"><svg class="ic"><use href="#ic-lock"/></svg> รหัสโรงเรียน</button>
     </div>
 
     <div class="filters">
-      <div class="f">
-        <label><svg class="ic"><use href="#ic-filter"/></svg> ระดับข้อมูล</label>
-        <select id="fLevel">
-          <option value="school">ระดับโรงเรียน</option>
-          <option value="class">ระดับชั้น</option>
-        </select>
-      </div>
       <div class="f"><label><svg class="ic"><use href="#ic-calendar"/></svg> ปีการศึกษา</label>
         <select id="fYear"><option value="">ทั้งหมด</option></select></div>
       <div class="f"><label>ภาคเรียน</label>
@@ -401,6 +395,7 @@ footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 4
       </div>
       <div class="f"><label>อำเภอ</label><select id="fDist"><option value="">ทั้งหมด</option></select></div>
       <div class="f"><label>กลุ่มโรงเรียน</label><select id="fGroup"><option value="">ทั้งหมด</option></select></div>
+      <div class="f"><label><svg class="ic"><use href="#ic-filter"/></svg> ระดับชั้น</label><select id="fGrade"><option value="">ทั้งหมด</option></select></div>
       <div class="f" style="flex:2"><label><svg class="ic"><use href="#ic-search"/></svg> ค้นหา (โรงเรียน / ผู้กรอก)</label>
         <input type="search" id="fQ" placeholder="พิมพ์คำค้น…"></div>
       <button class="btn" id="btnClear"><svg class="ic"><use href="#ic-x"/></svg> ล้างตัวกรอง</button>
@@ -436,7 +431,7 @@ footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 4
           <div class="legend" id="legendQ"></div>
         </div>
 
-        <div class="panel full" id="panelGrade" style="display:none">
+        <div class="panel full" id="panelGrade">
           <h3><svg class="ic"><use href="#ic-cap"/></svg> คะแนนเฉลี่ย 8C รายระดับชั้น</h3>
           <p class="cap">แสดงเฉพาะเมื่อเลือกดูข้อมูล “ระดับชั้น” · เต็ม 4.00</p>
           <div id="chartL"></div>
@@ -472,6 +467,16 @@ footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 4
     <!-- ยังไม่ส่ง -->
     <div id="tab-miss" style="display:none">
       <div id="missBox"></div>
+    </div>
+
+    <!-- รหัสโรงเรียน -->
+    <div id="tab-codes" style="display:none">
+      <div class="panel full" style="margin-top:14px">
+        <h3><svg class="ic"><use href="#ic-lock"/></svg> รหัสเฉพาะโรงเรียน สำหรับเปิดแดชบอร์ดของโรงเรียน</h3>
+        <p class="cap">แจกรหัสนี้ให้แต่ละโรงเรียนพร้อมลิงก์ school.html —
+          โรงเรียนจะเห็นเฉพาะข้อมูลของตนเองเท่านั้น · กดปุ่ม “ส่งออก CSV” ขณะอยู่แท็บนี้เพื่อบันทึกเป็นไฟล์</p>
+        <div class="scroller"><table class="sumtbl" id="tblCodes"></table></div>
+      </div>
     </div>
 
     <footer>กลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา · สพป.อุดรธานี เขต 1</footer>
@@ -612,9 +617,13 @@ const SCHOOLS = {
 const QUALITY = ['ควรพัฒนา','พอใช้','ดี','ดีเยี่ยม'];
 const QCOLOR  = ['var(--seq-1)','var(--seq-2)','var(--seq-3)','var(--seq-4)'];
 const DISTRICTS = ['เมืองอุดรธานี','หนองวัวซอ','เพ็ญ','สร้างคอม'];
+const GRADES = ['อนุบาล 1','อนุบาล 2','อนุบาล 3',
+  'ประถมศึกษาปีที่ 1','ประถมศึกษาปีที่ 2','ประถมศึกษาปีที่ 3',
+  'ประถมศึกษาปีที่ 4','ประถมศึกษาปีที่ 5','ประถมศึกษาปีที่ 6',
+  'มัธยมศึกษาปีที่ 1','มัธยมศึกษาปีที่ 2','มัธยมศึกษาปีที่ 3'];
 
 const $ = id => document.getElementById(id);
-let TOKEN = '', DATA = { school: [], class: [] }, SORT = { k:'seq', d:-1, ci:null };
+let TOKEN = '', DATA = [], CODES = [], SORT = { k:'seq', d:-1, ci:null };
 
 function districtOf(g){
   g = String(g||'');
@@ -685,21 +694,23 @@ function jsonp(params, cb){
 function load(after){
   jsonp('action=list&token=' + encodeURIComponent(TOKEN), function(r){
     if (!r.ok){ if (after) after(false, r.message); return; }
-    DATA.school = r.school || [];
-    DATA.class  = r.klass  || [];
+    DATA = r.rows || [];
     buildFilters();
     render();
     if (after) after(true);
+    if (!CODES.length) jsonp('action=codes&token=' + encodeURIComponent(TOKEN), function(c){
+      if (c.ok){ CODES = c.codes || []; renderCodes(); }
+    });
   });
 }
 
 /* ---------- ตัวกรอง ---------- */
 function buildFilters(){
-  const all = DATA.school.concat(DATA.class);
-  const years = [...new Set(all.map(r=>r.year))].filter(Boolean).sort().reverse();
+  const years = [...new Set(DATA.map(r=>r.year))].filter(Boolean).sort().reverse();
   fill($('fYear'), years, 'ทั้งหมด');
-  fill($('fDist'), DISTRICTS.filter(d => all.some(r=>r.district===d)), 'ทั้งหมด');
+  fill($('fDist'), DISTRICTS.filter(d => DATA.some(r=>r.district===d)), 'ทั้งหมด');
   fill($('fGroup'), Object.keys(SCHOOLS), 'ทั้งหมด');
+  fill($('fGrade'), GRADES.filter(g => DATA.some(r=>r.grade===g)), 'ทั้งหมด');
 }
 function fill(sel, arr, first){
   const cur = sel.value;
@@ -709,24 +720,24 @@ function fill(sel, arr, first){
 }
 
 function rows(){
-  const lv = $('fLevel').value;
   const y = $('fYear').value, t = $('fTerm').value,
         d = $('fDist').value, g = $('fGroup').value,
-        q = $('fQ').value.trim().toLowerCase();
-  return (lv === 'class' ? DATA.class : DATA.school).filter(function(r){
+        gr = $('fGrade').value, q = $('fQ').value.trim().toLowerCase();
+  return DATA.filter(function(r){
     if (y && r.year !== y) return false;
     if (t && r.term !== t) return false;
     if (d && r.district !== d) return false;
     if (g && r.schoolGroup !== g) return false;
-    if (q && (r.school + ' ' + r.reporter + ' ' + (r.grade||'')).toLowerCase().indexOf(q) < 0) return false;
+    if (gr && r.grade !== gr) return false;
+    if (q && (r.school + ' ' + r.reporter + ' ' + (r.label||'')).toLowerCase().indexOf(q) < 0) return false;
     return true;
   });
 }
 
-['fLevel','fYear','fTerm','fDist','fGroup'].forEach(id => $(id).addEventListener('change', render));
+['fYear','fTerm','fDist','fGroup','fGrade'].forEach(id => $(id).addEventListener('change', render));
 $('fQ').addEventListener('input', render);
 $('btnClear').addEventListener('click', function(){
-  ['fYear','fTerm','fDist','fGroup'].forEach(id => $(id).value = '');
+  ['fYear','fTerm','fDist','fGroup','fGrade'].forEach(id => $(id).value = '');
   $('fQ').value = ''; render();
 });
 $('btnReload').addEventListener('click', function(){
@@ -739,7 +750,7 @@ $('btnPrint').addEventListener('click', () => window.print());
 document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', function(){
   document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
   this.classList.add('on');
-  ['dash','area','table','miss'].forEach(t => $('tab-'+t).style.display = (t === this.dataset.tab) ? '' : 'none');
+  ['dash','area','table','miss','codes'].forEach(t => $('tab-'+t).style.display = (t === this.dataset.tab) ? '' : 'none');
 }));
 const activeTab = () => (document.querySelector('.tab.on') || {}).dataset?.tab || 'dash';
 
@@ -757,9 +768,6 @@ function wAvg(list, idx){
 /* ---------- วาดภาพ ---------- */
 function render(){
   const R = rows();
-  const isClass = $('fLevel').value === 'class';
-  $('panelGrade').style.display = isClass ? '' : 'none';
-
   const nSchools = new Set(R.map(r => r.school)).size;
   const totalSchools = Object.values(SCHOOLS).reduce((a,b)=>a+b.length, 0);
   const pct = totalSchools ? Math.round(nSchools / totalSchools * 100) : 0;
@@ -777,8 +785,8 @@ function render(){
   }
 
   $('tiles').innerHTML = R.length ? [
-    tile('#5a2ea6','clipboard','รายการที่รายงาน', R.length.toLocaleString('th-TH'),
-      isClass ? 'ชุดข้อมูลระดับชั้น' : 'ชุดข้อมูลระดับโรงเรียน'),
+    tile('#5a2ea6','clipboard','ห้องเรียนที่ส่งข้อมูล', R.length.toLocaleString('th-TH'),
+      'ห้อง · จาก ' + new Set(R.map(r=>r.grade)).size + ' ระดับชั้น'),
     tile('#3866eb','school','โรงเรียนที่ส่งข้อมูล',
       nSchools + ' <small>/ ' + totalSchools + '</small>', 'คิดเป็น ' + pct + '% ของโรงเรียนในเขต', pct),
     tile('#7c5ad4','award','คะแนนเฉลี่ย 8C',
@@ -836,22 +844,15 @@ function render(){
     return '<span><i style="background:' + QCOLOR[i] + '"></i>' + q + ' — ' + n + ' รายการ</span>';
   }).join('') : '';
 
-  if (isClass){
-    const order = ['อนุบาล 1','อนุบาล 2','อนุบาล 3','ประถมศึกษาปีที่ 1','ประถมศึกษาปีที่ 2',
-      'ประถมศึกษาปีที่ 3','ประถมศึกษาปีที่ 4','ประถมศึกษาปีที่ 5','ประถมศึกษาปีที่ 6',
-      'มัธยมศึกษาปีที่ 1','มัธยมศึกษาปีที่ 2','มัธยมศึกษาปีที่ 3'];
-    const GR = [...new Set(R.map(r=>r.grade))].filter(Boolean)
-      .sort((a,b)=>order.indexOf(a)-order.indexOf(b));
-    const byL = GR.map(function(g){
-      const L = R.filter(r => r.grade === g);
-      const v = wAvg(L,null);
-      return { nm: g, v: v, tx: v.toFixed(2), sub: '(' + L.length + ')' };
-    });
-    $('chartL').innerHTML = byL.length ? bars(byL, 4) : noData();
-  }
+  const byL = GRADES.map(function(g){
+    const L = R.filter(r => r.grade === g);
+    const v = wAvg(L,null);
+    return { nm: g, v: v, tx: v.toFixed(2), sub: '(' + L.length + ' ห้อง)', n: L.length };
+  }).filter(x => x.n > 0);
+  $('chartL').innerHTML = byL.length ? bars(byL, 4) : noData();
 
-  renderArea(R, isClass);
-  renderTable(R, isClass);
+  renderArea(R);
+  renderTable(R);
   renderMissing(R);
 }
 
@@ -905,13 +906,12 @@ function sumHead(first){
     '<th>เฉลี่ย</th><th>ระดับคุณภาพ</th></tr></thead>';
 }
 
-function renderArea(R, isClass){
+function renderArea(R){
   const totalSchools = Object.values(SCHOOLS).reduce((a, b) => a + b.length, 0);
   const all = agg(R, 'รวมทั้งเขต', totalSchools);
   const y = $('fYear').value, t = $('fTerm').value;
   const scope = (y ? 'ปีการศึกษา ' + y : 'ทุกปีการศึกษา') +
-    (t ? ' ภาคเรียนที่ ' + t : '') +
-    ' · ข้อมูล' + (isClass ? 'ระดับชั้น' : 'ระดับโรงเรียน');
+    (t ? ' ภาคเรียนที่ ' + t : '') + ' · รวมจากข้อมูลรายห้องเรียน';
 
   /* --- แถบสรุปภาพรวมเขต --- */
   if (!R.length){
@@ -931,6 +931,8 @@ function renderArea(R, isClass){
         '<div class="qb">' + icon('check') + ' ระดับคุณภาพ ' + qualityOf(all.avg) + '</div>' +
         '<div class="kv"><b>' + all.sent + ' / ' + totalSchools + '</b>' +
           '<span>โรงเรียนที่ส่งข้อมูล</span></div>' +
+        '<div class="kv"><b>' + R.length.toLocaleString('th-TH') + '</b>' +
+          '<span>ห้องเรียนที่ส่งข้อมูล</span></div>' +
         '<div class="kv"><b>' + all.students.toLocaleString('th-TH') + '</b>' +
           '<span>นักเรียนที่ประเมิน (คน)</span></div>' +
         '<div class="kv"><b>' + ranked[0].key + '</b>' +
@@ -982,7 +984,7 @@ function bars(list, max){
 }
 
 /* ---------- ตาราง ---------- */
-function renderTable(R, isClass){
+function renderTable(R){
   const cols = [
     { k:'refCode', t:'รหัสอ้างอิง' },
     { k:'year',    t:'ปี' },
@@ -990,7 +992,8 @@ function renderTable(R, isClass){
     { k:'district',t:'อำเภอ' },
     { k:'schoolGroup', t:'กลุ่มโรงเรียน' },
     { k:'school',  t:'โรงเรียน' },
-    isClass ? { k:'grade', t:'ระดับชั้น' } : { k:'size', t:'ขนาด' },
+    { k:'grade',   t:'ระดับชั้น' },
+    { k:'label',   t:'ชั้น/ห้อง', c:1 },
     { k:'nEval',   t:'ประเมิน', c:1 }
   ].concat(RUBRIC.map((c,i) => ({ k:'c'+i, t:c.key, c:1, ci:i })))
    .concat([
@@ -999,7 +1002,7 @@ function renderTable(R, isClass){
     { k:'strength',t:'จุดเด่น' },
     { k:'improve', t:'จุดที่ควรพัฒนา' },
     { k:'evidence',t:'หลักฐาน' },
-    { k:'reporter',t:'ผู้กรอก' },
+    { k:'reporter',t:'ครูผู้กรอก' },
     { k:'position',t:'ตำแหน่ง' },
     { k:'phone',   t:'โทรศัพท์' },
     { k:'created', t:'วันที่บันทึก' },
@@ -1082,7 +1085,7 @@ function download(name, lines){
 const csvq = s => '"' + String(s == null ? '' : s).replace(/"/g,'""') + '"';
 
 /* สรุประดับเขต → ส่งออกตารางเปรียบเทียบอำเภอและกลุ่มโรงเรียน */
-function exportArea(R, isClass){
+function exportArea(R){
   const totalSchools = Object.values(SCHOOLS).reduce((a,b)=>a+b.length, 0);
   const all = agg(R, 'รวมทั้งเขต', totalSchools);
   const head = ['ระดับ','ชื่อ','อำเภอ','โรงเรียนที่ส่ง','โรงเรียนทั้งหมด','ร้อยละความครอบคลุม',
@@ -1105,30 +1108,57 @@ function exportArea(R, isClass){
     .concat([line('เขตพื้นที่', all, '')])
     .concat(dist.map(x => line('อำเภอ', x, x.name)))
     .concat(grp.map(x => line('กลุ่มโรงเรียน', x, x.district)));
-  download('8C_สรุประดับเขต_' + (isClass ? 'ระดับชั้น' : 'ระดับโรงเรียน') + '_' +
-    new Date().toISOString().slice(0,10) + '.csv', lines);
+  download('8C_สรุประดับเขต_' + new Date().toISOString().slice(0,10) + '.csv', lines);
 }
 
 $('btnCsv').addEventListener('click', function(){
-  const R = rows(), isClass = $('fLevel').value === 'class';
+  const tab = activeTab();
+  if (tab === 'codes'){
+    if (!CODES.length){ alert('ยังไม่ได้โหลดรหัสโรงเรียน'); return; }
+    const h = ['อำเภอ','กลุ่มโรงเรียน','โรงเรียน','รหัสโรงเรียน'];
+    download('8C_รหัสโรงเรียน_' + new Date().toISOString().slice(0,10) + '.csv',
+      [h.map(csvq).join(',')].concat(CODES.map(c =>
+        [c.district, c.group, c.school, c.code].map(csvq).join(','))));
+    return;
+  }
+  const R = rows();
   if (!R.length){ alert('ไม่มีข้อมูลให้ส่งออก'); return; }
-  if (activeTab() === 'area'){ exportArea(R, isClass); return; }
+  if (tab === 'area'){ exportArea(R); return; }
   const head = ['รหัสอ้างอิง','ปีการศึกษา','ภาคเรียน','อำเภอ','กลุ่มโรงเรียน','โรงเรียน',
-    isClass ? 'ระดับชั้น' : 'ขนาดโรงเรียน','จำนวนนักเรียนทั้งหมด','จำนวนที่ประเมิน']
+    'ระดับชั้น','ห้องที่','ชั้น/ห้อง','จำนวนนักเรียนในห้อง','จำนวนที่ประเมิน']
     .concat(RUBRIC.map(c => c.key + ' ' + c.short))
     .concat(['คะแนนเฉลี่ย','ระดับคุณภาพ','จุดเด่น','จุดที่ควรพัฒนา','ลิงก์หลักฐาน',
-      'ผู้กรอก','ตำแหน่ง','โทรศัพท์','อีเมล/Line','หมายเหตุ','วันที่บันทึก','แก้ไขล่าสุด']);
+      'ครูผู้กรอก','ตำแหน่ง','โทรศัพท์','อีเมล/Line','หมายเหตุ','วันที่บันทึก','แก้ไขล่าสุด']);
   const lines = [head.map(csvq).join(',')].concat(R.map(function(r){
     return [r.refCode,r.year,r.term,r.district,r.schoolGroup,r.school,
-      isClass ? r.grade : r.size, r.nAll, r.nEval]
+      r.grade, r.room, r.label, r.nAll, r.nEval]
       .concat(r.c)
       .concat([Number(r.avg).toFixed(2), qualityOf(r.avg), r.strength, r.improve, r.evidence,
         r.reporter, r.position, r.phone, r.contact, r.note, r.created, r.updated])
       .map(csvq).join(',');
   }));
-  download('8C_' + (isClass ? 'ระดับชั้น' : 'ระดับโรงเรียน') + '_' +
-    new Date().toISOString().slice(0,10) + '.csv', lines);
+  download('8C_ข้อมูลรายห้อง_' + new Date().toISOString().slice(0,10) + '.csv', lines);
 });
+
+/* ---------- ตารางรหัสโรงเรียน ---------- */
+function renderCodes(){
+  if (!CODES.length){ $('tblCodes').innerHTML = ''; return; }
+  const sent = new Set(DATA.map(r => r.school));
+  $('tblCodes').innerHTML =
+    '<thead><tr><th>#</th><th class="l">โรงเรียน</th><th class="l">กลุ่มโรงเรียน</th>' +
+    '<th>อำเภอ</th><th>รหัสโรงเรียน</th><th>สถานะ</th></tr></thead><tbody>' +
+    CODES.map(function(c,i){
+      const has = sent.has(c.school);
+      return '<tr><td>' + (i+1) + '</td>' +
+        '<td class="l"><span class="nm">' + esc(c.school) + '</span></td>' +
+        '<td class="l"><span class="sub">' + esc(c.group) + '</span></td>' +
+        '<td>' + esc(c.district) + '</td>' +
+        '<td><code style="font-size:.92rem;font-weight:700;letter-spacing:.04em">' +
+          esc(c.code) + '</code></td>' +
+        '<td>' + (has ? '<span class="pill q3">ส่งแล้ว</span>'
+                      : '<span class="sub">ยังไม่ส่ง</span>') + '</td></tr>';
+    }).join('') + '</tbody>';
+}
 
 /* ---------- เข้าระบบอัตโนมัติจาก session เดิม ---------- */
 (function(){

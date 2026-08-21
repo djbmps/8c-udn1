@@ -139,44 +139,64 @@ textarea{resize:vertical;min-height:84px}
   box-shadow:0 0 0 4px rgba(124,90,212,.13)}
 .switch input:focus-visible + .box{outline:2px solid var(--brand-500);outline-offset:2px}
 
-/* ============ RUBRIC ============ */
-.rub{border:1px solid var(--line);border-left:5px solid var(--c);border-radius:var(--r);
+/* ============ RUBRIC (กรอกจำนวนนักเรียนแต่ละระดับ) ============ */
+.rub{border:1px solid var(--line);border-left:6px solid var(--c);border-radius:var(--r);
   padding:20px;margin-bottom:16px;background:var(--card);transition:.2s;position:relative}
 .rub:hover{box-shadow:var(--sh-1)}
-.rub.done{background:linear-gradient(180deg, color-mix(in srgb, var(--c) 6%, transparent), transparent 60%)}
-.rub .top{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px}
-.rub .ic-box{width:44px;height:44px;border-radius:13px;flex:0 0 auto;display:grid;place-items:center;
-  color:#fff;background:linear-gradient(140deg, var(--c), color-mix(in srgb, var(--c) 65%, #000));
-  box-shadow:0 4px 12px color-mix(in srgb, var(--c) 38%, transparent)}
-.rub .ic-box .ic{width:23px;height:23px;stroke-width:1.9}
-.rub .ttl{font-weight:700;font-size:1.07rem;color:var(--ink-1);display:flex;align-items:center;
+.rub.done{background:linear-gradient(180deg, color-mix(in srgb, var(--c) 7%, transparent), transparent 55%)}
+.rub .top{display:flex;gap:14px;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap}
+.rub .ic-box{width:46px;height:46px;border-radius:14px;flex:0 0 auto;display:grid;place-items:center;
+  color:#fff;background:linear-gradient(140deg, var(--c), color-mix(in srgb, var(--c) 62%, #000));
+  box-shadow:0 5px 14px color-mix(in srgb, var(--c) 40%, transparent)}
+.rub .ic-box .ic{width:24px;height:24px;stroke-width:1.9}
+.rub .meta{flex:1;min-width:220px}
+.rub .ttl{font-weight:700;font-size:1.08rem;color:var(--ink-1);display:flex;align-items:center;
   gap:8px;flex-wrap:wrap}
-.rub .k{font-size:.74rem;font-weight:700;letter-spacing:.05em;padding:2px 8px;border-radius:6px;
+.rub .k{font-size:.74rem;font-weight:700;letter-spacing:.05em;padding:2px 9px;border-radius:6px;
   color:#fff;background:var(--c)}
 .rub .en{font-size:.79rem;color:var(--ink-3);font-style:italic}
 .rub .de{font-size:.89rem;color:var(--ink-2);margin-top:3px}
-.rub .mark{margin-left:auto;color:var(--ink-3);opacity:0;transition:.2s}
-.rub .mark .ic{width:22px;height:22px}
-.rub.done .mark{opacity:1;color:var(--c)}
+.rub .stat{display:flex;flex-direction:column;align-items:flex-end;gap:6px;margin-left:auto}
+.tally{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:.9rem;
+  padding:7px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--soft);
+  color:var(--ink-2);white-space:nowrap;transition:.18s}
+.tally .ic{width:1.05em;height:1.05em}
+.tally.ok{background:#e9f8f4;border-color:#9fd9cd;color:#0b6354}
+.tally.over{background:#fdedec;border-color:#f2b7b3;color:#9d2b23}
+[data-theme=dark] .tally.ok{background:#0f302a;border-color:#1d5c50;color:#7fe3d3}
+[data-theme=dark] .tally.over{background:#331715;border-color:#6d2f2a;color:#f5a9a4}
+.rub .mean{font-size:.82rem;color:var(--ink-3);font-weight:600}
+.rub .mean b{color:var(--c);font-size:1.05rem}
+.rub .copy{background:none;border:none;padding:0;font:inherit;font-size:.8rem;font-weight:600;
+  color:var(--brand-600);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 
-.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.opts label{cursor:pointer;margin:0;display:block}
-.opts input{position:absolute;opacity:0;width:0;height:0}
-.opt{border:1.5px solid var(--line);border-radius:12px;padding:12px;height:100%;
-  display:flex;flex-direction:column;gap:7px;transition:.16s;background:var(--card)}
-.opt:hover{border-color:#c6b8e2;transform:translateY(-2px);box-shadow:var(--sh-1)}
-.opt .lv{display:flex;align-items:center;gap:7px;font-weight:700;font-size:.85rem}
-.opt .dot{width:22px;height:22px;border-radius:7px;color:#fff;font-size:.76rem;
-  display:grid;place-items:center;flex:0 0 auto;font-weight:700}
-.opt .tx{font-size:.79rem;color:var(--ink-2);line-height:1.5}
-.o1 .dot{background:var(--l1)} .o2 .dot{background:var(--l2)}
-.o3 .dot{background:var(--l3)} .o4 .dot{background:var(--l4)}
-.o1 .lv{color:var(--l1)} .o2 .lv{color:var(--l2)}
-.o3 .lv{color:var(--l3)} .o4 .lv{color:var(--l4)}
-.opts input:checked + .opt{border-color:var(--c);background:color-mix(in srgb, var(--c) 8%, var(--card));
-  box-shadow:0 0 0 3px color-mix(in srgb, var(--c) 22%, transparent)}
-.opts input:checked + .opt .tx{color:var(--ink-1)}
-.opts input:focus-visible + .opt{outline:2px solid var(--brand-500);outline-offset:2px}
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-top:14px}
+.opt{border:2px solid var(--lc);border-radius:13px;overflow:hidden;background:var(--card);
+  display:flex;flex-direction:column;transition:.16s}
+.opt:focus-within{box-shadow:0 0 0 4px color-mix(in srgb, var(--lc) 26%, transparent)}
+.opt .hd{background:var(--lc);color:#fff;padding:8px 12px;display:flex;align-items:center;gap:8px;
+  font-weight:700;font-size:.88rem}
+.opt .hd .num{width:22px;height:22px;border-radius:7px;background:rgba(255,255,255,.26);
+  display:grid;place-items:center;font-size:.78rem;flex:0 0 auto}
+.opt .tx{font-size:.79rem;color:var(--ink-2);line-height:1.5;padding:11px 12px 8px;flex:1}
+.opt .inp{padding:0 12px 12px;display:flex;align-items:center;gap:8px}
+.opt input{font-family:inherit;font-size:1.35rem;font-weight:700;text-align:center;
+  padding:9px 6px;border:2px solid var(--lc);border-radius:10px;width:100%;
+  background:color-mix(in srgb, var(--lc) 8%, var(--card));color:var(--ink-1);
+  -moz-appearance:textfield}
+.opt input::-webkit-outer-spin-button,.opt input::-webkit-inner-spin-button{
+  -webkit-appearance:none;margin:0}
+.opt input:focus{outline:none;border-color:var(--lc);
+  background:color-mix(in srgb, var(--lc) 16%, var(--card))}
+.opt input:placeholder-shown{font-weight:400;color:var(--ink-3)}
+.opt .unit{font-size:.85rem;color:var(--ink-3);font-weight:600;flex:0 0 auto}
+.o1{--lc:var(--l1)} .o2{--lc:var(--l2)} .o3{--lc:var(--l3)} .o4{--lc:var(--l4)}
+
+.neednum{background:#fff8e8;border:1px solid #efd39c;color:#7a5510;padding:13px 17px;
+  border-radius:var(--r);margin-bottom:18px;font-size:.92rem;display:flex;gap:11px;align-items:center}
+.neednum .ic{width:20px;height:20px;flex:0 0 auto}
+[data-theme=dark] .neednum{background:#332a12;border-color:#6b5723;color:#f0d194}
+.neednum b{font-size:1.15rem}
 
 /* ============ LIVE SCORE ============ */
 .score{position:sticky;bottom:14px;z-index:5;margin-top:22px;color:#fff;
@@ -344,7 +364,7 @@ footer .ic{width:1.6em;height:1.6em;color:var(--brand-500);opacity:.7;display:bl
   <!-- 1 -->
   <div class="card">
     <h2><span class="badge-n">1</span> <svg class="ic"><use href="#ic-calendar"/></svg> ข้อมูลพื้นฐาน</h2>
-    <p class="hint">เลือกปีการศึกษา ภาคเรียน และระดับของข้อมูลที่ต้องการรายงาน</p>
+    <p class="hint">แบบฟอร์มนี้สำหรับ <b>ครูประจำชั้น</b> กรอกผลการประเมินของ <b>ห้องเรียนที่ตนรับผิดชอบ</b> ห้องละ 1 ชุด</p>
 
     <div class="grid g3">
       <div class="f">
@@ -364,36 +384,11 @@ footer .ic{width:1.6em;height:1.6em;color:var(--brand-500);opacity:.7;display:bl
       </div>
     </div>
 
-    <div class="f full" style="margin-top:20px">
-      <label>ระดับของข้อมูล <span class="req">*</span></label>
-      <div class="switch">
-        <label>
-          <input type="radio" name="lv" value="school" checked>
-          <div class="box">
-            <svg class="ic"><use href="#ic-school"/></svg>
-            <div>
-              <div class="t">ระดับโรงเรียน</div>
-              <div class="d">สรุปภาพรวมทั้งโรงเรียน 1 ชุดข้อมูล — ผู้รับผิดชอบของโรงเรียนเป็นผู้กรอก</div>
-            </div>
-          </div>
-        </label>
-        <label>
-          <input type="radio" name="lv" value="class">
-          <div class="box">
-            <svg class="ic"><use href="#ic-users"/></svg>
-            <div>
-              <div class="t">ระดับชั้น</div>
-              <div class="d">แยกตามระดับชั้น อ.1 – ม.3 กรอกทีละชั้น — ครูประจำชั้น/ครูผู้สอนเป็นผู้กรอก</div>
-            </div>
-          </div>
-        </label>
-      </div>
-    </div>
   </div>
 
   <!-- 2 -->
   <div class="card">
-    <h2><span class="badge-n">2</span> <svg class="ic"><use href="#ic-school"/></svg> ข้อมูลโรงเรียน</h2>
+    <h2><span class="badge-n">2</span> <svg class="ic"><use href="#ic-school"/></svg> โรงเรียนและห้องเรียน</h2>
     <p class="hint" id="schHint">เลือกกลุ่มโรงเรียนก่อน แล้วรายชื่อโรงเรียนในกลุ่มจะแสดงให้เลือก</p>
 
     <div class="grid">
@@ -406,28 +401,20 @@ footer .ic{width:1.6em;height:1.6em;color:var(--brand-500);opacity:.7;display:bl
         <select id="school" disabled><option value="">— เลือกกลุ่มโรงเรียนก่อน —</option></select>
       </div>
 
-      <div class="f" id="wrapSize">
-        <label>ขนาดโรงเรียน</label>
-        <select id="size">
-          <option value="">— ไม่ระบุ —</option>
-          <option>ขนาดเล็ก (ไม่เกิน 120 คน)</option>
-          <option>ขนาดกลาง (121–600 คน)</option>
-          <option>ขนาดใหญ่ (601–1,500 คน)</option>
-          <option>ขนาดใหญ่พิเศษ (1,501 คนขึ้นไป)</option>
-        </select>
-      </div>
-      <div class="f" id="wrapGrade" style="display:none">
+      <div class="f">
         <label>ระดับชั้น <span class="req">*</span></label>
         <select id="grade"><option value="">— เลือกระดับชั้น —</option></select>
       </div>
-
       <div class="f">
-        <label id="lbNAll">จำนวนนักเรียนทั้งหมด (คน)</label>
-        <input type="number" id="nAll" min="0" max="5000" placeholder="เช่น 250">
+        <label>ห้องที่ <span class="req">*</span></label>
+        <select id="room"></select>
+        <span class="note" id="roomHint">โรงเรียนที่มีชั้นละห้องเดียว ให้เลือก “ห้องที่ 1”</span>
       </div>
-      <div class="f">
-        <label>จำนวนนักเรียนที่ประเมิน (คน) <span class="req">*</span></label>
-        <input type="number" id="nEval" min="1" max="5000" placeholder="เช่น 245">
+
+      <div class="f full">
+        <label><svg class="ic"><use href="#ic-users"/></svg> จำนวนนักเรียนในห้อง (คน) <span class="req">*</span></label>
+        <input type="number" id="nAll" min="1" max="200" placeholder="เช่น 28">
+        <span class="note">ตัวเลขนี้เป็นตัวตั้ง — ผลการประเมินทุกด้านต้องรวมได้เท่ากับจำนวนนี้</span>
       </div>
     </div>
   </div>
@@ -436,9 +423,14 @@ footer .ic{width:1.6em;height:1.6em;color:var(--brand-500);opacity:.7;display:bl
   <div class="card">
     <h2><span class="badge-n">3</span> <svg class="ic"><use href="#ic-clipboard"/></svg> ผลการประเมินทักษะ 8C</h2>
     <p class="hint">
-      พิจารณาจาก<b>ภาพรวมของผู้เรียนส่วนใหญ่</b> แล้วเลือกระดับคุณภาพที่ตรงที่สุดในแต่ละด้าน
+      แต่ละด้าน ให้กรอก<b>จำนวนนักเรียน</b>ที่อยู่ในแต่ละระดับคุณภาพ
       โดยใช้หลักฐานเชิงประจักษ์ประกอบ เช่น ชิ้นงาน แบบบันทึกพฤติกรรม ผลการปฏิบัติ
+      — <b>ทุกด้านต้องรวมได้เท่ากับจำนวนนักเรียนในห้อง</b>
     </p>
+    <div class="neednum" id="needNum">
+      <svg class="ic"><use href="#ic-info"/></svg>
+      <div id="needTx">กรุณากรอก “จำนวนนักเรียนในห้อง” ในขั้นที่ 2 ก่อน แล้วช่องกรอกคะแนนจะพร้อมใช้งาน</div>
+    </div>
     <div id="rubrics"></div>
 
     <div class="score" id="score">
@@ -480,7 +472,7 @@ footer .ic{width:1.6em;height:1.6em;color:var(--brand-500);opacity:.7;display:bl
 
   <!-- 5 -->
   <div class="card">
-    <h2><span class="badge-n">5</span> <svg class="ic"><use href="#ic-user"/></svg> ผู้กรอกข้อมูล</h2>
+    <h2><span class="badge-n">5</span> <svg class="ic"><use href="#ic-user"/></svg> ครูผู้กรอกข้อมูล</h2>
     <p class="hint">สำหรับติดต่อกลับกรณีข้อมูลไม่ครบถ้วน</p>
     <div class="grid">
       <div class="f">
@@ -491,11 +483,11 @@ footer .ic{width:1.6em;height:1.6em;color:var(--brand-500);opacity:.7;display:bl
         <label>ตำแหน่ง <span class="req">*</span></label>
         <select id="position">
           <option value="">— เลือกตำแหน่ง —</option>
+          <option selected>ครูประจำชั้น</option>
+          <option>ครูผู้สอน</option>
+          <option>ครูวิชาการโรงเรียน</option>
           <option>ผู้อำนวยการสถานศึกษา</option>
           <option>รองผู้อำนวยการสถานศึกษา</option>
-          <option>ครูวิชาการโรงเรียน</option>
-          <option>ครูประจำชั้น</option>
-          <option>ครูผู้สอน</option>
           <option>ครูผู้ช่วย</option>
           <option>พนักงานราชการ / ครูอัตราจ้าง</option>
           <option>ศึกษานิเทศก์</option>
@@ -526,6 +518,8 @@ footer .ic{width:1.6em;height:1.6em;color:var(--brand-500);opacity:.7;display:bl
 
   <footer>
     <svg class="ic"><use href="#ic-cap"/></svg>
+    <a href="school.html" style="color:var(--brand-600);font-weight:600">
+      โรงเรียนดูสรุปผลของตนเอง →</a><br><br>
     กลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา<br>
     สำนักงานเขตพื้นที่การศึกษาประถมศึกษาอุดรธานี เขต 1
   </footer>
@@ -667,6 +661,10 @@ const GRADES = ['อนุบาล 1','อนุบาล 2','อนุบา�
   'ประถมศึกษาปีที่ 1','ประถมศึกษาปีที่ 2','ประถมศึกษาปีที่ 3',
   'ประถมศึกษาปีที่ 4','ประถมศึกษาปีที่ 5','ประถมศึกษาปีที่ 6',
   'มัธยมศึกษาปีที่ 1','มัธยมศึกษาปีที่ 2','มัธยมศึกษาปีที่ 3'];
+const ABBR = {'อนุบาล 1':'อ.1','อนุบาล 2':'อ.2','อนุบาล 3':'อ.3',
+  'ประถมศึกษาปีที่ 1':'ป.1','ประถมศึกษาปีที่ 2':'ป.2','ประถมศึกษาปีที่ 3':'ป.3',
+  'ประถมศึกษาปีที่ 4':'ป.4','ประถมศึกษาปีที่ 5':'ป.5','ประถมศึกษาปีที่ 6':'ป.6',
+  'มัธยมศึกษาปีที่ 1':'ม.1','มัธยมศึกษาปีที่ 2':'ม.2','มัธยมศึกษาปีที่ 3':'ม.3'};
 
 const $ = id => document.getElementById(id);
 
@@ -689,9 +687,9 @@ const $ = id => document.getElementById(id);
   const g = Object.keys(SCHOOLS);
   const n = g.reduce((a,k)=>a+SCHOOLS[k].length,0);
   const items = [
-    ['ic-clipboard','ทักษะ 8 ด้าน'],
-    ['ic-award','รูบริก 4 ระดับ'],
-    ['ic-users', g.length + ' กลุ่มโรงเรียน'],
+    ['ic-user','สำหรับครูประจำชั้น'],
+    ['ic-clipboard','ทักษะ 8 ด้าน · รูบริก 4 ระดับ'],
+    ['ic-users','กรอกห้องละ 1 ชุด'],
     ['ic-school', n + ' โรงเรียน'],
     ['ic-refresh','บันทึกซ้ำเพื่อแก้ไขได้']
   ];
@@ -713,7 +711,20 @@ const $ = id => document.getElementById(id);
   Object.keys(SCHOOLS).forEach(g =>
     $('sgroup').appendChild(new Option(g + ' (' + SCHOOLS[g].length + ' โรงเรียน)', g)));
   GRADES.forEach(g => $('grade').appendChild(new Option(g, g)));
+  for (let r = 1; r <= 12; r++) $('room').appendChild(new Option('ห้องที่ ' + r, r));
+  $('room').value = 1;
 })();
+
+function roomLabel(){
+  const g = $('grade').value, r = $('room').value;
+  return g ? (ABBR[g] || g) + '/' + r : '';
+}
+['grade','room'].forEach(id => $(id).addEventListener('change', function(){
+  const t = roomLabel();
+  $('roomHint').textContent = t
+    ? 'กำลังกรอกข้อมูลของห้อง ' + t + ' — โรงเรียนที่มีชั้นละห้องเดียว ให้เลือก “ห้องที่ 1”'
+    : 'โรงเรียนที่มีชั้นละห้องเดียว ให้เลือก “ห้องที่ 1”';
+}));
 
 $('sgroup').addEventListener('change', function(){
   const s = $('school');
@@ -730,67 +741,91 @@ $('sgroup').addEventListener('change', function(){
   $('schHint').textContent = 'กลุ่มนี้มี ' + SCHOOLS[this.value].length + ' โรงเรียน';
 });
 
-/* ---------- สลับระดับข้อมูล ---------- */
-document.querySelectorAll('input[name=lv]').forEach(r => r.addEventListener('change', function(){
-  const isClass = this.value === 'class';
-  $('wrapSize').style.display  = isClass ? 'none' : '';
-  $('wrapGrade').style.display = isClass ? '' : 'none';
-  $('lbNAll').textContent = isClass ? 'จำนวนนักเรียนในชั้น (คน)' : 'จำนวนนักเรียนทั้งหมด (คน)';
-}));
-
-/* ---------- สร้างการ์ดรูบริก ---------- */
+/* ---------- สร้างการ์ดรูบริก (กรอกจำนวนนักเรียนแต่ละระดับ) ---------- */
 (function(){
   $('rubrics').innerHTML = RUBRIC.map((c,i) => `
     <div class="rub" id="rub_${c.key}" style="--c:${c.color}">
       <div class="top">
         <div class="ic-box"><svg class="ic"><use href="#ic-${c.key.toLowerCase()}"/></svg></div>
-        <div>
+        <div class="meta">
           <div class="ttl"><span class="k">${c.key}</span> ${c.short}</div>
           <div class="en">${c.en}</div>
           <div class="de">${c.th}</div>
         </div>
-        <div class="mark"><svg class="ic"><use href="#ic-check"/></svg></div>
+        <div class="stat">
+          <span class="tally" id="ta_${c.key}">
+            <svg class="ic"><use href="#ic-users"/></svg><span>0 / 0 คน</span></span>
+          <span class="mean" id="mn_${c.key}">คะแนนเฉลี่ย <b>–</b></span>
+          ${i > 0 ? `<button type="button" class="copy" data-copy="${c.key}" data-from="${RUBRIC[i-1].key}">
+            ⤵ ใช้ค่าเหมือน ${RUBRIC[i-1].key}</button>` : ''}
+        </div>
       </div>
       <div class="opts">
         ${c.levels.map((tx,j) => `
-          <label>
-            <input type="radio" name="${c.key}" value="${j+1}">
-            <div class="opt o${j+1}">
-              <div class="lv"><span class="dot">${j+1}</span> ${LEVEL_NAME[j]}</div>
-              <div class="tx">${tx}</div>
+          <div class="opt o${j+1}">
+            <div class="hd"><span class="num">${j+1}</span> ${LEVEL_NAME[j]}</div>
+            <div class="tx">${tx}</div>
+            <div class="inp">
+              <input type="number" min="0" max="200" step="1" inputmode="numeric"
+                     id="${c.key}_${j+1}" placeholder="0"
+                     aria-label="${c.key} ระดับ ${j+1} ${LEVEL_NAME[j]} จำนวนนักเรียน">
+              <span class="unit">คน</span>
             </div>
-          </label>`).join('')}
+          </div>`).join('')}
       </div>
     </div>`).join('');
 
-  document.querySelectorAll('.opts input').forEach(r => r.addEventListener('change', function(){
-    $('rub_' + this.name).classList.add('done');
+  document.querySelectorAll('.opt input').forEach(el => {
+    el.addEventListener('input', recalc);
+    el.addEventListener('focus', function(){ this.select(); });
+  });
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', function(){
+    const to = this.dataset.copy, from = this.dataset.from;
+    for (let L = 1; L <= 4; L++) $(to + '_' + L).value = $(from + '_' + L).value;
     recalc();
   }));
 })();
 
-function scores(){
-  return RUBRIC.map(c => {
-    const el = document.querySelector('input[name=' + c.key + ']:checked');
-    return el ? Number(el.value) : 0;
-  });
-}
+const total = () => Number($('nAll').value) || 0;
+const cCount = (key, L) => Number($(key + '_' + L).value) || 0;
+const cSum = key => [1,2,3,4].reduce((a,L) => a + cCount(key,L), 0);
+const cMean = key => {
+  const n = cSum(key);
+  return n ? [1,2,3,4].reduce((a,L) => a + cCount(key,L) * L, 0) / n : 0;
+};
 
 const CIRC = 2 * Math.PI * 25;
 
 function recalc(){
-  const s = scores(), done = s.filter(x=>x>0);
-  $('pct').textContent = done.length + '/8';
-  $('ring').setAttribute('stroke-dasharray', (done.length/8*CIRC).toFixed(1) + ' ' + CIRC.toFixed(1));
-  if (done.length < 8){
+  const N = total();
+  $('needTx').innerHTML = N
+    ? 'จำนวนนักเรียนในห้อง <b>' + N + '</b> คน — ทุกด้านต้องกรอกให้รวมได้ ' + N + ' คนพอดี'
+    : 'กรุณากรอก “จำนวนนักเรียนในห้อง” ในขั้นที่ 2 ก่อน แล้วช่องกรอกคะแนนจะพร้อมใช้งาน';
+
+  let done = 0, sumMean = 0;
+  RUBRIC.forEach(function(c){
+    const n = cSum(c.key), m = cMean(c.key);
+    const t = $('ta_' + c.key), rub = $('rub_' + c.key);
+    t.className = 'tally' + (N && n === N ? ' ok' : (n > N && N ? ' over' : ''));
+    t.querySelector('span').textContent = n + ' / ' + (N || '–') + ' คน';
+    $('mn_' + c.key).innerHTML = 'คะแนนเฉลี่ย <b>' + (n ? m.toFixed(2) : '–') + '</b>';
+    if (N && n === N){ done++; sumMean += m; rub.classList.add('done'); }
+    else rub.classList.remove('done');
+  });
+
+  $('pct').textContent = done + '/8';
+  $('ring').setAttribute('stroke-dasharray', (done/8*CIRC).toFixed(1) + ' ' + CIRC.toFixed(1));
+  if (done < 8){
     $('avg').textContent = '–';
-    $('qual').innerHTML = '<svg class="ic"><use href="#ic-info"/></svg> ยังประเมินไม่ครบ';
+    $('qual').innerHTML = '<svg class="ic"><use href="#ic-info"/></svg> ยังกรอกไม่ครบ ' + done + '/8 ด้าน';
     return;
   }
-  const avg = s.reduce((a,b)=>a+b,0)/8;
+  const avg = sumMean / 8;
   $('avg').textContent = avg.toFixed(2);
   $('qual').innerHTML = '<svg class="ic"><use href="#ic-award"/></svg> ระดับคุณภาพ: ' + qualityOf(avg);
 }
+
+$('nAll').addEventListener('input', recalc);
 
 /* ---------- ส่งข้อมูล ---------- */
 if (!API_URL) $('setup').classList.add('on');
@@ -804,12 +839,13 @@ function show(type, html, icon){
 
 $('reset').addEventListener('click', function(){
   if (!confirm('ล้างข้อมูลทั้งหมดในแบบฟอร์ม?')) return;
-  document.querySelectorAll('.opts input').forEach(r => r.checked = false);
+  document.querySelectorAll('.opt input').forEach(r => r.value = '');
   document.querySelectorAll('.rub').forEach(r => r.classList.remove('done'));
-  ['nAll','nEval','strength','improve','evidence','reporter','phone','contact','note']
+  ['nAll','strength','improve','evidence','reporter','phone','contact','note']
     .forEach(id => $(id).value = '');
   $('sgroup').value = ''; $('sgroup').dispatchEvent(new Event('change'));
-  $('position').value = ''; $('size').value = ''; $('grade').value = '';
+  $('position').value = 'ครูประจำชั้น'; $('grade').value = ''; $('room').value = 1;
+  $('grade').dispatchEvent(new Event('change'));
   $('msg').className = 'msg';
   recalc();
   window.scrollTo({top:0, behavior:'smooth'});
@@ -818,18 +854,15 @@ $('reset').addEventListener('click', function(){
 $('send').addEventListener('click', async function(){
   if (!API_URL){ show('err','ยังไม่ได้ตั้งค่า API_URL ในไฟล์ กรุณาติดต่อผู้ดูแลระบบ'); return; }
 
-  const isClass = document.querySelector('input[name=lv]:checked').value === 'class';
   const d = {
     action:'submit',
-    level: isClass ? 'class' : 'school',
     year: $('year').value,
     term: $('term').value,
     schoolGroup: $('sgroup').value,
     school: $('school').value,
-    size: $('size').value,
     grade: $('grade').value,
+    room: $('room').value,
     nAll: $('nAll').value,
-    nEval: $('nEval').value,
     strength: $('strength').value.trim(),
     improve: $('improve').value.trim(),
     evidence: $('evidence').value.trim(),
@@ -842,19 +875,21 @@ $('send').addEventListener('click', async function(){
 
   if (!d.schoolGroup) return show('err','กรุณาเลือกกลุ่มโรงเรียน');
   if (!d.school)      return show('err','กรุณาเลือกโรงเรียน');
-  if (isClass && !d.grade) return show('err','กรุณาเลือกระดับชั้น');
-  if (!(Number(d.nEval) > 0)) return show('err','กรุณากรอกจำนวนนักเรียนที่ประเมิน');
-  if (Number(d.nAll) > 0 && Number(d.nEval) > Number(d.nAll))
-    return show('err','จำนวนที่ประเมินมากกว่าจำนวนนักเรียนทั้งหมด');
+  if (!d.grade) return show('err','กรุณาเลือกระดับชั้น');
+  if (!d.room)  return show('err','กรุณาเลือกห้องที่');
+  const N = total();
+  if (!(N > 0)) return show('err','กรุณากรอกจำนวนนักเรียนในห้อง');
 
-  const s = scores();
-  const miss = RUBRIC.filter((c,i) => !s[i]).map(c => c.key);
-  if (miss.length){
-    show('err','กรุณาให้คะแนนให้ครบทั้ง 8 ด้าน — ยังขาด ' + miss.join(', '));
-    document.getElementById('rub_' + miss[0]).scrollIntoView({behavior:'smooth', block:'center'});
+  const bad = RUBRIC.filter(c => cSum(c.key) !== N);
+  if (bad.length){
+    const b = bad[0];
+    show('err','<b>' + b.key + ' ' + b.short + '</b> รวมได้ ' + cSum(b.key) +
+      ' คน แต่ห้องนี้มี ' + N + ' คน<br>ทุกด้านต้องกรอกให้รวมได้ ' + N + ' คนพอดี' +
+      (bad.length > 1 ? ' — ยังไม่ครบอีก ' + (bad.length-1) + ' ด้าน' : ''));
+    document.getElementById('rub_' + b.key).scrollIntoView({behavior:'smooth', block:'center'});
     return;
   }
-  RUBRIC.forEach((c,i) => d[c.key] = s[i]);
+  RUBRIC.forEach(c => { for (let L = 1; L <= 4; L++) d[c.key + '_' + L] = cCount(c.key, L); });
 
   if (!d.reporter) return show('err','กรุณากรอกชื่อ – สกุล ผู้กรอกข้อมูล');
   if (!d.position) return show('err','กรุณาเลือกตำแหน่ง');
@@ -876,10 +911,10 @@ $('send').addEventListener('click', async function(){
     if (r.ok){
       show('ok',
         '<b>' + (r.updated ? 'ปรับปรุงข้อมูลเดิมเรียบร้อย' : 'บันทึกข้อมูลเรียบร้อย') + '</b><br>' +
-        (isClass ? d.grade + ' · ' : '') + d.school + ' · ปีการศึกษา ' + d.year + ' ภาคเรียนที่ ' + d.term + '<br>' +
+        'ห้อง ' + (r.label || roomLabel()) + ' · ' + d.school + ' · ปีการศึกษา ' + d.year + ' ภาคเรียนที่ ' + d.term + '<br>' +
         'คะแนนเฉลี่ย 8C <b>' + r.avg.toFixed(2) + '</b> — ระดับคุณภาพ <b>' + r.quality + '</b><br>' +
         'รหัสอ้างอิง <span class="ref">' + r.refCode + '</span><br>' +
-        '<span class="note">หากต้องการแก้ไข ให้กรอกโรงเรียน/ปีการศึกษา/ภาคเรียนเดิมแล้วบันทึกใหม่ ระบบจะทับข้อมูลเดิมให้</span>');
+        '<span class="note">หากต้องการแก้ไข ให้กรอกห้องเดิม/ปีการศึกษา/ภาคเรียนเดิมแล้วบันทึกใหม่ ระบบจะทับข้อมูลเดิมให้</span>');
     } else {
       show('err', r.message || 'บันทึกไม่สำเร็จ');
     }
