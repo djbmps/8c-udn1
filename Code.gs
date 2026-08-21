@@ -520,3 +520,38 @@ function รีเซ็ตรหัสผ่านทุกโรงเรี�
   Logger.log('รีเซ็ตรหัสผ่านของทุกโรงเรียนกลับเป็นรหัสโรงเรียนแล้ว');
   return 'ok';
 }
+
+/* ---------------------------------------------------------------
+ *  ▶ ล้างข้อมูลทั้งหมด — ใช้ก่อนเปิดใช้งานจริง หรือขึ้นปีการศึกษาใหม่
+ *     ลบข้อมูลรายห้องทุกแถว + ล้างบัญชีผู้ใช้ (รหัสผ่านกลับเป็นรหัสโรงเรียน)
+ *     ⚠️ ลบแล้วกู้คืนไม่ได้ — ควรดาวน์โหลดสำรองก่อน (ไฟล์ → ดาวน์โหลด → Excel)
+ * --------------------------------------------------------------- */
+function ล้างข้อมูลทั้งหมด() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  var msg = [];
+
+  const a = ss.getSheetByName(SHEET_ROOM);
+  if (a && a.getLastRow() > 1) {
+    var n = a.getLastRow() - 1;
+    a.deleteRows(2, n);
+    msg.push('ลบข้อมูลรายห้อง ' + n + ' แถว');
+  } else msg.push('ข้อมูลรายห้องว่างอยู่แล้ว');
+
+  const b = ss.getSheetByName(SHEET_USER);
+  if (b && b.getLastRow() > 1) {
+    var m = b.getLastRow() - 1;
+    b.deleteRows(2, m);
+    msg.push('ล้างบัญชีผู้ใช้ ' + m + ' รายการ');
+  } else msg.push('บัญชีผู้ใช้ว่างอยู่แล้ว');
+
+  ['ชีต1', 'Sheet1', 'ระดับชั้น', 'ระดับโรงเรียน'].forEach(function (nm) {
+    var s = ss.getSheetByName(nm);
+    if (s && ss.getSheets().length > 1 && s.getLastRow() === 0) {
+      ss.deleteSheet(s);
+      msg.push('ลบแผ่นงานที่ไม่ใช้ "' + nm + '"');
+    }
+  });
+
+  Logger.log(msg.join('\n'));
+  return msg.join(' · ');
+}
