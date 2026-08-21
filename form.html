@@ -650,7 +650,7 @@ function startApp(){
   const keys = Object.keys(g);
   $('grade').innerHTML = '<option value="">— เลือกระดับชั้น —</option>' +
     keys.map(k => '<option value="' + esc(ABBR[k] || k) + '" data-k="' + esc(k) + '">' +
-      esc(ABBR[k] || k) + ' (' + g[k][0] + ' คน / ' + g[k][1] + ' ห้อง)</option>').join('');
+      esc(ABBR[k] || k) + ' (' + g[k][1] + ' ห้อง)</option>').join('');
   if (!keys.length){
     $('grade').innerHTML = '<option value="">ไม่พบข้อมูลชั้นเรียนใน BIG DATA</option>';
   }
@@ -667,29 +667,49 @@ function startApp(){
   recalc();
 }
 
-$('grade').addEventListener('change', function(){
-  const opt = this.options[this.selectedIndex];
-  const k = opt ? opt.dataset.k : '';
-  const info = (ME.grades || {})[k];
-  if (!info){ $('room').innerHTML = '<option value="">— เลือกห้อง —</option>'; $('roomHint').textContent=''; return; }
-  const rooms = Math.max(1, Number(info[1]) || 1);
-  $('room').innerHTML = '<option value="">— เลือกห้อง —</option>' +
-    Array.from({length: Math.max(rooms, 1)}, (_,i) =>
-      '<option value="' + (i+1) + '">ห้องที่ ' + (i+1) + '</option>').join('') +
-    (rooms < 20 ? '<option value="' + (rooms+1) + '">ห้องที่ ' + (rooms+1) + ' (เพิ่มเติม)</option>' : '');
-  $('roomHint').textContent = 'BIG DATA ระบุ ' + rooms + ' ห้อง';
-  if (rooms === 1){ $('room').value = '1'; $('room').dispatchEvent(new Event('change')); }
-});
-$('room').addEventListener('change', function(){
+/** ข้อมูลชั้นเรียนที่เลือกอยู่จาก BIG DATA */
+function gradeInfo(){
   const opt = $('grade').options[$('grade').selectedIndex];
   const k = opt ? opt.dataset.k : '';
   const info = (ME.grades || {})[k];
-  if (!info || !this.value) return;
+  if (!info) return null;
   const rooms = Math.max(1, Number(info[1]) || 1);
-  const per = Math.round(Number(info[0]) / rooms);
-  if (!$('nAll').value) { $('nAll').value = per; recalc(); }
-  $('nHint').textContent = 'BIG DATA: ทั้งชั้นมี ' + info[0] + ' คน / ' + rooms + ' ห้อง (เฉลี่ย ' + per + ' คน) — แก้ไขได้ตามจริง';
+  return { key:k, total: Number(info[0]) || 0, rooms: rooms,
+           per: Math.max(1, Math.round((Number(info[0]) || 0) / rooms)) };
+}
+
+/** เติมจำนวนนักเรียนตาม BIG DATA ทุกครั้งที่เปลี่ยนระดับชั้นหรือห้อง */
+function fillStudents(){
+  const g = gradeInfo();
+  if (!g){
+    $('nHint').textContent = 'ระบบเติมให้จาก BIG DATA — แก้ไขได้ตามจริง';
+    return;
+  }
+  $('nAll').value = g.per;
+  $('nHint').textContent = 'BIG DATA: ทั้งชั้นมี ' + g.total + ' คน / ' + g.rooms +
+    ' ห้อง (เฉลี่ย ' + g.per + ' คน) — แก้ไขได้ตามจริง';
+  recalc();
+}
+
+$('grade').addEventListener('change', function(){
+  const g = gradeInfo();
+  if (!g){
+    $('room').innerHTML = '<option value="">— เลือกห้อง —</option>';
+    $('roomHint').textContent = '';
+    $('nAll').value = '';
+    $('nHint').textContent = 'ระบบเติมให้จาก BIG DATA — แก้ไขได้ตามจริง';
+    recalc();
+    return;
+  }
+  $('room').innerHTML = '<option value="">— เลือกห้อง —</option>' +
+    Array.from({length: g.rooms}, (_,i) =>
+      '<option value="' + (i+1) + '">ห้องที่ ' + (i+1) + '</option>').join('') +
+    (g.rooms < 20 ? '<option value="' + (g.rooms+1) + '">ห้องที่ ' + (g.rooms+1) + ' (เพิ่มเติม)</option>' : '');
+  $('roomHint').textContent = 'BIG DATA ระบุ ' + g.rooms + ' ห้อง';
+  if (g.rooms === 1) $('room').value = '1';
+  fillStudents();
 });
+$('room').addEventListener('change', fillStudents);
 
 /* ---------- การ์ดทักษะ ---------- */
 function buildCards(){
