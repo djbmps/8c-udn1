@@ -140,15 +140,15 @@ function checkPass(smis, pass) {
   if (pass == null || String(pass) === '') return { ok: false, message: 'กรุณากรอกรหัสผ่าน' };
   const u = findUser(smis);
   const h = hashPass(smis, String(pass));
-  const expect = u ? u.hash : hashPass(smis, smis);   // ยังไม่เคยตั้งรหัส → ใช้รหัสโรงเรียน
+  const expect = (u && u.hash) ? u.hash : hashPass(smis, smis);   // ยังไม่เคยตั้งรหัส → ใช้รหัสโรงเรียน
   if (h !== expect) return { ok: false, message: 'รหัสผ่านไม่ถูกต้อง' };
-  return { ok: true, token: makeToken(smis, expect), school: s, isDefault: !u };
+  return { ok: true, token: makeToken(smis, expect), school: s, isDefault: !(u && u.hash) };
 }
 
 /** ตรวจ token ที่ส่งมาพร้อมการบันทึกข้อมูล */
 function checkToken(smis, token) {
   const u = findUser(smis);
-  const expect = u ? u.hash : hashPass(smis, smis);
+  const expect = (u && u.hash) ? u.hash : hashPass(smis, smis);
   return String(token || '') === makeToken(smis, expect);
 }
 
@@ -216,7 +216,7 @@ function doPost(e) {
       if (!s) return json({ ok: false, message: 'ไม่พบรหัสโรงเรียนนี้' });
       const sh = getUserSheet();
       const u = findUser(smis);
-      if (u) sh.deleteRow(u.row);
+      if (u) sh.getRange(u.row, 4, 1, 2).setValues([['', '']]);
       return json({ ok: true, message: 'รีเซ็ตรหัสผ่านของ ' + s.name + ' กลับเป็นรหัสโรงเรียนแล้ว' });
     }
 
