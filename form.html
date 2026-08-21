@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#3d1f77">
-<title>แดชบอร์ดโรงเรียน — ทักษะ 8C สพป.อุดรธานี เขต 1</title>
+<title>กรอกข้อมูลทักษะ 8C รายห้องเรียน — สพป.อุดรธานี เขต 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,11 +12,10 @@
 :root{
   --brand-900:#2a1758; --brand-800:#3d1f77; --brand-700:#4c2a96;
   --brand-600:#5a2ea6; --brand-500:#7c5ad4; --brand-100:#f1eafd;
-  --blue:#3866eb; --pink:#d94f9a; --pink-soft:#f5a3d0;
-  --seq-1:#c0a9f0; --seq-2:#9a7ce2; --seq-3:#6b45c4; --seq-4:#3f2585;
-  --bar:#7c5ad4; --bar-soft:#f1eafd;
+  --blue:#3866eb; --pink:#d94f9a;
   --l1:#c4407a; --l2:#9540bb; --l3:#6344cf; --l4:#3340b8;
-  --ok:#1e9d6b; --warn:#d98218; --bad:#c0392b;
+  --l1-bg:#fdeaf3; --l2-bg:#f6e9fb; --l3-bg:#eae7fc; --l4-bg:#e6e9fb;
+  --ok:#1e9d6b; --ok-bg:#e5f7ef; --warn:#d98218; --bad:#c0392b; --bad-bg:#fdeceb;
   --ink-1:#171226; --ink-2:#4d465f; --ink-3:#7a7290;
   --bg:#f3f0fa; --card:#ffffff; --line:#e3dcf0; --soft:#f8f5fd; --grid:#efeaf8;
   --r-lg:18px; --r:14px; --r-sm:10px;
@@ -25,10 +24,9 @@
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme=light]){
-    --seq-1:#59409a; --seq-2:#7c5ad4; --seq-3:#9d80e8; --seq-4:#c3aef3;
-    --bar:#8f6ddc; --bar-soft:#241a45; --brand-100:#241a45;
-    --brand-500:#9d80e8; --brand-600:#8f6ddc;
-    --ok:#3ec18c; --warn:#e6a23c; --bad:#e0685c;
+    --brand-100:#241a45; --brand-500:#9d80e8; --brand-600:#8f6ddc;
+    --l1-bg:#3a1c2c; --l2-bg:#331c40; --l3-bg:#251f4a; --l4-bg:#1e2148;
+    --ok:#3ec18c; --ok-bg:#12301f; --warn:#e6a23c; --bad:#e0685c; --bad-bg:#3a1b1a;
     --ink-1:#f2eefb; --ink-2:#b9b0cf; --ink-3:#8d84a8;
     --bg:#0f0b1c; --card:#181329; --line:#2b2342; --soft:#1e1834; --grid:#241d3b;
     --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
@@ -36,10 +34,9 @@
   }
 }
 [data-theme=dark]{
-  --seq-1:#59409a; --seq-2:#7c5ad4; --seq-3:#9d80e8; --seq-4:#c3aef3;
-  --bar:#8f6ddc; --bar-soft:#241a45; --brand-100:#241a45;
-  --brand-500:#9d80e8; --brand-600:#8f6ddc;
-  --ok:#3ec18c; --warn:#e6a23c; --bad:#e0685c;
+  --brand-100:#241a45; --brand-500:#9d80e8; --brand-600:#8f6ddc;
+  --l1-bg:#3a1c2c; --l2-bg:#331c40; --l3-bg:#251f4a; --l4-bg:#1e2148;
+  --ok:#3ec18c; --ok-bg:#12301f; --warn:#e6a23c; --bad:#e0685c; --bad-bg:#3a1b1a;
   --ink-1:#f2eefb; --ink-2:#b9b0cf; --ink-3:#8d84a8;
   --bg:#0f0b1c; --card:#181329; --line:#2b2342; --soft:#1e1834; --grid:#241d3b;
   --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
@@ -49,7 +46,7 @@
 body{margin:0;background:var(--bg);color:var(--ink-1);
   font-family:'Sarabun',-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.6;
   -webkit-font-smoothing:antialiased}
-.wrap{max-width:1180px;margin:0 auto;padding:0 18px 60px}
+.wrap{max-width:1020px;margin:0 auto;padding:0 18px 130px}
 a{color:var(--brand-600)}
 .ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;vertical-align:-.16em}
@@ -61,11 +58,10 @@ header{position:relative;overflow:hidden;color:#fff;padding:20px 18px 22px;
     linear-gradient(135deg,#1b2a6b,#4c2a96 50%,#8e2f83)}
 header .wrap{padding-bottom:0;display:flex;justify-content:space-between;align-items:center;
   gap:16px;flex-wrap:wrap;position:relative;z-index:1}
-header h1{margin:4px 0 0;font-size:1.34rem;font-weight:800;letter-spacing:-.01em;
-  display:flex;align-items:center;gap:10px}
+header h1{margin:4px 0 0;font-size:1.3rem;font-weight:800;display:flex;align-items:center;gap:10px}
 header h1 .ic{width:1.05em;height:1.05em;opacity:.9}
-header .k{font-size:.8rem;opacity:.85;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-header .k a{color:#fff;opacity:.9;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+header .k{font-size:.8rem;opacity:.87;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+header .k a{color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:5px;opacity:.9}
 header .k a:hover{opacity:1;text-decoration:underline}
 .hbtns{display:flex;gap:8px;flex-wrap:wrap}
 .gbtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26);
@@ -73,158 +69,174 @@ header .k a:hover{opacity:1;text-decoration:underline}
   cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.15s;text-decoration:none;
   position:relative;overflow:hidden;isolation:isolate;box-shadow:inset 0 1px 0 rgba(255,255,255,.24)}
 .gbtn:hover{background:rgba(255,255,255,.26);transform:translateY(-1px)}
-.gbtn::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  z-index:-1;background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.06) 46%,
-    rgba(255,255,255,0) 52%,rgba(0,0,0,.08))}
-.gbtn::after{content:"";position:absolute;top:-10%;left:-150%;width:55%;height:120%;
-  pointer-events:none;z-index:-1;transform:skewX(-20deg);
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5) 45%,rgba(255,255,255,.72),
-    rgba(255,255,255,.5) 55%,transparent)}
+.gbtn::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.06) 46%,rgba(255,255,255,0) 52%,rgba(0,0,0,.08))}
+.gbtn::after{content:"";position:absolute;top:-10%;left:-150%;width:55%;height:120%;pointer-events:none;
+  z-index:-1;transform:skewX(-20deg);
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5) 45%,rgba(255,255,255,.72),rgba(255,255,255,.5) 55%,transparent)}
 .gbtn:hover::after{animation:sheen .78s ease}
 @keyframes sheen{from{left:-150%} to{left:150%}}
-.gbtn .ic{width:1.05em;height:1.05em}
-.gbtn.key{background:linear-gradient(135deg,#f0a12e,#e0692c);border-color:rgba(255,255,255,.4);
-  font-weight:700;box-shadow:0 4px 14px rgba(224,105,44,.4),inset 0 1px 0 rgba(255,255,255,.4)}
-.gbtn.key:hover{background:linear-gradient(135deg,#f5ac3e,#ee7534)}
 
-/* ตัวเลือกโรงเรียน */
-.picker{max-width:640px;margin:7vh auto;background:var(--card);border:1px solid var(--line);
-  border-radius:22px;padding:34px 30px;box-shadow:var(--sh-2)}
-.picker .lock{width:60px;height:60px;margin:0 auto 16px;border-radius:18px;display:grid;place-items:center;
+/* ---------- เข้าสู่ระบบ ---------- */
+.login{max-width:440px;margin:7vh auto;background:var(--card);border:1px solid var(--line);
+  border-radius:22px;padding:34px 30px;text-align:center;box-shadow:var(--sh-2)}
+.login .lock{width:60px;height:60px;margin:0 auto 16px;border-radius:18px;display:grid;place-items:center;
   color:#fff;background:linear-gradient(140deg,#7442c9,#2a1758);box-shadow:0 8px 22px rgba(76,42,150,.35)}
-.picker .lock .ic{width:28px;height:28px}
-.picker h2{margin:0 0 6px;font-size:1.28rem;font-weight:700;text-align:center}
-.picker p.sub{margin:0 0 22px;color:var(--ink-2);font-size:.9rem;text-align:center}
-.picker input,.picker select{width:100%;padding:13px;font-size:1rem;font-family:inherit;
+.login .lock .ic{width:28px;height:28px}
+.login h2{margin:0 0 6px;font-size:1.28rem;font-weight:700}
+.login p.sub{margin:0 0 20px;color:var(--ink-2);font-size:.9rem}
+.login input{width:100%;padding:13px;font-size:1rem;font-family:inherit;
   border:1.5px solid var(--line);border-radius:12px;margin-bottom:11px;background:var(--card);color:var(--ink-1)}
-.picker input:focus,.picker select:focus{outline:none;border-color:var(--brand-500);
-  box-shadow:0 0 0 4px rgba(124,90,212,.16)}
-.plist{max-height:320px;overflow:auto;border:1px solid var(--line);border-radius:12px}
-.plist a{display:flex;justify-content:space-between;gap:10px;align-items:center;
-  padding:11px 14px;border-bottom:1px solid var(--grid);text-decoration:none;color:var(--ink-1);font-size:.92rem}
-.plist a:last-child{border-bottom:none}
-.plist a:hover{background:var(--soft)}
-.plist .g{font-size:.76rem;color:var(--ink-3);white-space:nowrap}
-.plist .cd{font-family:ui-monospace,Menlo,monospace;font-size:.78rem;color:var(--brand-600);
-  background:var(--brand-100);padding:2px 8px;border-radius:7px}
-.picker .help{margin-top:18px;font-size:.82rem;color:var(--ink-3);line-height:1.7;text-align:center}
+.login input#user{font-family:ui-monospace,Menlo,monospace;text-align:center;letter-spacing:.1em;font-size:1.15rem}
+.login input:focus{outline:none;border-color:var(--brand-500);box-shadow:0 0 0 4px rgba(124,90,212,.16)}
+.login button.go{width:100%;padding:13px;background:linear-gradient(135deg,#7442c9 0%,#5a2ea6 55%,#8e2f83 100%);
+  color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  position:relative;overflow:hidden;isolation:isolate;
+  box-shadow:0 4px 16px rgba(76,42,150,.3),inset 0 1px 0 rgba(255,255,255,.34)}
+.login button.go:hover{transform:translateY(-1px)}
+.login button.go::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.06) 46%,rgba(255,255,255,0) 52%,rgba(0,0,0,.08))}
+.login button.go::after{content:"";position:absolute;top:-10%;left:-150%;width:55%;height:120%;pointer-events:none;
+  z-index:-1;transform:skewX(-20deg);
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5) 45%,rgba(255,255,255,.72),rgba(255,255,255,.5) 55%,transparent)}
+.login button.go:hover::after{animation:sheen .78s ease}
+.login .er{color:var(--bad);font-size:.88rem;margin-top:12px;min-height:20px}
+.login .nm{background:var(--brand-100);color:var(--brand-600);border-radius:12px;padding:9px 12px;
+  font-weight:700;font-size:.94rem;margin-bottom:12px;min-height:0}
+.login .help{margin-top:18px;font-size:.82rem;color:var(--ink-3);line-height:1.75}
 
-/* แถบข้อมูลโรงเรียน */
-.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
-.meta span{background:var(--card);border:1px solid var(--line);border-radius:999px;
-  padding:6px 14px;font-size:.83rem;color:var(--ink-2);display:inline-flex;align-items:center;gap:7px;
-  box-shadow:var(--sh-1)}
-.meta span b{color:var(--ink-1);font-weight:700}
-.meta .ic{width:1em;height:1em;color:var(--brand-600)}
-
-/* filters */
-.filters{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:14px;margin-top:14px;display:flex;gap:11px;flex-wrap:wrap;align-items:flex-end;box-shadow:var(--sh-1)}
-.filters .f{display:flex;flex-direction:column;gap:5px;min-width:150px}
-.filters label{font-size:.76rem;font-weight:600;color:var(--ink-3);display:flex;align-items:center;gap:5px}
-.filters label .ic{width:.95em;height:.95em}
-.filters select{font-family:inherit;font-size:.92rem;padding:9px 32px 9px 11px;
-  border:1.5px solid var(--line);border-radius:var(--r-sm);background:var(--card);color:var(--ink-1);
-  width:100%;appearance:none;-webkit-appearance:none;
+/* ---------- ฟอร์ม ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:20px;box-shadow:var(--sh-1);margin-top:14px}
+.card > h2{margin:0 0 4px;font-size:1.05rem;font-weight:700;display:flex;align-items:center;gap:9px}
+.card > h2 .n{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;font-size:.82rem;
+  background:var(--brand-100);color:var(--brand-600);font-weight:800}
+.card > p.cap{margin:0 0 16px;font-size:.82rem;color:var(--ink-3);padding-left:35px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:13px}
+.fld{display:flex;flex-direction:column;gap:5px}
+.fld label{font-size:.79rem;font-weight:600;color:var(--ink-2);display:flex;align-items:center;gap:5px}
+.fld label .ic{width:.95em;height:.95em;color:var(--brand-600)}
+.fld label .req{color:var(--bad)}
+.fld input,.fld select,.fld textarea{font-family:inherit;font-size:.95rem;padding:10px 12px;
+  border:1.5px solid var(--line);border-radius:var(--r-sm);background:var(--card);color:var(--ink-1);width:100%}
+.fld select{padding-right:32px;appearance:none;-webkit-appearance:none;
   background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%237a7290' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 10px center}
-.filters select:focus{outline:none;border-color:var(--brand-500);box-shadow:0 0 0 3px rgba(124,90,212,.15)}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--brand-500);
+  box-shadow:0 0 0 3px rgba(124,90,212,.15)}
+.fld .hint{font-size:.75rem;color:var(--ink-3)}
+.fld.locked input{background:var(--soft);color:var(--ink-2);font-weight:600}
+.wide{grid-column:1/-1}
+.nbig input{font-size:1.35rem;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;
+  padding:11px;letter-spacing:.02em}
 
-/* hero */
-.hero{background:
-    radial-gradient(620px 260px at 6% -30%, rgba(56,102,235,.5), transparent 60%),
-    radial-gradient(560px 300px at 94% -20%, rgba(217,79,154,.45), transparent 58%),
-    linear-gradient(135deg,#2a1758,#4c2a96 50%,#8e2f83);
-  color:#fff;border-radius:var(--r-lg);padding:24px;margin-top:14px;box-shadow:0 8px 26px rgba(42,23,88,.28)}
-.hero .ttl{font-size:.86rem;opacity:.85;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.hero .row{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-end;margin-top:12px}
-.hero .big{font-size:3rem;font-weight:800;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-.hero .big small{font-size:1rem;opacity:.7;font-weight:600;letter-spacing:0}
-.hero .qb{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.18);
-  border:1px solid rgba(255,255,255,.3);padding:7px 16px;border-radius:999px;font-weight:600}
-.hero .kv{display:flex;flex-direction:column;gap:2px}
-.hero .kv b{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
-.hero .kv span{font-size:.79rem;opacity:.82}
+/* ---------- การ์ดทักษะ ---------- */
+.crd{border:1.5px solid var(--line);border-radius:var(--r-lg);margin-top:14px;overflow:hidden;
+  background:var(--card);box-shadow:var(--sh-1)}
+.crd .top{display:flex;align-items:center;gap:13px;padding:14px 18px;color:#fff;flex-wrap:wrap}
+.crd .top .bdg{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+  background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.3);font-weight:800;font-size:.95rem}
+.crd .top .tt{flex:1;min-width:160px}
+.crd .top .tt b{display:block;font-size:1rem;font-weight:700;line-height:1.35}
+.crd .top .tt span{font-size:.78rem;opacity:.88}
+.crd .top .tally{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.34);
+  padding:5px 13px;border-radius:999px;font-size:.83rem;font-weight:700;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.crd .top .tally.ok{background:#fff;color:var(--ok);border-color:#fff}
+.crd .top .tally.over{background:#fff;color:var(--bad);border-color:#fff}
+.crd .top .cp{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);color:#fff;
+  font-family:inherit;font-size:.79rem;padding:5px 11px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.crd .top .cp:hover{background:rgba(255,255,255,.32)}
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px}
+.opt{border:1.5px solid var(--line);border-radius:var(--r);padding:11px;display:flex;
+  flex-direction:column;gap:8px;transition:.15s}
+.opt .hd{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.86rem}
+.opt .hd .num{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;
+  color:#fff;font-size:.76rem;font-weight:800;flex:0 0 auto}
+.opt .tx{font-size:.78rem;line-height:1.55;color:var(--ink-2);flex:1}
+.opt .inp{display:flex;align-items:center;gap:7px;margin-top:2px}
+.opt .inp input{flex:1;min-width:0;font-family:inherit;font-size:1.25rem;font-weight:800;text-align:center;
+  padding:9px 6px;border:1.5px solid var(--line);border-radius:var(--r-sm);
+  background:var(--card);color:var(--ink-1);font-variant-numeric:tabular-nums;
+  -moz-appearance:textfield}
+.opt .inp input::-webkit-outer-spin-button,.opt .inp input::-webkit-inner-spin-button{
+  -webkit-appearance:none;margin:0}
+.opt .inp input:focus{outline:none;box-shadow:0 0 0 3px rgba(124,90,212,.2)}
+.opt .inp .unit{font-size:.8rem;color:var(--ink-3);font-weight:600}
+.opt.o1{background:var(--l1-bg);border-color:color-mix(in srgb,var(--l1) 30%,transparent)}
+.opt.o2{background:var(--l2-bg);border-color:color-mix(in srgb,var(--l2) 30%,transparent)}
+.opt.o3{background:var(--l3-bg);border-color:color-mix(in srgb,var(--l3) 30%,transparent)}
+.opt.o4{background:var(--l4-bg);border-color:color-mix(in srgb,var(--l4) 30%,transparent)}
+.opt.o1 .hd .num{background:var(--l1)} .opt.o2 .hd .num{background:var(--l2)}
+.opt.o3 .hd .num{background:var(--l3)} .opt.o4 .hd .num{background:var(--l4)}
+.opt.o1 .hd{color:var(--l1)} .opt.o2 .hd{color:var(--l2)}
+.opt.o3 .hd{color:var(--l3)} .opt.o4 .hd{color:var(--l4)}
+.opt.o1 .inp input{border-color:color-mix(in srgb,var(--l1) 45%,transparent)}
+.opt.o2 .inp input{border-color:color-mix(in srgb,var(--l2) 45%,transparent)}
+.opt.o3 .inp input{border-color:color-mix(in srgb,var(--l3) 45%,transparent)}
+.opt.o4 .inp input{border-color:color-mix(in srgb,var(--l4) 45%,transparent)}
+.crd .ft{padding:0 14px 14px;font-size:.82rem;color:var(--ink-3);display:flex;
+  justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.crd .ft b{color:var(--ink-1);font-variant-numeric:tabular-nums}
 
-.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;
-  box-shadow:var(--sh-1);margin-top:14px}
-.panel h3{margin:0 0 3px;font-size:1.03rem;font-weight:700;display:flex;align-items:center;gap:9px}
-.panel h3 .ic{width:1.1em;height:1.1em;color:var(--brand-600)}
-.panel .cap{margin:0 0 18px;font-size:.81rem;color:var(--ink-3);padding-left:28px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+/* ---------- แถบสถานะ ---------- */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);
+  box-shadow:0 -6px 26px rgba(42,23,88,.14);z-index:20}
+.bar .wrap{padding:11px 18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.ring{width:46px;height:46px;flex:0 0 auto;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:.74rem;font-weight:800}
+.bar .st{display:flex;flex-direction:column;line-height:1.3}
+.bar .st b{font-size:1.24rem;font-weight:800;font-variant-numeric:tabular-nums}
+.bar .st span{font-size:.76rem;color:var(--ink-3)}
+.bar .sp{flex:1}
+.bar button{background:linear-gradient(135deg,#7442c9 0%,#5a2ea6 55%,#8e2f83 100%);color:#fff;border:none;
+  padding:12px 24px;border-radius:12px;font-family:inherit;font-size:.98rem;font-weight:700;cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;position:relative;overflow:hidden;isolation:isolate;
+  box-shadow:0 4px 16px rgba(76,42,150,.3),inset 0 1px 0 rgba(255,255,255,.34)}
+.bar button:hover:not(:disabled){transform:translateY(-1px)}
+.bar button:disabled{opacity:.55;cursor:not-allowed}
+.bar button::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.06) 46%,rgba(255,255,255,0) 52%,rgba(0,0,0,.08))}
+.bar button::after{content:"";position:absolute;top:-10%;left:-150%;width:55%;height:120%;pointer-events:none;
+  z-index:-1;transform:skewX(-20deg);
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5) 45%,rgba(255,255,255,.72),rgba(255,255,255,.5) 55%,transparent)}
+.bar button:hover:not(:disabled)::after{animation:sheen .78s ease}
 
-.hb{display:grid;grid-template-columns:auto 1fr auto;gap:10px 12px;align-items:center}
-.hb .nm{font-size:.87rem;color:var(--ink-2);text-align:right;max-width:230px;
-  display:flex;align-items:center;gap:7px;justify-content:flex-end}
-.hb .nm .sw{width:9px;height:9px;border-radius:3px;flex:0 0 auto}
-.hb .track{background:var(--grid);border-radius:5px;height:16px}
-.hb .fill{height:100%;background:var(--bar);border-radius:0 5px 5px 0;min-width:3px;transition:width .45s ease}
-.hb .val{font-size:.86rem;font-weight:700;font-variant-numeric:tabular-nums;min-width:46px;text-align:right}
-.hb .sub{font-size:.74rem;color:var(--ink-3);font-weight:500}
+.msg{border-radius:var(--r-lg);padding:16px 18px;margin-top:14px;font-size:.94rem;
+  display:flex;gap:12px;align-items:flex-start;line-height:1.65}
+.msg .ic{width:1.3em;height:1.3em;margin-top:2px}
+.msg.ok{background:var(--ok-bg);color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 34%,transparent)}
+.msg.err{background:var(--bad-bg);color:var(--bad);border:1px solid color-mix(in srgb,var(--bad) 34%,transparent)}
+.msg b{display:block;font-size:1rem}
+.warnbox{background:#fff5e6;border:1px solid #f0cf9c;color:#7a5312;border-radius:var(--r-lg);
+  padding:14px 18px;margin-top:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:.9rem}
+[data-theme=dark] .warnbox{background:#2e2412;border-color:#4d3c1c;color:#f0d3a0}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .warnbox{
+  background:#2e2412;border-color:#4d3c1c;color:#f0d3a0}}
+.warnbox button{background:#e0692c;color:#fff;border:none;padding:8px 16px;border-radius:10px;
+  font-family:inherit;font-weight:700;font-size:.86rem;cursor:pointer;margin-left:auto}
 
-.sumtbl{width:100%;border-collapse:separate;border-spacing:0;font-size:.85rem}
-.sumtbl th{background:var(--soft);color:var(--ink-2);font-weight:600;font-size:.76rem;
-  padding:9px 8px;text-align:center;border-bottom:1.5px solid var(--line);white-space:nowrap}
-.sumtbl th.l,.sumtbl td.l{text-align:left}
-.sumtbl td{padding:9px 8px;text-align:center;border-bottom:1px solid var(--grid);
-  font-variant-numeric:tabular-nums;white-space:nowrap}
-.sumtbl tbody tr:hover td{background:var(--soft)}
-.sumtbl tfoot td{font-weight:700;border-top:2px solid var(--line);border-bottom:none;background:var(--soft)}
-.sumtbl .cell{display:block;padding:6px 0;border-radius:6px;font-weight:700;font-size:.79rem;
-  color:#1b0d3d;min-width:34px}
-.sumtbl .nm{font-weight:600;color:var(--ink-1)}
-.sumtbl .sub{font-size:.74rem;color:var(--ink-3);font-weight:400}
-.sumtbl .rm{display:inline-grid;place-items:center;min-width:52px;padding:3px 8px;border-radius:8px;
-  background:var(--brand-100);color:var(--brand-600);font-weight:700;font-size:.82rem}
-.pill{display:inline-block;padding:3px 11px;border-radius:99px;font-size:.75rem;font-weight:700;min-width:68px}
-.q4{background:var(--seq-4);color:#fff} .q3{background:var(--seq-3);color:#fff}
-.q2{background:var(--seq-2);color:#221146} .q1{background:var(--seq-1);color:#221146}
-.scroller{overflow:auto;margin:0 -4px;padding:0 4px}
-.hmlegend{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:.79rem;color:var(--ink-3);
-  padding-top:13px;border-top:1px solid var(--grid);flex-wrap:wrap}
-.hmlegend .sw{display:flex;border-radius:5px;overflow:hidden}
-.hmlegend .sw i{width:26px;height:12px;display:block}
-.dist{display:grid;grid-template-columns:auto 1fr auto;gap:10px 12px;align-items:center}
-.dist .nm{font-size:.87rem;color:var(--ink-2);text-align:right;display:flex;align-items:center;
-  gap:7px;justify-content:flex-end;max-width:230px}
-.dist .nm .sw{width:9px;height:9px;border-radius:3px;flex:0 0 auto}
-.dist .track{display:flex;height:26px;border-radius:7px;overflow:hidden;background:var(--grid);gap:2px}
-.dist .seg{height:100%;display:grid;place-items:center;color:#fff;font-size:.78rem;font-weight:700;
-  transition:width .45s ease;min-width:0;overflow:hidden}
-.dist .tot{font-size:.86rem;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;
-  min-width:52px;text-align:right}
-.lvlegend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:.82rem;color:var(--ink-2);
-  padding-top:14px;border-top:1px solid var(--grid)}
-.lvlegend span{display:inline-flex;align-items:center;gap:6px}
-.lvlegend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.modal{position:fixed;inset:0;background:rgba(20,10,40,.55);display:grid;place-items:center;
+  z-index:60;padding:20px;backdrop-filter:blur(3px)}
+.modal .box{background:var(--card);border-radius:20px;padding:28px 26px;max-width:420px;width:100%;
+  box-shadow:var(--sh-2);text-align:center}
+.modal h3{margin:0 0 6px;font-size:1.14rem;display:flex;align-items:center;justify-content:center;gap:9px}
+.modal p{margin:0 0 16px;font-size:.87rem;color:var(--ink-2)}
+.modal input{width:100%;padding:12px;font-size:.98rem;font-family:inherit;border:1.5px solid var(--line);
+  border-radius:12px;background:var(--card);color:var(--ink-1);margin-bottom:10px}
+.modal input:focus{outline:none;border-color:var(--brand-500);box-shadow:0 0 0 4px rgba(124,90,212,.16)}
+.modal .go{width:100%;padding:12px;background:linear-gradient(135deg,#7442c9,#5a2ea6 55%,#8e2f83);
+  color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:.98rem;font-weight:600;cursor:pointer}
+.modal .cancel{background:none;border:none;color:var(--ink-3);font-family:inherit;font-size:.87rem;
+  margin-top:10px;cursor:pointer}
+.modal .er{font-size:.86rem;min-height:20px;margin-top:6px}
+footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:24px 18px 10px}
 
-/* ความคืบหน้า */
-.prog{display:grid;grid-template-columns:auto 1fr auto;gap:8px 12px;align-items:center}
-.prog .nm{font-size:.87rem;color:var(--ink-2);text-align:right;white-space:nowrap}
-.prog .track{background:var(--grid);border-radius:5px;height:14px;overflow:hidden}
-.prog .fill{height:100%;border-radius:5px;transition:width .45s ease}
-.prog .val{font-size:.83rem;font-weight:700;font-variant-numeric:tabular-nums;min-width:96px;text-align:right}
-.prog .val small{font-weight:500;color:var(--ink-3)}
-.empty{text-align:center;color:var(--ink-3);padding:34px 10px;font-size:.94rem}
-.empty .ic{width:34px;height:34px;display:block;margin:0 auto 10px;opacity:.45}
-.cta{margin-top:14px;background:linear-gradient(135deg,#fff4e2,#ffe9f2);border:1px solid #f5d9b8;
-  border-radius:var(--r-lg);padding:18px 20px;display:flex;gap:16px;align-items:center;
-  flex-wrap:wrap;justify-content:space-between;color:#5a3b12}
-[data-theme=dark] .cta{background:linear-gradient(135deg,#2c2213,#2c1622);border-color:#4a3a20;color:#f0d9b5}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .cta{
-  background:linear-gradient(135deg,#2c2213,#2c1622);border-color:#4a3a20;color:#f0d9b5}}
-.cta b{display:block;font-size:1rem}
-.cta .ctb{background:linear-gradient(135deg,#f0a12e,#e0692c);color:#fff;border:none;
-  padding:11px 20px;border-radius:11px;font-family:inherit;font-weight:700;font-size:.94rem;
-  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
-  box-shadow:0 4px 14px rgba(224,105,44,.35),inset 0 1px 0 rgba(255,255,255,.4)}
-.cta .ctb:hover{transform:translateY(-1px)}
-footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 40px}
-
-@media(max-width:900px){ .two{grid-template-columns:1fr} }
-@media(max-width:600px){ .hb .nm{max-width:118px} .panel .cap{padding-left:0} header h1{font-size:1.1rem} }
-@media print{ header .hbtns,.filters,.cta{display:none!important} body{background:#fff}
-  .panel,.hero{break-inside:avoid;box-shadow:none} }
+@media(max-width:820px){ .opts{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:520px){ .opts{grid-template-columns:1fr} .card>p.cap{padding-left:0}
+  header h1{font-size:1.08rem} .bar .st.hidesm{display:none} }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -277,98 +289,131 @@ footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 4
 <symbol id="ic-moon" viewBox="0 0 24 24"><path d="M20.5 14.3A8.6 8.6 0 0 1 9.7 3.5a8.6 8.6 0 1 0 10.8 10.8Z"/></symbol>
 </svg>
 
-<!-- เลือกโรงเรียน (เมื่อยังไม่ระบุ ?smis=) -->
-<div id="picker" class="picker" style="display:none">
-  <div class="lock"><svg class="ic"><use href="#ic-school"/></svg></div>
-  <h2>แดชบอร์ดโรงเรียน</h2>
-  <p class="sub">ค้นหาและเลือกโรงเรียนเพื่อดูผลการประเมินทักษะ 8C</p>
-  <input type="text" id="q" placeholder="พิมพ์ชื่อโรงเรียน หรือรหัส SMIS 8 หลัก" autocomplete="off">
-  <div class="plist" id="plist"></div>
+<!-- ---------- เข้าสู่ระบบ ---------- -->
+<div id="login" class="login">
+  <div class="lock"><svg class="ic"><use href="#ic-lock"/></svg></div>
+  <h2>เข้าสู่ระบบกรอกข้อมูล</h2>
+  <p class="sub">สำหรับครูและเจ้าหน้าที่ของโรงเรียน</p>
+  <input type="text" id="user" placeholder="รหัสโรงเรียน 8 หลัก" inputmode="numeric"
+         maxlength="8" autocomplete="username">
+  <div class="nm" id="uName" style="display:none"></div>
+  <input type="password" id="pass" placeholder="รหัสผ่าน" autocomplete="current-password">
+  <button class="go" id="btnGo"><svg class="ic"><use href="#ic-login"/></svg> เข้าสู่ระบบ</button>
+  <div class="er" id="loginErr"></div>
   <div class="help">
-    แดชบอร์ดเปิดให้ดูได้ทุกคน ไม่ต้องเข้าสู่ระบบ<br>
-    เข้าสู่ระบบเฉพาะเมื่อต้องการ <b>กรอกหรือแก้ไขข้อมูล</b> ของโรงเรียนตนเอง<br>
-    <a href="index.html">← กลับหน้าภาพรวมระดับเขต</a>
+    <b>ชื่อผู้ใช้</b> คือรหัสโรงเรียน (SMIS) 8 หลัก เช่น 41010001<br>
+    <b>รหัสผ่านเริ่มต้น</b> คือรหัสโรงเรียนเดียวกัน — เปลี่ยนได้หลังเข้าสู่ระบบ<br>
+    <a href="index.html">← ภาพรวมระดับเขต</a> · <a href="school.html">แดชบอร์ดโรงเรียน</a>
   </div>
 </div>
 
-<!-- แดชบอร์ด -->
+<!-- ---------- ฟอร์ม ---------- -->
 <div id="app" style="display:none">
-  <header>
-    <div class="wrap">
-      <div>
-        <div class="k">
-          <a href="index.html"><svg class="ic"><use href="#ic-up"/></svg> ภาพรวมระดับเขต</a>
-          <span id="hGroup"></span>
-        </div>
-        <h1><svg class="ic"><use href="#ic-school"/></svg> <span id="hSchool"></span></h1>
-      </div>
-      <div class="hbtns">
-        <a class="gbtn key" id="btnLogin" href="form.html"><svg class="ic"><use href="#ic-login"/></svg> เข้าสู่ระบบกรอกข้อมูล</a>
-        <button class="gbtn" id="btnTheme"><svg class="ic"><use href="#ic-moon"/></svg> โหมดมืด</button>
-        <button class="gbtn" id="btnReload"><svg class="ic"><use href="#ic-refresh"/></svg> โหลดใหม่</button>
-        <button class="gbtn" id="btnCsv"><svg class="ic"><use href="#ic-download"/></svg> CSV</button>
-        <button class="gbtn" id="btnPrint"><svg class="ic"><use href="#ic-print"/></svg> พิมพ์</button>
-        <button class="gbtn" id="btnSwitch"><svg class="ic"><use href="#ic-search"/></svg> เปลี่ยนโรงเรียน</button>
-      </div>
-    </div>
-  </header>
-
+<header>
   <div class="wrap">
-    <div class="meta" id="meta"></div>
-
-    <div class="filters">
-      <div class="f"><label><svg class="ic"><use href="#ic-calendar"/></svg> ปีการศึกษา</label>
-        <select id="fYear"><option value="">ทั้งหมด</option></select></div>
-      <div class="f"><label>ภาคเรียน</label>
-        <select id="fTerm"><option value="">ทั้งหมด</option><option value="1">ที่ 1</option><option value="2">ที่ 2</option></select></div>
-      <div class="f"><label>ระดับชั้น</label><select id="fGrade"><option value="">ทั้งหมด</option></select></div>
-    </div>
-
-    <div id="hero"></div>
-
-    <div class="panel">
-      <h3><svg class="ic"><use href="#ic-clock"/></svg> ความคืบหน้าการกรอกข้อมูล</h3>
-      <p class="cap">เทียบกับจำนวนห้องเรียนจริงตามระบบ BIG DATA สพป.อุดรธานี เขต 1 (ปีการศึกษา 2569 ภาคเรียนที่ 1)</p>
-      <div id="progBox"></div>
-    </div>
-
-    <div class="two">
-      <div class="panel">
-        <h3><svg class="ic"><use href="#ic-chart"/></svg> คะแนนเฉลี่ยรายทักษะ 8 ด้าน</h3>
-        <p class="cap">ของทั้งโรงเรียน · ถ่วงน้ำหนักตามจำนวนนักเรียน · เต็ม 4.00</p>
-        <div id="chartC"></div>
+    <div>
+      <div class="k">
+        <a href="index.html"><svg class="ic"><use href="#ic-up"/></svg> ภาพรวมเขต</a>
+        <a id="lnkSchool" href="school.html"><svg class="ic"><use href="#ic-chart"/></svg> แดชบอร์ดโรงเรียน</a>
+        <span id="hGroup"></span>
       </div>
-      <div class="panel">
-        <h3><svg class="ic"><use href="#ic-cap"/></svg> คะแนนเฉลี่ยรายระดับชั้น</h3>
-        <p class="cap">รวมทุกห้องในชั้นเดียวกัน · เต็ม 4.00</p>
-        <div id="chartG"></div>
-      </div>
+      <h1><svg class="ic"><use href="#ic-clipboard"/></svg> <span id="hSchool"></span></h1>
     </div>
-
-    <div class="panel">
-      <h3><svg class="ic"><use href="#ic-users"/></svg> การกระจายนักเรียนตามระดับคุณภาพ รายทักษะ</h3>
-      <p class="cap">จำนวนนักเรียน (คน) ในแต่ละระดับ รวมทุกห้องตามตัวกรอง — เห็นได้ทันทีว่าด้านใดมีนักเรียนกลุ่มควรพัฒนามาก</p>
-      <div id="chartDist"></div>
-      <div class="lvlegend" id="lvLegend"></div>
+    <div class="hbtns">
+      <button class="gbtn" id="btnTheme"><svg class="ic"><use href="#ic-moon"/></svg> โหมดมืด</button>
+      <button class="gbtn" id="btnPw"><svg class="ic"><use href="#ic-lock"/></svg> เปลี่ยนรหัสผ่าน</button>
+      <button class="gbtn" id="btnOut"><svg class="ic"><use href="#ic-x"/></svg> ออกจากระบบ</button>
     </div>
-
-    <div class="panel">
-      <h3><svg class="ic"><use href="#ic-table"/></svg> ผลรายห้องเรียน</h3>
-      <p class="cap">เรียงตามระดับชั้นและห้อง · ช่อง C1–C8 เข้มมาก = คะแนนสูง</p>
-      <div class="scroller"><table class="sumtbl" id="tblRoom"></table></div>
-      <div class="hmlegend" id="hmLegend"></div>
-    </div>
-
-    <div class="cta">
-      <div>
-        <b>เป็นครูของโรงเรียนนี้ใช่ไหม</b>
-        <span id="ctaTx">เข้าสู่ระบบด้วยรหัสโรงเรียนเพื่อกรอกหรือแก้ไขข้อมูลรายห้อง</span>
-      </div>
-      <a class="ctb" id="btnLogin2" href="form.html"><svg class="ic"><use href="#ic-login"/></svg> เข้าสู่ระบบกรอกข้อมูล</a>
-    </div>
-
-    <footer>กลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา · สพป.อุดรธานี เขต 1</footer>
   </div>
+</header>
+
+<div class="wrap">
+  <div id="warn"></div>
+  <div id="msg"></div>
+
+  <!-- 1 ข้อมูลห้องเรียน -->
+  <div class="card">
+    <h2><span class="n">1</span> ข้อมูลห้องเรียน</h2>
+    <p class="cap">1 ห้องเรียน = 1 ชุดข้อมูล · หากกรอกซ้ำห้องเดิม ระบบจะปรับปรุงข้อมูลเดิมให้</p>
+    <div class="grid">
+      <div class="fld"><label><svg class="ic"><use href="#ic-calendar"/></svg> ปีการศึกษา <span class="req">*</span></label>
+        <select id="year"></select></div>
+      <div class="fld"><label>ภาคเรียน <span class="req">*</span></label>
+        <select id="term"><option value="1">ภาคเรียนที่ 1</option><option value="2">ภาคเรียนที่ 2</option></select></div>
+      <div class="fld"><label>วันที่ประเมิน</label><input type="date" id="date"></div>
+      <div class="fld locked"><label><svg class="ic"><use href="#ic-school"/></svg> โรงเรียน</label>
+        <input type="text" id="schoolBox" readonly></div>
+      <div class="fld"><label><svg class="ic"><use href="#ic-cap"/></svg> ระดับชั้น <span class="req">*</span></label>
+        <select id="grade"><option value="">— เลือกระดับชั้น —</option></select></div>
+      <div class="fld"><label>ห้องที่ <span class="req">*</span></label>
+        <select id="room"><option value="">— เลือกห้อง —</option></select>
+        <span class="hint" id="roomHint"></span></div>
+      <div class="fld nbig"><label><svg class="ic"><use href="#ic-users"/></svg> จำนวนนักเรียนในห้อง <span class="req">*</span></label>
+        <input type="number" id="nAll" min="1" max="300" step="1" inputmode="numeric" placeholder="0">
+        <span class="hint" id="nHint">ระบบเติมให้จาก BIG DATA — แก้ไขได้ตามจริง</span></div>
+    </div>
+  </div>
+
+  <!-- 2 ทักษะ 8C -->
+  <div class="card">
+    <h2><span class="n">2</span> ทักษะ 8C — นับจำนวนนักเรียนแต่ละระดับ</h2>
+    <p class="cap">แต่ละด้าน อ่านคำอธิบาย 4 ระดับ แล้วใส่ว่ามีนักเรียน "กี่คน" อยู่ในระดับนั้น ·
+      ผลรวมของทุกด้านต้องเท่ากับจำนวนนักเรียนในห้อง</p>
+    <div id="cards"></div>
+  </div>
+
+  <!-- 3 ข้อมูลเพิ่มเติม -->
+  <div class="card">
+    <h2><span class="n">3</span> ข้อมูลเพิ่มเติม (ไม่บังคับ)</h2>
+    <p class="cap">ช่วยให้เขตพื้นที่เห็นบริบทและวางแผนนิเทศได้ตรงจุด</p>
+    <div class="grid">
+      <div class="fld wide"><label><svg class="ic"><use href="#ic-spark"/></svg> จุดเด่นของห้องเรียน</label>
+        <textarea id="strength" rows="2" maxlength="400" placeholder="เช่น นักเรียนกล้าแสดงออก ทำงานกลุ่มได้ดี"></textarea></div>
+      <div class="fld wide"><label><svg class="ic"><use href="#ic-alert"/></svg> จุดที่ควรพัฒนา</label>
+        <textarea id="improve" rows="2" maxlength="400" placeholder="เช่น ควรเพิ่มทักษะการใช้เทคโนโลยี"></textarea></div>
+      <div class="fld wide"><label><svg class="ic"><use href="#ic-link"/></svg> ลิงก์หลักฐาน</label>
+        <input type="url" id="evidence" placeholder="https://drive.google.com/..."></div>
+    </div>
+  </div>
+
+  <!-- 4 ผู้กรอก -->
+  <div class="card">
+    <h2><span class="n">4</span> ผู้กรอกข้อมูล</h2>
+    <p class="cap">ระบบจะจำไว้ให้ในเครื่องนี้ ครั้งต่อไปไม่ต้องพิมพ์ใหม่</p>
+    <div class="grid">
+      <div class="fld"><label><svg class="ic"><use href="#ic-user"/></svg> ชื่อ-สกุล <span class="req">*</span></label>
+        <input type="text" id="reporter" maxlength="80" placeholder="เช่น นางสาวสมหญิง ใจดี"></div>
+      <div class="fld"><label>ตำแหน่ง <span class="req">*</span></label>
+        <input type="text" id="position" maxlength="60" placeholder="เช่น ครูประจำชั้น ป.1/1"></div>
+      <div class="fld"><label><svg class="ic"><use href="#ic-phone"/></svg> เบอร์โทรศัพท์ <span class="req">*</span></label>
+        <input type="tel" id="phone" maxlength="15" inputmode="tel" placeholder="08XXXXXXXX"></div>
+      <div class="fld"><label>อีเมล / ID Line</label><input type="text" id="contact" maxlength="80"></div>
+      <div class="fld wide"><label><svg class="ic"><use href="#ic-notes"/></svg> หมายเหตุ</label>
+        <input type="text" id="note" maxlength="200"></div>
+    </div>
+  </div>
+
+  <footer>กลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา · สพป.อุดรธานี เขต 1</footer>
+</div>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="ring">
+      <svg width="46" height="46" viewBox="0 0 46 46">
+        <circle cx="23" cy="23" r="19" fill="none" stroke="var(--grid)" stroke-width="5"/>
+        <circle id="rg" cx="23" cy="23" r="19" fill="none" stroke="var(--brand-500)" stroke-width="5"
+          stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4"
+          style="transition:stroke-dashoffset .4s ease"/>
+      </svg>
+      <b id="rgTx">0/8</b>
+    </div>
+    <div class="st"><b id="stAvg">–</b><span>คะแนนเฉลี่ย 8C</span></div>
+    <div class="st hidesm"><b id="stQ">–</b><span>ระดับคุณภาพ</span></div>
+    <div class="st hidesm"><b id="stN">0</b><span>นักเรียนในห้อง (คน)</span></div>
+    <div class="sp"></div>
+    <button id="btnSave"><svg class="ic"><use href="#ic-save"/></svg> บันทึกข้อมูล</button>
+  </div>
+</div>
 </div>
 
 <script>
@@ -479,30 +524,19 @@ function qualityOf(avg) {
 }
 
 const SCHOOLS = [{"code":"41010001","name":"บ้านท่าตูมดงสระพัง","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":62,"size":"ขนาดเล็ก"},{"code":"41010002","name":"มิตรภาพ 6","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":129,"size":"ขนาดกลาง"},{"code":"41010003","name":"บ้านโนนยางโนนบ่อ","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":40,"size":"ขนาดเล็ก"},{"code":"41010004","name":"บ้านขมิ้นบ่อโคลน","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":53,"size":"ขนาดเล็ก"},{"code":"41010006","name":"บ้านดอนหวาย","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":34,"size":"ขนาดเล็ก"},{"code":"41010008","name":"นิคมสร้างตนเองเชียงพิณ 3","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":110,"size":"ขนาดเล็ก"},{"code":"41010009","name":"นิคมสร้างตนเองเชียงพิณ 5","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":29,"size":"ขนาดเล็ก"},{"code":"41010010","name":"บ้านนาสมบูรณ์","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":19,"size":"ขนาดเล็ก"},{"code":"41010011","name":"บ้านโคกสะอาดศรีบูรพา","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":121,"size":"ขนาดกลาง"},{"code":"41010012","name":"บ้านหนองสวรรค์ (ไชยเชียงพิณ)","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":63,"size":"ขนาดเล็ก"},{"code":"41010013","name":"บ้านหนองโอนหนองฮาง","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":136,"size":"ขนาดกลาง"},{"code":"41010015","name":"บ้านเชียงพิณ","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":94,"size":"ขนาดเล็ก"},{"code":"41010016","name":"นาคลองหนองศรีคามวิทยา","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":62,"size":"ขนาดเล็ก"},{"code":"41010017","name":"บ้านเชียงยืน","group":"กลุ่มเมือง 8","amphoe":"เมืองอุดรธานี","total":219,"size":"ขนาดกลาง"},{"code":"41010018","name":"บ้านอีหลุ่ง","group":"กลุ่มเมือง 8","amphoe":"เมืองอุดรธานี","total":57,"size":"ขนาดเล็ก"},{"code":"41010019","name":"บ้านจำปา","group":"กลุ่มเมือง 8","amphoe":"เมืองอุดรธานี","total":32,"size":"ขนาดเล็ก"},{"code":"41010020","name":"บ้านป่องมหิดลอนุสรณ์ 6","group":"กลุ่มเมือง 8","amphoe":"เมืองอุดรธานี","total":25,"size":"ขนาดเล็ก"},{"code":"41010021","name":"บ้านหนองน้ำเค็ม","group":"กลุ่มเมือง 8","amphoe":"เมืองอุดรธานี","total":70,"size":"ขนาดเล็ก"},{"code":"41010022","name":"บ้านโนนสวรรค์","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":15,"size":"ขนาดเล็ก"},{"code":"41010023","name":"บ้านหนองหลอด","group":"กลุ่มเมือง 8","amphoe":"เมืองอุดรธานี","total":180,"size":"ขนาดกลาง"},{"code":"41010024","name":"บ้านหนองตอสูงแคน","group":"กลุ่มเมือง 8","amphoe":"เมืองอุดรธานี","total":87,"size":"ขนาดเล็ก"},{"code":"41010025","name":"บ่อน้อยประชาสรรค์","group":"กลุ่มเมือง 8","amphoe":"เมืองอุดรธานี","total":124,"size":"ขนาดกลาง"},{"code":"41010026","name":"บ้านนาเยีย","group":"กลุ่มเมือง 8","amphoe":"เมืองอุดรธานี","total":35,"size":"ขนาดเล็ก"},{"code":"41010028","name":"บ้านเชียงพัง","group":"กลุ่มเมือง 4","amphoe":"เมืองอุดรธานี","total":139,"size":"ขนาดกลาง"},{"code":"41010029","name":"ชุมชนนากว้างพัฒนศึกษา","group":"กลุ่มเมือง 4","amphoe":"เมืองอุดรธานี","total":150,"size":"ขนาดกลาง"},{"code":"41010030","name":"บ้านนาทาม","group":"กลุ่มเมือง 4","amphoe":"เมืองอุดรธานี","total":0,"size":"ขนาดเล็ก"},{"code":"41010031","name":"บ้านหมากตูมดอนยานาง","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":133,"size":"ขนาดกลาง"},{"code":"41010032","name":"ไทยรัฐวิทยา ๙๒ (ชุมชนนาข่า)","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":204,"size":"ขนาดกลาง"},{"code":"41010033","name":"บ้านถ่อนใหญ่ถ่อนน้อย","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":42,"size":"ขนาดเล็ก"},{"code":"41010034","name":"บ้านเหล่าดอนแตง","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":25,"size":"ขนาดเล็ก"},{"code":"41010035","name":"บ้านนาคำหลวง","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":228,"size":"ขนาดกลาง"},{"code":"41010036","name":"บ้านงอยเลิงทอง","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":73,"size":"ขนาดเล็ก"},{"code":"41010037","name":"ประชาสามัคคี","group":"กลุ่มเมือง 7","amphoe":"เมืองอุดรธานี","total":97,"size":"ขนาดเล็ก"},{"code":"41010039","name":"บ้านศรีเชียงใหม่","group":"กลุ่มเมือง 2","amphoe":"เมืองอุดรธานี","total":57,"size":"ขนาดเล็ก"},{"code":"41010040","name":"บ้านกุดลิงง้อหนองแก","group":"กลุ่มเมือง 2","amphoe":"เมืองอุดรธานี","total":42,"size":"ขนาดเล็ก"},{"code":"41010041","name":"บ้านนาแอง","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":109,"size":"ขนาดเล็ก"},{"code":"41010043","name":"บ้านนิคมพัฒนา","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":83,"size":"ขนาดเล็ก"},{"code":"41010044","name":"บ้านหนองขุ่นเหล่าหลักวิทยา","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":150,"size":"ขนาดกลาง"},{"code":"41010045","name":"บ้านปากดงส่งเสริมธรรม","group":"กลุ่มเมือง 3","amphoe":"เมืองอุดรธานี","total":54,"size":"ขนาดเล็ก"},{"code":"41010047","name":"ชุมชนโนนสูง","group":"กลุ่มเมือง 9","amphoe":"เมืองอุดรธานี","total":647,"size":"ขนาดกลาง"},{"code":"41010048","name":"บ้านหนองโสกดาว","group":"กลุ่มเมือง 9","amphoe":"เมืองอุดรธานี","total":93,"size":"ขนาดเล็ก"},{"code":"41010049","name":"บ้านข้าวสาร","group":"กลุ่มเมือง 9","amphoe":"เมืองอุดรธานี","total":48,"size":"ขนาดเล็ก"},{"code":"41010050","name":"บ้านชัยพรมิตรภาพที่ 67","group":"กลุ่มเมือง 9","amphoe":"เมืองอุดรธานี","total":160,"size":"ขนาดกลาง"},{"code":"41010051","name":"บ้านเม่น","group":"กลุ่มเมือง 4","amphoe":"เมืองอุดรธานี","total":79,"size":"ขนาดเล็ก"},{"code":"41010052","name":"บ้านขาว","group":"กลุ่มเมือง 4","amphoe":"เมืองอุดรธานี","total":58,"size":"ขนาดเล็ก"},{"code":"41010053","name":"บ้านดู่","group":"กลุ่มเมือง 4","amphoe":"เมืองอุดรธานี","total":80,"size":"ขนาดเล็ก"},{"code":"41010054","name":"บ้านหัวบึง","group":"กลุ่มเมือง 4","amphoe":"เมืองอุดรธานี","total":212,"size":"ขนาดกลาง"},{"code":"41010055","name":"บ้านพรานเหมือน","group":"กลุ่มเมือง 4","amphoe":"เมืองอุดรธานี","total":194,"size":"ขนาดกลาง"},{"code":"41010056","name":"บ้านดงเค็ง (นําวัฒนาอุปถัมภ์)","group":"กลุ่มเมือง 2","amphoe":"เมืองอุดรธานี","total":39,"size":"ขนาดเล็ก"},{"code":"41010057","name":"บ้านคำกลิ้ง","group":"กลุ่มเมือง 2","amphoe":"เมืองอุดรธานี","total":294,"size":"ขนาดกลาง"},{"code":"41010058","name":"บ้านหนองตูม","group":"กลุ่มเมือง 2","amphoe":"เมืองอุดรธานี","total":124,"size":"ขนาดกลาง"},{"code":"41010059","name":"บ้านจั่นศรีวิไล","group":"กลุ่มเมือง 2","amphoe":"เมืองอุดรธานี","total":122,"size":"ขนาดกลาง"},{"code":"41010060","name":"บ้านเลี่ยมพิลึก","group":"กลุ่มเมือง 2","amphoe":"เมืองอุดรธานี","total":58,"size":"ขนาดเล็ก"},{"code":"41010061","name":"ค่ายประจักษ์ศิลปาคม","group":"กลุ่มเมือง 2","amphoe":"เมืองอุดรธานี","total":102,"size":"ขนาดเล็ก"},{"code":"41010062","name":"บ้านตาด","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":210,"size":"ขนาดกลาง"},{"code":"41010063","name":"บ้านกกสะทอนเครือหวายดิน","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":59,"size":"ขนาดเล็ก"},{"code":"41010064","name":"บ้านโนนเดื่อ","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":67,"size":"ขนาดเล็ก"},{"code":"41010065","name":"บ้านสุขสมบูรณ์","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":73,"size":"ขนาดเล็ก"},{"code":"41010066","name":"บ้านศรีบุญเรือง","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":62,"size":"ขนาดเล็ก"},{"code":"41010067","name":"เจ ซี บ้านอินทร์แปลง","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":63,"size":"ขนาดเล็ก"},{"code":"41010068","name":"ผ่านศึกสงเคราะห์","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":97,"size":"ขนาดเล็ก"},{"code":"41010069","name":"บ้านหลุบหวายป่าขาม","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":59,"size":"ขนาดเล็ก"},{"code":"41010071","name":"บ้านเลื่อม","group":"กลุ่มเมือง 4","amphoe":"เมืองอุดรธานี","total":200,"size":"ขนาดกลาง"},{"code":"41010074","name":"ชุมชนสามพร้าว","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":642,"size":"ขนาดกลาง"},{"code":"41010075","name":"บ้านหนองบุนาหล่ำ","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":113,"size":"ขนาดเล็ก"},{"code":"41010077","name":"บ้านหนองบั่วประชาสรรค์","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":80,"size":"ขนาดเล็ก"},{"code":"41010079","name":"บ้านดอนหาดดงเหล่าต้อง","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":92,"size":"ขนาดเล็ก"},{"code":"41010081","name":"บ้านอี่เลี่ยน","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":183,"size":"ขนาดกลาง"},{"code":"41010082","name":"บ้านเซประชาอุทิศ","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":86,"size":"ขนาดเล็ก"},{"code":"41010083","name":"บ้านโก่ย","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":54,"size":"ขนาดเล็ก"},{"code":"41010084","name":"บ้านจำปาโนนสะอาด","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":60,"size":"ขนาดเล็ก"},{"code":"41010085","name":"บ้านหนองนาคำ","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":473,"size":"ขนาดกลาง"},{"code":"41010086","name":"บ้านหนองหว้าหนองไผ่","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":123,"size":"ขนาดกลาง"},{"code":"41010087","name":"บ้านหนองแก","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":37,"size":"ขนาดเล็ก"},{"code":"41010088","name":"บ้านถ่อนน้อยหนองไผ่คำ","group":"กลุ่มเมือง 6","amphoe":"เมืองอุดรธานี","total":73,"size":"ขนาดเล็ก"},{"code":"41010091","name":"บ้านหนองขาม(ค่ายเสนีย์อุปถัมภ์)","group":"กลุ่มเมือง 1","amphoe":"เมืองอุดรธานี","total":277,"size":"ขนาดกลาง"},{"code":"41010092","name":"บ้านดงอุดม","group":"กลุ่มเมือง 1","amphoe":"เมืองอุดรธานี","total":81,"size":"ขนาดเล็ก"},{"code":"41010094","name":"บ้านเก่าน้อย","group":"กลุ่มเมือง 1","amphoe":"เมืองอุดรธานี","total":20,"size":"ขนาดเล็ก"},{"code":"41010095","name":"บ้านแม่นนท์","group":"กลุ่มเมือง 9","amphoe":"เมืองอุดรธานี","total":60,"size":"ขนาดเล็ก"},{"code":"41010096","name":"บ้านหนองไผ่หนองหิน","group":"กลุ่มเมือง 9","amphoe":"เมืองอุดรธานี","total":44,"size":"ขนาดเล็ก"},{"code":"41010097","name":"บ้านหนองนาเจริญ","group":"กลุ่มเมือง 9","amphoe":"เมืองอุดรธานี","total":64,"size":"ขนาดเล็ก"},{"code":"41010098","name":"บ้านหนองบัวเงินหนองบัวทอง","group":"กลุ่มเมือง 9","amphoe":"เมืองอุดรธานี","total":67,"size":"ขนาดเล็ก"},{"code":"41010099","name":"บ้านหนองตะไก้","group":"กลุ่มเมือง 9","amphoe":"เมืองอุดรธานี","total":75,"size":"ขนาดเล็ก"},{"code":"41010101","name":"บ้านโสกน้ำขาว","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":58,"size":"ขนาดเล็ก"},{"code":"41010103","name":"หนองไฮวิทยา","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":161,"size":"ขนาดกลาง"},{"code":"41010104","name":"บ้านโนนสะอาดผาสุข","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":204,"size":"ขนาดกลาง"},{"code":"41010105","name":"บ้านดงมะกรูดทรายทอง","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":145,"size":"ขนาดกลาง"},{"code":"41010106","name":"บ้านโคกลาด","group":"กลุ่มเมือง 5","amphoe":"เมืองอุดรธานี","total":231,"size":"ขนาดกลาง"},{"code":"41010107","name":"ชุมชนบ้านเดื่อวิทยา","group":"กลุ่มเมือง 1","amphoe":"เมืองอุดรธานี","total":59,"size":"ขนาดเล็ก"},{"code":"41010109","name":"บ้านหนองเหล็ก","group":"กลุ่มเมือง 1","amphoe":"เมืองอุดรธานี","total":51,"size":"ขนาดเล็ก"},{"code":"41010110","name":"บ้านหนองตุ","group":"กลุ่มเมือง 1","amphoe":"เมืองอุดรธานี","total":96,"size":"ขนาดเล็ก"},{"code":"41010111","name":"บ้านม่วงสว่างสามัคคี","group":"กลุ่มเมือง 1","amphoe":"เมืองอุดรธานี","total":154,"size":"ขนาดกลาง"},{"code":"41010112","name":"อนุบาลอุดรธานี","group":"กลุ่มเมือง 2","amphoe":"เมืองอุดรธานี","total":3245,"size":"ขนาดใหญ่พิเศษ"},{"code":"41010114","name":"บ้านหมากแข้ง","group":"กลุ่มเมือง 1","amphoe":"เมืองอุดรธานี","total":3306,"size":"ขนาดใหญ่พิเศษ"},{"code":"41010115","name":"บ้านดอนอุดม(เนยอุปถัมภ์)","group":"กลุ่มเมือง 1","amphoe":"เมืองอุดรธานี","total":20,"size":"ขนาดเล็ก"},{"code":"41010116","name":"บ้านหนองบัว","group":"กลุ่มเมือง 1","amphoe":"เมืองอุดรธานี","total":218,"size":"ขนาดกลาง"},{"code":"41010117","name":"หนองสำโรงวิทยา","group":"กลุ่มเมือง 4","amphoe":"เมืองอุดรธานี","total":434,"size":"ขนาดกลาง"},{"code":"41010119","name":"ชุมชนกุดหมากไฟ","group":"กลุ่มหนองวัวซอ 3 (กุดหมากไฟ อูบมุง)","amphoe":"หนองวัวซอ","total":234,"size":"ขนาดกลาง"},{"code":"41010120","name":"บ้านโคกล่าม","group":"กลุ่มหนองวัวซอ 3 (กุดหมากไฟ อูบมุง)","amphoe":"หนองวัวซอ","total":67,"size":"ขนาดเล็ก"},{"code":"41010121","name":"บ้านหนองแวงจุมพล","group":"กลุ่มหนองวัวซอ 3 (กุดหมากไฟ อูบมุง)","amphoe":"หนองวัวซอ","total":178,"size":"ขนาดกลาง"},{"code":"41010122","name":"บ้านหนองแซงสร้อย","group":"กลุ่มหนองวัวซอ 1 (หนองวัวซอ น้ำพ่น หนองบัวบาน)","amphoe":"หนองวัวซอ","total":162,"size":"ขนาดกลาง"},{"code":"41010123","name":"บ้านหนองแวงเดิดเกษตรสมบูรณ์","group":"กลุ่มหนองวัวซอ 1 (หนองวัวซอ น้ำพ่น หนองบัวบาน)","amphoe":"หนองวัวซอ","total":47,"size":"ขนาดเล็ก"},{"code":"41010124","name":"บ้านน้ำพ่น","group":"กลุ่มหนองวัวซอ 1 (หนองวัวซอ น้ำพ่น หนองบัวบาน)","amphoe":"หนองวัวซอ","total":162,"size":"ขนาดกลาง"},{"code":"41010125","name":"บ้านเลา","group":"กลุ่มหนองวัวซอ 1 (หนองวัวซอ น้ำพ่น หนองบัวบาน)","amphoe":"หนองวัวซอ","total":40,"size":"ขนาดเล็ก"},{"code":"41010126","name":"รัฐประชา 509","group":"กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)","amphoe":"หนองวัวซอ","total":162,"size":"ขนาดกลาง"},{"code":"41010127","name":"บ้านโนนหวาย","group":"กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)","amphoe":"หนองวัวซอ","total":196,"size":"ขนาดกลาง"},{"code":"41010128","name":"บ้านหนองเม็กห้วยทราย","group":"กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)","amphoe":"หนองวัวซอ","total":47,"size":"ขนาดเล็ก"},{"code":"41010129","name":"บ้านโคกหนองแซง","group":"กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)","amphoe":"หนองวัวซอ","total":60,"size":"ขนาดเล็ก"},{"code":"41010130","name":"บ้านเสาเล้า","group":"กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)","amphoe":"หนองวัวซอ","total":18,"size":"ขนาดเล็ก"},{"code":"41010131","name":"บ้านหนองบัวบาน","group":"กลุ่มหนองวัวซอ 1 (หนองวัวซอ น้ำพ่น หนองบัวบาน)","amphoe":"หนองวัวซอ","total":132,"size":"ขนาดกลาง"},{"code":"41010132","name":"นิคมสร้างตนเองเชียงพิณ 1","group":"กลุ่มหนองวัวซอ 1 (หนองวัวซอ น้ำพ่น หนองบัวบาน)","amphoe":"หนองวัวซอ","total":49,"size":"ขนาดเล็ก"},{"code":"41010134","name":"บ้านหนองอ้อน้อย","group":"กลุ่มหนองวัวซอ 1 (หนองวัวซอ น้ำพ่น หนองบัวบาน)","amphoe":"หนองวัวซอ","total":35,"size":"ขนาดเล็ก"},{"code":"41010135","name":"บ้านโคกก่องหนองแวงยาว","group":"กลุ่มหนองวัวซอ 1 (หนองวัวซอ น้ำพ่น หนองบัวบาน)","amphoe":"หนองวัวซอ","total":107,"size":"ขนาดเล็ก"},{"code":"41010136","name":"อนุบาลหนองวัวซอ","group":"กลุ่มหนองวัวซอ 1 (หนองวัวซอ น้ำพ่น หนองบัวบาน)","amphoe":"หนองวัวซอ","total":795,"size":"ขนาดใหญ่"},{"code":"41010137","name":"บ้านหนองอ้อ","group":"กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)","amphoe":"หนองวัวซอ","total":122,"size":"ขนาดกลาง"},{"code":"41010138","name":"บ้านโนนสำราญ","group":"กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)","amphoe":"หนองวัวซอ","total":43,"size":"ขนาดเล็ก"},{"code":"41010139","name":"ชุมชนหนองแสง","group":"กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)","amphoe":"หนองวัวซอ","total":79,"size":"ขนาดเล็ก"},{"code":"41010140","name":"บ้านหนองแวงฮีคำหมากคูณ","group":"กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)","amphoe":"หนองวัวซอ","total":204,"size":"ขนาดกลาง"},{"code":"41010142","name":"บ้านหมากหญ้า","group":"กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)","amphoe":"หนองวัวซอ","total":230,"size":"ขนาดกลาง"},{"code":"41010143","name":"บ้านผาสิงห์","group":"กลุ่มหนองวัวซอ 2 (หมากหญ้า หนองอ้อ โนนหวาย)","amphoe":"หนองวัวซอ","total":115,"size":"ขนาดเล็ก"},{"code":"41010144","name":"บ้านดงบัง","group":"กลุ่มหนองวัวซอ 3 (กุดหมากไฟ อูบมุง)","amphoe":"หนองวัวซอ","total":31,"size":"ขนาดเล็ก"},{"code":"41010145","name":"บ้านโนนชัยศรี","group":"กลุ่มหนองวัวซอ 3 (กุดหมากไฟ อูบมุง)","amphoe":"หนองวัวซอ","total":58,"size":"ขนาดเล็ก"},{"code":"41010146","name":"บ้านหนองบัวเงิน","group":"กลุ่มหนองวัวซอ 3 (กุดหมากไฟ อูบมุง)","amphoe":"หนองวัวซอ","total":56,"size":"ขนาดเล็ก"},{"code":"41010147","name":"บ้านอูบมุง","group":"กลุ่มหนองวัวซอ 3 (กุดหมากไฟ อูบมุง)","amphoe":"หนองวัวซอ","total":119,"size":"ขนาดเล็ก"},{"code":"41010148","name":"บ้านห้วยไร่","group":"กลุ่มหนองวัวซอ 3 (กุดหมากไฟ อูบมุง)","amphoe":"หนองวัวซอ","total":75,"size":"ขนาดเล็ก"},{"code":"41010149","name":"บ้านโคกผักหอม","group":"กลุ่มหนองวัวซอ 3 (กุดหมากไฟ อูบมุง)","amphoe":"หนองวัวซอ","total":218,"size":"ขนาดกลาง"},{"code":"41010150","name":"บ้านนาสีนวล","group":"กลุ่มเพ็ญ 6","amphoe":"เพ็ญ","total":99,"size":"ขนาดเล็ก"},{"code":"41010151","name":"บ้านโคกกลาง","group":"กลุ่มเพ็ญ 6","amphoe":"เพ็ญ","total":318,"size":"ขนาดกลาง"},{"code":"41010152","name":"บ้านดอนจันทร์โพนสวรรค์คำเจริญ","group":"กลุ่มเพ็ญ 6","amphoe":"เพ็ญ","total":87,"size":"ขนาดเล็ก"},{"code":"41010153","name":"บ้านจอมศรี","group":"กลุ่มเพ็ญ 6","amphoe":"เพ็ญ","total":123,"size":"ขนาดกลาง"},{"code":"41010154","name":"บ้านข่าทุ่งม่วงโนนศรีสมบูรณ์","group":"กลุ่มเพ็ญ 6","amphoe":"เพ็ญ","total":84,"size":"ขนาดเล็ก"},{"code":"41010155","name":"บ้านหนองบ่อ","group":"กลุ่มเพ็ญ 6","amphoe":"เพ็ญ","total":122,"size":"ขนาดกลาง"},{"code":"41010156","name":"บ้านสะอาดนาพังศรีเจริญ","group":"กลุ่มเพ็ญ 6","amphoe":"เพ็ญ","total":106,"size":"ขนาดเล็ก"},{"code":"41010157","name":"จอมตาลโนนดู่โนนสำราญ","group":"กลุ่มเพ็ญ 6","amphoe":"เพ็ญ","total":256,"size":"ขนาดกลาง"},{"code":"41010158","name":"บ้านดงยางนารายณ์","group":"กลุ่มเพ็ญ 6","amphoe":"เพ็ญ","total":128,"size":"ขนาดกลาง"},{"code":"41010159","name":"บ้านเชียงหวางสร้างลาน","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":155,"size":"ขนาดกลาง"},{"code":"41010160","name":"บ้านนาดี","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":42,"size":"ขนาดเล็ก"},{"code":"41010161","name":"บ้านสร้างหลวงสร้างคำ","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":132,"size":"ขนาดกลาง"},{"code":"41010162","name":"ดงใหญ่เจริญพัฒน์","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":225,"size":"ขนาดกลาง"},{"code":"41010163","name":"บ้านดอนข่าคำผักหนามประชาสามัคคี","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":216,"size":"ขนาดกลาง"},{"code":"41010164","name":"บ้านโพนเลาโพนทอง","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":79,"size":"ขนาดเล็ก"},{"code":"41010165","name":"บ้านด่าน","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":65,"size":"ขนาดเล็ก"},{"code":"41010166","name":"บ้านโนนสวาง","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":55,"size":"ขนาดเล็ก"},{"code":"41010167","name":"บ้านคอนเลียบ","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":35,"size":"ขนาดเล็ก"},{"code":"41010168","name":"บ้านนาพัง","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":41,"size":"ขนาดเล็ก"},{"code":"41010169","name":"บ้านเตาไห","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":143,"size":"ขนาดกลาง"},{"code":"41010170","name":"บ้านหม้อ","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":56,"size":"ขนาดเล็ก"},{"code":"41010171","name":"บ้านคอนสวรรค์สินเจริญ","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":41,"size":"ขนาดเล็ก"},{"code":"41010172","name":"บ้านนาบัวไผ่วิทยา","group":"กลุ่มเพ็ญ 5","amphoe":"เพ็ญ","total":98,"size":"ขนาดเล็ก"},{"code":"41010173","name":"บ้านยางซอง","group":"กลุ่มเพ็ญ 5","amphoe":"เพ็ญ","total":76,"size":"ขนาดเล็ก"},{"code":"41010174","name":"บ้านนาทรายนาม่วง","group":"กลุ่มเพ็ญ 5","amphoe":"เพ็ญ","total":82,"size":"ขนาดเล็ก"},{"code":"41010175","name":"บ้านดอนกลอยดอนอุดม","group":"กลุ่มเพ็ญ 5","amphoe":"เพ็ญ","total":100,"size":"ขนาดเล็ก"},{"code":"41010176","name":"บ้านท่าหนาด","group":"กลุ่มเพ็ญ 5","amphoe":"เพ็ญ","total":65,"size":"ขนาดเล็ก"},{"code":"41010177","name":"บ้านนาพู่","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":284,"size":"ขนาดกลาง"},{"code":"41010178","name":"บ้านป่าก้าวดอนแดง","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":45,"size":"ขนาดเล็ก"},{"code":"41010179","name":"บ้านหลวงหัวสวย","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":274,"size":"ขนาดกลาง"},{"code":"41010180","name":"บ้านศรีบุญเรือง","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":27,"size":"ขนาดเล็ก"},{"code":"41010181","name":"บ้านกิ่วดงมะไฟ","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":102,"size":"ขนาดเล็ก"},{"code":"41010182","name":"บ้านหนองนกเขียนโพนทัน","group":"กลุ่มเพ็ญ 3","amphoe":"เพ็ญ","total":154,"size":"ขนาดกลาง"},{"code":"41010183","name":"ชุมชนบ้านธาตุ","group":"กลุ่มเพ็ญ 2","amphoe":"เพ็ญ","total":140,"size":"ขนาดกลาง"},{"code":"41010184","name":"บ้านสังซาวังน้ำขาว","group":"กลุ่มเพ็ญ 2","amphoe":"เพ็ญ","total":55,"size":"ขนาดเล็ก"},{"code":"41010185","name":"บ้านถิ่นสุขาวิทยา","group":"กลุ่มเพ็ญ 2","amphoe":"เพ็ญ","total":76,"size":"ขนาดเล็ก"},{"code":"41010186","name":"นิคมโนนสมบูรณ์","group":"กลุ่มเพ็ญ 2","amphoe":"เพ็ญ","total":44,"size":"ขนาดเล็ก"},{"code":"41010187","name":"บ้านนาคอมนาดอกไม้","group":"กลุ่มเพ็ญ 2","amphoe":"เพ็ญ","total":114,"size":"ขนาดเล็ก"},{"code":"41010188","name":"บ้านดอนแก้ว","group":"กลุ่มเพ็ญ 2","amphoe":"เพ็ญ","total":36,"size":"ขนาดเล็ก"},{"code":"41010189","name":"บ้านยามกาใหญ่","group":"กลุ่มเพ็ญ 2","amphoe":"เพ็ญ","total":63,"size":"ขนาดเล็ก"},{"code":"41010190","name":"บ้านนาพูนทรัพย์","group":"กลุ่มเพ็ญ 2","amphoe":"เพ็ญ","total":61,"size":"ขนาดเล็ก"},{"code":"41010191","name":"บ้านหมูม่นโพนโนนสะอาด","group":"กลุ่มเพ็ญ 2","amphoe":"เพ็ญ","total":139,"size":"ขนาดกลาง"},{"code":"41010192","name":"บ้านยามกาโนนคำ","group":"กลุ่มเพ็ญ 2","amphoe":"เพ็ญ","total":166,"size":"ขนาดกลาง"},{"code":"41010193","name":"บ้านเหล่าดอนเงิน","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":190,"size":"ขนาดกลาง"},{"code":"41010194","name":"บ้านหนองผง","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":51,"size":"ขนาดเล็ก"},{"code":"41010195","name":"บ้านยาง (คุรุราษฎร์วิทยา)","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":86,"size":"ขนาดเล็ก"},{"code":"41010196","name":"บ้านโคกสว่าง","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":95,"size":"ขนาดเล็ก"},{"code":"41010198","name":"บ้านหนองกุง","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":83,"size":"ขนาดเล็ก"},{"code":"41010199","name":"บ้านดงขันทอง","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":44,"size":"ขนาดเล็ก"},{"code":"41010200","name":"บ้านดงศรีสําราญ","group":"กลุ่มเพ็ญ 4","amphoe":"เพ็ญ","total":34,"size":"ขนาดเล็ก"},{"code":"41010201","name":"บ้านนาส่อนโพนทัน","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":64,"size":"ขนาดเล็ก"},{"code":"41010202","name":"บ้านใหม่","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":38,"size":"ขนาดเล็ก"},{"code":"41010203","name":"บ้านศรีสุวรรณโพนสว่าง","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":86,"size":"ขนาดเล็ก"},{"code":"41010204","name":"บ้านโพนงามหนองตุ","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":156,"size":"ขนาดกลาง"},{"code":"41010205","name":"อนุบาลเพ็ญประชานุกูล","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":1370,"size":"ขนาดใหญ่"},{"code":"41010206","name":"บ้านโนนรังหนองผือวิทยา","group":"กลุ่มเพ็ญ 5","amphoe":"เพ็ญ","total":58,"size":"ขนาดเล็ก"},{"code":"41010207","name":"บ้านทอนดอนยาว","group":"กลุ่มเพ็ญ 5","amphoe":"เพ็ญ","total":116,"size":"ขนาดเล็ก"},{"code":"41010208","name":"บ้านสร้างแป้น","group":"กลุ่มเพ็ญ 5","amphoe":"เพ็ญ","total":136,"size":"ขนาดกลาง"},{"code":"41010209","name":"บ้านหว้าน","group":"กลุ่มเพ็ญ 5","amphoe":"เพ็ญ","total":67,"size":"ขนาดเล็ก"},{"code":"41010210","name":"สุมเส้าวิทยา","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":262,"size":"ขนาดกลาง"},{"code":"41010211","name":"บ้านดงปอ","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":103,"size":"ขนาดเล็ก"},{"code":"41010212","name":"บ้านหนองนาไฮโนนสะอาด","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":206,"size":"ขนาดกลาง"},{"code":"41010213","name":"บ้านแพงศรี","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":34,"size":"ขนาดเล็ก"},{"code":"41010215","name":"บ้านหนองบัวบาน","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":47,"size":"ขนาดเล็ก"},{"code":"41010216","name":"บ้านหนองแสนตอโนนสร้างคำ","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":99,"size":"ขนาดเล็ก"},{"code":"41010217","name":"ดงยางวังโตนวิทยา","group":"กลุ่มเพ็ญ 1","amphoe":"เพ็ญ","total":124,"size":"ขนาดกลาง"},{"code":"41010218","name":"บ้านเชียงดา","group":"กลุ่มสร้างคอม 1 (สร้างคอม)","amphoe":"สร้างคอม","total":142,"size":"ขนาดกลาง"},{"code":"41010219","name":"บ้านแมดวิทยาคม","group":"กลุ่มสร้างคอม 1 (สร้างคอม)","amphoe":"สร้างคอม","total":128,"size":"ขนาดกลาง"},{"code":"41010220","name":"บ้านนาหว้า(สันติราษฎร์พิทยาคม)","group":"กลุ่มสร้างคอม 1 (สร้างคอม)","amphoe":"สร้างคอม","total":64,"size":"ขนาดเล็ก"},{"code":"41010221","name":"บ้านไชยฟอง","group":"กลุ่มสร้างคอม 1 (สร้างคอม)","amphoe":"สร้างคอม","total":26,"size":"ขนาดเล็ก"},{"code":"41010222","name":"บ้านนาสะอาด","group":"กลุ่มสร้างคอม 1 (สร้างคอม)","amphoe":"สร้างคอม","total":28,"size":"ขนาดเล็ก"},{"code":"41010223","name":"บ้านดอนเดื่อ","group":"กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)","amphoe":"สร้างคอม","total":118,"size":"ขนาดเล็ก"},{"code":"41010224","name":"บ้านดอนบาก","group":"กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)","amphoe":"สร้างคอม","total":73,"size":"ขนาดเล็ก"},{"code":"41010225","name":"โคกโพธิ์วิทยา","group":"กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)","amphoe":"สร้างคอม","total":183,"size":"ขนาดกลาง"},{"code":"41010226","name":"บ้านนาน้ำชุ่ม","group":"กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)","amphoe":"สร้างคอม","total":259,"size":"ขนาดกลาง"},{"code":"41010227","name":"บ้านยวด","group":"กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)","amphoe":"สร้างคอม","total":129,"size":"ขนาดกลาง"},{"code":"41010228","name":"บ้านชาด","group":"กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)","amphoe":"สร้างคอม","total":119,"size":"ขนาดเล็ก"},{"code":"41010229","name":"บ้านนามั่ง","group":"กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)","amphoe":"สร้างคอม","total":219,"size":"ขนาดกลาง"},{"code":"41010230","name":"บ้านน้ำเที่ยง","group":"กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)","amphoe":"สร้างคอม","total":66,"size":"ขนาดเล็ก"},{"code":"41010231","name":"บ้านตลิ่งชัน-สร้างแก้ว","group":"กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)","amphoe":"สร้างคอม","total":83,"size":"ขนาดเล็ก"},{"code":"41010232","name":"บ้านศรีชมชื่นบุญชิตวิทยา","group":"กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)","amphoe":"สร้างคอม","total":45,"size":"ขนาดเล็ก"},{"code":"41010233","name":"บ้านหินโงม","group":"กลุ่มสร้างคอม 2 (โคกโพธิ์ บ้านยวด หินโงม)","amphoe":"สร้างคอม","total":122,"size":"ขนาดกลาง"},{"code":"41010234","name":"บ้านโนนนกหอ(เพ็งแสนวิทยา)","group":"กลุ่มสร้างคอม 1 (สร้างคอม)","amphoe":"สร้างคอม","total":8,"size":"ขนาดเล็ก"},{"code":"41010235","name":"บ้านดงผักเทียม","group":"กลุ่มสร้างคอม 1 (สร้างคอม)","amphoe":"สร้างคอม","total":29,"size":"ขนาดเล็ก"},{"code":"41010236","name":"อนุบาลสร้างคอม","group":"กลุ่มสร้างคอม 1 (สร้างคอม)","amphoe":"สร้างคอม","total":320,"size":"ขนาดกลาง"},{"code":"41010237","name":"บ้านท่าเสียว","group":"กลุ่มสร้างคอม 1 (สร้างคอม)","amphoe":"สร้างคอม","total":107,"size":"ขนาดเล็ก"},{"code":"41010238","name":"บ้านโนนชาดวรุบลวิทยา","group":"กลุ่มสร้างคอม 1 (สร้างคอม)","amphoe":"สร้างคอม","total":61,"size":"ขนาดเล็ก"},{"code":"41010239","name":"บ้านโคกสว่าง","group":"กลุ่มสร้างคอม 1 (สร้างคอม)","amphoe":"สร้างคอม","total":0,"size":"ขนาดเล็ก"}];
+const SMAP = {}; SCHOOLS.forEach(s => SMAP[s.code] = s);
 
-const QUALITY = ['ควรพัฒนา','พอใช้','ดี','ดีเยี่ยม'];
-const GRADES = ['อนุบาล 1','อนุบาล 2','อนุบาล 3',
-  'ประถมศึกษาปีที่ 1','ประถมศึกษาปีที่ 2','ประถมศึกษาปีที่ 3',
-  'ประถมศึกษาปีที่ 4','ประถมศึกษาปีที่ 5','ประถมศึกษาปีที่ 6',
-  'มัธยมศึกษาปีที่ 1','มัธยมศึกษาปีที่ 2','มัธยมศึกษาปีที่ 3',
-  'มัธยมศึกษาปีที่ 4','มัธยมศึกษาปีที่ 5','มัธยมศึกษาปีที่ 6'];
-const ABBR = {'อนุบาล 1':'อ.1','อนุบาล 2':'อ.2','อนุบาล 3':'อ.3',
-  'ประถมศึกษาปีที่ 1':'ป.1','ประถมศึกษาปีที่ 2':'ป.2','ประถมศึกษาปีที่ 3':'ป.3',
-  'ประถมศึกษาปีที่ 4':'ป.4','ประถมศึกษาปีที่ 5':'ป.5','ประถมศึกษาปีที่ 6':'ป.6',
-  'มัธยมศึกษาปีที่ 1':'ม.1','มัธยมศึกษาปีที่ 2':'ม.2','มัธยมศึกษาปีที่ 3':'ม.3',
-  'มัธยมศึกษาปีที่ 4':'ม.4','มัธยมศึกษาปีที่ 5':'ม.5','มัธยมศึกษาปีที่ 6':'ม.6'};
-const FROM_ABBR = {}; Object.keys(ABBR).forEach(k => FROM_ABBR[ABBR[k]] = k);
-const HEAT = ['#ece2fd','#ddd0fa','#cdbaf6','#bda3f0','#ad8be9','#a075e3'];
+const ABBR = {'อ.1':'อนุบาล 1','อ.2':'อนุบาล 2','อ.3':'อนุบาล 3',
+  'ป.1':'ประถมศึกษาปีที่ 1','ป.2':'ประถมศึกษาปีที่ 2','ป.3':'ประถมศึกษาปีที่ 3',
+  'ป.4':'ประถมศึกษาปีที่ 4','ป.5':'ประถมศึกษาปีที่ 5','ป.6':'ประถมศึกษาปีที่ 6',
+  'ม.1':'มัธยมศึกษาปีที่ 1','ม.2':'มัธยมศึกษาปีที่ 2','ม.3':'มัธยมศึกษาปีที่ 3',
+  'ม.4':'มัธยมศึกษาปีที่ 4','ม.5':'มัธยมศึกษาปีที่ 5','ม.6':'มัธยมศึกษาปีที่ 6'};
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
 const icon = n => '<svg class="ic"><use href="#ic-' + n + '"/></svg>';
-const noData = t => '<div class="empty">' + icon('info') + (t || 'ยังไม่มีข้อมูลตามเงื่อนไขที่เลือก') + '</div>';
-function heat(v){
-  if (!(v > 0)) return 'transparent';
-  return HEAT[Math.round(Math.max(0, Math.min(1, (v-1)/3)) * (HEAT.length-1))];
-}
-let SMIS = '', INFO = {}, ROWS = [];
+
+let ME = null;   // {smis, school, group, district, grades, token}
 
 /* ---------- โหมดสว่าง / มืด ---------- */
 (function(){
@@ -524,309 +558,294 @@ let SMIS = '', INFO = {}, ROWS = [];
   });
 })();
 
-/* ---------- JSONP ---------- */
-function jsonp(params, cb){
-  const name = 'cb_' + Math.random().toString(36).slice(2);
-  const s = document.createElement('script');
-  const t = setTimeout(function(){ cleanup(); cb({ ok:false, message:'หมดเวลาเชื่อมต่อ' }); }, 25000);
-  function cleanup(){ clearTimeout(t); try{ delete window[name]; }catch(e){} s.remove(); }
-  window[name] = function(r){ cleanup(); cb(r); };
-  s.src = API_URL + '?' + params + '&callback=' + name;
-  s.onerror = function(){ cleanup(); cb({ ok:false, message:'เชื่อมต่อไม่สำเร็จ' }); };
-  document.body.appendChild(s);
+/* ---------- POST ---------- */
+function post(payload, cb){
+  fetch(API_URL, { method:'POST', body: JSON.stringify(payload) })
+    .then(r => r.json()).then(cb)
+    .catch(() => cb({ ok:false, message:'เชื่อมต่อระบบไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ต' }));
 }
 
-/* ---------- ตัวเลือกโรงเรียน ---------- */
-function showPicker(){
-  $('app').style.display = 'none';
-  $('picker').style.display = '';
-  drawList('');
-  $('q').focus();
-}
-function drawList(q){
-  q = q.trim().toLowerCase();
-  const list = (q ? SCHOOLS.filter(s => s.name.toLowerCase().indexOf(q) >= 0 ||
-      s.code.indexOf(q) >= 0 || s.group.toLowerCase().indexOf(q) >= 0) : SCHOOLS).slice(0, 60);
-  $('plist').innerHTML = list.length
-    ? list.map(s => '<a href="?smis=' + s.code + '"><span><b>' + esc(s.name) + '</b>' +
-        '<br><span class="g">' + esc(s.group) + ' · อำเภอ' + esc(s.amphoe) + '</span></span>' +
-        '<span class="cd">' + s.code + '</span></a>').join('')
-    : '<div class="empty" style="padding:22px">ไม่พบโรงเรียนที่ค้นหา</div>';
-}
-$('q').addEventListener('input', function(){ drawList(this.value); });
-$('btnSwitch').addEventListener('click', function(){ location.href = 'school.html'; });
-
-/* ---------- โหลดข้อมูล ---------- */
-function load(after){
-  jsonp('action=school&smis=' + encodeURIComponent(SMIS), function(r){
-    if (!r.ok){
-      $('picker').style.display = '';
-      $('plist').innerHTML = '<div class="empty" style="padding:22px">' +
-        esc(r.message || 'โหลดข้อมูลไม่สำเร็จ') + '</div>';
-      drawList('');
-      if (after) after(false);
-      return;
-    }
-    INFO = r;
-    ROWS = r.rows || [];
-    $('picker').style.display = 'none';
-    $('app').style.display = '';
-    $('hSchool').textContent = r.school;
-    $('hGroup').textContent = '· ' + r.group + ' · อำเภอ' + r.district;
-    $('btnLogin').href = 'form.html?smis=' + r.smis;
-    $('btnLogin2').href = 'form.html?smis=' + r.smis;
-    $('ctaTx').textContent = 'ชื่อผู้ใช้คือรหัสโรงเรียน ' + r.smis +
-      ' · รหัสผ่านเริ่มต้นคือรหัสโรงเรียนเช่นกัน (เปลี่ยนได้ภายหลัง)';
-    document.title = r.school + ' — แดชบอร์ดทักษะ 8C';
-    drawMeta();
-    buildFilters();
-    render();
-    if (after) after(true);
-  });
-}
-
-function drawMeta(){
-  const g = INFO.grades || {};
-  var rooms = 0; Object.keys(g).forEach(k => rooms += Number(g[k][1]) || 0);
-  $('meta').innerHTML =
-    '<span>' + icon('school') + 'รหัส SMIS <b>' + esc(INFO.smis) + '</b></span>' +
-    '<span>' + icon('list') + 'ตำบล<b>' + esc(INFO.tambon) + '</b></span>' +
-    '<span>' + icon('award') + '<b>' + esc(INFO.size) + '</b></span>' +
-    '<span>' + icon('users') + 'นักเรียนทั้งหมด <b>' + Number(INFO.total).toLocaleString('th-TH') + '</b> คน</span>' +
-    '<span>' + icon('cap') + 'ห้องเรียน <b>' + rooms + '</b> ห้อง</span>' +
-    '<span>' + icon('clipboard') + 'ส่งข้อมูลแล้ว <b>' + ROWS.length + '</b> รายการ</span>';
-}
-
-/* ---------- ตัวกรอง ---------- */
-function buildFilters(){
-  const years = [...new Set(ROWS.map(r=>r.year))].filter(Boolean).sort().reverse();
-  fill($('fYear'), years);
-  fill($('fGrade'), GRADES.filter(g => ROWS.some(r=>r.grade===g)));
-}
-function fill(sel, arr){
-  const cur = sel.value;
-  sel.innerHTML = '<option value="">ทั้งหมด</option>';
-  arr.forEach(v => sel.appendChild(new Option(v, v)));
-  if (arr.indexOf(cur) >= 0) sel.value = cur;
-}
-['fYear','fTerm','fGrade'].forEach(id => $(id).addEventListener('change', render));
-$('btnReload').addEventListener('click', function(){
-  const b = this; b.innerHTML = icon('refresh') + ' กำลังโหลด…';
-  load(function(){ b.innerHTML = icon('refresh') + ' โหลดใหม่'; });
+/* ---------- เข้าสู่ระบบ ---------- */
+$('user').addEventListener('input', function(){
+  const s = SMAP[this.value.trim()];
+  $('uName').style.display = s ? '' : 'none';
+  if (s) $('uName').textContent = s.name;
 });
-$('btnPrint').addEventListener('click', () => window.print());
+$('user').addEventListener('keydown', e => { if (e.key==='Enter') $('pass').focus(); });
+$('pass').addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });
+$('btnGo').addEventListener('click', doLogin);
 
-function rows(){
-  const y = $('fYear').value, t = $('fTerm').value, g = $('fGrade').value;
-  return ROWS.filter(function(r){
-    if (y && r.year !== y) return false;
-    if (t && r.term !== t) return false;
-    if (g && r.grade !== g) return false;
-    return true;
+function doLogin(){
+  const u = $('user').value.trim(), p = $('pass').value;
+  if (!API_URL){ $('loginErr').textContent = 'ยังไม่ได้ตั้งค่า API_URL ในไฟล์นี้'; return; }
+  if (!/^\d{8}$/.test(u)){ $('loginErr').textContent = 'รหัสโรงเรียนต้องเป็นตัวเลข 8 หลัก'; return; }
+  if (!p){ $('loginErr').textContent = 'กรุณากรอกรหัสผ่าน'; return; }
+  $('loginErr').textContent = 'กำลังตรวจสอบ…';
+  $('btnGo').disabled = true;
+  post({ action:'login', user:u, pass:p }, function(r){
+    $('btnGo').disabled = false;
+    if (!r.ok){ $('loginErr').textContent = r.message || 'เข้าสู่ระบบไม่สำเร็จ'; return; }
+    ME = r;
+    try{ sessionStorage.setItem('me8c', JSON.stringify(r)); }catch(e){}
+    startApp();
   });
 }
 
-/* ---------- คำนวณ ---------- */
-function wAvg(list, idx){
-  let sw = 0, sv = 0;
-  list.forEach(function(r){
-    const w = Math.max(1, Number(r.nEval) || 1);
-    const v = (idx == null) ? r.avg : r.c[idx];
-    if (v > 0){ sw += w; sv += v * w; }
-  });
-  return sw ? sv / sw : 0;
-}
-function bars(list, max){
-  return '<div class="hb">' + list.map(function(x){
-    const w = Math.max(1, x.v / max * 100);
-    return '<div class="nm">' + (x.sw ? '<span class="sw" style="background:' + x.sw + '"></span>' : '') +
-      esc(x.nm) + '</div>' +
-      '<div class="track"><div class="fill" style="width:' + w + '%" title="' + esc(x.nm) + ' — ' + x.tx + '"></div></div>' +
-      '<div class="val">' + x.tx + (x.sub ? ' <span class="sub">' + x.sub + '</span>' : '') + '</div>';
-  }).join('') + '</div>';
-}
+$('btnOut').addEventListener('click', function(){
+  try{ sessionStorage.removeItem('me8c'); }catch(e){}
+  location.href = 'school.html' + (ME ? '?smis=' + ME.smis : '');
+});
 
-/* ---------- ความคืบหน้า ---------- */
-function renderProgress(R){
-  const g = INFO.grades || {};
-  const keys = Object.keys(g);
-  if (!keys.length){
-    $('progBox').innerHTML = noData('ไม่พบข้อมูลห้องเรียนของโรงเรียนนี้ในระบบ BIG DATA');
-    return;
-  }
-  var totExp = 0, totGot = 0;
-  const items = keys.map(function(k){
-    const exp = Number(g[k][1]) || 0;
-    const full = FROM_ABBR[k] || k;
-    const got = new Set(R.filter(r => r.grade === full).map(r => String(r.room))).size;
-    totExp += exp; totGot += Math.min(got, exp);
-    return { k:k, exp:exp, got:got, students:Number(g[k][0]) || 0 };
-  });
-  const pct = totExp ? Math.round(totGot / totExp * 100) : 0;
-  const col = p => p >= 100 ? 'var(--ok)' : (p >= 50 ? 'var(--warn)' : 'var(--bad)');
-  $('progBox').innerHTML =
-    '<div class="prog">' + items.map(function(x){
-      const p = x.exp ? Math.min(100, Math.round(x.got / x.exp * 100)) : 0;
-      return '<div class="nm">' + esc(x.k) + '</div>' +
-        '<div class="track"><div class="fill" style="width:' + p + '%;background:' + col(p) + '"></div></div>' +
-        '<div class="val">' + x.got + '/' + x.exp + ' ห้อง <small>(' + x.students + ' คน)</small></div>';
-    }).join('') + '</div>' +
-    '<p class="cap" style="padding-left:0;margin:16px 0 0">รวมทั้งโรงเรียน <b style="color:' + col(pct) + '">' +
-      totGot + ' จาก ' + totExp + ' ห้อง (' + pct + '%)</b>' +
-      (pct >= 100 ? ' — ครบทุกห้องแล้ว 🎉' : ' — ยังเหลืออีก ' + (totExp - totGot) + ' ห้อง') + '</p>';
-}
-
-/* ---------- วาดภาพ ---------- */
-function render(){
-  const R = rows();
-  const y = $('fYear').value, t = $('fTerm').value;
-  const scope = (y ? 'ปีการศึกษา ' + y : 'ทุกปีการศึกษา') + (t ? ' ภาคเรียนที่ ' + t : '');
-
-  renderProgress(R);
-
-  if (!R.length){
-    $('hero').innerHTML = '<div class="panel">' + noData('โรงเรียนนี้ยังไม่มีข้อมูลตามเงื่อนไขที่เลือก') + '</div>';
-    $('chartC').innerHTML = noData(); $('chartG').innerHTML = noData();
-    $('chartDist').innerHTML = noData(); $('lvLegend').innerHTML = '';
-    $('tblRoom').innerHTML = ''; $('hmLegend').innerHTML = '';
-    return;
-  }
-
-  const avg = wAvg(R, null);
-  const students = R.reduce((a,r)=>a + (Number(r.nEval)||0), 0);
-  const cAvgs = RUBRIC.map((c,i)=>({ key:c.key, short:c.short, color:c.color, v:wAvg(R,i) }));
-  const weak = cAvgs.slice().sort((a,b)=>a.v-b.v)[0];
-  const gradesWith = [...new Set(R.map(r=>r.grade))].length;
-
-  $('hero').innerHTML =
-    '<div class="hero">' +
-      '<div class="ttl">' + icon('award') + ' ภาพรวมทักษะ 8C ของโรงเรียน · ' + esc(scope) + '</div>' +
-      '<div class="row">' +
-        '<div><div class="big">' + avg.toFixed(2) + '<small> / 4.00</small></div></div>' +
-        '<div class="qb">' + icon('check') + ' ระดับคุณภาพ ' + qualityOf(avg) + '</div>' +
-        '<div class="kv"><b>' + R.length + '</b><span>ห้องเรียนที่ส่งข้อมูล</span></div>' +
-        '<div class="kv"><b>' + gradesWith + '</b><span>ระดับชั้นที่มีข้อมูล</span></div>' +
-        '<div class="kv"><b>' + students.toLocaleString('th-TH') + '</b><span>นักเรียนที่ประเมิน (คน)</span></div>' +
-        '<div class="kv"><b>' + weak.key + '</b><span>ควรเร่งพัฒนา — ' + esc(weak.short) + ' (' + weak.v.toFixed(2) + ')</span></div>' +
-      '</div></div>';
-
-  $('chartC').innerHTML = bars(cAvgs.slice().sort((a,b)=>b.v-a.v)
-    .map(c => ({ nm: c.key + ' · ' + c.short, sw: c.color, v: c.v, tx: c.v.toFixed(2) })), 4);
-
-  /* การกระจายนักเรียนตามระดับ */
-  const LC = ['var(--l1)','var(--l2)','var(--l3)','var(--l4)'];
-  const totals = [0,0,0,0];
-  const distRows = RUBRIC.map(function(c,i){
-    const d = [0,0,0,0];
-    R.forEach(function(r){
-      const dd = (r.dist && r.dist[i]) ? r.dist[i] : null;
-      if (dd) for (let L=0; L<4; L++) d[L] += Number(dd[L]) || 0;
+/* ---------- เปลี่ยนรหัสผ่าน ---------- */
+$('btnPw').addEventListener('click', openPw);
+function openPw(){
+  const m = document.createElement('div');
+  m.className = 'modal';
+  m.innerHTML = '<div class="box"><h3>' + icon('lock') + ' เปลี่ยนรหัสผ่าน</h3>' +
+    '<p>ของโรงเรียน ' + esc(ME.school) + ' (' + ME.smis + ')</p>' +
+    '<input type="password" id="p0" placeholder="รหัสผ่านเดิม" autocomplete="current-password">' +
+    '<input type="password" id="p1" placeholder="รหัสผ่านใหม่ (อย่างน้อย 6 ตัวอักษร)" autocomplete="new-password">' +
+    '<input type="password" id="p2" placeholder="ยืนยันรหัสผ่านใหม่" autocomplete="new-password">' +
+    '<button class="go" id="pGo">บันทึกรหัสผ่านใหม่</button>' +
+    '<div class="er" id="pErr"></div><button class="cancel" id="pX">ยกเลิก</button></div>';
+  document.body.appendChild(m);
+  const er = m.querySelector('#pErr');
+  m.querySelector('#pGo').addEventListener('click', function(){
+    const a = m.querySelector('#p0').value, b = m.querySelector('#p1').value, c = m.querySelector('#p2').value;
+    er.style.color = 'var(--bad)';
+    if (b.length < 6){ er.textContent = 'รหัสผ่านใหม่ต้องยาวอย่างน้อย 6 ตัวอักษร'; return; }
+    if (b !== c){ er.textContent = 'ยืนยันรหัสผ่านไม่ตรงกัน'; return; }
+    er.style.color = 'var(--ink-3)'; er.textContent = 'กำลังบันทึก…';
+    post({ action:'changepass', user:ME.smis, pass:a, newpass:b }, function(r){
+      if (!r.ok){ er.style.color='var(--bad)'; er.textContent = r.message; return; }
+      ME.token = r.token; ME.isDefault = false;
+      try{ sessionStorage.setItem('me8c', JSON.stringify(ME)); }catch(e){}
+      m.remove(); $('warn').innerHTML = '';
+      show('ok', 'เปลี่ยนรหัสผ่านเรียบร้อยแล้ว', 'ครั้งต่อไปให้เข้าสู่ระบบด้วยรหัสผ่านใหม่');
     });
-    for (let L=0; L<4; L++) totals[L] += d[L];
-    return { key:c.key, short:c.short, color:c.color, d:d, n:d.reduce((a,b)=>a+b,0) };
   });
-  const maxN = Math.max(1, ...distRows.map(x=>x.n));
-  $('chartDist').innerHTML = distRows.some(x=>x.n>0)
-    ? '<div class="dist">' + distRows.map(function(x){
-        return '<div class="nm"><span class="sw" style="background:' + x.color + '"></span>' +
-          x.key + ' · ' + esc(x.short) + '</div>' +
-          '<div class="track" style="width:' + (x.n/maxN*100) + '%">' +
-          x.d.map(function(v,L){
-            if (!v) return '';
-            const pctW = v / x.n * 100;
-            return '<div class="seg" style="width:' + pctW + '%;background:' + LC[L] +
-              '" title="ระดับ ' + (L+1) + ' ' + LEVEL_NAME[L] + ' — ' + v + ' คน">' +
-              (pctW > 7 ? v : '') + '</div>';
-          }).join('') + '</div>' +
-          '<div class="tot">' + x.n + ' คน</div>';
-      }).join('') + '</div>'
-    : noData('ข้อมูลชุดนี้ยังไม่มีรายละเอียดรายระดับ');
-  $('lvLegend').innerHTML = LEVEL_NAME.map(function(nm,L){
-    return '<span><i style="background:' + LC[L] + '"></i>ระดับ ' + (L+1) + ' ' + nm +
-      ' — ' + totals[L].toLocaleString('th-TH') + ' คน</span>';
+  m.querySelector('#pX').addEventListener('click', () => m.remove());
+  m.querySelector('#p0').focus();
+}
+
+/* ---------- เริ่มฟอร์ม ---------- */
+function startApp(){
+  $('login').style.display = 'none';
+  $('app').style.display = '';
+  $('hSchool').textContent = ME.school;
+  $('hGroup').textContent = '· ' + ME.group + ' · อำเภอ' + ME.district;
+  $('schoolBox').value = ME.school + '  (' + ME.smis + ')';
+  $('lnkSchool').href = 'school.html?smis=' + ME.smis;
+  document.title = 'กรอกข้อมูล 8C — ' + ME.school;
+
+  /* ปีการศึกษา */
+  const thisYear = new Date().getFullYear() + 543;
+  const ys = [thisYear + 1, thisYear, thisYear - 1];
+  $('year').innerHTML = ys.map(y => '<option value="' + y + '"' +
+    (y === thisYear ? ' selected' : '') + '>' + y + '</option>').join('');
+  $('date').value = new Date().toISOString().slice(0,10);
+
+  /* ระดับชั้นที่โรงเรียนเปิดสอน */
+  const g = ME.grades || {};
+  const keys = Object.keys(g);
+  $('grade').innerHTML = '<option value="">— เลือกระดับชั้น —</option>' +
+    keys.map(k => '<option value="' + esc(ABBR[k] || k) + '" data-k="' + esc(k) + '">' +
+      esc(ABBR[k] || k) + ' (' + g[k][0] + ' คน / ' + g[k][1] + ' ห้อง)</option>').join('');
+  if (!keys.length){
+    $('grade').innerHTML = '<option value="">ไม่พบข้อมูลชั้นเรียนใน BIG DATA</option>';
+  }
+
+  if (ME.isDefault){
+    $('warn').innerHTML = '<div class="warnbox">' + icon('alert') +
+      '<span><b>ท่านกำลังใช้รหัสผ่านเริ่มต้น</b> (รหัสโรงเรียน) — แนะนำให้เปลี่ยนรหัสผ่านเพื่อความปลอดภัย</span>' +
+      '<button id="wPw">เปลี่ยนรหัสผ่าน</button></div>';
+    $('wPw').addEventListener('click', openPw);
+  }
+
+  buildCards();
+  restoreReporter();
+  recalc();
+}
+
+$('grade').addEventListener('change', function(){
+  const opt = this.options[this.selectedIndex];
+  const k = opt ? opt.dataset.k : '';
+  const info = (ME.grades || {})[k];
+  if (!info){ $('room').innerHTML = '<option value="">— เลือกห้อง —</option>'; $('roomHint').textContent=''; return; }
+  const rooms = Math.max(1, Number(info[1]) || 1);
+  $('room').innerHTML = '<option value="">— เลือกห้อง —</option>' +
+    Array.from({length: Math.max(rooms, 1)}, (_,i) =>
+      '<option value="' + (i+1) + '">ห้องที่ ' + (i+1) + '</option>').join('') +
+    (rooms < 20 ? '<option value="' + (rooms+1) + '">ห้องที่ ' + (rooms+1) + ' (เพิ่มเติม)</option>' : '');
+  $('roomHint').textContent = 'BIG DATA ระบุ ' + rooms + ' ห้อง';
+  if (rooms === 1){ $('room').value = '1'; $('room').dispatchEvent(new Event('change')); }
+});
+$('room').addEventListener('change', function(){
+  const opt = $('grade').options[$('grade').selectedIndex];
+  const k = opt ? opt.dataset.k : '';
+  const info = (ME.grades || {})[k];
+  if (!info || !this.value) return;
+  const rooms = Math.max(1, Number(info[1]) || 1);
+  const per = Math.round(Number(info[0]) / rooms);
+  if (!$('nAll').value) { $('nAll').value = per; recalc(); }
+  $('nHint').textContent = 'BIG DATA: ทั้งชั้นมี ' + info[0] + ' คน / ' + rooms + ' ห้อง (เฉลี่ย ' + per + ' คน) — แก้ไขได้ตามจริง';
+});
+
+/* ---------- การ์ดทักษะ ---------- */
+function buildCards(){
+  $('cards').innerHTML = RUBRIC.map(function(c, i){
+    return '<div class="crd" id="crd' + c.key + '">' +
+      '<div class="top" style="background:linear-gradient(135deg,' + c.color + ',' + c.ink + ')">' +
+        '<div class="bdg">' + c.key + '</div>' +
+        '<div class="tt"><b>' + esc(c.short) + '</b><span>' + esc(c.th) + '</span></div>' +
+        (i > 0 ? '<button type="button" class="cp" data-cp="' + i + '">' + icon('down') +
+          ' ใช้ค่าเหมือน ' + RUBRIC[i-1].key + '</button>' : '') +
+        '<div class="tally" id="ty' + c.key + '">0 / 0 คน</div>' +
+      '</div>' +
+      '<div class="opts">' + c.levels.map(function(tx, j){
+        return '<div class="opt o' + (j+1) + '">' +
+          '<div class="hd"><span class="num">' + (j+1) + '</span> ' + LEVEL_NAME[j] + '</div>' +
+          '<div class="tx">' + esc(tx) + '</div>' +
+          '<div class="inp"><input type="number" min="0" max="300" step="1" inputmode="numeric" ' +
+            'id="' + c.key + '_' + (j+1) + '" placeholder="0"><span class="unit">คน</span></div>' +
+        '</div>';
+      }).join('') + '</div>' +
+      '<div class="ft"><span>รวม <b id="sm' + c.key + '">0</b> คน จากที่ต้องมี <b id="rq' + c.key + '">0</b> คน</span>' +
+        '<span>คะแนนเฉลี่ยด้านนี้ <b id="mn' + c.key + '">–</b> / 4.00</span></div>' +
+    '</div>';
   }).join('');
 
-  const byG = GRADES.map(function(g){
-    const L = R.filter(r => r.grade === g);
-    return { g:g, n:L.length, v: wAvg(L,null) };
-  }).filter(x => x.n > 0);
-  $('chartG').innerHTML = byG.length
-    ? bars(byG.map(x => ({ nm: x.g, v: x.v, tx: x.v.toFixed(2), sub: '(' + x.n + ' ห้อง)' })), 4)
-    : noData();
-
-  /* ตารางรายห้อง */
-  const S = R.slice().sort(function(a,b){
-    const d = GRADES.indexOf(a.grade) - GRADES.indexOf(b.grade);
-    return d !== 0 ? d : (Number(a.room) - Number(b.room));
+  $('cards').addEventListener('input', function(e){
+    if (e.target.tagName === 'INPUT') recalc();
   });
-  const all = { c: RUBRIC.map((x,i)=>wAvg(R,i)), avg: avg, n: students };
-  $('tblRoom').innerHTML =
-    '<thead><tr><th class="l">ห้อง</th><th class="l">ครูประจำชั้น</th><th>นักเรียน</th>' +
-    RUBRIC.map(c => '<th title="' + esc(c.short) + '">' + c.key + '</th>').join('') +
-    '<th>เฉลี่ย</th><th>ระดับคุณภาพ</th></tr></thead><tbody>' +
-    S.map(function(r){
-      const q = QUALITY.indexOf(qualityOf(r.avg)) + 1;
-      return '<tr>' +
-        '<td class="l"><span class="rm">' + esc(r.label || r.grade) + '</span></td>' +
-        '<td class="l"><span class="nm">' + esc(r.reporter) + '</span>' +
-          '<br><span class="sub">' + esc(r.position) + '</span></td>' +
-        '<td>' + esc(r.nEval) + '</td>' +
-        r.c.map(v => '<td><span class="cell" style="background:' + heat(v) + '">' +
-          (v > 0 ? v : '–') + '</span></td>').join('') +
-        '<td><b>' + Number(r.avg).toFixed(2) + '</b></td>' +
-        '<td><span class="pill q' + q + '">' + qualityOf(r.avg) + '</span></td></tr>';
-    }).join('') + '</tbody>' +
-    '<tfoot><tr><td class="l">รวมทั้งโรงเรียน</td><td class="l">' + S.length + ' ห้อง</td>' +
-      '<td>' + all.n.toLocaleString('th-TH') + '</td>' +
-      all.c.map(v => '<td>' + (v > 0 ? v.toFixed(2) : '–') + '</td>').join('') +
-      '<td>' + all.avg.toFixed(2) + '</td>' +
-      '<td><span class="pill q' + (QUALITY.indexOf(qualityOf(all.avg)) + 1) + '">' +
-        qualityOf(all.avg) + '</span></td></tr></tfoot>';
-
-  $('hmLegend').innerHTML = 'ความเข้มของสีในช่อง C1–C8 แทนระดับคะแนน · <span>1</span>' +
-    '<span class="sw">' + HEAT.map(c => '<i style="background:' + c + '"></i>').join('') +
-    '</span><span>4</span> · ยิ่งอ่อนยิ่งควรเร่งพัฒนา';
+  $('cards').addEventListener('click', function(e){
+    const b = e.target.closest('button[data-cp]'); if (!b) return;
+    const i = Number(b.dataset.cp);
+    for (var L=1; L<=4; L++) $(RUBRIC[i].key + '_' + L).value = $(RUBRIC[i-1].key + '_' + L).value;
+    recalc();
+  });
+  $('nAll').addEventListener('input', recalc);
 }
 
-/* ---------- ส่งออก CSV ---------- */
-$('btnCsv').addEventListener('click', function(){
-  const R = rows();
-  if (!R.length){ alert('ไม่มีข้อมูลให้ส่งออก'); return; }
-  const q = s => '"' + String(s == null ? '' : s).replace(/"/g,'""') + '"';
-  const head = ['ปีการศึกษา','ภาคเรียน','รหัสโรงเรียน','โรงเรียน','ระดับชั้น','ห้องที่','ชั้น/ห้อง',
-    'จำนวนนักเรียนในห้อง']
-    .concat(RUBRIC.map(c => c.key + ' ' + c.short))
-    .concat(['คะแนนเฉลี่ย','ระดับคุณภาพ','จุดเด่น','จุดที่ควรพัฒนา','ลิงก์หลักฐาน',
-      'ครูผู้กรอก','ตำแหน่ง','วันที่บันทึก','แก้ไขล่าสุด']);
-  const lines = [head.map(q).join(',')].concat(R.map(function(r){
-    return [r.year,r.term,INFO.smis,INFO.school,r.grade,r.room,r.label,r.nAll]
-      .concat(r.c)
-      .concat([Number(r.avg).toFixed(2), qualityOf(r.avg), r.strength, r.improve, r.evidence,
-        r.reporter, r.position, r.created, r.updated]).map(q).join(',');
-  }));
-  const blob = new Blob(['﻿' + lines.join('\r\n')], { type:'text/csv;charset=utf-8;' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = '8C_' + INFO.smis + '_' + new Date().toISOString().slice(0,10) + '.csv';
-  a.click();
-  URL.revokeObjectURL(a.href);
+const cVal = (k,L) => Number($(k + '_' + L).value) || 0;
+const cSum = k => [1,2,3,4].reduce((a,L)=>a+cVal(k,L), 0);
+const cMean = k => { const n = cSum(k);
+  return n ? [1,2,3,4].reduce((a,L)=>a+cVal(k,L)*L, 0) / n : 0; };
+
+function recalc(){
+  const N = Number($('nAll').value) || 0;
+  $('stN').textContent = N;
+  var done = 0, sum = 0;
+  RUBRIC.forEach(function(c){
+    const n = cSum(c.key), m = cMean(c.key);
+    const ty = $('ty' + c.key);
+    ty.textContent = n + ' / ' + N + ' คน';
+    ty.className = 'tally' + (N > 0 && n === N ? ' ok' : (n > N && N > 0 ? ' over' : ''));
+    $('sm' + c.key).textContent = n;
+    $('rq' + c.key).textContent = N;
+    $('mn' + c.key).textContent = n ? m.toFixed(2) : '–';
+    if (N > 0 && n === N){ done++; sum += m; }
+  });
+  const avg = done === 8 ? sum / 8 : 0;
+  $('stAvg').textContent = done === 8 ? avg.toFixed(2) : '–';
+  $('stQ').textContent = done === 8 ? qualityOf(avg) : '–';
+  $('rgTx').textContent = done + '/8';
+  $('rg').style.strokeDashoffset = String(119.4 * (1 - done/8));
+  $('btnSave').disabled = false;
+}
+
+/* ---------- ผู้กรอก ---------- */
+function restoreReporter(){
+  try{
+    const s = JSON.parse(localStorage.getItem('rep8c') || '{}');
+    ['reporter','position','phone','contact'].forEach(k => { if (s[k]) $(k).value = s[k]; });
+  }catch(e){}
+}
+function saveReporter(){
+  try{
+    localStorage.setItem('rep8c', JSON.stringify({
+      reporter:$('reporter').value, position:$('position').value,
+      phone:$('phone').value, contact:$('contact').value }));
+  }catch(e){}
+}
+
+/* ---------- แจ้งผล ---------- */
+function show(type, title, detail){
+  $('msg').innerHTML = '<div class="msg ' + type + '">' + icon(type==='ok'?'check':'alert') +
+    '<div><b>' + esc(title) + '</b>' + (detail ? esc(detail) : '') + '</div></div>';
+  $('msg').scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+/* ---------- บันทึก ---------- */
+$('btnSave').addEventListener('click', function(){
+  const N = Number($('nAll').value) || 0;
+  const need = [['grade','ระดับชั้น'],['room','ห้องที่'],['reporter','ชื่อ-สกุลผู้กรอก'],
+    ['position','ตำแหน่ง'],['phone','เบอร์โทรศัพท์']];
+  for (var i=0;i<need.length;i++){
+    if (!$(need[i][0]).value.trim()){
+      show('err','กรุณากรอก ' + need[i][1]); $(need[i][0]).focus(); return;
+    }
+  }
+  if (!(N >= 1)){ show('err','กรุณากรอกจำนวนนักเรียนในห้อง'); $('nAll').focus(); return; }
+  for (var k=0;k<RUBRIC.length;k++){
+    const key = RUBRIC[k].key, n = cSum(key);
+    if (n !== N){
+      show('err', key + ' ยังไม่ครบ',
+        ' — กรอกไว้ ' + n + ' คน แต่ห้องนี้มี ' + N + ' คน กรุณาปรับให้ผลรวมเท่ากัน');
+      $('crd' + key).scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
+    }
+  }
+  const ev = $('evidence').value.trim();
+  if (ev && !/^https?:\/\/.+/i.test(ev)){ show('err','ลิงก์หลักฐานต้องขึ้นต้นด้วย http:// หรือ https://'); return; }
+
+  const p = {
+    action:'submit', user:ME.smis, token:ME.token,
+    year:$('year').value, term:$('term').value, date:$('date').value,
+    grade:$('grade').value, room:$('room').value, nAll:N,
+    strength:$('strength').value.trim(), improve:$('improve').value.trim(), evidence:ev,
+    reporter:$('reporter').value.trim(), position:$('position').value.trim(),
+    phone:$('phone').value.trim(), contact:$('contact').value.trim(), note:$('note').value.trim()
+  };
+  RUBRIC.forEach(function(c){ for (var L=1;L<=4;L++) p[c.key + '_' + L] = cVal(c.key, L); });
+
+  const b = $('btnSave');
+  b.disabled = true; b.innerHTML = icon('refresh') + ' กำลังบันทึก…';
+  post(p, function(r){
+    b.disabled = false; b.innerHTML = icon('save') + ' บันทึกข้อมูล';
+    if (!r.ok){ show('err','บันทึกไม่สำเร็จ', ' — ' + r.message); return; }
+    saveReporter();
+    show('ok', r.message,
+      ' · ห้อง ' + r.label + ' · คะแนนเฉลี่ย 8C ' + Number(r.avg).toFixed(2) +
+      ' — ระดับคุณภาพ ' + r.quality + ' · รหัสอ้างอิง ' + r.refCode);
+    $('msg').firstChild.insertAdjacentHTML('beforeend',
+      '<div style="margin-top:10px"><a href="school.html?smis=' + ME.smis +
+      '" style="font-weight:600">ดูแดชบอร์ดของโรงเรียน →</a>' +
+      ' &nbsp;·&nbsp; <a href="#" id="again" style="font-weight:600">กรอกห้องถัดไป</a></div>');
+    const ag = $('again');
+    if (ag) ag.addEventListener('click', function(e){
+      e.preventDefault();
+      RUBRIC.forEach(c => { for (var L=1;L<=4;L++) $(c.key+'_'+L).value = ''; });
+      $('room').value = ''; $('nAll').value = '';
+      $('strength').value = ''; $('improve').value = ''; $('evidence').value = '';
+      $('msg').innerHTML = ''; recalc();
+      window.scrollTo({ top:0, behavior:'smooth' });
+    });
+  });
 });
 
 /* ---------- เริ่มทำงาน ---------- */
 (function(){
   const q = new URLSearchParams(location.search).get('smis');
-  var c = q && /^\d{8}$/.test(q) ? q : null;
-  if (!c){ try{ c = sessionStorage.getItem('smis8c'); }catch(e){} }
-  if (c && !API_URL){
-    showPicker();
-    $('plist').innerHTML = '<div class="empty" style="padding:22px">ยังไม่ได้ตั้งค่า API_URL ในไฟล์นี้</div>';
-    return;
+  if (q && /^\d{8}$/.test(q)){
+    $('user').value = q;
+    $('user').dispatchEvent(new Event('input'));
+    setTimeout(() => $('pass').focus(), 100);
   }
-  if (c && SCHOOLS.some(s => s.code === c)){
-    SMIS = c;
-    try{ sessionStorage.setItem('smis8c', c); }catch(e){}
-    load();
-  } else showPicker();
+  try{
+    const s = JSON.parse(sessionStorage.getItem('me8c') || 'null');
+    if (s && s.token && (!q || q === s.smis)){ ME = s; startApp(); }
+  }catch(e){}
 })();
 </script>
 </body>
