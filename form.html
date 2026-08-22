@@ -238,6 +238,16 @@ footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:24px 18px 1
 @media(max-width:520px){ .opts{grid-template-columns:1fr} .card>p.cap{padding-left:0}
   header h1{font-size:1.08rem} .bar .st.hidesm{display:none} }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* ---------- ปุ่มเปิด/ปิดการมองเห็นรหัสผ่าน ---------- */
+.pw{position:relative;display:block}
+.pw > input{padding-right:48px !important}
+.pw .eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  width:36px;height:36px;display:grid;place-items:center;padding:0;
+  border:none;background:none;color:var(--ink-3);cursor:pointer;border-radius:10px;
+  transition:.15s;font-family:inherit}
+.pw .eye:hover{color:var(--brand-600);background:var(--soft)}
+.pw .eye:focus-visible{outline:2px solid var(--brand-500);outline-offset:1px}
+.pw .eye .ic{width:20px;height:20px;stroke-width:1.7}
 </style>
 </head>
 <body>
@@ -287,6 +297,8 @@ footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:24px 18px 1
 <symbol id="ic-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M7 21v-7h10v7"/><path d="M7 3v5h7"/></symbol>
 <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></symbol>
 <symbol id="ic-moon" viewBox="0 0 24 24"><path d="M20.5 14.3A8.6 8.6 0 0 1 9.7 3.5a8.6 8.6 0 1 0 10.8 10.8Z"/></symbol>
+<symbol id="ic-eye" viewBox="0 0 24 24"><path d="M2.2 12S5.8 5.5 12 5.5 21.8 12 21.8 12 18.2 18.5 12 18.5 2.2 12 2.2 12Z"/><circle cx="12" cy="12" r="3.2"/></symbol>
+<symbol id="ic-eye-off" viewBox="0 0 24 24"><path d="M9.9 5.8A9.6 9.6 0 0 1 12 5.5c6.2 0 9.8 6.5 9.8 6.5a17 17 0 0 1-3.3 4.1M6.5 7.9A17 17 0 0 0 2.2 12S5.8 18.5 12 18.5c1.6 0 3-.4 4.2-1"/><path d="M10 10a2.8 2.8 0 0 0 4 4"/><path d="M3 3l18 18"/></symbol>
 </svg>
 
 <!-- ---------- เข้าสู่ระบบ ---------- -->
@@ -558,6 +570,36 @@ let ME = null;   // {smis, school, group, district, grades, token}
   });
 })();
 
+/* ---------- ปุ่มเปิดตาดูรหัสผ่าน ---------- */
+function eyeAll(root){
+  (root || document).querySelectorAll('input[type=password]').forEach(function(inp){
+    if (inp.parentNode && inp.parentNode.classList && inp.parentNode.classList.contains('pw')) return;
+    const w = document.createElement('span');
+    w.className = 'pw';
+    inp.parentNode.insertBefore(w, inp);
+    w.appendChild(inp);
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'eye';
+    b.tabIndex = -1;
+    function paint(){
+      const hidden = inp.type === 'password';
+      b.innerHTML = icon(hidden ? 'eye' : 'eye-off');
+      b.title = hidden ? 'แสดงรหัสผ่าน' : 'ซ่อนรหัสผ่าน';
+      b.setAttribute('aria-label', b.title);
+    }
+    paint();
+    b.addEventListener('click', function(){
+      const pos = inp.selectionStart;
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+      paint();
+      inp.focus();
+      try{ inp.setSelectionRange(pos, pos); }catch(e){}
+    });
+    w.appendChild(b);
+  });
+}
+
 /* ---------- POST ---------- */
 function post(payload, cb){
   fetch(API_URL, { method:'POST', body: JSON.stringify(payload) })
@@ -625,6 +667,7 @@ function openPw(){
     });
   });
   m.querySelector('#pX').addEventListener('click', () => m.remove());
+  eyeAll(m);
   m.querySelector('#p0').focus();
 }
 
@@ -856,6 +899,7 @@ $('btnSave').addEventListener('click', function(){
 
 /* ---------- เริ่มทำงาน ---------- */
 (function(){
+  eyeAll();
   const q = new URLSearchParams(location.search).get('smis');
   if (q && /^\d{8}$/.test(q)){
     $('user').value = q;
