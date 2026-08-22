@@ -15,7 +15,7 @@
   --blue:#3866eb; --pink:#d94f9a;
   --seq-1:#c0a9f0; --seq-2:#9a7ce2; --seq-3:#6b45c4; --seq-4:#3f2585;
   --bar:#7c5ad4;
-  --l1:#c4407a; --l2:#9540bb; --l3:#6344cf; --l4:#3340b8;
+  --l1:#c03050; --l2:#d98c14; --l3:#1f96c2; --l4:#5a2ea6;
   --ok:#1e9d6b; --warn:#d98218; --bad:#c0392b;
   --ink-1:#171226; --ink-2:#4d465f; --ink-3:#7a7290;
   --bg:#f3f0fa; --card:#ffffff; --line:#e3dcf0; --soft:#f8f5fd; --grid:#efeaf8;
@@ -26,6 +26,7 @@
 @media (prefers-color-scheme:dark){
   :root:not([data-theme=light]){
     --seq-1:#59409a; --seq-2:#7c5ad4; --seq-3:#9d80e8; --seq-4:#c3aef3;
+    --l1:#c0364f; --l2:#b8890a; --l3:#0f9fc9; --l4:#7a52cf;
     --bar:#8f6ddc; --brand-100:#241a45; --brand-500:#9d80e8; --brand-600:#8f6ddc;
     --ok:#3ec18c; --warn:#e6a23c; --bad:#e0685c;
     --ink-1:#f2eefb; --ink-2:#b9b0cf; --ink-3:#8d84a8;
@@ -36,6 +37,7 @@
 }
 [data-theme=dark]{
   --seq-1:#59409a; --seq-2:#7c5ad4; --seq-3:#9d80e8; --seq-4:#c3aef3;
+  --l1:#c0364f; --l2:#b8890a; --l3:#0f9fc9; --l4:#7a52cf;
   --bar:#8f6ddc; --brand-100:#241a45; --brand-500:#9d80e8; --brand-600:#8f6ddc;
   --ok:#3ec18c; --warn:#e6a23c; --bad:#e0685c;
   --ink-1:#f2eefb; --ink-2:#b9b0cf; --ink-3:#8d84a8;
@@ -234,6 +236,82 @@ footer .src{font-size:.78rem;opacity:.85}
 .pw .eye:hover{color:var(--brand-600);background:var(--soft)}
 .pw .eye:focus-visible{outline:2px solid var(--brand-500);outline-offset:1px}
 .pw .eye .ic{width:20px;height:20px;stroke-width:1.7}
+/* ============ กราฟ (ใช้ร่วมกันทั้งหน้าเขตและหน้าโรงเรียน) ============ */
+.chtip{position:fixed;z-index:80;pointer-events:none;display:none;max-width:260px;
+  background:var(--ink-1);color:var(--card);border-radius:10px;padding:8px 11px;
+  font-size:.8rem;line-height:1.5;box-shadow:0 8px 24px rgba(20,10,40,.28)}
+.chtip b{display:block;font-size:.85rem;margin-bottom:2px}
+.chtip i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:6px;font-style:normal}
+.chtip .r{display:flex;justify-content:space-between;gap:14px}
+.chtip .r span{opacity:.82}
+
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart .grid{stroke:var(--grid);stroke-width:1;fill:none}
+.chart .axis{stroke:var(--line);stroke-width:1}
+.chart .tick{fill:var(--ink-3);font-size:10.5px;font-family:inherit}
+.chart .lbl{fill:var(--ink-2);font-size:11.5px;font-weight:600;font-family:inherit}
+.chart .val{fill:var(--ink-1);font-size:11.5px;font-weight:700;font-family:inherit}
+
+/* เรดาร์ */
+.radar .area{fill:var(--bar);fill-opacity:.16;stroke:var(--bar);stroke-width:2;
+  stroke-linejoin:round;transition:d .4s ease}
+.radar .dot{fill:var(--card);stroke:var(--bar);stroke-width:2.4}
+.radar .hit{fill:transparent;cursor:pointer}
+.radar .hit:hover + .dot,.radar .dot.on{fill:var(--bar)}
+.radar .key{fill:var(--ink-2);font-size:11.5px;font-weight:700;font-family:inherit}
+.radar .sub{fill:var(--ink-3);font-size:10px;font-family:inherit}
+.radar .pin{paint-order:stroke;stroke-linejoin:round}
+
+/* เส้นแนวโน้ม */
+.linec .area{fill:url(#lg);stroke:none}
+.linec .ln{fill:none;stroke:var(--bar);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.linec .dot{fill:var(--card);stroke:var(--bar);stroke-width:2.4}
+.linec .dot.big{fill:var(--bar)}
+.linec .cross{stroke:var(--brand-500);stroke-width:1;opacity:0;stroke-dasharray:0}
+.linec .band{fill:transparent;cursor:crosshair}
+.linec .band:hover ~ .cross{opacity:.45}
+
+/* แท่งกระจายสองทาง (Likert) */
+.dv{display:grid;grid-template-columns:auto 1fr auto;gap:7px 12px;align-items:center}
+.dv .nm{font-size:.85rem;color:var(--ink-2);text-align:right;white-space:nowrap;
+  display:flex;align-items:center;gap:7px;justify-content:flex-end}
+.dv .nm i{width:9px;height:9px;border-radius:3px;flex:0 0 auto}
+.dv .trk{position:relative;display:flex;height:26px}
+.dv .trk::before{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;
+  background:var(--line)}
+.dv .side{flex:1 1 50%;display:flex;min-width:0;gap:2px}
+.dv .side.l{justify-content:flex-end}
+.dv .seg{height:100%;display:grid;place-items:center;color:#fff;font-size:.76rem;
+  font-weight:700;overflow:hidden;transition:width .45s ease;cursor:pointer;min-width:0}
+.dv .side.l .seg:first-child{border-radius:6px 0 0 6px}
+.dv .side.r .seg:last-child{border-radius:0 6px 6px 0}
+.dv .risk{font-size:.82rem;font-weight:700;color:var(--ink-2);
+  font-variant-numeric:tabular-nums;min-width:52px;text-align:right}
+.dv .risk.hi{color:var(--bad)}
+.dvfoot{display:flex;justify-content:space-between;align-items:center;gap:14px;
+  flex-wrap:wrap;margin-top:14px;padding-top:13px;border-top:1px solid var(--grid)}
+.lg{display:flex;gap:15px;flex-wrap:wrap;font-size:.81rem;color:var(--ink-2)}
+.lg span{display:inline-flex;align-items:center;gap:6px}
+.lg i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.tbtn{background:none;border:1px solid var(--line);color:var(--ink-2);font-family:inherit;
+  font-size:.79rem;padding:5px 12px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{border-color:var(--brand-500);color:var(--brand-600)}
+.axcap{display:flex;justify-content:space-between;font-size:.75rem;color:var(--ink-3);
+  margin-top:6px;padding-left:0}
+
+/* มิเตอร์ */
+.meter{display:flex;flex-direction:column;gap:5px;min-width:180px}
+.meter .tp{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  font-size:.79rem;opacity:.88}
+.meter .tp b{font-size:1.05rem;font-weight:800;font-variant-numeric:tabular-nums}
+.meter .bar{height:8px;border-radius:99px;background:rgba(255,255,255,.24);overflow:hidden}
+.meter .fill{height:100%;border-radius:99px;background:#fff;transition:width .5s ease}
+
+@media(max-width:600px){
+  .dv{grid-template-columns:auto 1fr;gap:6px 8px}
+  .dv .risk{display:none}
+  .dv .nm{max-width:104px;white-space:normal;line-height:1.25}
+}
 </style>
 </head>
 <body>
@@ -450,6 +528,11 @@ const GRADES = ['อนุบาล 1','อนุบาล 2','อนุบา�
   'มัธยมศึกษาปีที่ 1','มัธยมศึกษาปีที่ 2','มัธยมศึกษาปีที่ 3',
   'มัธยมศึกษาปีที่ 4','มัธยมศึกษาปีที่ 5','มัธยมศึกษาปีที่ 6'];
 const HEAT = ['#ece2fd','#ddd0fa','#cdbaf6','#bda3f0','#ad8be9','#a075e3'];
+const ABBR_G = {'อนุบาล 1':'อ.1','อนุบาล 2':'อ.2','อนุบาล 3':'อ.3',
+  'ประถมศึกษาปีที่ 1':'ป.1','ประถมศึกษาปีที่ 2':'ป.2','ประถมศึกษาปีที่ 3':'ป.3',
+  'ประถมศึกษาปีที่ 4':'ป.4','ประถมศึกษาปีที่ 5':'ป.5','ประถมศึกษาปีที่ 6':'ป.6',
+  'มัธยมศึกษาปีที่ 1':'ม.1','มัธยมศึกษาปีที่ 2':'ม.2','มัธยมศึกษาปีที่ 3':'ม.3',
+  'มัธยมศึกษาปีที่ 4':'ม.4','มัธยมศึกษาปีที่ 5':'ม.5','มัธยมศึกษาปีที่ 6':'ม.6'};
 const LC = ['var(--l1)','var(--l2)','var(--l3)','var(--l4)'];
 
 const $ = id => document.getElementById(id);
@@ -476,6 +559,235 @@ const TOTAL_ROOMS = SCHOOLS.reduce((a,s)=>a+roomsOf(s),0);
 const TOTAL_STUDENTS = SCHOOLS.reduce((a,s)=>a+(Number(s.total)||0),0);
 
 let ROWS = [], TAB = 'dash', ADMIN = '', ADMROWS = null, USERS = null, SORT = { k:'avg', d:-1 };
+
+/* ============================================================
+   ชุดกราฟ SVG — ใช้ร่วมกันทั้งหน้าเขตและหน้าโรงเรียน
+   เลือกรูปแบบตามหน้าที่ของข้อมูล
+     • เรดาร์        — รูปทรงจุดแข็ง/จุดอ่อน 8 ด้านพร้อมกัน
+     • เส้นแนวโน้ม   — ค่าเฉลี่ยไล่ตามลำดับชั้น (ข้อมูลมีลำดับ)
+     • แท่งสองทาง    — สัดส่วนระดับคุณภาพ แยกซ้าย(ต้องพัฒนา)/ขวา(ดี)
+   ============================================================ */
+const CH = (function () {
+  const esc2 = s => String(s == null ? '' : s)
+    .replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+  const nf2 = n => Number(n || 0).toLocaleString('th-TH');
+
+  /* ---------- ทูลทิป ---------- */
+  var tipEl = null;
+  function tipBox() {
+    if (!tipEl) { tipEl = document.createElement('div'); tipEl.className = 'chtip'; document.body.appendChild(tipEl); }
+    return tipEl;
+  }
+  function show(html, x, y) {
+    const t = tipBox();
+    t.innerHTML = html; t.style.display = 'block';
+    const r = t.getBoundingClientRect();
+    t.style.left = Math.max(8, Math.min(innerWidth - r.width - 8, x - r.width / 2)) + 'px';
+    t.style.top = Math.max(8, y - r.height - 14) + 'px';
+  }
+  function hide() { if (tipEl) tipEl.style.display = 'none'; }
+  function bind(root) {
+    if (!root) return;
+    root.querySelectorAll('[data-tip]').forEach(function (el) {
+      el.addEventListener('pointermove', e => show(el.getAttribute('data-tip'), e.clientX, e.clientY));
+      el.addEventListener('pointerenter', e => show(el.getAttribute('data-tip'), e.clientX, e.clientY));
+      el.addEventListener('pointerleave', hide);
+    });
+    root.addEventListener('pointerleave', hide);
+    addEventListener('scroll', hide, { passive: true });
+  }
+
+  /* ---------- 1) เรดาร์ 8 ด้าน ---------- */
+  function radar(items, opt) {
+    opt = opt || {};
+    const max = opt.max || 4, n = items.length;
+    const W = 430, H = 340, cx = W / 2, cy = H / 2 + 4, R = 108;
+    const ang = i => -Math.PI / 2 + i * 2 * Math.PI / n;
+    const px = (i, v) => cx + Math.cos(ang(i)) * R * (v / max);
+    const py = (i, v) => cy + Math.sin(ang(i)) * R * (v / max);
+    const ring = v => items.map((_, i) => px(i, v).toFixed(1) + ',' + py(i, v).toFixed(1)).join(' ');
+
+    var best = 0, worst = 0;
+    items.forEach((x, i) => { if (x.v > items[best].v) best = i; if (x.v < items[worst].v) worst = i; });
+
+    var s = '<svg class="chart radar" viewBox="0 0 ' + W + ' ' + H + '" role="img" ' +
+      'aria-label="เรดาร์คะแนนเฉลี่ยรายทักษะ 8 ด้าน เต็ม ' + max + '">';
+    /* วงอ้างอิง 1–4 */
+    for (var v = 1; v <= max; v++) s += '<polygon class="grid" points="' + ring(v) + '"/>';
+    /* ก้าน */
+    items.forEach(function (_, i) {
+      s += '<line class="grid" x1="' + cx + '" y1="' + cy + '" x2="' + px(i, max).toFixed(1) +
+        '" y2="' + py(i, max).toFixed(1) + '"/>';
+    });
+    /* ป้ายสเกลบนแกนบนสุด */
+    for (var v2 = 1; v2 <= max; v2++) {
+      s += '<text class="tick" x="' + (cx + 4) + '" y="' + (py(0, v2) + 3.5).toFixed(1) + '">' + v2 + '</text>';
+    }
+    /* พื้นที่ข้อมูล */
+    s += '<polygon class="area" points="' + items.map((x, i) =>
+      px(i, x.v).toFixed(1) + ',' + py(i, x.v).toFixed(1)).join(' ') + '"/>';
+
+    /* จุด + พื้นที่รับเมาส์ + ป้ายแกน */
+    items.forEach(function (x, i) {
+      const X = px(i, x.v), Y = py(i, x.v);
+      const tip = '<b>' + esc2(x.key) + ' · ' + esc2(x.label) + '</b>' +
+        '<div class="r"><span>คะแนนเฉลี่ย</span><b>' + x.v.toFixed(2) + ' / ' + max.toFixed(2) + '</b></div>' +
+        (x.extra ? '<div class="r"><span>' + esc2(x.extra[0]) + '</span><b>' + esc2(x.extra[1]) + '</b></div>' : '');
+      s += '<circle class="hit" cx="' + X.toFixed(1) + '" cy="' + Y.toFixed(1) + '" r="16" data-tip="' + esc2(tip) + '"/>';
+      s += '<circle class="dot" cx="' + X.toFixed(1) + '" cy="' + Y.toFixed(1) + '" r="4.6"/>';
+
+      const LX = px(i, max) + Math.cos(ang(i)) * 30, LY = py(i, max) + Math.sin(ang(i)) * 30;
+      const c = Math.cos(ang(i));
+      const anchor = Math.abs(c) < 0.3 ? 'middle' : (c > 0 ? 'start' : 'end');
+      s += '<text class="key" x="' + LX.toFixed(1) + '" y="' + (LY - 3).toFixed(1) + '" text-anchor="' + anchor + '">' +
+        esc2(x.key) + '</text>';
+      s += '<text class="sub" x="' + LX.toFixed(1) + '" y="' + (LY + 9).toFixed(1) + '" text-anchor="' + anchor + '">' +
+        esc2(x.short || '') + '</text>';
+    });
+
+    /* ป้ายค่าเฉพาะจุดสูงสุด–ต่ำสุด (ไม่ติดป้ายทุกจุด) */
+    [[best, 'สูงสุด'], [worst, 'ต่ำสุด']].forEach(function (pair) {
+      const i = pair[0], x = items[i];
+      const X = px(i, x.v), Y = py(i, x.v);
+      const c = Math.cos(ang(i)), off = c >= 0 ? 13 : -13;
+      s += '<text class="val pin" x="' + (X + off).toFixed(1) + '" y="' + (Y + 4).toFixed(1) +
+        '" text-anchor="' + (c >= 0 ? 'start' : 'end') + '" stroke="var(--card)" stroke-width="3">' +
+        x.v.toFixed(2) + '</text>';
+    });
+    s += '</svg>';
+    return s;
+  }
+
+  /* ---------- 2) เส้นแนวโน้มตามลำดับชั้น ---------- */
+  function trend(pts, opt) {
+    opt = opt || {};
+    const lo = opt.lo != null ? opt.lo : 1, hi = opt.hi != null ? opt.hi : 4;
+    const W = 440, H = 290, PL = 30, PR = 14, PT = 16, PB = 44;
+    const iw = W - PL - PR, ih = H - PT - PB;
+    const n = pts.length;
+    if (!n) return '';
+    const X = i => PL + (n === 1 ? iw / 2 : i * iw / (n - 1));
+    const Y = v => PT + ih - (Math.max(lo, Math.min(hi, v)) - lo) / (hi - lo) * ih;
+
+    var s = '<svg class="chart linec" viewBox="0 0 ' + W + ' ' + H + '" role="img" ' +
+      'aria-label="แนวโน้มคะแนนเฉลี่ย 8C ตามระดับชั้น">' +
+      '<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0%" stop-color="var(--bar)" stop-opacity=".26"/>' +
+      '<stop offset="100%" stop-color="var(--bar)" stop-opacity="0"/></linearGradient></defs>';
+
+    for (var v = lo; v <= hi; v += (hi - lo) / 3) {
+      const y = Y(v);
+      s += '<line class="grid" x1="' + PL + '" y1="' + y.toFixed(1) + '" x2="' + (W - PR) + '" y2="' + y.toFixed(1) + '"/>' +
+        '<text class="tick" x="' + (PL - 7) + '" y="' + (y + 3.5).toFixed(1) + '" text-anchor="end">' +
+        v.toFixed(1) + '</text>';
+    }
+
+    const line = pts.map((p, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(p.v).toFixed(1)).join(' ');
+    s += '<path class="area" d="' + line + ' L' + X(n - 1).toFixed(1) + ' ' + (PT + ih) +
+      ' L' + X(0).toFixed(1) + ' ' + (PT + ih) + ' Z"/>';
+    s += '<path class="ln" d="' + line + '"/>';
+
+    var best = 0, worst = 0;
+    pts.forEach((p, i) => { if (p.v > pts[best].v) best = i; if (p.v < pts[worst].v) worst = i; });
+
+    pts.forEach(function (p, i) {
+      const x = X(i), y = Y(p.v);
+      const key = (i === 0 || i === n - 1 || i === best || i === worst);
+      const tip = '<b>' + esc2(p.label) + '</b>' +
+        '<div class="r"><span>คะแนนเฉลี่ย 8C</span><b>' + p.v.toFixed(2) + '</b></div>' +
+        (p.n != null ? '<div class="r"><span>ห้องเรียน</span><b>' + nf2(p.n) + ' ห้อง</b></div>' : '') +
+        (p.students != null ? '<div class="r"><span>นักเรียน</span><b>' + nf2(p.students) + ' คน</b></div>' : '');
+      s += '<rect class="band" x="' + (x - iw / (2 * Math.max(1, n - 1))).toFixed(1) + '" y="' + PT +
+        '" width="' + (iw / Math.max(1, n - 1)).toFixed(1) + '" height="' + ih + '" data-tip="' + esc2(tip) + '"/>';
+      s += '<circle class="dot' + (key ? ' big' : '') + '" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) +
+        '" r="' + (key ? 5 : 4) + '"/>';
+      if (key) {
+        s += '<text class="val" x="' + x.toFixed(1) + '" y="' + (y - 11).toFixed(1) +
+          '" text-anchor="middle" stroke="var(--card)" stroke-width="3" paint-order="stroke">' +
+          p.v.toFixed(2) + '</text>';
+      }
+      s += '<text class="tick" x="' + x.toFixed(1) + '" y="' + (PT + ih + 17) +
+        '" text-anchor="middle">' + esc2(p.short || p.label) + '</text>';
+      if (p.n != null) {
+        s += '<text class="tick" x="' + x.toFixed(1) + '" y="' + (PT + ih + 31) +
+          '" text-anchor="middle" opacity=".72">' + p.n + ' ห้อง</text>';
+      }
+    });
+    s += '</svg>';
+    return s;
+  }
+
+  /* ---------- 3) แท่งกระจายสองทาง (ordered scale) ---------- */
+  function diverging(rows, opt) {
+    opt = opt || {};
+    const names = opt.names || ['ระดับ 1', 'ระดับ 2', 'ระดับ 3', 'ระดับ 4'];
+    const cols = ['var(--l1)', 'var(--l2)', 'var(--l3)', 'var(--l4)'];
+    const sorted = rows.slice().sort(function (a, b) {
+      const ra = a.n ? (a.d[0] + a.d[1]) / a.n : 0, rb = b.n ? (b.d[0] + b.d[1]) / b.n : 0;
+      return rb - ra;
+    });
+    const tot = [0, 0, 0, 0];
+    rows.forEach(r => r.d.forEach((v, i) => tot[i] += v));
+
+    var s = '<div class="dv">';
+    sorted.forEach(function (r) {
+      const n = r.n || 1;
+      const p = r.d.map(v => v / n * 100);
+      const risk = p[0] + p[1];
+      function seg(i) {
+        const w = (p[i] * 2).toFixed(2);
+        const tip = '<b>' + esc2(r.key) + ' · ' + esc2(r.label) + '</b>' +
+          '<div class="r"><span><i style="background:' + cols[i] + '"></i>' + esc2(names[i]) + '</span>' +
+          '<b>' + nf2(r.d[i]) + ' คน (' + p[i].toFixed(1) + '%)</b></div>' +
+          '<div class="r"><span>นักเรียนทั้งหมด</span><b>' + nf2(n) + ' คน</b></div>';
+        return '<div class="seg" style="width:' + w + '%;background:' + cols[i] + '" data-tip="' + esc2(tip) + '">' +
+          (p[i] >= 9 ? Math.round(p[i]) + '%' : '') + '</div>';
+      }
+      s += '<div class="nm"><i style="background:' + (r.color || 'var(--bar)') + '"></i>' +
+        esc2(r.key) + ' · ' + esc2(r.short || r.label) + '</div>' +
+        '<div class="trk"><div class="side l">' + seg(0) + seg(1) + '</div>' +
+        '<div class="side r">' + seg(2) + seg(3) + '</div></div>' +
+        '<div class="risk' + (risk >= 40 ? ' hi' : '') + '">' + risk.toFixed(0) + '%</div>';
+    });
+    s += '</div>' +
+      '<div class="axcap"><span>← ควรเร่งพัฒนา</span><span>ผ่านเกณฑ์ดีขึ้นไป →</span></div>' +
+      '<div class="dvfoot"><div class="lg">' +
+      names.map((nm, i) => '<span><i style="background:' + cols[i] + '"></i>' + esc2(nm) +
+        ' — ' + nf2(tot[i]) + ' คน</span>').join('') +
+      '</div><button type="button" class="tbtn" data-table>ดูเป็นตาราง</button></div>' +
+      '<div data-tablebox style="display:none;margin-top:12px"></div>';
+    return s;
+  }
+
+  /** ตารางค่าตัวเลขของแท่งสองทาง (เปิด/ปิดด้วยปุ่ม) */
+  function divTable(rows, names) {
+    names = names || ['ระดับ 1', 'ระดับ 2', 'ระดับ 3', 'ระดับ 4'];
+    return '<div class="scroller"><table class="sumtbl"><thead><tr><th class="l">ทักษะ</th>' +
+      names.map(n => '<th>' + esc2(n) + '</th>').join('') +
+      '<th>รวม</th><th>ควรเร่งพัฒนา</th></tr></thead><tbody>' +
+      rows.map(function (r) {
+        const n = r.n || 1, risk = (r.d[0] + r.d[1]) / n * 100;
+        return '<tr><td class="l"><b>' + esc2(r.key) + '</b> ' + esc2(r.short || r.label) + '</td>' +
+          r.d.map(v => '<td>' + nf2(v) + '</td>').join('') +
+          '<td><b>' + nf2(r.n) + '</b></td><td>' + risk.toFixed(1) + '%</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /** ผูกปุ่ม "ดูเป็นตาราง" */
+  function bindTable(root, rows, names) {
+    if (!root) return;
+    const btn = root.querySelector('[data-table]'), box = root.querySelector('[data-tablebox]');
+    if (!btn || !box) return;
+    btn.addEventListener('click', function () {
+      const open = box.style.display !== 'none';
+      if (!open && !box.innerHTML) box.innerHTML = divTable(rows, names);
+      box.style.display = open ? 'none' : '';
+      btn.textContent = open ? 'ดูเป็นตาราง' : 'ซ่อนตาราง';
+    });
+  }
+
+  return { radar: radar, trend: trend, diverging: diverging, bind: bind, bindTable: bindTable, hide: hide };
+})();
 
 /* ---------- โหมดสว่าง / มืด ---------- */
 (function(){
@@ -647,69 +959,91 @@ function renderDash(){
   const students = R.reduce((a,r)=>a+(Number(r.nEval)||0),0);
   const nSchools = new Set(R.map(r=>r.smis)).size;
   const inScope = scopeSchools().length;
-  const cAvgs = RUBRIC.map((c,i)=>({key:c.key, short:c.short, color:c.color, v:wAvg(R,i)}));
-  const sorted = cAvgs.slice().sort((a,b)=>b.v-a.v);
-  const best = sorted[0], weak = sorted[sorted.length-1];
   const cover = inScope ? Math.round(nSchools/inScope*100) : 0;
+  const roomsExp = scopeSchools().reduce((a,s)=>a+roomsOf(s),0);
+  const roomCover = roomsExp ? Math.round(R.length/roomsExp*100) : 0;
 
+  const cAvgs = RUBRIC.map((c,i)=>({key:c.key, short:c.short, color:c.color, v:wAvg(R,i)}));
+  const ranked = cAvgs.slice().sort((a,b)=>b.v-a.v);
+  const best = ranked[0], weak = ranked[ranked.length-1];
+
+  /* ข้อมูลการกระจายรายทักษะ */
+  const totals=[0,0,0,0];
+  const dist = RUBRIC.map(function(c,i){
+    const d=[0,0,0,0];
+    R.forEach(function(r){ const dd = r.dist && r.dist[i];
+      if (dd) for (var L=0;L<4;L++) d[L] += Number(dd[L])||0; });
+    for (var L=0;L<4;L++) totals[L]+=d[L];
+    return {key:c.key, label:c.short, short:c.short, color:c.color, d:d, n:d.reduce((a,b)=>a+b,0)};
+  });
+  const nEval = totals.reduce((a,b)=>a+b,0);
+  const riskAll = nEval ? (totals[0]+totals[1])/nEval*100 : 0;
+
+  /* แนวโน้มรายระดับชั้น */
   const byG = GRADES.map(function(g){
     const L = R.filter(r=>r.grade===g);
-    return { g:g, n:L.length, v:wAvg(L,null) };
+    return { label:g, short:(ABBR_G[g]||g), v:wAvg(L,null), n:L.length,
+             students:L.reduce((a,r)=>a+(Number(r.nEval)||0),0) };
   }).filter(x=>x.n>0);
 
+  var loG = byG[0] || {short:'–', v:0}, hiG = byG[0] || {short:'–', v:0};
+  byG.forEach(function(g){ if (g.v < loG.v) loG = g; if (g.v > hiG.v) hiG = g; });
+
   $('body').innerHTML =
+    /* ---- ฮีโร่ + มิเตอร์ความครอบคลุม ---- */
     '<div class="hero">' +
       '<div class="ttl">' + icon('award') + ' ภาพรวมทักษะ 8C ทั้งเขตพื้นที่ · ' + esc(scope) + '</div>' +
       '<div class="row">' +
         '<div><div class="big">' + avg.toFixed(2) + '<small> / 4.00</small></div></div>' +
         '<div class="qb">' + icon('check') + ' ระดับคุณภาพ ' + qualityOf(avg) + '</div>' +
-        '<div class="kv"><b>' + nSchools + ' / ' + inScope + '</b><span>โรงเรียนที่ส่งข้อมูล (' + cover + '%)</span></div>' +
-        '<div class="kv"><b>' + nf(R.length) + '</b><span>ห้องเรียนที่ส่งข้อมูล</span></div>' +
+        '<div class="meter"><div class="tp"><span>โรงเรียนที่ส่งข้อมูล</span>' +
+          '<b>' + nSchools + ' / ' + inScope + '</b></div>' +
+          '<div class="bar"><div class="fill" style="width:' + Math.max(cover,1.5) + '%"></div></div>' +
+          '<div class="tp" style="opacity:.7"><span>' + cover + '%</span><span>ห้องเรียน ' +
+          nf(R.length) + ' / ' + nf(roomsExp) + ' (' + roomCover + '%)</span></div></div>' +
         '<div class="kv"><b>' + nf(students) + '</b><span>นักเรียนที่ประเมิน (คน)</span></div>' +
-        '<div class="kv"><b>' + best.key + '</b><span>แข็งแรงที่สุด — ' + esc(best.short) + ' (' + best.v.toFixed(2) + ')</span></div>' +
-        '<div class="kv"><b>' + weak.key + '</b><span>ควรเร่งพัฒนา — ' + esc(weak.short) + ' (' + weak.v.toFixed(2) + ')</span></div>' +
+        '<div class="kv"><b>' + riskAll.toFixed(0) + '%</b><span>อยู่ในกลุ่มควรเร่งพัฒนา</span></div>' +
       '</div></div>' +
 
+    /* ---- เรดาร์ + เส้นแนวโน้ม ---- */
     '<div class="two">' +
-      '<div class="panel"><h3>' + icon('chart') + ' คะแนนเฉลี่ยรายทักษะ 8 ด้าน</h3>' +
-        '<p class="cap">ทั้งเขต · ถ่วงน้ำหนักตามจำนวนนักเรียน · เต็ม 4.00</p>' +
-        bars(sorted.map(c=>({nm:c.key+' · '+c.short, sw:c.color, v:c.v, tx:c.v.toFixed(2)})), 4) + '</div>' +
-      '<div class="panel"><h3>' + icon('cap') + ' คะแนนเฉลี่ยรายระดับชั้น</h3>' +
-        '<p class="cap">รวมทุกห้องทุกโรงเรียนในชั้นเดียวกัน</p>' +
-        (byG.length ? bars(byG.map(x=>({nm:x.g, v:x.v, tx:x.v.toFixed(2), sub:'('+x.n+' ห้อง)'})), 4) : noData()) +
+      '<div class="panel"><h3>' + icon('spark') + ' รูปทรงทักษะ 8 ด้านของเขต</h3>' +
+        '<p class="cap">ยิ่งกางออกยิ่งดี · เต็ม 4.00 · ถ่วงน้ำหนักตามจำนวนนักเรียน — ' +
+          'ด้านที่บุ๋มเข้าหาศูนย์กลางคือด้านที่ควรเร่งพัฒนา</p>' +
+        '<div id="rad"></div>' +
+        '<div class="dvfoot"><div class="lg">' +
+          '<span><i style="background:var(--bar)"></i>คะแนนเฉลี่ยของเขต</span>' +
+          '<span style="color:var(--ink-3)">แข็งแรงสุด ' + best.key + ' ' + esc(best.short) +
+            ' · ควรเร่งพัฒนา ' + weak.key + ' ' + esc(weak.short) + '</span>' +
+        '</div></div></div>' +
+      '<div class="panel"><h3>' + icon('up') + ' แนวโน้มตามระดับชั้น</h3>' +
+        '<p class="cap">ค่าเฉลี่ย 8C ไล่จากชั้นเล็กไปชั้นโต — ใช้ดูว่าทักษะพัฒนาขึ้นตามช่วงวัยหรือไม่</p>' +
+        '<div id="trd"></div>' +
+        (byG.length ? '<div class="dvfoot"><div class="lg">' +
+          '<span><i style="background:var(--bar)"></i>คะแนนเฉลี่ย 8C</span>' +
+          '<span style="color:var(--ink-3)">ต่ำสุด ' + esc(loG.short) + ' ' + loG.v.toFixed(2) +
+          ' · สูงสุด ' + esc(hiG.short) + ' ' + hiG.v.toFixed(2) +
+          ' · ห่างกัน ' + (hiG.v - loG.v).toFixed(2) + '</span></div></div>' : '') +
       '</div>' +
     '</div>' +
 
-    '<div class="panel"><h3>' + icon('users') + ' การกระจายนักเรียนตามระดับคุณภาพ รายทักษะ</h3>' +
-      '<p class="cap">รวมทุกโรงเรียนตามตัวกรอง — เห็นสัดส่วนนักเรียนกลุ่มควรพัฒนาในแต่ละทักษะ</p>' +
-      '<div id="dashDist"></div>' +
-    '</div>';
+    /* ---- แท่งกระจายสองทาง ---- */
+    '<div class="panel"><h3>' + icon('users') + ' สัดส่วนนักเรียนตามระดับคุณภาพ รายทักษะ</h3>' +
+      '<p class="cap">แบ่งครึ่งที่เส้นกลาง — ซ้ายคือกลุ่มที่ยังไม่ถึงเกณฑ์ (ควรพัฒนา + พอใช้) ' +
+        'ขวาคือกลุ่มที่ผ่านเกณฑ์ (ดี + ดีเยี่ยม) · เรียงจากทักษะที่มีกลุ่มควรเร่งพัฒนามากที่สุด</p>' +
+      '<div id="dvz"></div></div>';
 
-  /* การกระจายรายทักษะ */
-  const totals=[0,0,0,0];
-  const drows = RUBRIC.map(function(c,i){
-    const d=[0,0,0,0];
-    R.forEach(function(r){ const dd = r.dist && r.dist[i];
-      if (dd) for (var L=0;L<4;L++) d[L] += Number(dd[L])||0; });
-    for (var L=0;L<4;L++) totals[L]+=d[L];
-    return {key:c.key, short:c.short, color:c.color, d:d, n:d.reduce((a,b)=>a+b,0)};
-  });
-  const maxN = Math.max(1, ...drows.map(x=>x.n));
-  const distHTML = drows.some(x=>x.n>0)
-    ? '<div class="dist">' + drows.map(function(x){
-        return '<div class="nm"><span class="sw" style="background:'+x.color+'"></span>' +
-          x.key + ' · ' + esc(x.short) + '</div>' +
-          '<div class="track" style="width:'+(x.n/maxN*100)+'%">' +
-          x.d.map(function(v,L){ if(!v) return '';
-            const p = v/x.n*100;
-            return '<div class="seg" style="width:'+p+'%;background:'+LC[L]+
-              '" title="ระดับ '+(L+1)+' '+LEVEL_NAME[L]+' — '+nf(v)+' คน">'+(p>7?nf(v):'')+'</div>';
-          }).join('') + '</div><div class="tot">' + nf(x.n) + ' คน</div>';
-      }).join('') + '</div>' +
-      '<div class="lvlegend">' + LEVEL_NAME.map((nm,L) =>
-        '<span><i style="background:'+LC[L]+'"></i>ระดับ '+(L+1)+' '+nm+' — '+nf(totals[L])+' คน</span>').join('') + '</div>'
-    : noData();
-  $('dashDist').innerHTML = distHTML;
+  /* วาดกราฟ */
+  $('rad').innerHTML = CH.radar(cAvgs.map(function(c,i){
+    const dd = dist[i];
+    return { key:c.key, label:c.short, short:c.short, v:c.v, color:c.color,
+             extra:['กลุ่มควรเร่งพัฒนา', dd.n ? Math.round((dd.d[0]+dd.d[1])/dd.n*100) + '%' : '–'] };
+  }));
+  $('trd').innerHTML = byG.length ? CH.trend(byG, {lo:1, hi:4}) : noData();
+  $('dvz').innerHTML = CH.diverging(dist, {names: LEVEL_NAME.map((n,i)=>'ระดับ ' + (i+1) + ' ' + n)});
+
+  CH.bind($('rad')); CH.bind($('trd')); CH.bind($('dvz'));
+  CH.bindTable($('dvz'), dist, LEVEL_NAME.map((n,i)=>'ระดับ ' + (i+1) + ' ' + n));
 }
 
 /* ---------- แท็บ 2: รายอำเภอ / กลุ่ม ---------- */

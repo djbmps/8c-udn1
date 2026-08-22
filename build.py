@@ -15,6 +15,8 @@ slim = [{'code': s['code'], 'name': s['name'], 'group': s['group'],
 schools_slim = json.dumps(slim, ensure_ascii=False, separators=(',', ':'))
 icons = open(SRC / 'icons.svg', encoding='utf-8').read().strip()
 rubric = open(ROOT / 'rubric.js', encoding='utf-8').read().strip()
+charts_js = open(SRC / 'charts.js', encoding='utf-8').read().strip()
+charts_css = open(SRC / 'charts.css', encoding='utf-8').read().strip()
 
 def sub(txt, **kw):
     for k, v in kw.items():
@@ -38,7 +40,7 @@ for tpl, out in pages.items():
         print('  ! ข้าม', tpl, '(ยังไม่มีไฟล์)')
         continue
     t = open(p, encoding='utf-8').read()
-    t = sub(t, ICONS=icons, RUBRIC_JS=rubric,
+    t = sub(t, ICONS=icons, RUBRIC_JS=rubric, CHARTS_JS=charts_js, CHARTS_CSS=charts_css,
             SCHOOLS_JSON=schools_json, SCHOOLS_SLIM=schools_slim)
     if API_URL:
         t = re.sub(r'const API_URL = "[^"]*";', 'const API_URL = "%s";' % API_URL, t, count=1)
