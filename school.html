@@ -744,7 +744,8 @@ const CH = (function () {
       }
       s += '<text class="tick" x="' + x.toFixed(1) + '" y="' + (PT + ih + 17) +
         '" text-anchor="middle">' + esc2(p.short || p.label) + '</text>';
-      if (p.n != null) {
+      /* จำนวนห้อง: ซ่อนเมื่อชั้นเยอะจนป้ายทับกัน และสลับแสดงเว้นจุดเมื่อเริ่มแน่น */
+      if (p.n != null && n <= 15 && (n <= 9 || i % 2 === 0)) {
         s += '<text class="tick" x="' + x.toFixed(1) + '" y="' + (PT + ih + 31) +
           '" text-anchor="middle" opacity=".72">' + p.n + ' ห้อง</text>';
       }
