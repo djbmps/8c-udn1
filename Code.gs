@@ -525,6 +525,143 @@ function รีเซ็ตรหัสผ่านทุกโรงเรี�
 }
 
 /* ---------------------------------------------------------------
+ *  ▶ จำลองข้อมูลทั้งเขต — สร้างข้อมูลตัวอย่างให้ครบทุกโรงเรียน/ทุกห้อง
+ *     ใช้สำหรับทดสอบหน้าแดชบอร์ดก่อนเปิดใช้งานจริง
+ *     ⚠️ ล้างข้อมูลรายห้องเดิมทั้งหมดก่อน แล้วสร้างใหม่
+ *     ทุกแถวมีหมายเหตุ "ข้อมูลจำลอง" — ลบได้ด้วย ล้างข้อมูลทั้งหมด()
+ * --------------------------------------------------------------- */
+const SIM_TARGET = 3.60;   // ค่ากลางที่ใช้สุ่ม (ผลลัพธ์จริงราว 3.32 เพราะเพดานอยู่ที่ 4)
+const SIM_YEAR = '2569';
+const SIM_TERM = '1';
+
+/* สุ่มแบบคงที่ (ผลลัพธ์เหมือนเดิมทุกครั้งที่รัน) — คืนค่า 0..1 */
+function simRand(seed) {
+  var h = 2166136261;
+  for (var i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i);
+    h = (h * 16777619) >>> 0;
+  }
+  h ^= h >>> 13; h = (h * 1274126177) >>> 0; h ^= h >>> 16;
+  return (h >>> 0) / 4294967296;
+}
+/* คืนค่า -1..1 */
+function simJit(seed) { return simRand(seed) * 2 - 1; }
+
+/* แปลงค่าเฉลี่ยเป้าหมาย -> จำนวนนักเรียนแต่ละระดับ (รวมเท่ากับ n พอดี) */
+function simDist(mean, n, seed) {
+  var w = [], sum = 0, s = 1.08;
+  for (var L = 1; L <= 4; L++) {
+    var d = L - mean;
+    var x = Math.exp(-(d * d) / (2 * s * s));
+    w.push(x); sum += x;
+  }
+  var cnt = [], acc = 0;
+  for (var i = 0; i < 4; i++) {
+    var c = Math.floor(w[i] / sum * n);
+    cnt.push(c); acc += c;
+  }
+  /* กระจายเศษที่เหลือให้ระดับที่มีน้ำหนักมากก่อน */
+  var order = [0, 1, 2, 3].sort(function (a, b) { return w[b] - w[a]; });
+  var k = 0;
+  while (acc < n) { cnt[order[k % 4]]++; acc++; k++; }
+  while (acc > n) {
+    for (var j = 3; j >= 0; j--) { if (cnt[order[j]] > 0) { cnt[order[j]]--; acc--; break; } }
+  }
+  return cnt;
+}
+
+function จำลองข้อมูลทั้งเขต() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sh = getSheet();
+
+  /* 1) ล้างข้อมูลเดิม */
+  if (sh.getLastRow() > 1) sh.deleteRows(2, sh.getLastRow() - 1);
+
+  /* 2) ตารางแปลงชื่อย่อ -> ชื่อเต็มระดับชั้น */
+  const FULL = {};
+  Object.keys(LEVEL_ABBR).forEach(function (full) { FULL[LEVEL_ABBR[full]] = full; });
+
+  /* ลำดับชั้นสำหรับคิดแนวโน้ม (ชั้นโตคะแนนสูงกว่าเล็กน้อย) */
+  const ORDER = ['อ.1', 'อ.2', 'อ.3', 'ป.1', 'ป.2', 'ป.3', 'ป.4', 'ป.5', 'ป.6',
+    'ม.1', 'ม.2', 'ม.3', 'ม.4', 'ม.5', 'ม.6'];
+
+  /* จุดแข็ง/จุดอ่อนรายทักษะ (C6 ต่ำสุด, C8 สูงสุด) */
+  const CBIAS = [0.00, -0.10, 0.04, 0.08, -0.02, -0.20, -0.06, 0.16];
+
+  const now = new Date();
+  const stamp = Utilities.formatDate(now, 'Asia/Bangkok', 'dd/MM/yyyy HH:mm:ss');
+  const rows = [];
+  var seq = 0, sumAvg = 0, sumStu = 0;
+
+  SCHOOLS.forEach(function (sc) {
+    const sBias = simJit('S' + sc.code) * 0.38;          /* ระดับโรงเรียน ±0.38 */
+    Object.keys(sc.grades).forEach(function (ab) {
+      const info = sc.grades[ab];
+      const stu = Number(info[0]) || 0, nRoom = Number(info[1]) || 0;
+      if (!(stu > 0 && nRoom > 0)) return;
+      const per = Math.max(1, Math.round(stu / nRoom));
+      const gi = ORDER.indexOf(ab);
+      const gBias = gi < 0 ? 0 : (gi - 6) * 0.022;        /* แนวโน้มตามชั้น */
+
+      for (var r = 1; r <= nRoom; r++) {
+        /* ห้องสุดท้ายรับจำนวนที่เหลือ เพื่อให้รวมเท่ากับข้อมูล BIG DATA */
+        const nAll = (r === nRoom) ? Math.max(1, stu - per * (nRoom - 1)) : per;
+        const rBias = simJit('R' + sc.code + ab + r) * 0.10;
+
+        var dist = [], means = [];
+        for (var k = 0; k < 8; k++) {
+          const kBias = simJit('K' + sc.code + ab + r + k) * 0.13;
+          var m = SIM_TARGET + sBias + gBias + rBias + CBIAS[k] + kBias;
+          if (m > 3.92) m = 3.92;
+          if (m < 1.70) m = 1.70;
+          const c = simDist(m, nAll, sc.code + ab + r + k);
+          var tot = 0;
+          for (var L = 0; L < 4; L++) tot += c[L] * (L + 1);
+          dist.push(c);
+          means.push(Math.round((tot / nAll) * 100) / 100);
+        }
+        var s8 = 0;
+        for (var q = 0; q < 8; q++) s8 += means[q];
+        const avg = Math.round((s8 / 8) * 100) / 100;
+
+        var hi = 0, lo = 0;
+        for (var t = 1; t < 8; t++) {
+          if (means[t] > means[hi]) hi = t;
+          if (means[t] < means[lo]) lo = t;
+        }
+
+        seq++;
+        sumAvg += avg * nAll; sumStu += nAll;
+
+        var cells = [];
+        for (var j = 0; j < 8; j++) cells = cells.concat(dist[j]).concat([means[j]]);
+
+        rows.push([
+          seq, stamp, '', makeRef(now, seq),
+          SIM_YEAR, SIM_TERM, sc.amphoe, sc.group, "'" + sc.code, sc.name,
+          FULL[ab] || ab, r, ab + '/' + r, nAll
+        ].concat(cells).concat([
+          avg, qualityLabel(avg),
+          C_HEAD[hi], C_HEAD[lo], '',
+          'ครูตัวอย่าง (ข้อมูลจำลอง)', 'ครูประจำชั้น', "'", "'",
+          'ข้อมูลจำลองสำหรับทดสอบระบบ — ลบได้'
+        ]));
+      }
+    });
+  });
+
+  /* 3) เขียนลงชีตครั้งเดียว */
+  if (rows.length) sh.getRange(2, 1, rows.length, HEAD_ROOM.length).setValues(rows);
+
+  const overall = sumStu ? Math.round((sumAvg / sumStu) * 100) / 100 : 0;
+  const msg = 'สร้างข้อมูลจำลอง ' + rows.length + ' ห้อง / ' + SCHOOLS.length + ' โรงเรียน · ' +
+    'นักเรียน ' + sumStu + ' คน · ค่าเฉลี่ยรวมของเขต ' + overall.toFixed(2) +
+    ' (' + qualityLabel(overall) + ')';
+  Logger.log(msg);
+  return msg;
+}
+
+/* ---------------------------------------------------------------
  *  ▶ ล้างข้อมูลทั้งหมด — ใช้ก่อนเปิดใช้งานจริง หรือขึ้นปีการศึกษาใหม่
  *     ลบข้อมูลรายห้องทุกแถว + ล้างบัญชีผู้ใช้ (รหัสผ่านกลับเป็นรหัสโรงเรียน)
  *     ⚠️ ลบแล้วกู้คืนไม่ได้ — ควรดาวน์โหลดสำรองก่อน (ไฟล์ → ดาวน์โหลด → Excel)
