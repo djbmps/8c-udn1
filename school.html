@@ -221,7 +221,11 @@ header .k a:hover{opacity:1;text-decoration:underline}
   text-decoration:none;display:inline-flex;align-items:center;gap:8px;
   box-shadow:0 4px 14px rgba(224,105,44,.35),inset 0 1px 0 rgba(255,255,255,.4)}
 .cta .ctb:hover{transform:translateY(-1px)}
-footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 40px}
+footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 40px;line-height:1.9}
+footer .ttl{display:block;font-size:.95rem;font-weight:800;color:var(--ink-2);line-height:1.5;margin-bottom:2px}
+footer .dev{color:var(--ink-2)}
+footer .cr{display:block;margin-top:9px;padding-top:9px;border-top:1px solid var(--grid);
+  font-size:.76rem;opacity:.8}
 
 @media(max-width:900px){ .two{grid-template-columns:1fr} }
 @media(max-width:600px){ .hb .nm{max-width:118px} .panel .cap{padding-left:0} header h1{font-size:1.1rem} }
@@ -369,6 +373,11 @@ footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 4
     เข้าสู่ระบบเฉพาะเมื่อต้องการ <b>กรอกหรือแก้ไขข้อมูล</b> ของโรงเรียนตนเอง<br>
     <a href="index.html">← กลับหน้าภาพรวมระดับเขต</a>
   </div>
+  <footer>
+    <span class="ttl">8C SkillTrack — ระบบบันทึกและติดตามพัฒนาการทักษะ 8C ของผู้เรียน</span>
+    <span class="dev">ผู้พัฒนา: นางสาวดวงใจ บุญมีประเสริฐ ศึกษานิเทศก์ สพป.อุดรธานี เขต 1</span>
+    <span class="cr">สงวนลิขสิทธิ์ © พ.ศ. 2569</span>
+  </footer>
 </div>
 
 <!-- แดชบอร์ด -->
@@ -446,7 +455,12 @@ footer{text-align:center;color:var(--ink-3);font-size:.84rem;padding:28px 18px 4
       <a class="ctb" id="btnLogin2" href="form.html"><svg class="ic"><use href="#ic-login"/></svg> เข้าสู่ระบบกรอกข้อมูล</a>
     </div>
 
-    <footer>กลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา · สพป.อุดรธานี เขต 1</footer>
+    <footer>
+      <span class="ttl">8C SkillTrack — ระบบบันทึกและติดตามพัฒนาการทักษะ 8C ของผู้เรียน</span>
+      <span class="dev">ผู้พัฒนา: นางสาวดวงใจ บุญมีประเสริฐ ศึกษานิเทศก์ สพป.อุดรธานี เขต 1</span><br>
+      กลุ่มนิเทศ ติดตาม และประเมินผลการจัดการศึกษา · สพป.อุดรธานี เขต 1
+      <span class="cr">สงวนลิขสิทธิ์ © พ.ศ. 2569</span>
+    </footer>
   </div>
 </div>
 
