@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#3d1f77">
+<title>ใบสรุปผลรายห้องเรียน — ทักษะ 8C สพป.อุดรธานี เขต 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand-900:#2a1758; --brand-800:#3d1f77; --brand-700:#4c2a96;
+  --brand-600:#5a2ea6; --brand-500:#7c5ad4; --brand-100:#f1eafd;
+  --bar:#7c5ad4;
+  --l1:#c03050; --l2:#d98c14; --l3:#1f96c2; --l4:#5a2ea6;
+  --ok:#1e9d6b; --warn:#d98218; --bad:#c0392b;
+  --ink-1:#171226; --ink-2:#4d465f; --ink-3:#7a7290;
+  --bg:#f3f0fa; --card:#ffffff; --line:#e3dcf0; --soft:#f8f5fd; --grid:#efeaf8;
+  --r-lg:18px; --r:14px; --r-sm:10px;
+  --sh-1:0 1px 2px rgba(58,31,110,.06), 0 4px 14px rgba(58,31,110,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]){
+    --l1:#c0364f; --l2:#b8890a; --l3:#0f9fc9; --l4:#7a52cf;
+    --bar:#8f6ddc; --brand-100:#241a45; --brand-500:#9d80e8; --brand-600:#8f6ddc;
+    --ok:#3ec18c; --warn:#e6a23c; --bad:#e0685c;
+    --ink-1:#f2eefb; --ink-2:#b9b0cf; --ink-3:#8d84a8;
+    --bg:#0f0b1c; --card:#181329; --line:#2b2342; --soft:#1e1834; --grid:#241d3b;
+    --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
+  }
+}
+[data-theme=dark]{
+  --l1:#c0364f; --l2:#b8890a; --l3:#0f9fc9; --l4:#7a52cf;
+  --bar:#8f6ddc; --brand-100:#241a45; --brand-500:#9d80e8; --brand-600:#8f6ddc;
+  --ok:#3ec18c; --warn:#e6a23c; --bad:#e0685c;
+  --ink-1:#f2eefb; --ink-2:#b9b0cf; --ink-3:#8d84a8;
+  --bg:#0f0b1c; --card:#181329; --line:#2b2342; --soft:#1e1834; --grid:#241d3b;
+  --sh-1:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink-1);
+  font-family:'Sarabun',-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.6;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--brand-600)}
+.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;vertical-align:-.16em}
+
+/* ---------- แถบควบคุม (ไม่พิมพ์) ---------- */
+.bar{position:sticky;top:0;z-index:30;background:linear-gradient(135deg,#1b2a6b,#4c2a96 55%,#8e2f83);
+  color:#fff;padding:12px 18px;box-shadow:0 2px 14px rgba(30,15,70,.25)}
+.bar .in{max-width:1120px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.bar h1{margin:0;font-size:1.02rem;font-weight:800;display:flex;align-items:center;gap:8px;
+  width:100%;line-height:1.35}
+.bar h1 small{font-weight:500;opacity:.85;font-size:.8rem}
+.f{display:flex;flex-direction:column;gap:4px;min-width:150px}
+.f label{font-size:.74rem;opacity:.85}
+.f select,.f input{font-family:inherit;font-size:.88rem;padding:8px 10px;border-radius:9px;
+  border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;width:100%}
+.f select option{color:#171226}
+.btn{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;
+  font-family:inherit;font-size:.86rem;font-weight:600;padding:9px 14px;border-radius:10px;
+  cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.btn:hover{background:rgba(255,255,255,.28)}
+.btn.key{background:linear-gradient(135deg,#f0a12e,#e0692c);border-color:rgba(255,255,255,.4)}
+.note{max-width:1120px;margin:14px auto 0;padding:0 18px;color:var(--ink-3);font-size:.86rem}
+
+/* ---------- แผ่นรายงาน A4 ---------- */
+.sheets{max-width:1120px;margin:18px auto 60px;padding:0 18px;display:flex;
+  flex-direction:column;gap:26px}
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:26px 28px 22px;box-shadow:var(--sh-1)}
+.sheet h2{margin:0;font-size:1.16rem;font-weight:800;letter-spacing:-.01em}
+.sheet .sub{margin:2px 0 0;color:var(--ink-3);font-size:.86rem}
+.rhead{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;
+  padding-bottom:14px;border-bottom:2px solid var(--brand-600)}
+.rhead .org{text-align:right;font-size:.8rem;color:var(--ink-3);line-height:1.5;white-space:nowrap}
+.meta{display:flex;flex-wrap:wrap;gap:8px 10px;margin:14px 0 0}
+.meta span{background:var(--soft);border:1px solid var(--line);border-radius:99px;
+  padding:4px 12px;font-size:.82rem;color:var(--ink-2)}
+.meta span b{color:var(--ink-1)}
+
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.kpi .k{background:var(--soft);border:1px solid var(--line);border-radius:var(--r);
+  padding:11px 13px}
+.kpi .k .t{font-size:.76rem;color:var(--ink-3)}
+.kpi .k .v{font-size:1.42rem;font-weight:800;line-height:1.25;font-variant-numeric:tabular-nums}
+.kpi .k .d{font-size:.76rem;color:var(--ink-3)}
+.up{color:var(--ok)} .dn{color:var(--bad)}
+
+.two{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:20px;
+  align-items:start;margin-top:18px}
+h3.sec{margin:22px 0 8px;font-size:.98rem;font-weight:800;display:flex;align-items:center;gap:8px}
+h3.sec .n{background:var(--brand-600);color:#fff;width:22px;height:22px;border-radius:7px;
+  display:grid;place-items:center;font-size:.78rem;flex:0 0 auto}
+p.cap{margin:0 0 10px;color:var(--ink-3);font-size:.84rem}
+
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th,td{padding:7px 9px;border-bottom:1px solid var(--grid);text-align:right;
+  font-variant-numeric:tabular-nums}
+th{font-weight:700;color:var(--ink-2);background:var(--soft);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+tbody tr:hover{background:var(--soft)}
+td.nm{display:flex;align-items:center;gap:7px}
+td.nm i{width:9px;height:9px;border-radius:3px;flex:0 0 auto}
+.pill{display:inline-block;padding:1px 9px;border-radius:99px;font-size:.76rem;font-weight:700;color:#fff}
+.lv1{background:var(--l1)} .lv2{background:var(--l2)} .lv3{background:var(--l3)} .lv4{background:var(--l4)}
+.risk{font-weight:800}
+.risk.hi{color:var(--bad)} .risk.mid{color:var(--warn)}
+
+.target{display:grid;gap:10px}
+.target .row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px}
+.target .row .cnt{font-size:1.3rem;font-weight:800;color:var(--bad);min-width:56px;text-align:center;
+  font-variant-numeric:tabular-nums}
+.target .row .cnt small{display:block;font-size:.68rem;font-weight:600;color:var(--ink-3)}
+.target .row .who b{font-size:.94rem}
+.target .row .who div{font-size:.8rem;color:var(--ink-3)}
+.target .row .pc{font-size:.9rem;font-weight:700;color:var(--ink-2)}
+
+.plan{display:grid;gap:14px}
+.plan .card{border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.plan .hd{background:var(--brand-100);padding:9px 14px;display:flex;justify-content:space-between;
+  gap:12px;align-items:baseline;flex-wrap:wrap}
+.plan .hd b{font-size:.95rem}
+.plan .hd span{font-size:.8rem;color:var(--ink-2)}
+.plan .bd{padding:12px 14px}
+.plan .step{font-size:.85rem;color:var(--ink-2);background:var(--soft);border-left:3px solid var(--bar);
+  padding:8px 12px;border-radius:0 8px 8px 0;margin-bottom:10px}
+.plan .step b{color:var(--ink-1)}
+.plan ul{margin:0;padding-left:20px}
+.plan li{font-size:.86rem;margin-bottom:4px}
+.plan .ext{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line)}
+.plan .ext .t{font-size:.8rem;font-weight:700;color:var(--ink-2);margin-bottom:4px}
+
+.sign{display:grid;grid-template-columns:repeat(2,1fr);gap:40px;margin-top:26px;
+  padding-top:8px;text-align:center;color:var(--ink-2);font-size:.85rem}
+.sign .ln{margin:26px 12px 6px;border-top:1px dotted var(--ink-3)}
+.foot{margin-top:16px;padding-top:10px;border-top:1px solid var(--grid);
+  color:var(--ink-3);font-size:.74rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:var(--r-lg);
+  padding:40px 22px;text-align:center;color:var(--ink-3)}
+.loading{text-align:center;padding:60px 20px;color:var(--ink-3)}
+.spin{width:26px;height:26px;border:3px solid var(--line);border-top-color:var(--brand-500);
+  border-radius:50%;animation:sp .8s linear infinite;margin:0 auto 12px}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ============ กราฟ (ใช้ร่วมกันทั้งหน้าเขตและหน้าโรงเรียน) ============ */
+.chtip{position:fixed;z-index:80;pointer-events:none;display:none;max-width:260px;
+  background:var(--ink-1);color:var(--card);border-radius:10px;padding:8px 11px;
+  font-size:.8rem;line-height:1.5;box-shadow:0 8px 24px rgba(20,10,40,.28)}
+.chtip b{display:block;font-size:.85rem;margin-bottom:2px}
+.chtip i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:6px;font-style:normal}
+.chtip .r{display:flex;justify-content:space-between;gap:14px}
+.chtip .r span{opacity:.82}
+
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart .grid{stroke:var(--grid);stroke-width:1;fill:none}
+.chart .axis{stroke:var(--line);stroke-width:1}
+.chart .tick{fill:var(--ink-3);font-size:10.5px;font-family:inherit}
+.chart .lbl{fill:var(--ink-2);font-size:11.5px;font-weight:600;font-family:inherit}
+.chart .val{fill:var(--ink-1);font-size:11.5px;font-weight:700;font-family:inherit}
+
+/* เรดาร์ */
+.radar .area{fill:var(--bar);fill-opacity:.16;stroke:var(--bar);stroke-width:2;
+  stroke-linejoin:round;transition:d .4s ease}
+.radar .dot{fill:var(--card);stroke:var(--bar);stroke-width:2.4}
+.radar .hit{fill:transparent;cursor:pointer}
+.radar .hit:hover + .dot,.radar .dot.on{fill:var(--bar)}
+.radar .key{fill:var(--ink-2);font-size:11.5px;font-weight:700;font-family:inherit}
+.radar .sub{fill:var(--ink-3);font-size:10px;font-family:inherit}
+.radar .pin{paint-order:stroke;stroke-linejoin:round}
+
+/* เส้นแนวโน้ม */
+.linec .area{fill:url(#lg);stroke:none}
+.linec .ln{fill:none;stroke:var(--bar);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.linec .dot{fill:var(--card);stroke:var(--bar);stroke-width:2.4}
+.linec .dot.big{fill:var(--bar)}
+.linec .cross{stroke:var(--brand-500);stroke-width:1;opacity:0;stroke-dasharray:0}
+.linec .band{fill:transparent;cursor:crosshair}
+.linec .band:hover ~ .cross{opacity:.45}
+
+/* แท่งกระจายสองทาง (Likert) */
+.dv{display:grid;grid-template-columns:auto 1fr auto;gap:7px 12px;align-items:center}
+.dv .nm{font-size:.85rem;color:var(--ink-2);text-align:right;white-space:nowrap;
+  display:flex;align-items:center;gap:7px;justify-content:flex-end}
+.dv .nm i{width:9px;height:9px;border-radius:3px;flex:0 0 auto}
+.dv .trk{position:relative;display:flex;height:26px}
+.dv .trk::before{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;
+  background:var(--line)}
+.dv .side{flex:1 1 50%;display:flex;min-width:0;gap:2px}
+.dv .side.l{justify-content:flex-end}
+.dv .seg{height:100%;display:grid;place-items:center;color:#fff;font-size:.76rem;
+  font-weight:700;overflow:hidden;transition:width .45s ease;cursor:pointer;min-width:0}
+.dv .side.l .seg:first-child{border-radius:6px 0 0 6px}
+.dv .side.r .seg:last-child{border-radius:0 6px 6px 0}
+.dv .risk{font-size:.82rem;font-weight:700;color:var(--ink-2);
+  font-variant-numeric:tabular-nums;min-width:52px;text-align:right}
+.dv .risk.hi{color:var(--bad)}
+.dvfoot{display:flex;justify-content:space-between;align-items:center;gap:14px;
+  flex-wrap:wrap;margin-top:14px;padding-top:13px;border-top:1px solid var(--grid)}
+.lg{display:flex;gap:15px;flex-wrap:wrap;font-size:.81rem;color:var(--ink-2)}
+.lg span{display:inline-flex;align-items:center;gap:6px}
+.lg i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.tbtn{background:none;border:1px solid var(--line);color:var(--ink-2);font-family:inherit;
+  font-size:.79rem;padding:5px 12px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.tbtn:hover{border-color:var(--brand-500);color:var(--brand-600)}
+.axcap{display:flex;justify-content:space-between;font-size:.75rem;color:var(--ink-3);
+  margin-top:6px;padding-left:0}
+
+/* มิเตอร์ */
+.meter{display:flex;flex-direction:column;gap:5px;min-width:180px}
+.meter .tp{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  font-size:.79rem;opacity:.88}
+.meter .tp b{font-size:1.05rem;font-weight:800;font-variant-numeric:tabular-nums}
+.meter .bar{height:8px;border-radius:99px;background:rgba(255,255,255,.24);overflow:hidden}
+.meter .fill{height:100%;border-radius:99px;background:#fff;transition:width .5s ease}
+
+@media(max-width:600px){
+  .dv{grid-template-columns:auto 1fr;gap:6px 8px}
+  .dv .risk{display:none}
+  .dv .nm{max-width:104px;white-space:normal;line-height:1.25}
+}
+
+@media(max-width:820px){
+  .two{grid-template-columns:1fr}
+  .kpi{grid-template-columns:repeat(2,1fr)}
+  .sheet{padding:18px 16px}
+}
+@page{ size:A4 portrait; margin:11mm 10mm; }
+@media print{
+  .bar,.note{display:none!important}
+  body{background:#fff;font-size:12.5px}
+  .sheets{margin:0;padding:0;gap:0;max-width:none}
+  .sheet{break-after:page;page-break-after:always;border:none;border-radius:0;
+    box-shadow:none;padding:0 0 8mm}
+  .sheet:last-child{break-after:auto;page-break-after:auto}
+  h3.sec,.plan .card,.target .row,.kpi,table{break-inside:avoid}
+  .chart{max-width:330px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<defs>
+  <g id="i-base" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></g>
+</defs>
+<symbol id="ic-c1" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.6-4.6"/><path d="m7.8 10.6 1.9 1.9 3.5-3.5"/></symbol>
+<symbol id="ic-c2" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 21.5h4"/><path d="M12 2.5a6.5 6.5 0 0 0-4.2 11.5c.6.6.9 1.3 1.1 2h6.2c.2-.7.5-1.4 1.1-2A6.5 6.5 0 0 0 12 2.5Z"/></symbol>
+<symbol id="ic-c3" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4"/><path d="M12 2.8c2.6 2.9 2.6 15.5 0 18.4"/><path d="M12 2.8c-2.6 2.9-2.6 15.5 0 18.4"/></symbol>
+<symbol id="ic-c4" viewBox="0 0 24 24"><path d="M15.5 21v-1.8a3.7 3.7 0 0 0-3.7-3.7H6.2a3.7 3.7 0 0 0-3.7 3.7V21"/><circle cx="9" cy="7.5" r="3.7"/><path d="M21.5 21v-1.8a3.7 3.7 0 0 0-2.8-3.6"/><path d="M16 4a3.7 3.7 0 0 1 0 7.2"/></symbol>
+<symbol id="ic-c5" viewBox="0 0 24 24"><path d="M20.5 14.5a2 2 0 0 1-2 2H7.5l-4 4V5.5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2Z"/><path d="M8 8.5h8"/><path d="M8 12h5"/></symbol>
+<symbol id="ic-c6" viewBox="0 0 24 24"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7"/><path d="M12 16.5v4"/><path d="m9.5 8 -1.8 2 1.8 2"/><path d="m14.5 8 1.8 2-1.8 2"/></symbol>
+<symbol id="ic-c7" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M16 20.5V5.5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15"/><path d="M2.5 12.5h19"/></symbol>
+<symbol id="ic-c8" viewBox="0 0 24 24"><path d="M12 20.7 4.8 13.6C3.4 12.2 2 10.5 2 8.3A5.3 5.3 0 0 1 7.3 3c1.7 0 2.9.5 4.7 2 1.8-1.5 3-2 4.7-2A5.3 5.3 0 0 1 22 8.3c0 2.2-1.4 3.9-2.8 5.3Z"/></symbol>
+
+<symbol id="ic-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/></symbol>
+<symbol id="ic-school" viewBox="0 0 24 24"><path d="m3 9 9-5.5L21 9"/><path d="M5 10.5V20a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 20v-9.5"/><path d="M10 21.5v-5h4v5"/><circle cx="12" cy="11" r="1.6"/></symbol>
+<symbol id="ic-clipboard" viewBox="0 0 24 24"><rect x="8.5" y="2.5" width="7" height="4" rx="1.4"/><path d="M15.5 4.5H18a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2h2.5"/><path d="m9 14 2 2 4-4"/></symbol>
+<symbol id="ic-user" viewBox="0 0 24 24"><path d="M19.5 21v-2a4 4 0 0 0-4-4h-7a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+<symbol id="ic-notes" viewBox="0 0 24 24"><path d="M5 3.5h14a1.5 1.5 0 0 1 1.5 1.5v14a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19V5A1.5 1.5 0 0 1 5 3.5Z"/><path d="M7.5 8.5h9M7.5 12h9M7.5 15.5h5"/></symbol>
+<symbol id="ic-link" viewBox="0 0 24 24"><path d="M10 13.5a4.6 4.6 0 0 0 7 .5l2.8-2.8a4.6 4.6 0 0 0-6.5-6.5L11.7 6.2"/><path d="M14 10.5a4.6 4.6 0 0 0-7-.5l-2.8 2.8a4.6 4.6 0 0 0 6.5 6.5l1.6-1.6"/></symbol>
+<symbol id="ic-phone" viewBox="0 0 24 24"><path d="M21 16.9v2.6a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.6A2 2 0 0 1 3.3 1.7h2.6a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L7 9.5a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></symbol>
+<symbol id="ic-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="m8.2 12.2 2.6 2.6 5-5.2"/></symbol>
+<symbol id="ic-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M12 7.5v5.2"/><path d="M12 16.4h.01"/></symbol>
+<symbol id="ic-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M12 16.5v-5"/><path d="M12 7.8h.01"/></symbol>
+<symbol id="ic-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3.2v5h5"/></symbol>
+<symbol id="ic-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"/><path d="M21 3.2v5h-5"/></symbol>
+<symbol id="ic-download" viewBox="0 0 24 24"><path d="M20.5 15.5v3.2a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-3.2"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M12 15V3.2"/></symbol>
+<symbol id="ic-print" viewBox="0 0 24 24"><path d="M6.5 9V3.5h11V9"/><path d="M6.5 18.5H5a2 2 0 0 1-2-2v-4.7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4.7a2 2 0 0 1-2 2h-1.5"/><rect x="6.5" y="14.5" width="11" height="6" rx="1.2"/></symbol>
+<symbol id="ic-chart" viewBox="0 0 24 24"><path d="M3.5 3.5v17h17"/><path d="M7.8 17V12"/><path d="M12 17V8"/><path d="M16.2 17v-3"/></symbol>
+<symbol id="ic-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M3 15h18M9.5 9.5V20"/></symbol>
+<symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M12 6.8V12l3.4 1.9"/></symbol>
+<symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m20.5 20.5-4.8-4.8"/></symbol>
+<symbol id="ic-filter" viewBox="0 0 24 24"><path d="M21 4.5H3l7.2 8.5V19l3.6 1.8V13Z"/></symbol>
+<symbol id="ic-lock" viewBox="0 0 24 24"><rect x="3.5" y="10.5" width="17" height="10.5" rx="2.2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/><path d="M12 14.8v2.4"/></symbol>
+<symbol id="ic-login" viewBox="0 0 24 24"><path d="M14.5 3.5H18a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-3.5"/><path d="m10 16.5 4.5-4.5L10 7.5"/><path d="M14.5 12H4"/></symbol>
+<symbol id="ic-award" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="5.6"/><path d="m8.4 13.6-1.1 7.9L12 19l4.7 2.5-1.1-7.9"/></symbol>
+<symbol id="ic-up" viewBox="0 0 24 24"><path d="M21 7.5 13.2 15.3l-4.2-4.2L3 17"/><path d="M15.5 7.5H21V13"/></symbol>
+<symbol id="ic-down" viewBox="0 0 24 24"><path d="M21 16.5 13.2 8.7l-4.2 4.2L3 7"/><path d="M15.5 16.5H21V11"/></symbol>
+<symbol id="ic-cap" viewBox="0 0 24 24"><path d="M21.5 9.2 12 4.3 2.5 9.2 12 14.1Z"/><path d="M6.4 11.4v4.8c0 1.6 2.5 2.9 5.6 2.9s5.6-1.3 5.6-2.9v-4.8"/></symbol>
+<symbol id="ic-users" viewBox="0 0 24 24"><path d="M15.5 21v-1.8a3.7 3.7 0 0 0-3.7-3.7H6.2a3.7 3.7 0 0 0-3.7 3.7V21"/><circle cx="9" cy="7.5" r="3.7"/><path d="M21.5 21v-1.8a3.7 3.7 0 0 0-2.8-3.6"/><path d="M16 4a3.7 3.7 0 0 1 0 7.2"/></symbol>
+<symbol id="ic-spark" viewBox="0 0 24 24"><path d="m12 2.8 2.1 5.6 5.6 2.1-5.6 2.1L12 18.2l-2.1-5.6L4.3 10.5l5.6-2.1Z"/><path d="M18.5 16.5 19.4 19l2.5.9-2.5.9-.9 2.5-.9-2.5-2.5-.9 2.5-.9Z"/></symbol>
+<symbol id="ic-list" viewBox="0 0 24 24"><path d="M8.5 6.5h12M8.5 12h12M8.5 17.5h12"/><path d="M4 6.5h.01M4 12h.01M4 17.5h.01"/></symbol>
+<symbol id="ic-x" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol>
+<symbol id="ic-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M7 21v-7h10v7"/><path d="M7 3v5h7"/></symbol>
+<symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></symbol>
+<symbol id="ic-moon" viewBox="0 0 24 24"><path d="M20.5 14.3A8.6 8.6 0 0 1 9.7 3.5a8.6 8.6 0 1 0 10.8 10.8Z"/></symbol>
+<symbol id="ic-eye" viewBox="0 0 24 24"><path d="M2.2 12S5.8 5.5 12 5.5 21.8 12 21.8 12 18.2 18.5 12 18.5 2.2 12 2.2 12Z"/><circle cx="12" cy="12" r="3.2"/></symbol>
+<symbol id="ic-eye-off" viewBox="0 0 24 24"><path d="M9.9 5.8A9.6 9.6 0 0 1 12 5.5c6.2 0 9.8 6.5 9.8 6.5a17 17 0 0 1-3.3 4.1M6.5 7.9A17 17 0 0 0 2.2 12S5.8 18.5 12 18.5c1.6 0 3-.4 4.2-1"/><path d="M10 10a2.8 2.8 0 0 0 4 4"/><path d="M3 3l18 18"/></symbol>
+</svg>
+
+<div class="bar">
+  <div class="in">
+    <h1><svg class="ic"><use href="#ic-clipboard"/></svg> ใบสรุปผลทักษะ 8C รายห้องเรียน
+      <small id="hint">สำหรับครูประจำชั้น — พิมพ์แจกหรือแนบแฟ้มพัฒนาผู้เรียนได้</small></h1>
+    <div class="f" style="flex:1 1 240px">
+      <label>โรงเรียน</label>
+      <select id="fSchool"></select>
+    </div>
+    <div class="f"><label>ปีการศึกษา</label><select id="fYear"></select></div>
+    <div class="f"><label>ภาคเรียน</label><select id="fTerm"></select></div>
+    <div class="f"><label>ระดับชั้น</label><select id="fGrade"></select></div>
+    <div class="f"><label>ห้อง</label><select id="fRoom"></select></div>
+    <button class="btn key" id="btnPrint"><svg class="ic"><use href="#ic-print"/></svg> พิมพ์ / บันทึก PDF</button>
+    <button class="btn" id="btnBack"><svg class="ic"><use href="#ic-school"/></svg> กลับแดชบอร์ด</button>
+  </div>
+</div>
+
+<div class="note" id="note"></div>
+<div class="sheets" id="sheets">
+  <div class="loading"><div class="spin"></div>กำลังโหลดข้อมูล…</div>
+</div>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbx10-4630NSBzbDfEzO2i0n5xh5oAevMXedQk8BkNXSxYCBZne89wKRdgqavS92vQPh/exec";
+/* เกณฑ์การประเมินทักษะ 8C — ใช้ร่วมกันทั้ง index.html และ admin.html */
+const RUBRIC = [
+  {
+    key: 'C1', color: '#2a78d6', ink: '#1f63b8', dark: '#3987e5', short: 'คิดวิเคราะห์ แก้ปัญหา', icon: 'ic',
+    en: 'Critical Thinking and Problem Solving',
+    th: 'คิดวิเคราะห์ แก้ไขปัญหาได้อย่างมีวิจารณญาณ',
+    levels: [
+      'ผู้เรียนตอบคำถามจากการจดจำ ยังแยกข้อเท็จจริงกับความคิดเห็นไม่ได้ และรอให้ครูบอกวิธีแก้ปัญหา',
+      'ตั้งคำถามและระบุปัญหาได้เมื่อครูชี้แนะ ให้เหตุผลประกอบคำตอบได้บ้าง แก้ปัญหาตามขั้นตอนที่กำหนดให้',
+      'วิเคราะห์ข้อมูล แยกข้อเท็จจริงจากความคิดเห็น เลือกวิธีแก้ปัญหาด้วยตนเองและอธิบายเหตุผลได้',
+      'ตั้งคำถามเชิงลึก ประเมินความน่าเชื่อถือของข้อมูล ออกแบบวิธีแก้ปัญหาใหม่ ตรวจสอบผลและปรับปรุงได้เอง เป็นแบบอย่างแก่เพื่อน'
+    ]
+  },
+  {
+    key: 'C2', color: '#eb6834', ink: '#c94f1f', dark: '#f07a4b', short: 'คิดสร้างสรรค์ นวัตกรรม', icon: 'ic',
+    en: 'Creativity and Innovation',
+    th: 'คิดสร้างสรรค์และพัฒนานวัตกรรมใหม่ ๆ',
+    levels: [
+      'ทำงานตามตัวอย่างที่ครูให้เท่านั้น ยังไม่แสดงความคิดที่แตกต่าง',
+      'เสนอความคิดใหม่ได้เมื่อมีตัวอย่างหรือคำชี้แนะ ดัดแปลงผลงานเดิมได้เล็กน้อย',
+      'คิดริเริ่มผลงานหรือวิธีการของตนเอง ต่อยอดความคิดของผู้อื่นได้ มีชิ้นงานสร้างสรรค์ในระดับห้องเรียน/โรงเรียน',
+      'สร้างสรรค์ชิ้นงานหรือนวัตกรรมที่แปลกใหม่และใช้ได้จริง เผยแพร่หรือได้รับการยอมรับตั้งแต่ระดับกลุ่มโรงเรียนขึ้นไป'
+    ]
+  },
+  {
+    key: 'C3', color: '#1baf7a', ink: '#118a5f', dark: '#25c58c', short: 'เข้าใจต่างวัฒนธรรม', icon: 'ic',
+    en: 'Cross-Cultural Understanding',
+    th: 'เข้าใจความแตกต่างทางวัฒนธรรม',
+    levels: [
+      'รู้จักวัฒนธรรมของตนเองเพียงบางส่วน ยังไม่สนใจความแตกต่างของผู้อื่น',
+      'บอกความเหมือน–ต่างของวัฒนธรรมท้องถิ่นกับวัฒนธรรมอื่นได้เมื่อมีการชี้แนะ',
+      'ยอมรับและปฏิบัติต่อผู้ที่แตกต่างด้วยความเคารพ เข้าร่วมกิจกรรมวัฒนธรรมท้องถิ่น/นานาชาติ สื่อสารภาษาต่างประเทศพื้นฐานได้',
+      'อธิบายและถ่ายทอดวัฒนธรรมไทยและท้องถิ่นแก่ผู้อื่นได้ ทำงานร่วมกับผู้มีพื้นเพต่างกันได้ดี เป็นผู้นำกิจกรรมแลกเปลี่ยนวัฒนธรรม'
+    ]
+  },
+  {
+    key: 'C4', color: '#eda100', ink: '#a87200', dark: '#f0b437', short: 'ทำงานเป็นทีม ภาวะผู้นำ', icon: 'ic',
+    en: 'Collaboration, Teamwork and Leadership',
+    th: 'ทำงานร่วมกับผู้อื่นและมีภาวะผู้นำ',
+    levels: [
+      'ร่วมงานกลุ่มโดยรอให้เพื่อนมอบหมาย ยังไม่รับผิดชอบบทบาทของตน',
+      'ร่วมงานกลุ่มและทำหน้าที่ที่ได้รับมอบหมายจนสำเร็จเมื่อมีครูกำกับ',
+      'วางแผนแบ่งบทบาทกับเพื่อนได้ รับฟังความเห็นต่าง แก้ไขข้อขัดแย้งได้ ทำหน้าที่หัวหน้ากลุ่มได้',
+      'เป็นผู้นำและผู้ตามได้ตามสถานการณ์ ประสานงานให้ทีมบรรลุเป้าหมาย สะท้อนผลการทำงานของทีมและพัฒนาอย่างต่อเนื่อง'
+    ]
+  },
+  {
+    key: 'C5', color: '#e87ba4', ink: '#c1517d', dark: '#ef92b6', short: 'สื่อสาร รู้เท่าทันสื่อ', icon: 'ic',
+    en: 'Communications, Information and Media Literacy',
+    th: 'สื่อสารและรู้เท่าทันสื่อ',
+    levels: [
+      'สื่อสารได้ไม่ชัดเจน เชื่อข้อมูลจากสื่อโดยไม่ตรวจสอบ',
+      'พูดและเขียนสื่อสารได้ตามรูปแบบที่กำหนด เริ่มตั้งข้อสงสัยกับข้อมูลจากสื่อ',
+      'นำเสนอข้อมูลอย่างเป็นระบบ เลือกใช้สื่อให้เหมาะกับผู้ฟัง ตรวจสอบแหล่งที่มาก่อนเชื่อหรือแชร์',
+      'สื่อสารได้อย่างมั่นใจทั้งภาษาไทยและภาษาต่างประเทศ ผลิตสื่อสร้างสรรค์พร้อมอ้างอิงแหล่งข้อมูล รู้เท่าทันข่าวลวงและเตือนผู้อื่นได้'
+    ]
+  },
+  {
+    key: 'C6', color: '#008300', ink: '#006b00', dark: '#17a317', short: 'คอมพิวเตอร์และ ICT', icon: 'ic',
+    en: 'Computing and ICT Literacy',
+    th: 'ใช้คอมพิวเตอร์และเทคโนโลยีสารสนเทศเป็น',
+    levels: [
+      'ใช้อุปกรณ์พื้นฐานได้เมื่อมีผู้ช่วยเหลือ',
+      'ใช้โปรแกรมพื้นฐาน เช่น พิมพ์งาน ค้นข้อมูล ได้ตามขั้นตอนที่กำหนด',
+      'เลือกใช้โปรแกรมหรือแอปพลิเคชันให้เหมาะกับงาน จัดการไฟล์และข้อมูลได้ เขียนโปรแกรมอย่างง่าย/วิทยาการคำนวณตามระดับชั้น',
+      'ใช้เทคโนโลยีสร้างชิ้นงาน แก้ปัญหาด้วยแนวคิดเชิงคำนวณ ใช้ AI และเครื่องมือดิจิทัลอย่างรู้เท่าทันและปลอดภัย ช่วยแนะนำเพื่อนได้'
+    ]
+  },
+  {
+    key: 'C7', color: '#4a3aa7', ink: '#3a2d85', dark: '#7e6fe0', short: 'ทักษะอาชีพ เรียนรู้ด้วยตนเอง', icon: 'ic',
+    en: 'Career and Learning Skills',
+    th: 'มีทักษะอาชีพและการเรียนรู้ด้วยตนเอง',
+    levels: [
+      'ยังไม่ทราบความถนัดและความสนใจของตนเอง เรียนรู้เมื่อครูสั่งเท่านั้น',
+      'บอกความถนัดและอาชีพที่สนใจได้ ทำงานที่ได้รับมอบหมายจนเสร็จ',
+      'ตั้งเป้าหมายการเรียน วางแผนการเรียนรู้ด้วยตนเอง มีทักษะอาชีพพื้นฐานหรือผลงานอาชีพในโรงเรียน',
+      'กำกับการเรียนรู้ของตนเองอย่างต่อเนื่อง มีแฟ้มสะสมงานหรือรายได้ระหว่างเรียน เชื่อมโยงการเรียนกับเส้นทางอาชีพได้ชัดเจน'
+    ]
+  },
+  {
+    key: 'C8', color: '#e34948', ink: '#c02f2e', dark: '#ea6c6b', short: 'เมตตา คุณธรรม วินัย', icon: 'ic',
+    en: 'Compassion',
+    th: 'มีความเมตตา มีคุณธรรม และระเบียบวินัย',
+    levels: [
+      'ปฏิบัติตามระเบียบเมื่อมีผู้กำกับ ยังไม่ใส่ใจผู้อื่น',
+      'มีมารยาท ช่วยเหลือผู้อื่นเมื่อได้รับการร้องขอ ปฏิบัติตามข้อตกลงของห้องเรียน',
+      'มีวินัย ซื่อสัตย์ รับผิดชอบ ช่วยเหลือเพื่อนและส่วนรวมด้วยความเต็มใจ',
+      'เป็นแบบอย่างด้านคุณธรรมและวินัย ริเริ่มกิจกรรมจิตอาสาหรือช่วยเหลือชุมชน จนได้รับการยกย่อง'
+    ]
+  }
+];
+
+const LEVEL_NAME = ['ควรพัฒนา', 'พอใช้', 'ดี', 'ดีเยี่ยม'];
+
+function qualityOf(avg) {
+  if (avg >= 3.51) return 'ดีเยี่ยม';
+  if (avg >= 2.51) return 'ดี';
+  if (avg >= 1.51) return 'พอใช้';
+  return 'ควรพัฒนา';
+}
+/* ============================================================
+ *  แนวทางพัฒนารายทักษะ (ใช้ในรายงานสำหรับครู)
+ *  fix = กิจกรรมซ่อมเสริมสำหรับนักเรียนระดับ 1–2
+ *  ext = กิจกรรมต่อยอดสำหรับนักเรียนระดับ 3–4
+ *  ทั้งหมดเป็น "ตัวอย่างแนวทาง" ครูปรับตามบริบทของห้องได้
+ * ============================================================ */
+const ACT = {
+  C1: {
+    fix: [
+      'ใช้คำถาม 5W1H กับเรื่องใกล้ตัววันละ 1 เรื่อง ให้ผู้เรียนตอบเป็นคำพูดก่อนเขียน',
+      'ฝึกแยก "ข้อเท็จจริง" กับ "ความคิดเห็น" จากพาดหัวข่าว 3 ข่าวต่อสัปดาห์',
+      'ให้โจทย์ปัญหาที่มีขั้นตอนกำกับ (scaffold) แล้วค่อย ๆ ถอดขั้นตอนออกทีละข้อ',
+      'ใช้ผังกราฟิก (ผังก้างปลา / ผังความคิด) ช่วยเรียบเรียงเหตุ–ผล'
+    ],
+    ext: [
+      'ให้ออกแบบวิธีแก้ปัญหาในโรงเรียนด้วยตนเอง แล้วนำเสนอพร้อมเหตุผลสนับสนุน',
+      'ฝึกประเมินความน่าเชื่อถือของแหล่งข้อมูล และเป็นพี่เลี้ยงให้เพื่อนในกลุ่ม'
+    ]
+  },
+  C2: {
+    fix: [
+      'ให้ดัดแปลงผลงานเดิมของตนเอง 1 จุดต่อครั้ง เพื่อลดความกลัวการคิดต่าง',
+      'ใช้กิจกรรม "คิดให้ได้ 10 วิธี" กับของใช้ 1 ชิ้น เน้นปริมาณก่อนคุณภาพ',
+      'ชื่นชมความคิดที่แตกต่างในห้องอย่างสม่ำเสมอ แม้ยังไม่สมบูรณ์',
+      'ใช้วัสดุเหลือใช้ในท้องถิ่นสร้างชิ้นงานเล็ก ๆ ให้เห็นผลเร็ว'
+    ],
+    ext: [
+      'ทำโครงงานนวัตกรรมที่แก้ปัญหาจริงของชุมชน แล้วส่งประกวดระดับกลุ่มโรงเรียนขึ้นไป',
+      'จัดเวทีให้เผยแพร่ผลงานและรับข้อเสนอแนะเพื่อปรับปรุงต่อ'
+    ]
+  },
+  C3: {
+    fix: [
+      'เริ่มจากวัฒนธรรมท้องถิ่นของตนเอง ให้เล่าประเพณีในหมู่บ้าน 1 เรื่องต่อสัปดาห์',
+      'ใช้ตารางเปรียบเทียบ "เหมือน–ต่าง" ระหว่างวัฒนธรรมไทยกับอาเซียน',
+      'สอนคำทักทาย/มารยาทพื้นฐานของต่างชาติผ่านบทบาทสมมติสั้น ๆ',
+      'ตั้งข้อตกลงห้องเรียนเรื่องการเคารพความแตกต่างและทบทวนทุกเดือน'
+    ],
+    ext: [
+      'ให้เป็นผู้นำกิจกรรมแลกเปลี่ยนวัฒนธรรม หรือมัคคุเทศก์น้อยของโรงเรียน',
+      'ทำสื่อแนะนำวัฒนธรรมท้องถิ่นเป็นสองภาษาเผยแพร่ทางช่องทางของโรงเรียน'
+    ]
+  },
+  C4: {
+    fix: [
+      'มอบบทบาทที่ชัดเจนให้ทุกคนในกลุ่ม (หัวหน้า / จดบันทึก / จับเวลา / นำเสนอ) แล้วหมุนเวียน',
+      'ใช้กลุ่มเล็ก 3 คนก่อน เพื่อไม่ให้ผู้เรียนหลบอยู่หลังกลุ่มใหญ่',
+      'ให้ประเมินตนเองและเพื่อนด้วยแบบสั้น 3 ข้อหลังงานกลุ่มทุกครั้ง',
+      'สอนวิธีพูดเมื่อไม่เห็นด้วยอย่างสุภาพ ด้วยประโยคตัวอย่างติดผนังห้อง'
+    ],
+    ext: [
+      'ให้รับผิดชอบโครงการของห้อง/โรงเรียนตั้งแต่วางแผนจนสรุปผล',
+      'ฝึกเป็นพี่เลี้ยงกลุ่มน้อง และสะท้อนผลการทำงานของทีมเป็นลายลักษณ์อักษร'
+    ]
+  },
+  C5: {
+    fix: [
+      'ฝึกพูดหน้าชั้น 1 นาทีทุกวันด้วยหัวข้อใกล้ตัว เพื่อสร้างความมั่นใจ',
+      'ใช้เกม "จริงหรือมั่ว" ตรวจสอบข่าวปลอมสัปดาห์ละ 1 ข่าว',
+      'สอนสูตรการนำเสนอ 3 ส่วน (เปิด–เนื้อหา–สรุป) และให้ใช้ซ้ำจนคล่อง',
+      'ฝึกอ่านจับใจความแล้วเล่าใหม่ด้วยคำของตนเอง'
+    ],
+    ext: [
+      'ผลิตสื่อสร้างสรรค์ (คลิปสั้น / อินโฟกราฟิก) พร้อมอ้างอิงแหล่งข้อมูล',
+      'เป็นทีมประชาสัมพันธ์ของโรงเรียน และช่วยเตือนเพื่อนเรื่องข่าวลวง'
+    ]
+  },
+  C6: {
+    fix: [
+      'จัดตารางใช้ห้องคอมพิวเตอร์ให้ทุกห้องได้ใช้จริงอย่างน้อยสัปดาห์ละ 1 ครั้ง',
+      'ฝึกทักษะพื้นฐานให้แม่นก่อน: พิมพ์สัมผัส เปิด–บันทึกไฟล์ ค้นหาข้อมูล',
+      'ใช้ Unplugged Coding (บัตรคำสั่ง / ตารางเดินหุ่นยนต์) เมื่ออุปกรณ์ไม่พอ',
+      'สอนความปลอดภัยออนไลน์: รหัสผ่าน ข้อมูลส่วนตัว และการกลั่นแกล้งทางไซเบอร์',
+      'จับคู่เพื่อนช่วยเพื่อน 1 เครื่องต่อ 2 คน เพื่อลดปัญหาอุปกรณ์ไม่พอ'
+    ],
+    ext: [
+      'ให้สร้างชิ้นงานดิจิทัลที่ใช้จริง เช่น เว็บเพจของห้อง หรือโปรแกรมช่วยงานครู',
+      'ตั้งชุมนุมคอมพิวเตอร์/หุ่นยนต์ และส่งแข่งขันระดับกลุ่มโรงเรียนขึ้นไป'
+    ]
+  },
+  C7: {
+    fix: [
+      'ให้ตั้งเป้าหมายการเรียนรายสัปดาห์ 1 ข้อ แล้วทบทวนด้วยตนเองทุกวันศุกร์',
+      'พาไปรู้จักอาชีพในชุมชนภาคเรียนละ 1 อาชีพ พร้อมสัมภาษณ์เจ้าของอาชีพ',
+      'ฝึกงานอาชีพพื้นฐานในโรงเรียน เช่น เกษตร ทำอาหาร งานช่างเบื้องต้น',
+      'ใช้บันทึกการเรียนรู้ (learning log) สั้น ๆ 3 บรรทัดท้ายคาบ'
+    ],
+    ext: [
+      'ทำโครงงานอาชีพที่มีรายรับ–รายจ่ายจริง และสรุปบทเรียนทางธุรกิจ',
+      'วางแผนการศึกษาต่อและเส้นทางอาชีพของตนเองพร้อมเหตุผลรองรับ'
+    ]
+  },
+  C8: {
+    fix: [
+      'ใช้กิจกรรมหน้าเสาธง/โฮมรูมชวนคิดเรื่องคุณธรรมสัปดาห์ละ 1 ประเด็น',
+      'ตั้งข้อตกลงห้องเรียนร่วมกัน และให้ผู้เรียนติดตามผลด้วยตนเอง',
+      'ใช้จิตอาสาในโรงเรียนเป็นงานประจำของทุกคน ไม่ใช่เฉพาะคนสมัครใจ',
+      'ชื่นชมพฤติกรรมดีเป็นรายบุคคลอย่างเจาะจง แทนการตำหนิรวม ๆ'
+    ],
+    ext: [
+      'ให้เป็นแกนนำจิตอาสาหรือสภานักเรียน ออกแบบกิจกรรมช่วยเหลือชุมชน',
+      'ถอดบทเรียนคุณธรรมจากการปฏิบัติจริงและเผยแพร่ให้รุ่นน้อง'
+    ]
+  }
+};
+/* ============================================================
+   ชุดกราฟ SVG — ใช้ร่วมกันทั้งหน้าเขตและหน้าโรงเรียน
+   เลือกรูปแบบตามหน้าที่ของข้อมูล
+     • เรดาร์        — รูปทรงจุดแข็ง/จุดอ่อน 8 ด้านพร้อมกัน
+     • เส้นแนวโน้ม   — ค่าเฉลี่ยไล่ตามลำดับชั้น (ข้อมูลมีลำดับ)
+     • แท่งสองทาง    — สัดส่วนระดับคุณภาพ แยกซ้าย(ต้องพัฒนา)/ขวา(ดี)
+   ============================================================ */
+const CH = (function () {
+  const esc2 = s => String(s == null ? '' : s)
+    .replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+  const nf2 = n => Number(n || 0).toLocaleString('th-TH');
+
+  /* ---------- ทูลทิป ---------- */
+  var tipEl = null;
+  function tipBox() {
+    if (!tipEl) { tipEl = document.createElement('div'); tipEl.className = 'chtip'; document.body.appendChild(tipEl); }
+    return tipEl;
+  }
+  function show(html, x, y) {
+    const t = tipBox();
+    t.innerHTML = html; t.style.display = 'block';
+    const r = t.getBoundingClientRect();
+    t.style.left = Math.max(8, Math.min(innerWidth - r.width - 8, x - r.width / 2)) + 'px';
+    t.style.top = Math.max(8, y - r.height - 14) + 'px';
+  }
+  function hide() { if (tipEl) tipEl.style.display = 'none'; }
+  function bind(root) {
+    if (!root) return;
+    root.querySelectorAll('[data-tip]').forEach(function (el) {
+      el.addEventListener('pointermove', e => show(el.getAttribute('data-tip'), e.clientX, e.clientY));
+      el.addEventListener('pointerenter', e => show(el.getAttribute('data-tip'), e.clientX, e.clientY));
+      el.addEventListener('pointerleave', hide);
+    });
+    root.addEventListener('pointerleave', hide);
+    addEventListener('scroll', hide, { passive: true });
+  }
+
+  /* ---------- 1) เรดาร์ 8 ด้าน ---------- */
+  function radar(items, opt) {
+    opt = opt || {};
+    const max = opt.max || 4, n = items.length;
+    const W = 430, H = 340, cx = W / 2, cy = H / 2 + 4, R = 108;
+    const ang = i => -Math.PI / 2 + i * 2 * Math.PI / n;
+    const px = (i, v) => cx + Math.cos(ang(i)) * R * (v / max);
+    const py = (i, v) => cy + Math.sin(ang(i)) * R * (v / max);
+    const ring = v => items.map((_, i) => px(i, v).toFixed(1) + ',' + py(i, v).toFixed(1)).join(' ');
+
+    var best = 0, worst = 0;
+    items.forEach((x, i) => { if (x.v > items[best].v) best = i; if (x.v < items[worst].v) worst = i; });
+
+    var s = '<svg class="chart radar" viewBox="0 0 ' + W + ' ' + H + '" role="img" ' +
+      'aria-label="เรดาร์คะแนนเฉลี่ยรายทักษะ 8 ด้าน เต็ม ' + max + '">';
+    /* วงอ้างอิง 1–4 */
+    for (var v = 1; v <= max; v++) s += '<polygon class="grid" points="' + ring(v) + '"/>';
+    /* ก้าน */
+    items.forEach(function (_, i) {
+      s += '<line class="grid" x1="' + cx + '" y1="' + cy + '" x2="' + px(i, max).toFixed(1) +
+        '" y2="' + py(i, max).toFixed(1) + '"/>';
+    });
+    /* ป้ายสเกลบนแกนบนสุด */
+    for (var v2 = 1; v2 <= max; v2++) {
+      s += '<text class="tick" x="' + (cx + 4) + '" y="' + (py(0, v2) + 3.5).toFixed(1) + '">' + v2 + '</text>';
+    }
+    /* พื้นที่ข้อมูล */
+    s += '<polygon class="area" points="' + items.map((x, i) =>
+      px(i, x.v).toFixed(1) + ',' + py(i, x.v).toFixed(1)).join(' ') + '"/>';
+
+    /* จุด + พื้นที่รับเมาส์ + ป้ายแกน */
+    items.forEach(function (x, i) {
+      const X = px(i, x.v), Y = py(i, x.v);
+      const tip = '<b>' + esc2(x.key) + ' · ' + esc2(x.label) + '</b>' +
+        '<div class="r"><span>คะแนนเฉลี่ย</span><b>' + x.v.toFixed(2) + ' / ' + max.toFixed(2) + '</b></div>' +
+        (x.extra ? '<div class="r"><span>' + esc2(x.extra[0]) + '</span><b>' + esc2(x.extra[1]) + '</b></div>' : '');
+      s += '<circle class="hit" cx="' + X.toFixed(1) + '" cy="' + Y.toFixed(1) + '" r="16" data-tip="' + esc2(tip) + '"/>';
+      s += '<circle class="dot" cx="' + X.toFixed(1) + '" cy="' + Y.toFixed(1) + '" r="4.6"/>';
+
+      const LX = px(i, max) + Math.cos(ang(i)) * 30, LY = py(i, max) + Math.sin(ang(i)) * 30;
+      const c = Math.cos(ang(i));
+      const anchor = Math.abs(c) < 0.3 ? 'middle' : (c > 0 ? 'start' : 'end');
+      s += '<text class="key" x="' + LX.toFixed(1) + '" y="' + (LY - 3).toFixed(1) + '" text-anchor="' + anchor + '">' +
+        esc2(x.key) + '</text>';
+      /* ชื่อย่อยาว ๆ ตัดเป็น 2 บรรทัด กันล้นออกนอกกรอบ */
+      const sub = String(x.short || '');
+      var l1 = sub, l2 = '';
+      if (sub.length > 17) {
+        var cut = sub.lastIndexOf(' ', Math.ceil(sub.length / 2) + 4);
+        if (cut < 4) cut = sub.indexOf(' ', Math.ceil(sub.length / 2) - 4);
+        if (cut > 3) { l1 = sub.slice(0, cut); l2 = sub.slice(cut + 1); }
+      }
+      s += '<text class="sub" x="' + LX.toFixed(1) + '" y="' + (LY + 9).toFixed(1) + '" text-anchor="' + anchor + '">' +
+        esc2(l1) + (l2 ? '<tspan x="' + LX.toFixed(1) + '" dy="11">' + esc2(l2) + '</tspan>' : '') + '</text>';
+    });
+
+    /* ป้ายค่าเฉพาะจุดสูงสุด–ต่ำสุด (ไม่ติดป้ายทุกจุด) */
+    [[best, 'สูงสุด'], [worst, 'ต่ำสุด']].forEach(function (pair) {
+      const i = pair[0], x = items[i];
+      const X = px(i, x.v), Y = py(i, x.v);
+      const c = Math.cos(ang(i)), sn = Math.sin(ang(i));
+      /* แกนบน–ล่างวางป้ายในแนวตั้ง ไม่ให้ทับตัวเลขสเกลกลางภาพ */
+      var tx, ty, anc;
+      if (Math.abs(c) < 0.35) { tx = X; ty = Y + (sn < 0 ? -11 : 16); anc = 'middle'; }
+      else { tx = X + (c >= 0 ? 13 : -13); ty = Y + 4; anc = c >= 0 ? 'start' : 'end'; }
+      s += '<text class="val pin" x="' + tx.toFixed(1) + '" y="' + ty.toFixed(1) +
+        '" text-anchor="' + anc + '" stroke="var(--card)" stroke-width="3">' +
+        x.v.toFixed(2) + '</text>';
+    });
+    s += '</svg>';
+    return s;
+  }
+
+  /* ---------- 2) เส้นแนวโน้มตามลำดับชั้น ---------- */
+  function trend(pts, opt) {
+    opt = opt || {};
+    const lo = opt.lo != null ? opt.lo : 1, hi = opt.hi != null ? opt.hi : 4;
+    const W = 440, H = 290, PL = 30, PR = 14, PT = 16, PB = 44;
+    const iw = W - PL - PR, ih = H - PT - PB;
+    const n = pts.length;
+    if (!n) return '';
+    const X = i => PL + (n === 1 ? iw / 2 : i * iw / (n - 1));
+    const Y = v => PT + ih - (Math.max(lo, Math.min(hi, v)) - lo) / (hi - lo) * ih;
+
+    var s = '<svg class="chart linec" viewBox="0 0 ' + W + ' ' + H + '" role="img" ' +
+      'aria-label="แนวโน้มคะแนนเฉลี่ย 8C ตามระดับชั้น">' +
+      '<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0%" stop-color="var(--bar)" stop-opacity=".26"/>' +
+      '<stop offset="100%" stop-color="var(--bar)" stop-opacity="0"/></linearGradient></defs>';
+
+    for (var v = lo; v <= hi; v += (hi - lo) / 3) {
+      const y = Y(v);
+      s += '<line class="grid" x1="' + PL + '" y1="' + y.toFixed(1) + '" x2="' + (W - PR) + '" y2="' + y.toFixed(1) + '"/>' +
+        '<text class="tick" x="' + (PL - 7) + '" y="' + (y + 3.5).toFixed(1) + '" text-anchor="end">' +
+        v.toFixed(1) + '</text>';
+    }
+
+    const line = pts.map((p, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(p.v).toFixed(1)).join(' ');
+    s += '<path class="area" d="' + line + ' L' + X(n - 1).toFixed(1) + ' ' + (PT + ih) +
+      ' L' + X(0).toFixed(1) + ' ' + (PT + ih) + ' Z"/>';
+    s += '<path class="ln" d="' + line + '"/>';
+
+    var best = 0, worst = 0;
+    pts.forEach((p, i) => { if (p.v > pts[best].v) best = i; if (p.v < pts[worst].v) worst = i; });
+
+    pts.forEach(function (p, i) {
+      const x = X(i), y = Y(p.v);
+      const key = (i === 0 || i === n - 1 || i === best || i === worst);
+      const tip = '<b>' + esc2(p.label) + '</b>' +
+        '<div class="r"><span>คะแนนเฉลี่ย 8C</span><b>' + p.v.toFixed(2) + '</b></div>' +
+        (p.n != null ? '<div class="r"><span>ห้องเรียน</span><b>' + nf2(p.n) + ' ห้อง</b></div>' : '') +
+        (p.students != null ? '<div class="r"><span>นักเรียน</span><b>' + nf2(p.students) + ' คน</b></div>' : '');
+      s += '<rect class="band" x="' + (x - iw / (2 * Math.max(1, n - 1))).toFixed(1) + '" y="' + PT +
+        '" width="' + (iw / Math.max(1, n - 1)).toFixed(1) + '" height="' + ih + '" data-tip="' + esc2(tip) + '"/>';
+      s += '<circle class="dot' + (key ? ' big' : '') + '" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) +
+        '" r="' + (key ? 5 : 4) + '"/>';
+      if (key) {
+        s += '<text class="val" x="' + x.toFixed(1) + '" y="' + (y - 11).toFixed(1) +
+          '" text-anchor="middle" stroke="var(--card)" stroke-width="3" paint-order="stroke">' +
+          p.v.toFixed(2) + '</text>';
+      }
+      s += '<text class="tick" x="' + x.toFixed(1) + '" y="' + (PT + ih + 17) +
+        '" text-anchor="middle">' + esc2(p.short || p.label) + '</text>';
+      /* จำนวนห้อง: ซ่อนเมื่อชั้นเยอะจนป้ายทับกัน และสลับแสดงเว้นจุดเมื่อเริ่มแน่น */
+      if (p.n != null && n <= 15 && (n <= 9 || i % 2 === 0)) {
+        s += '<text class="tick" x="' + x.toFixed(1) + '" y="' + (PT + ih + 31) +
+          '" text-anchor="middle" opacity=".72">' + p.n + ' ห้อง</text>';
+      }
+    });
+    s += '</svg>';
+    return s;
+  }
+
+  /* ---------- 3) แท่งกระจายสองทาง (ordered scale) ---------- */
+  function diverging(rows, opt) {
+    opt = opt || {};
+    const names = opt.names || ['ระดับ 1', 'ระดับ 2', 'ระดับ 3', 'ระดับ 4'];
+    const cols = ['var(--l1)', 'var(--l2)', 'var(--l3)', 'var(--l4)'];
+    const sorted = rows.slice().sort(function (a, b) {
+      const ra = a.n ? (a.d[0] + a.d[1]) / a.n : 0, rb = b.n ? (b.d[0] + b.d[1]) / b.n : 0;
+      return rb - ra;
+    });
+    const tot = [0, 0, 0, 0];
+    rows.forEach(r => r.d.forEach((v, i) => tot[i] += v));
+
+    var s = '<div class="dv">';
+    sorted.forEach(function (r) {
+      const n = r.n || 1;
+      const p = r.d.map(v => v / n * 100);
+      const risk = p[0] + p[1];
+      function seg(i) {
+        const w = (p[i] * 2).toFixed(2);
+        const tip = '<b>' + esc2(r.key) + ' · ' + esc2(r.label) + '</b>' +
+          '<div class="r"><span><i style="background:' + cols[i] + '"></i>' + esc2(names[i]) + '</span>' +
+          '<b>' + nf2(r.d[i]) + ' คน (' + p[i].toFixed(1) + '%)</b></div>' +
+          '<div class="r"><span>นักเรียนทั้งหมด</span><b>' + nf2(n) + ' คน</b></div>';
+        return '<div class="seg" style="width:' + w + '%;background:' + cols[i] + '" data-tip="' + esc2(tip) + '">' +
+          (p[i] >= 9 ? Math.round(p[i]) + '%' : '') + '</div>';
+      }
+      s += '<div class="nm"><i style="background:' + (r.color || 'var(--bar)') + '"></i>' +
+        esc2(r.key) + ' · ' + esc2(r.short || r.label) + '</div>' +
+        '<div class="trk"><div class="side l">' + seg(0) + seg(1) + '</div>' +
+        '<div class="side r">' + seg(2) + seg(3) + '</div></div>' +
+        '<div class="risk' + (risk >= 40 ? ' hi' : '') + '">' + risk.toFixed(0) + '%</div>';
+    });
+    s += '</div>' +
+      '<div class="axcap"><span>← ควรเร่งพัฒนา</span><span>ผ่านเกณฑ์ดีขึ้นไป →</span></div>' +
+      '<div class="dvfoot"><div class="lg">' +
+      names.map((nm, i) => '<span><i style="background:' + cols[i] + '"></i>' + esc2(nm) +
+        ' — ' + nf2(tot[i]) + ' คน</span>').join('') +
+      '</div><button type="button" class="tbtn" data-table>ดูเป็นตาราง</button></div>' +
+      '<div data-tablebox style="display:none;margin-top:12px"></div>';
+    return s;
+  }
+
+  /** ตารางค่าตัวเลขของแท่งสองทาง (เปิด/ปิดด้วยปุ่ม) */
+  function divTable(rows, names) {
+    names = names || ['ระดับ 1', 'ระดับ 2', 'ระดับ 3', 'ระดับ 4'];
+    return '<div class="scroller"><table class="sumtbl"><thead><tr><th class="l">ทักษะ</th>' +
+      names.map(n => '<th>' + esc2(n) + '</th>').join('') +
+      '<th>รวม</th><th>ควรเร่งพัฒนา</th></tr></thead><tbody>' +
+      rows.map(function (r) {
+        const n = r.n || 1, risk = (r.d[0] + r.d[1]) / n * 100;
+        return '<tr><td class="l"><b>' + esc2(r.key) + '</b> ' + esc2(r.short || r.label) + '</td>' +
+          r.d.map(v => '<td>' + nf2(v) + '</td>').join('') +
+          '<td><b>' + nf2(r.n) + '</b></td><td>' + risk.toFixed(1) + '%</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /** ผูกปุ่ม "ดูเป็นตาราง" */
+  function bindTable(root, rows, names) {
+    if (!root) return;
+    const btn = root.querySelector('[data-table]'), box = root.querySelector('[data-tablebox]');
+    if (!btn || !box) return;
+    btn.addEventListener('click', function () {
+      const open = box.style.display !== 'none';
+      if (!open && !box.innerHTML) box.innerHTML = divTable(rows, names);
+      box.style.display = open ? 'none' : '';
+      btn.textContent = open ? 'ดูเป็นตาราง' : 'ซ่อนตาราง';
+    });
+  }
+
+  return { radar: radar, trend: trend, diverging: diverging, bind: bind, bindTable: bindTable, hide: hide };
+})();
+const SCHOOLS = [{"code":"41010001","name":"บ้านท่าตูมดงสระพัง","note":"","tambon":"กุดสระ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":62,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[3,1],"ป.1":[3,1],"ป.2":[4,1],"ป.3":[6,1],"ป.4":[14,1],"ป.5":[10,1],"ป.6":[13,1]}},{"code":"41010002","name":"มิตรภาพ 6","note":"","tambon":"กุดสระ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":129,"size":"ขนาดกลาง","grades":{"อ.2":[13,1],"อ.3":[14,1],"ป.1":[15,1],"ป.2":[12,1],"ป.3":[15,1],"ป.4":[16,1],"ป.5":[21,1],"ป.6":[23,1]}},{"code":"41010003","name":"บ้านโนนยางโนนบ่อ","note":"","tambon":"กุดสระ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":40,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[4,1],"ป.1":[4,1],"ป.2":[7,1],"ป.3":[6,1],"ป.4":[6,1],"ป.5":[4,1],"ป.6":[5,1]}},{"code":"41010004","name":"บ้านขมิ้นบ่อโคลน","note":"","tambon":"กุดสระ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":53,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[7,1],"ป.1":[12,1],"ป.2":[7,1],"ป.3":[4,1],"ป.4":[5,1],"ป.5":[8,1],"ป.6":[7,1]}},{"code":"41010006","name":"บ้านดอนหวาย","note":"","tambon":"กุดสระ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":34,"size":"ขนาดเล็ก","grades":{"อ.3":[4,1],"ป.1":[5,1],"ป.2":[8,1],"ป.3":[4,1],"ป.4":[3,1],"ป.5":[1,1],"ป.6":[9,1]}},{"code":"41010008","name":"นิคมสร้างตนเองเชียงพิณ 3","note":"","tambon":"โคกสะอาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":110,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[12,1],"ป.1":[13,1],"ป.2":[11,1],"ป.3":[19,1],"ป.4":[14,1],"ป.5":[15,1],"ป.6":[17,1]}},{"code":"41010009","name":"นิคมสร้างตนเองเชียงพิณ 5","note":"","tambon":"โคกสะอาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":29,"size":"ขนาดเล็ก","grades":{"อ.2":[1,1],"อ.3":[3,1],"ป.1":[3,1],"ป.2":[5,1],"ป.3":[4,1],"ป.4":[2,1],"ป.5":[8,1],"ป.6":[3,1]}},{"code":"41010010","name":"บ้านนาสมบูรณ์","note":"","tambon":"โคกสะอาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":19,"size":"ขนาดเล็ก","grades":{"อ.2":[2,1],"อ.3":[2,1],"ป.1":[3,1],"ป.2":[1,1],"ป.3":[2,1],"ป.4":[2,1],"ป.5":[3,1],"ป.6":[4,1]}},{"code":"41010011","name":"บ้านโคกสะอาดศรีบูรพา","note":"","tambon":"โคกสะอาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":121,"size":"ขนาดกลาง","grades":{"อ.2":[11,1],"อ.3":[8,1],"ป.1":[6,1],"ป.2":[7,1],"ป.3":[13,1],"ป.4":[14,1],"ป.5":[6,1],"ป.6":[17,1],"ม.1":[16,1],"ม.2":[9,1],"ม.3":[14,1]}},{"code":"41010012","name":"บ้านหนองสวรรค์ (ไชยเชียงพิณ)","note":"","tambon":"เชียงพิณ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":63,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[10,1],"ป.1":[6,1],"ป.2":[7,1],"ป.3":[10,1],"ป.4":[6,1],"ป.5":[6,1],"ป.6":[9,1]}},{"code":"41010013","name":"บ้านหนองโอนหนองฮาง","note":"","tambon":"เชียงพิณ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":136,"size":"ขนาดกลาง","grades":{"อ.1":[12,1],"อ.2":[9,1],"อ.3":[18,1],"ป.1":[10,1],"ป.2":[29,1],"ป.3":[10,1],"ป.4":[16,1],"ป.5":[16,1],"ป.6":[16,1]}},{"code":"41010015","name":"บ้านเชียงพิณ","note":"","tambon":"เชียงพิณ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":94,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[9,1],"ป.1":[10,1],"ป.2":[10,1],"ป.3":[14,1],"ป.4":[14,1],"ป.5":[12,1],"ป.6":[19,1]}},{"code":"41010016","name":"นาคลองหนองศรีคามวิทยา","note":"","tambon":"เชียงพิณ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":62,"size":"ขนาดเล็ก","grades":{"อ.2":[13,1],"อ.3":[6,1],"ป.1":[7,1],"ป.2":[7,1],"ป.3":[10,1],"ป.4":[7,1],"ป.5":[8,1],"ป.6":[4,1]}},{"code":"41010017","name":"บ้านเชียงยืน","note":"","tambon":"เชียงยืน","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 8","total":219,"size":"ขนาดกลาง","grades":{"อ.2":[17,1],"อ.3":[10,1],"ป.1":[20,1],"ป.2":[24,1],"ป.3":[19,1],"ป.4":[19,1],"ป.5":[25,1],"ป.6":[17,1],"ม.1":[27,1],"ม.2":[14,1],"ม.3":[27,1]}},{"code":"41010018","name":"บ้านอีหลุ่ง","note":"","tambon":"เชียงยืน","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 8","total":57,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[6,1],"ป.1":[12,1],"ป.2":[12,1],"ป.3":[2,1],"ป.4":[4,1],"ป.5":[5,1],"ป.6":[9,1]}},{"code":"41010019","name":"บ้านจำปา","note":"","tambon":"เชียงยืน","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 8","total":32,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"ป.1":[2,1],"ป.2":[7,1],"ป.3":[4,1],"ป.4":[6,1],"ป.5":[4,1],"ป.6":[4,1]}},{"code":"41010020","name":"บ้านป่องมหิดลอนุสรณ์ 6","note":"","tambon":"เชียงยืน","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 8","total":25,"size":"ขนาดเล็ก","grades":{"อ.2":[2,1],"อ.3":[1,1],"ป.1":[2,1],"ป.2":[8,1],"ป.3":[3,1],"ป.4":[1,1],"ป.5":[5,1],"ป.6":[3,1]}},{"code":"41010021","name":"บ้านหนองน้ำเค็ม","note":"","tambon":"เชียงยืน","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 8","total":70,"size":"ขนาดเล็ก","grades":{"อ.2":[8,1],"อ.3":[11,1],"ป.1":[8,1],"ป.2":[7,1],"ป.3":[10,1],"ป.4":[6,1],"ป.5":[9,1],"ป.6":[11,1]}},{"code":"41010022","name":"บ้านโนนสวรรค์","note":"เรียนรวมทุกชั้น","tambon":"เชียงยืน","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":15,"size":"ขนาดเล็ก","grades":{"อ.2":[1,1],"อ.3":[1,1],"ป.2":[7,1],"ป.4":[1,1],"ป.5":[1,1],"ป.6":[4,1]}},{"code":"41010023","name":"บ้านหนองหลอด","note":"","tambon":"เชียงยืน","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 8","total":180,"size":"ขนาดกลาง","grades":{"อ.2":[11,1],"อ.3":[17,1],"ป.1":[18,1],"ป.2":[10,1],"ป.3":[15,1],"ป.4":[21,1],"ป.5":[12,1],"ป.6":[17,1],"ม.1":[18,1],"ม.2":[22,1],"ม.3":[19,1]}},{"code":"41010024","name":"บ้านหนองตอสูงแคน","note":"","tambon":"เชียงยืน","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 8","total":87,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[4,1],"ป.1":[13,1],"ป.2":[10,1],"ป.3":[5,1],"ป.4":[8,1],"ป.5":[9,1],"ป.6":[9,1],"ม.1":[9,1],"ม.2":[6,1],"ม.3":[11,1]}},{"code":"41010025","name":"บ่อน้อยประชาสรรค์","note":"","tambon":"เชียงยืน","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 8","total":124,"size":"ขนาดกลาง","grades":{"อ.2":[11,1],"อ.3":[7,1],"ป.1":[12,1],"ป.2":[6,1],"ป.3":[10,1],"ป.4":[13,1],"ป.5":[9,1],"ป.6":[19,1],"ม.1":[12,1],"ม.2":[15,1],"ม.3":[10,1]}},{"code":"41010026","name":"บ้านนาเยีย","note":"","tambon":"เชียงยืน","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 8","total":35,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[3,1],"ป.1":[2,1],"ป.2":[3,1],"ป.3":[6,1],"ป.4":[4,1],"ป.5":[7,1],"ป.6":[4,1]}},{"code":"41010028","name":"บ้านเชียงพัง","note":"","tambon":"นากว้าง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 4","total":139,"size":"ขนาดกลาง","grades":{"อ.2":[20,1],"อ.3":[24,1],"ป.1":[9,1],"ป.2":[14,1],"ป.3":[20,1],"ป.4":[17,1],"ป.5":[11,1],"ป.6":[24,1]}},{"code":"41010029","name":"ชุมชนนากว้างพัฒนศึกษา","note":"","tambon":"นากว้าง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 4","total":150,"size":"ขนาดกลาง","grades":{"อ.2":[15,1],"อ.3":[14,1],"ป.1":[18,1],"ป.2":[16,1],"ป.3":[15,1],"ป.4":[22,1],"ป.5":[23,1],"ป.6":[27,1]}},{"code":"41010030","name":"บ้านนาทาม","note":"เรียนรวมทุกชั้น บ้านเชียงพัง","tambon":"นากว้าง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 4","total":0,"size":"ขนาดเล็ก","grades":{}},{"code":"41010031","name":"บ้านหมากตูมดอนยานาง","note":"","tambon":"นาข่า","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":133,"size":"ขนาดกลาง","grades":{"อ.2":[9,1],"อ.3":[12,1],"ป.1":[17,1],"ป.2":[17,1],"ป.3":[5,1],"ป.4":[14,1],"ป.5":[15,1],"ป.6":[8,1],"ม.1":[11,1],"ม.2":[15,1],"ม.3":[10,1]}},{"code":"41010032","name":"ไทยรัฐวิทยา ๙๒ (ชุมชนนาข่า)","note":"","tambon":"นาข่า","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":204,"size":"ขนาดกลาง","grades":{"อ.2":[4,1],"อ.3":[15,1],"ป.1":[9,1],"ป.2":[22,1],"ป.3":[15,1],"ป.4":[16,1],"ป.5":[24,1],"ป.6":[23,1],"ม.1":[22,1],"ม.2":[26,1],"ม.3":[28,1]}},{"code":"41010033","name":"บ้านถ่อนใหญ่ถ่อนน้อย","note":"","tambon":"นาข่า","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":42,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[6,1],"ป.1":[2,1],"ป.2":[8,1],"ป.3":[4,1],"ป.4":[5,1],"ป.5":[8,1],"ป.6":[6,1]}},{"code":"41010034","name":"บ้านเหล่าดอนแตง","note":"","tambon":"นาข่า","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":25,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[2,1],"ป.1":[3,1],"ป.2":[4,1],"ป.3":[4,1],"ป.4":[3,1],"ป.5":[3,1],"ป.6":[1,1]}},{"code":"41010035","name":"บ้านนาคำหลวง","note":"","tambon":"นาข่า","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":228,"size":"ขนาดกลาง","grades":{"อ.2":[17,1],"อ.3":[18,1],"ป.1":[24,1],"ป.2":[18,1],"ป.3":[19,1],"ป.4":[28,1],"ป.5":[20,1],"ป.6":[20,1],"ม.1":[15,1],"ม.2":[25,1],"ม.3":[24,1]}},{"code":"41010036","name":"บ้านงอยเลิงทอง","note":"","tambon":"นาข่า","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":73,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[11,1],"ป.1":[12,1],"ป.2":[6,1],"ป.3":[9,1],"ป.4":[8,1],"ป.5":[6,1],"ป.6":[12,1]}},{"code":"41010037","name":"ประชาสามัคคี","note":"","tambon":"นาข่า","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 7","total":97,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[11,1],"ป.1":[11,1],"ป.2":[17,1],"ป.3":[18,1],"ป.4":[8,1],"ป.5":[11,1],"ป.6":[12,1]}},{"code":"41010039","name":"บ้านศรีเชียงใหม่","note":"","tambon":"นาดี","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 2","total":57,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[7,1],"ป.1":[5,1],"ป.2":[3,1],"ป.3":[15,1],"ป.4":[4,1],"ป.5":[10,1],"ป.6":[4,1]}},{"code":"41010040","name":"บ้านกุดลิงง้อหนองแก","note":"","tambon":"นาดี","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 2","total":42,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[3,1],"ป.2":[4,1],"ป.3":[4,1],"ป.4":[6,1],"ป.5":[8,1],"ป.6":[10,1]}},{"code":"41010041","name":"บ้านนาแอง","note":"","tambon":"นิคมสงเคราะห์","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":109,"size":"ขนาดเล็ก","grades":{"อ.2":[16,1],"อ.3":[11,1],"ป.1":[11,1],"ป.2":[15,1],"ป.3":[14,1],"ป.4":[11,1],"ป.5":[15,1],"ป.6":[16,1]}},{"code":"41010043","name":"บ้านนิคมพัฒนา","note":"","tambon":"นิคมสงเคราะห์","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":83,"size":"ขนาดเล็ก","grades":{"อ.1":[10,1],"อ.2":[6,1],"อ.3":[4,1],"ป.1":[8,1],"ป.2":[7,1],"ป.3":[7,1],"ป.4":[13,1],"ป.5":[13,1],"ป.6":[15,1]}},{"code":"41010044","name":"บ้านหนองขุ่นเหล่าหลักวิทยา","note":"","tambon":"นิคมสงเคราะห์","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":150,"size":"ขนาดกลาง","grades":{"อ.2":[5,1],"อ.3":[6,1],"ป.1":[12,1],"ป.2":[7,1],"ป.3":[13,1],"ป.4":[14,1],"ป.5":[22,1],"ป.6":[16,1],"ม.1":[19,1],"ม.2":[20,1],"ม.3":[16,1]}},{"code":"41010045","name":"บ้านปากดงส่งเสริมธรรม","note":"","tambon":"นิคมสงเคราะห์","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 3","total":54,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[3,1],"ป.1":[4,1],"ป.2":[9,1],"ป.3":[9,1],"ป.4":[6,1],"ป.5":[5,1],"ป.6":[13,1]}},{"code":"41010047","name":"ชุมชนโนนสูง","note":"","tambon":"โนนสูง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 9","total":647,"size":"ขนาดกลาง","grades":{"อ.2":[10,1],"อ.3":[11,1],"ป.1":[68,2],"ป.2":[65,2],"ป.3":[65,2],"ป.4":[79,2],"ป.5":[81,3],"ป.6":[77,2],"ม.1":[69,2],"ม.2":[79,2],"ม.3":[43,2]}},{"code":"41010048","name":"บ้านหนองโสกดาว","note":"","tambon":"โนนสูง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 9","total":93,"size":"ขนาดเล็ก","grades":{"อ.1":[3,1],"อ.2":[10,1],"อ.3":[8,1],"ป.1":[7,1],"ป.2":[10,1],"ป.3":[15,1],"ป.4":[16,1],"ป.5":[6,1],"ป.6":[18,1]}},{"code":"41010049","name":"บ้านข้าวสาร","note":"","tambon":"โนนสูง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 9","total":48,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[8,1],"ป.1":[4,1],"ป.2":[5,1],"ป.3":[9,1],"ป.4":[4,1],"ป.5":[9,1],"ป.6":[5,1]}},{"code":"41010050","name":"บ้านชัยพรมิตรภาพที่ 67","note":"","tambon":"โนนสูง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 9","total":160,"size":"ขนาดกลาง","grades":{"อ.2":[6,1],"อ.3":[13,1],"ป.1":[10,1],"ป.2":[18,1],"ป.3":[11,1],"ป.4":[14,1],"ป.5":[16,1],"ป.6":[17,1],"ม.1":[23,1],"ม.2":[16,1],"ม.3":[16,1]}},{"code":"41010051","name":"บ้านเม่น","note":"","tambon":"บ้านขาว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 4","total":79,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[6,1],"ป.1":[9,1],"ป.2":[8,1],"ป.3":[9,1],"ป.4":[13,1],"ป.5":[17,1],"ป.6":[11,1]}},{"code":"41010052","name":"บ้านขาว","note":"","tambon":"บ้านขาว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 4","total":58,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[8,1],"ป.1":[7,1],"ป.2":[6,1],"ป.3":[4,1],"ป.4":[11,1],"ป.5":[5,1],"ป.6":[10,1]}},{"code":"41010053","name":"บ้านดู่","note":"","tambon":"บ้านขาว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 4","total":80,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[11,1],"ป.1":[8,1],"ป.2":[15,1],"ป.3":[13,1],"ป.4":[7,1],"ป.5":[9,1],"ป.6":[8,1]}},{"code":"41010054","name":"บ้านหัวบึง","note":"","tambon":"บ้านขาว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 4","total":212,"size":"ขนาดกลาง","grades":{"อ.2":[16,1],"อ.3":[16,1],"ป.1":[20,1],"ป.2":[20,1],"ป.3":[15,1],"ป.4":[27,1],"ป.5":[23,1],"ป.6":[19,1],"ม.1":[18,1],"ม.2":[14,1],"ม.3":[24,1]}},{"code":"41010055","name":"บ้านพรานเหมือน","note":"","tambon":"บ้านขาว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 4","total":194,"size":"ขนาดกลาง","grades":{"อ.2":[16,1],"อ.3":[15,1],"ป.1":[13,1],"ป.2":[17,1],"ป.3":[16,1],"ป.4":[22,1],"ป.5":[19,1],"ป.6":[23,1],"ม.1":[21,1],"ม.2":[15,1],"ม.3":[17,1]}},{"code":"41010056","name":"บ้านดงเค็ง (นําวัฒนาอุปถัมภ์)","note":"","tambon":"บ้านจั่น","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 2","total":39,"size":"ขนาดเล็ก","grades":{"อ.3":[4,1],"ป.1":[4,1],"ป.2":[4,1],"ป.3":[5,1],"ป.4":[5,1],"ป.5":[9,1],"ป.6":[8,1]}},{"code":"41010057","name":"บ้านคำกลิ้ง","note":"","tambon":"บ้านจั่น","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 2","total":294,"size":"ขนาดกลาง","grades":{"อ.2":[22,1],"อ.3":[15,1],"ป.1":[12,1],"ป.2":[14,1],"ป.3":[30,1],"ป.4":[31,1],"ป.5":[35,1],"ป.6":[38,1],"ม.1":[33,1],"ม.2":[36,1],"ม.3":[28,1]}},{"code":"41010058","name":"บ้านหนองตูม","note":"","tambon":"บ้านจั่น","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 2","total":124,"size":"ขนาดกลาง","grades":{"อ.2":[9,1],"อ.3":[9,1],"ป.1":[13,1],"ป.2":[15,1],"ป.3":[20,1],"ป.4":[13,1],"ป.5":[16,1],"ป.6":[29,1]}},{"code":"41010059","name":"บ้านจั่นศรีวิไล","note":"","tambon":"บ้านจั่น","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 2","total":122,"size":"ขนาดกลาง","grades":{"อ.2":[14,1],"อ.3":[13,1],"ป.1":[9,1],"ป.2":[20,1],"ป.3":[19,1],"ป.4":[15,1],"ป.5":[15,1],"ป.6":[17,1]}},{"code":"41010060","name":"บ้านเลี่ยมพิลึก","note":"","tambon":"บ้านจั่น","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 2","total":58,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[7,1],"ป.1":[3,1],"ป.2":[7,1],"ป.3":[7,1],"ป.4":[9,1],"ป.5":[12,1],"ป.6":[8,1]}},{"code":"41010061","name":"ค่ายประจักษ์ศิลปาคม","note":"","tambon":"บ้านจั่น","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 2","total":102,"size":"ขนาดเล็ก","grades":{"อ.3":[8,1],"ป.1":[4,1],"ป.2":[3,1],"ป.3":[3,1],"ป.4":[2,1],"ป.5":[6,1],"ป.6":[10,1],"ม.1":[24,1],"ม.2":[23,1],"ม.3":[19,1]}},{"code":"41010062","name":"บ้านตาด","note":"","tambon":"บ้านตาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":210,"size":"ขนาดกลาง","grades":{"อ.2":[24,1],"อ.3":[24,1],"ป.1":[23,1],"ป.2":[26,1],"ป.3":[29,1],"ป.4":[17,1],"ป.5":[29,2],"ป.6":[38,2]}},{"code":"41010063","name":"บ้านกกสะทอนเครือหวายดิน","note":"","tambon":"บ้านตาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":59,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[5,1],"ป.1":[7,1],"ป.2":[5,1],"ป.3":[11,1],"ป.4":[8,1],"ป.5":[10,1],"ป.6":[6,1]}},{"code":"41010064","name":"บ้านโนนเดื่อ","note":"","tambon":"บ้านตาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":67,"size":"ขนาดเล็ก","grades":{"อ.2":[12,1],"อ.3":[9,1],"ป.1":[1,1],"ป.2":[8,1],"ป.3":[12,1],"ป.4":[4,1],"ป.5":[9,1],"ป.6":[12,1]}},{"code":"41010065","name":"บ้านสุขสมบูรณ์","note":"","tambon":"บ้านตาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":73,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[8,1],"ป.1":[12,1],"ป.2":[8,1],"ป.3":[12,1],"ป.4":[9,1],"ป.5":[11,1],"ป.6":[7,1]}},{"code":"41010066","name":"บ้านศรีบุญเรือง","note":"","tambon":"บ้านตาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":62,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[4,1],"ป.1":[5,1],"ป.2":[8,1],"ป.3":[4,1],"ป.4":[15,1],"ป.5":[11,1],"ป.6":[10,1]}},{"code":"41010067","name":"เจ ซี บ้านอินทร์แปลง","note":"","tambon":"บ้านตาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":63,"size":"ขนาดเล็ก","grades":{"อ.2":[8,1],"อ.3":[4,1],"ป.1":[4,1],"ป.2":[9,1],"ป.3":[10,1],"ป.4":[5,1],"ป.5":[11,1],"ป.6":[12,1]}},{"code":"41010068","name":"ผ่านศึกสงเคราะห์","note":"","tambon":"บ้านตาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":97,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[10,1],"ป.1":[16,1],"ป.2":[13,1],"ป.3":[11,1],"ป.4":[18,1],"ป.5":[7,1],"ป.6":[13,1]}},{"code":"41010069","name":"บ้านหลุบหวายป่าขาม","note":"","tambon":"บ้านตาด","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":59,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[8,1],"ป.1":[7,1],"ป.2":[9,1],"ป.3":[13,1],"ป.4":[6,1],"ป.5":[3,1],"ป.6":[9,1]}},{"code":"41010071","name":"บ้านเลื่อม","note":"","tambon":"บ้านเลื่อม","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 4","total":200,"size":"ขนาดกลาง","grades":{"อ.1":[7,1],"อ.2":[7,1],"อ.3":[11,1],"ป.1":[7,1],"ป.2":[10,1],"ป.3":[14,1],"ป.4":[22,1],"ป.5":[21,1],"ป.6":[25,1],"ม.1":[30,1],"ม.2":[22,1],"ม.3":[24,1]}},{"code":"41010074","name":"ชุมชนสามพร้าว","note":"","tambon":"สามพร้าว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":642,"size":"ขนาดกลาง","grades":{"อ.2":[66,3],"อ.3":[63,3],"ป.1":[72,2],"ป.2":[71,2],"ป.3":[76,2],"ป.4":[92,3],"ป.5":[110,3],"ป.6":[92,3]}},{"code":"41010075","name":"บ้านหนองบุนาหล่ำ","note":"","tambon":"สามพร้าว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":113,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[11,1],"ป.1":[17,1],"ป.2":[5,1],"ป.3":[10,1],"ป.4":[18,1],"ป.5":[22,1],"ป.6":[24,1]}},{"code":"41010077","name":"บ้านหนองบั่วประชาสรรค์","note":"","tambon":"สามพร้าว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":80,"size":"ขนาดเล็ก","grades":{"อ.2":[11,1],"อ.3":[10,1],"ป.1":[10,1],"ป.2":[9,1],"ป.3":[7,1],"ป.4":[11,1],"ป.5":[9,1],"ป.6":[13,1]}},{"code":"41010079","name":"บ้านดอนหาดดงเหล่าต้อง","note":"","tambon":"สามพร้าว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":92,"size":"ขนาดเล็ก","grades":{"อ.2":[1,1],"อ.3":[12,1],"ป.1":[17,1],"ป.2":[13,1],"ป.3":[15,1],"ป.4":[13,1],"ป.5":[10,1],"ป.6":[11,1]}},{"code":"41010081","name":"บ้านอี่เลี่ยน","note":"","tambon":"หนองขอนกว้าง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":183,"size":"ขนาดกลาง","grades":{"อ.2":[22,1],"อ.3":[23,1],"ป.1":[14,1],"ป.2":[27,1],"ป.3":[17,1],"ป.4":[28,1],"ป.5":[23,1],"ป.6":[29,1]}},{"code":"41010082","name":"บ้านเซประชาอุทิศ","note":"","tambon":"หนองขอนกว้าง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":86,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[7,1],"ป.1":[10,1],"ป.2":[13,1],"ป.3":[11,1],"ป.4":[11,1],"ป.5":[17,1],"ป.6":[10,1]}},{"code":"41010083","name":"บ้านโก่ย","note":"","tambon":"หนองนาคำ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":54,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[8,1],"ป.1":[5,1],"ป.2":[5,1],"ป.3":[5,1],"ป.4":[6,1],"ป.5":[13,1],"ป.6":[6,1]}},{"code":"41010084","name":"บ้านจำปาโนนสะอาด","note":"","tambon":"หนองนาคำ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":60,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[3,1],"ป.1":[3,1],"ป.2":[9,1],"ป.3":[9,1],"ป.4":[12,1],"ป.5":[13,1],"ป.6":[6,1]}},{"code":"41010085","name":"บ้านหนองนาคำ","note":"","tambon":"หนองนาคำ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":473,"size":"ขนาดกลาง","grades":{"อ.2":[28,2],"อ.3":[38,2],"ป.1":[41,2],"ป.2":[41,2],"ป.3":[43,2],"ป.4":[46,2],"ป.5":[55,2],"ป.6":[57,2],"ม.1":[41,2],"ม.2":[44,2],"ม.3":[39,2]}},{"code":"41010086","name":"บ้านหนองหว้าหนองไผ่","note":"","tambon":"หนองนาคำ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":123,"size":"ขนาดกลาง","grades":{"อ.2":[16,1],"อ.3":[8,1],"ป.1":[17,1],"ป.2":[16,1],"ป.3":[12,1],"ป.4":[17,1],"ป.5":[23,1],"ป.6":[14,1]}},{"code":"41010087","name":"บ้านหนองแก","note":"","tambon":"หนองนาคำ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":37,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[2,1],"ป.1":[7,1],"ป.2":[5,1],"ป.3":[3,1],"ป.4":[3,1],"ป.5":[6,1],"ป.6":[7,1]}},{"code":"41010088","name":"บ้านถ่อนน้อยหนองไผ่คำ","note":"","tambon":"หนองนาคำ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 6","total":73,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[6,1],"ป.1":[9,1],"ป.2":[11,1],"ป.3":[14,1],"ป.4":[5,1],"ป.5":[12,1],"ป.6":[10,1]}},{"code":"41010091","name":"บ้านหนองขาม(ค่ายเสนีย์อุปถัมภ์)","note":"","tambon":"หนองบัว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 1","total":277,"size":"ขนาดกลาง","grades":{"อ.2":[21,1],"อ.3":[25,1],"ป.1":[29,1],"ป.2":[30,1],"ป.3":[36,1],"ป.4":[43,2],"ป.5":[36,2],"ป.6":[57,2]}},{"code":"41010092","name":"บ้านดงอุดม","note":"","tambon":"หนองบัว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 1","total":81,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[2,1],"ป.1":[4,1],"ป.2":[5,1],"ป.3":[5,1],"ป.4":[7,1],"ป.5":[7,1],"ป.6":[11,1],"ม.1":[12,1],"ม.2":[12,1],"ม.3":[10,1]}},{"code":"41010094","name":"บ้านเก่าน้อย","note":"เรียนรวมทุกชั้น","tambon":"หนองบัว","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 1","total":20,"size":"ขนาดเล็ก","grades":{"อ.2":[1,1],"ป.1":[4,1],"ป.2":[4,1],"ป.3":[2,1],"ป.4":[4,1],"ป.6":[5,1]}},{"code":"41010095","name":"บ้านแม่นนท์","note":"","tambon":"หนองไผ่","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 9","total":60,"size":"ขนาดเล็ก","grades":{"อ.2":[8,1],"อ.3":[6,1],"ป.1":[10,1],"ป.2":[6,1],"ป.3":[10,1],"ป.4":[6,1],"ป.5":[5,1],"ป.6":[9,1]}},{"code":"41010096","name":"บ้านหนองไผ่หนองหิน","note":"","tambon":"หนองไผ่","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 9","total":44,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[6,1],"ป.1":[2,1],"ป.2":[5,1],"ป.3":[6,1],"ป.4":[5,1],"ป.5":[11,1],"ป.6":[4,1]}},{"code":"41010097","name":"บ้านหนองนาเจริญ","note":"","tambon":"หนองไผ่","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 9","total":64,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[4,1],"ป.1":[10,1],"ป.2":[7,1],"ป.3":[10,1],"ป.4":[7,1],"ป.5":[11,1],"ป.6":[10,1]}},{"code":"41010098","name":"บ้านหนองบัวเงินหนองบัวทอง","note":"","tambon":"หนองไผ่","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 9","total":67,"size":"ขนาดเล็ก","grades":{"อ.2":[8,1],"อ.3":[8,1],"ป.1":[4,1],"ป.2":[8,1],"ป.3":[13,1],"ป.4":[6,1],"ป.5":[14,1],"ป.6":[6,1]}},{"code":"41010099","name":"บ้านหนองตะไก้","note":"","tambon":"หนองไผ่","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 9","total":75,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[9,1],"ป.1":[8,1],"ป.2":[7,1],"ป.3":[10,1],"ป.4":[12,1],"ป.5":[7,1],"ป.6":[15,1]}},{"code":"41010101","name":"บ้านโสกน้ำขาว","note":"","tambon":"หนองไฮ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":58,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[14,1],"ป.1":[4,1],"ป.2":[7,1],"ป.3":[9,1],"ป.4":[6,1],"ป.5":[6,1],"ป.6":[8,1]}},{"code":"41010103","name":"หนองไฮวิทยา","note":"","tambon":"หนองไฮ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":161,"size":"ขนาดกลาง","grades":{"อ.2":[10,1],"อ.3":[12,1],"ป.1":[13,1],"ป.2":[18,1],"ป.3":[11,1],"ป.4":[8,1],"ป.5":[18,1],"ป.6":[22,1],"ม.1":[23,1],"ม.2":[11,1],"ม.3":[15,1]}},{"code":"41010104","name":"บ้านโนนสะอาดผาสุข","note":"","tambon":"หนองไฮ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":204,"size":"ขนาดกลาง","grades":{"อ.2":[12,1],"อ.3":[16,1],"ป.1":[12,1],"ป.2":[15,1],"ป.3":[23,1],"ป.4":[23,1],"ป.5":[17,1],"ป.6":[19,1],"ม.1":[20,1],"ม.2":[25,1],"ม.3":[22,1]}},{"code":"41010105","name":"บ้านดงมะกรูดทรายทอง","note":"","tambon":"หนองไฮ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":145,"size":"ขนาดกลาง","grades":{"อ.2":[17,1],"อ.3":[16,1],"ป.1":[10,1],"ป.2":[17,1],"ป.3":[20,1],"ป.4":[21,1],"ป.5":[24,1],"ป.6":[20,1]}},{"code":"41010106","name":"บ้านโคกลาด","note":"","tambon":"หนองไฮ","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 5","total":231,"size":"ขนาดกลาง","grades":{"อ.2":[18,1],"อ.3":[20,1],"ป.1":[21,1],"ป.2":[23,1],"ป.3":[20,1],"ป.4":[17,1],"ป.5":[21,1],"ป.6":[20,1],"ม.1":[34,1],"ม.2":[23,1],"ม.3":[14,1]}},{"code":"41010107","name":"ชุมชนบ้านเดื่อวิทยา","note":"","tambon":"หมากแข้ง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 1","total":59,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[8,1],"ป.1":[8,1],"ป.2":[6,1],"ป.3":[5,1],"ป.4":[6,1],"ป.5":[9,1],"ป.6":[11,1]}},{"code":"41010109","name":"บ้านหนองเหล็ก","note":"","tambon":"หมากแข้ง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 1","total":51,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[2,1],"ป.1":[4,1],"ป.2":[9,1],"ป.3":[7,1],"ป.4":[7,1],"ป.5":[11,1],"ป.6":[7,1]}},{"code":"41010110","name":"บ้านหนองตุ","note":"","tambon":"หมากแข้ง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 1","total":96,"size":"ขนาดเล็ก","grades":{"อ.1":[7,1],"อ.2":[7,1],"อ.3":[5,1],"ป.1":[13,1],"ป.2":[8,1],"ป.3":[9,1],"ป.4":[13,1],"ป.5":[11,1],"ป.6":[23,1]}},{"code":"41010111","name":"บ้านม่วงสว่างสามัคคี","note":"","tambon":"หมากแข้ง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 1","total":154,"size":"ขนาดกลาง","grades":{"อ.2":[5,1],"อ.3":[11,1],"ป.1":[14,1],"ป.2":[16,1],"ป.3":[16,1],"ป.4":[13,1],"ป.5":[11,1],"ป.6":[9,1],"ม.1":[28,1],"ม.2":[17,1],"ม.3":[14,1]}},{"code":"41010112","name":"อนุบาลอุดรธานี","note":"","tambon":"หมากแข้ง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 2","total":3245,"size":"ขนาดใหญ่พิเศษ","grades":{"อ.2":[193,8],"อ.3":[238,8],"ป.1":[418,12],"ป.2":[462,12],"ป.3":[450,11],"ป.4":[478,12],"ป.5":[505,12],"ป.6":[501,12]}},{"code":"41010114","name":"บ้านหมากแข้ง","note":"","tambon":"หมากแข้ง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 1","total":3306,"size":"ขนาดใหญ่พิเศษ","grades":{"อ.2":[47,2],"อ.3":[61,3],"ป.1":[171,6],"ป.2":[214,7],"ป.3":[257,8],"ป.4":[289,8],"ป.5":[287,8],"ป.6":[335,8],"ม.1":[419,10],"ม.2":[401,10],"ม.3":[350,9],"ม.4":[163,4],"ม.5":[166,4],"ม.6":[146,4]}},{"code":"41010115","name":"บ้านดอนอุดม(เนยอุปถัมภ์)","note":"","tambon":"หมากแข้ง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 1","total":20,"size":"ขนาดเล็ก","grades":{"อ.3":[2,1],"ป.1":[2,1],"ป.2":[6,1],"ป.3":[3,1],"ป.4":[2,1],"ป.5":[3,1],"ป.6":[2,1]}},{"code":"41010116","name":"บ้านหนองบัว","note":"","tambon":"หมากแข้ง","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 1","total":218,"size":"ขนาดกลาง","grades":{"อ.2":[6,1],"อ.3":[17,1],"ป.1":[19,2],"ป.2":[24,2],"ป.3":[14,2],"ป.4":[22,2],"ป.5":[24,2],"ป.6":[22,2],"ม.1":[23,2],"ม.2":[22,2],"ม.3":[25,2]}},{"code":"41010117","name":"หนองสำโรงวิทยา","note":"","tambon":"หมูม่น","amphoe":"เมืองอุดรธานี","group":"กลุ่มเมือง 4","total":434,"size":"ขนาดกลาง","grades":{"อ.2":[18,1],"อ.3":[7,1],"ป.1":[25,2],"ป.2":[31,2],"ป.3":[24,1],"ป.4":[44,2],"ป.5":[50,2],"ป.6":[51,2],"ม.1":[64,2],"ม.2":[64,2],"ม.3":[56,2]}},{"code":"41010119","name":"ชุมชนกุดหมากไฟ","note":"","tambon":"กุดหมากไฟ","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 3","total":234,"size":"ขนาดกลาง","grades":{"อ.2":[10,1],"อ.3":[15,1],"ป.1":[21,1],"ป.2":[35,1],"ป.3":[21,1],"ป.4":[27,1],"ป.5":[22,1],"ป.6":[27,1],"ม.1":[11,1],"ม.2":[25,1],"ม.3":[20,1]}},{"code":"41010120","name":"บ้านโคกล่าม","note":"","tambon":"กุดหมากไฟ","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 3","total":67,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[11,1],"ป.1":[7,1],"ป.2":[14,1],"ป.3":[8,1],"ป.4":[8,1],"ป.5":[6,1],"ป.6":[10,1]}},{"code":"41010121","name":"บ้านหนองแวงจุมพล","note":"","tambon":"กุดหมากไฟ","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 3","total":178,"size":"ขนาดกลาง","grades":{"อ.2":[16,1],"อ.3":[28,1],"ป.1":[19,1],"ป.2":[16,1],"ป.3":[26,1],"ป.4":[24,1],"ป.5":[29,1],"ป.6":[20,1]}},{"code":"41010122","name":"บ้านหนองแซงสร้อย","note":"","tambon":"น้ำพ่น","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 1","total":162,"size":"ขนาดกลาง","grades":{"อ.2":[12,1],"อ.3":[13,1],"ป.1":[11,1],"ป.2":[16,1],"ป.3":[18,1],"ป.4":[14,1],"ป.5":[18,1],"ป.6":[15,1],"ม.1":[13,1],"ม.2":[26,1],"ม.3":[6,1]}},{"code":"41010123","name":"บ้านหนองแวงเดิดเกษตรสมบูรณ์","note":"","tambon":"น้ำพ่น","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 1","total":47,"size":"ขนาดเล็ก","grades":{"อ.2":[1,1],"อ.3":[4,1],"ป.1":[6,1],"ป.2":[8,1],"ป.3":[3,1],"ป.4":[11,1],"ป.5":[10,1],"ป.6":[4,1]}},{"code":"41010124","name":"บ้านน้ำพ่น","note":"","tambon":"น้ำพ่น","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 1","total":162,"size":"ขนาดกลาง","grades":{"อ.2":[17,1],"อ.3":[12,1],"ป.1":[14,1],"ป.2":[12,1],"ป.3":[15,1],"ป.4":[14,1],"ป.5":[22,1],"ป.6":[14,1],"ม.1":[15,1],"ม.2":[14,1],"ม.3":[13,1]}},{"code":"41010125","name":"บ้านเลา","note":"","tambon":"น้ำพ่น","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 1","total":40,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[4,1],"ป.1":[5,1],"ป.2":[6,1],"ป.3":[5,1],"ป.4":[4,1],"ป.5":[6,1],"ป.6":[5,1]}},{"code":"41010126","name":"รัฐประชา 509","note":"","tambon":"โนนหวาย","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 2","total":162,"size":"ขนาดกลาง","grades":{"อ.2":[16,1],"อ.3":[22,1],"ป.1":[15,1],"ป.2":[18,1],"ป.3":[23,1],"ป.4":[31,1],"ป.5":[23,1],"ป.6":[14,1]}},{"code":"41010127","name":"บ้านโนนหวาย","note":"","tambon":"โนนหวาย","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 2","total":196,"size":"ขนาดกลาง","grades":{"อ.2":[13,1],"อ.3":[12,1],"ป.1":[23,2],"ป.2":[25,2],"ป.3":[24,1],"ป.4":[28,2],"ป.5":[39,2],"ป.6":[32,2]}},{"code":"41010128","name":"บ้านหนองเม็กห้วยทราย","note":"","tambon":"โนนหวาย","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 2","total":47,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[6,1],"ป.1":[2,1],"ป.2":[4,1],"ป.3":[6,1],"ป.4":[10,1],"ป.5":[7,1],"ป.6":[9,1]}},{"code":"41010129","name":"บ้านโคกหนองแซง","note":"","tambon":"โนนหวาย","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 2","total":60,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[6,1],"ป.1":[5,1],"ป.2":[6,1],"ป.3":[10,1],"ป.4":[8,1],"ป.5":[9,1],"ป.6":[10,1]}},{"code":"41010130","name":"บ้านเสาเล้า","note":"","tambon":"โนนหวาย","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 2","total":18,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[3,1],"ป.1":[2,1],"ป.2":[2,1],"ป.3":[1,1],"ป.4":[3,1],"ป.5":[2,1],"ป.6":[2,1]}},{"code":"41010131","name":"บ้านหนองบัวบาน","note":"","tambon":"หนองบัวบาน","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 1","total":132,"size":"ขนาดกลาง","grades":{"อ.2":[10,1],"อ.3":[19,1],"ป.1":[12,1],"ป.2":[16,1],"ป.3":[17,1],"ป.4":[20,1],"ป.5":[20,1],"ป.6":[18,1]}},{"code":"41010132","name":"นิคมสร้างตนเองเชียงพิณ 1","note":"","tambon":"หนองบัวบาน","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 1","total":49,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[3,1],"ป.1":[10,1],"ป.2":[9,1],"ป.3":[10,1],"ป.4":[4,1],"ป.5":[4,1],"ป.6":[6,1]}},{"code":"41010134","name":"บ้านหนองอ้อน้อย","note":"","tambon":"หนองบัวบาน","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 1","total":35,"size":"ขนาดเล็ก","grades":{"อ.2":[1,1],"อ.3":[3,1],"ป.1":[4,1],"ป.2":[4,1],"ป.3":[3,1],"ป.4":[7,1],"ป.5":[5,1],"ป.6":[8,1]}},{"code":"41010135","name":"บ้านโคกก่องหนองแวงยาว","note":"","tambon":"หนองวัวซอ","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 1","total":107,"size":"ขนาดเล็ก","grades":{"อ.2":[13,1],"อ.3":[14,1],"ป.1":[16,1],"ป.2":[10,1],"ป.3":[11,1],"ป.4":[17,1],"ป.5":[7,1],"ป.6":[19,1]}},{"code":"41010136","name":"อนุบาลหนองวัวซอ","note":"","tambon":"หนองวัวซอ","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 1","total":795,"size":"ขนาดใหญ่","grades":{"อ.2":[63,3],"อ.3":[54,2],"ป.1":[62,2],"ป.2":[64,2],"ป.3":[68,2],"ป.4":[71,3],"ป.5":[89,3],"ป.6":[103,3],"ม.1":[77,2],"ม.2":[76,2],"ม.3":[68,2]}},{"code":"41010137","name":"บ้านหนองอ้อ","note":"","tambon":"หนองอ้อ","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 2","total":122,"size":"ขนาดกลาง","grades":{"อ.2":[9,1],"อ.3":[12,1],"ป.1":[13,1],"ป.2":[12,1],"ป.3":[24,1],"ป.4":[11,1],"ป.5":[24,1],"ป.6":[17,1]}},{"code":"41010138","name":"บ้านโนนสำราญ","note":"","tambon":"หนองอ้อ","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 2","total":43,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[3,1],"ป.1":[1,1],"ป.2":[5,1],"ป.3":[12,1],"ป.4":[4,1],"ป.5":[6,1],"ป.6":[5,1]}},{"code":"41010139","name":"ชุมชนหนองแสง","note":"","tambon":"หนองอ้อ","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 2","total":79,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[15,1],"ป.1":[10,1],"ป.2":[8,1],"ป.3":[9,1],"ป.4":[9,1],"ป.5":[10,1],"ป.6":[15,1]}},{"code":"41010140","name":"บ้านหนองแวงฮีคำหมากคูณ","note":"","tambon":"หนองอ้อ","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 2","total":204,"size":"ขนาดกลาง","grades":{"อ.3":[21,1],"ป.1":[24,1],"ป.2":[14,1],"ป.3":[18,1],"ป.4":[14,1],"ป.5":[20,1],"ป.6":[26,1],"ม.1":[17,1],"ม.2":[25,1],"ม.3":[25,1]}},{"code":"41010142","name":"บ้านหมากหญ้า","note":"","tambon":"หมากหญ้า","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 2","total":230,"size":"ขนาดกลาง","grades":{"อ.2":[20,1],"อ.3":[24,1],"ป.1":[17,1],"ป.2":[24,1],"ป.3":[17,1],"ป.4":[27,1],"ป.5":[27,1],"ป.6":[20,1],"ม.1":[18,1],"ม.2":[17,1],"ม.3":[19,1]}},{"code":"41010143","name":"บ้านผาสิงห์","note":"","tambon":"หมากหญ้า","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 2","total":115,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[8,1],"ป.1":[8,1],"ป.2":[8,1],"ป.3":[12,1],"ป.4":[11,1],"ป.5":[11,1],"ป.6":[18,1],"ม.1":[9,1],"ม.2":[12,1],"ม.3":[9,1]}},{"code":"41010144","name":"บ้านดงบัง","note":"","tambon":"อูบมุง","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 3","total":31,"size":"ขนาดเล็ก","grades":{"อ.2":[1,1],"อ.3":[3,1],"ป.1":[2,1],"ป.2":[5,1],"ป.3":[3,1],"ป.4":[10,1],"ป.5":[4,1],"ป.6":[3,1]}},{"code":"41010145","name":"บ้านโนนชัยศรี","note":"","tambon":"อูบมุง","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 3","total":58,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[9,1],"ป.1":[7,1],"ป.2":[7,1],"ป.3":[6,1],"ป.4":[5,1],"ป.5":[13,1],"ป.6":[7,1]}},{"code":"41010146","name":"บ้านหนองบัวเงิน","note":"","tambon":"อูบมุง","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 3","total":56,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[2,1],"ป.1":[12,1],"ป.2":[7,1],"ป.3":[10,1],"ป.4":[5,1],"ป.5":[6,1],"ป.6":[7,1]}},{"code":"41010147","name":"บ้านอูบมุง","note":"","tambon":"อูบมุง","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 3","total":119,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[9,1],"ป.1":[10,1],"ป.2":[15,1],"ป.3":[14,1],"ป.4":[15,1],"ป.5":[9,1],"ป.6":[13,1],"ม.1":[3,1],"ม.2":[14,1],"ม.3":[8,1]}},{"code":"41010148","name":"บ้านห้วยไร่","note":"","tambon":"อูบมุง","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 3","total":75,"size":"ขนาดเล็ก","grades":{"อ.2":[11,1],"อ.3":[6,1],"ป.1":[10,1],"ป.2":[6,1],"ป.3":[16,1],"ป.4":[11,1],"ป.5":[6,1],"ป.6":[9,1]}},{"code":"41010149","name":"บ้านโคกผักหอม","note":"","tambon":"อูบมุง","amphoe":"หนองวัวซอ","group":"กลุ่มหนองวัวซอ 3","total":218,"size":"ขนาดกลาง","grades":{"อ.2":[13,1],"อ.3":[15,1],"ป.1":[17,1],"ป.2":[16,1],"ป.3":[29,1],"ป.4":[24,1],"ป.5":[25,1],"ป.6":[21,1],"ม.1":[16,1],"ม.2":[18,1],"ม.3":[24,1]}},{"code":"41010150","name":"บ้านนาสีนวล","note":"","tambon":"โคกกลาง","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 6","total":99,"size":"ขนาดเล็ก","grades":{"อ.2":[19,1],"อ.3":[12,1],"ป.1":[10,1],"ป.2":[11,1],"ป.3":[13,1],"ป.4":[14,1],"ป.5":[9,1],"ป.6":[11,1]}},{"code":"41010151","name":"บ้านโคกกลาง","note":"","tambon":"โคกกลาง","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 6","total":318,"size":"ขนาดกลาง","grades":{"อ.2":[23,1],"อ.3":[28,1],"ป.1":[15,1],"ป.2":[32,1],"ป.3":[31,1],"ป.4":[24,1],"ป.5":[25,1],"ป.6":[31,1],"ม.1":[41,1],"ม.2":[34,1],"ม.3":[34,1]}},{"code":"41010152","name":"บ้านดอนจันทร์โพนสวรรค์คำเจริญ","note":"","tambon":"โคกกลาง","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 6","total":87,"size":"ขนาดเล็ก","grades":{"อ.2":[13,1],"อ.3":[9,1],"ป.1":[14,1],"ป.2":[7,1],"ป.3":[19,1],"ป.4":[9,1],"ป.5":[9,1],"ป.6":[7,1]}},{"code":"41010153","name":"บ้านจอมศรี","note":"","tambon":"จอมศรี","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 6","total":123,"size":"ขนาดกลาง","grades":{"อ.2":[7,1],"อ.3":[15,1],"ป.1":[15,1],"ป.2":[15,1],"ป.3":[16,1],"ป.4":[19,1],"ป.5":[21,1],"ป.6":[15,1]}},{"code":"41010154","name":"บ้านข่าทุ่งม่วงโนนศรีสมบูรณ์","note":"","tambon":"จอมศรี","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 6","total":84,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[14,1],"ป.1":[6,1],"ป.2":[9,1],"ป.3":[11,1],"ป.4":[11,1],"ป.5":[12,1],"ป.6":[16,1]}},{"code":"41010155","name":"บ้านหนองบ่อ","note":"","tambon":"จอมศรี","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 6","total":122,"size":"ขนาดกลาง","grades":{"อ.2":[15,1],"อ.3":[9,1],"ป.1":[13,1],"ป.2":[11,1],"ป.3":[17,1],"ป.4":[10,1],"ป.5":[23,1],"ป.6":[24,1]}},{"code":"41010156","name":"บ้านสะอาดนาพังศรีเจริญ","note":"","tambon":"จอมศรี","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 6","total":106,"size":"ขนาดเล็ก","grades":{"อ.2":[20,1],"อ.3":[7,1],"ป.1":[6,1],"ป.2":[14,1],"ป.3":[14,1],"ป.4":[14,1],"ป.5":[12,1],"ป.6":[19,1]}},{"code":"41010157","name":"จอมตาลโนนดู่โนนสำราญ","note":"","tambon":"จอมศรี","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 6","total":256,"size":"ขนาดกลาง","grades":{"อ.2":[14,1],"อ.3":[26,1],"ป.1":[20,1],"ป.2":[24,1],"ป.3":[31,1],"ป.4":[32,1],"ป.5":[28,1],"ป.6":[29,1],"ม.1":[13,1],"ม.2":[24,1],"ม.3":[15,1]}},{"code":"41010158","name":"บ้านดงยางนารายณ์","note":"","tambon":"จอมศรี","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 6","total":128,"size":"ขนาดกลาง","grades":{"อ.2":[6,1],"อ.3":[11,1],"ป.1":[9,1],"ป.2":[13,1],"ป.3":[14,1],"ป.4":[9,1],"ป.5":[8,1],"ป.6":[22,1],"ม.1":[13,1],"ม.2":[14,1],"ม.3":[9,1]}},{"code":"41010159","name":"บ้านเชียงหวางสร้างลาน","note":"","tambon":"เชียงหวาง","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":155,"size":"ขนาดกลาง","grades":{"อ.2":[17,1],"อ.3":[19,1],"ป.1":[18,1],"ป.2":[13,1],"ป.3":[16,1],"ป.4":[25,1],"ป.5":[28,1],"ป.6":[19,1]}},{"code":"41010160","name":"บ้านนาดี","note":"","tambon":"เชียงหวาง","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":42,"size":"ขนาดเล็ก","grades":{"อ.1":[4,1],"อ.2":[5,1],"อ.3":[6,1],"ป.1":[5,1],"ป.2":[4,1],"ป.3":[5,1],"ป.4":[7,1],"ป.5":[3,1],"ป.6":[3,1]}},{"code":"41010161","name":"บ้านสร้างหลวงสร้างคำ","note":"","tambon":"เชียงหวาง","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":132,"size":"ขนาดกลาง","grades":{"อ.2":[6,1],"อ.3":[10,1],"ป.1":[18,1],"ป.2":[10,1],"ป.3":[13,1],"ป.4":[8,1],"ป.5":[5,1],"ป.6":[18,1],"ม.1":[12,1],"ม.2":[8,1],"ม.3":[24,1]}},{"code":"41010162","name":"ดงใหญ่เจริญพัฒน์","note":"","tambon":"เชียงหวาง","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":225,"size":"ขนาดกลาง","grades":{"อ.2":[14,1],"อ.3":[17,1],"ป.1":[23,1],"ป.2":[17,1],"ป.3":[18,1],"ป.4":[20,1],"ป.5":[18,1],"ป.6":[32,1],"ม.1":[22,1],"ม.2":[19,1],"ม.3":[25,1]}},{"code":"41010163","name":"บ้านดอนข่าคำผักหนามประชาสามัคคี","note":"","tambon":"เชียงหวาง","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":216,"size":"ขนาดกลาง","grades":{"อ.2":[24,1],"อ.3":[15,1],"ป.1":[18,1],"ป.2":[17,1],"ป.3":[19,1],"ป.4":[13,1],"ป.5":[23,1],"ป.6":[19,2],"ม.1":[28,1],"ม.2":[18,1],"ม.3":[22,1]}},{"code":"41010164","name":"บ้านโพนเลาโพนทอง","note":"","tambon":"เชียงหวาง","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":79,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[11,1],"ป.1":[8,1],"ป.2":[12,1],"ป.3":[7,1],"ป.4":[13,1],"ป.5":[8,1],"ป.6":[11,1]}},{"code":"41010165","name":"บ้านด่าน","note":"","tambon":"เชียงหวาง","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":65,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[11,1],"ป.1":[12,1],"ป.2":[6,1],"ป.3":[9,1],"ป.4":[9,1],"ป.5":[6,1],"ป.6":[5,1]}},{"code":"41010166","name":"บ้านโนนสวาง","note":"","tambon":"เตาไห","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":55,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[4,1],"ป.1":[13,1],"ป.2":[5,1],"ป.3":[7,1],"ป.4":[4,1],"ป.5":[7,1],"ป.6":[8,1]}},{"code":"41010167","name":"บ้านคอนเลียบ","note":"","tambon":"เตาไห","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":35,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[5,1],"ป.1":[8,1],"ป.2":[6,1],"ป.3":[3,1],"ป.4":[4,1],"ป.5":[2,1],"ป.6":[2,1]}},{"code":"41010168","name":"บ้านนาพัง","note":"","tambon":"เตาไห","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":41,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[2,1],"ป.1":[5,1],"ป.2":[7,1],"ป.3":[5,1],"ป.4":[3,1],"ป.5":[7,1],"ป.6":[5,1]}},{"code":"41010169","name":"บ้านเตาไห","note":"","tambon":"เตาไห","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":143,"size":"ขนาดกลาง","grades":{"อ.2":[8,1],"อ.3":[10,1],"ป.1":[10,1],"ป.2":[11,1],"ป.3":[8,1],"ป.4":[7,1],"ป.5":[14,1],"ป.6":[11,1],"ม.1":[32,1],"ม.2":[14,1],"ม.3":[18,1]}},{"code":"41010170","name":"บ้านหม้อ","note":"","tambon":"เตาไห","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":56,"size":"ขนาดเล็ก","grades":{"อ.2":[8,1],"อ.3":[6,1],"ป.1":[4,1],"ป.2":[4,1],"ป.3":[5,1],"ป.4":[10,1],"ป.5":[8,1],"ป.6":[11,1]}},{"code":"41010171","name":"บ้านคอนสวรรค์สินเจริญ","note":"","tambon":"เตาไห","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":41,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[5,1],"ป.1":[7,1],"ป.2":[6,1],"ป.3":[6,1],"ป.4":[4,1],"ป.5":[1,1],"ป.6":[7,1]}},{"code":"41010172","name":"บ้านนาบัวไผ่วิทยา","note":"","tambon":"นาบัว","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 5","total":98,"size":"ขนาดเล็ก","grades":{"อ.2":[12,1],"อ.3":[11,1],"ป.1":[6,1],"ป.2":[7,1],"ป.3":[20,1],"ป.4":[15,1],"ป.5":[8,1],"ป.6":[19,1]}},{"code":"41010173","name":"บ้านยางซอง","note":"","tambon":"นาบัว","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 5","total":76,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[5,1],"ป.1":[13,1],"ป.2":[13,1],"ป.3":[12,1],"ป.4":[5,1],"ป.5":[14,1],"ป.6":[11,1]}},{"code":"41010174","name":"บ้านนาทรายนาม่วง","note":"","tambon":"นาบัว","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 5","total":82,"size":"ขนาดเล็ก","grades":{"อ.2":[10,1],"อ.3":[11,1],"ป.1":[6,1],"ป.2":[11,1],"ป.3":[11,1],"ป.4":[10,1],"ป.5":[15,1],"ป.6":[8,1]}},{"code":"41010175","name":"บ้านดอนกลอยดอนอุดม","note":"","tambon":"นาบัว","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 5","total":100,"size":"ขนาดเล็ก","grades":{"อ.2":[10,1],"อ.3":[8,1],"ป.1":[11,1],"ป.2":[8,1],"ป.3":[17,1],"ป.4":[14,1],"ป.5":[18,1],"ป.6":[14,1]}},{"code":"41010176","name":"บ้านท่าหนาด","note":"","tambon":"นาบัว","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 5","total":65,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[11,1],"ป.1":[7,1],"ป.2":[8,1],"ป.3":[10,1],"ป.4":[6,1],"ป.5":[13,1],"ป.6":[7,1]}},{"code":"41010177","name":"บ้านนาพู่","note":"","tambon":"นาพู่","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":284,"size":"ขนาดกลาง","grades":{"อ.2":[21,1],"อ.3":[23,1],"ป.1":[19,1],"ป.2":[16,1],"ป.3":[27,1],"ป.4":[21,1],"ป.5":[31,1],"ป.6":[24,1],"ม.1":[30,1],"ม.2":[38,1],"ม.3":[34,1]}},{"code":"41010178","name":"บ้านป่าก้าวดอนแดง","note":"","tambon":"นาพู่","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":45,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[4,1],"ป.1":[1,1],"ป.2":[9,1],"ป.3":[7,1],"ป.4":[5,1],"ป.5":[10,1],"ป.6":[6,1]}},{"code":"41010179","name":"บ้านหลวงหัวสวย","note":"","tambon":"นาพู่","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":274,"size":"ขนาดกลาง","grades":{"อ.2":[19,1],"อ.3":[22,1],"ป.1":[30,1],"ป.2":[27,1],"ป.3":[27,1],"ป.4":[19,1],"ป.5":[38,1],"ป.6":[23,1],"ม.1":[21,1],"ม.2":[29,1],"ม.3":[19,1]}},{"code":"41010180","name":"บ้านศรีบุญเรือง","note":"","tambon":"นาพู่","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":27,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[2,1],"ป.1":[5,1],"ป.2":[3,1],"ป.3":[5,1],"ป.4":[2,1],"ป.5":[2,1],"ป.6":[4,1]}},{"code":"41010181","name":"บ้านกิ่วดงมะไฟ","note":"","tambon":"นาพู่","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":102,"size":"ขนาดเล็ก","grades":{"อ.2":[10,1],"อ.3":[7,1],"ป.1":[9,1],"ป.2":[15,1],"ป.3":[9,1],"ป.4":[15,1],"ป.5":[20,1],"ป.6":[17,1]}},{"code":"41010182","name":"บ้านหนองนกเขียนโพนทัน","note":"","tambon":"เชียงหวาง","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 3","total":154,"size":"ขนาดกลาง","grades":{"อ.2":[7,1],"อ.3":[14,1],"ป.1":[7,1],"ป.2":[8,1],"ป.3":[19,1],"ป.4":[14,1],"ป.5":[9,1],"ป.6":[18,1],"ม.1":[18,1],"ม.2":[18,1],"ม.3":[22,1]}},{"code":"41010183","name":"ชุมชนบ้านธาตุ","note":"","tambon":"บ้านธาตุ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 2","total":140,"size":"ขนาดกลาง","grades":{"อ.2":[9,1],"อ.3":[17,1],"ป.1":[7,1],"ป.2":[14,1],"ป.3":[19,1],"ป.4":[21,1],"ป.5":[11,1],"ป.6":[8,1],"ม.1":[9,1],"ม.2":[17,1],"ม.3":[8,1]}},{"code":"41010184","name":"บ้านสังซาวังน้ำขาว","note":"","tambon":"บ้านธาตุ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 2","total":55,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[3,1],"ป.1":[8,1],"ป.2":[6,1],"ป.3":[4,1],"ป.4":[7,1],"ป.5":[8,1],"ป.6":[14,1]}},{"code":"41010185","name":"บ้านถิ่นสุขาวิทยา","note":"","tambon":"บ้านธาตุ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 2","total":76,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[7,1],"ป.1":[9,1],"ป.2":[8,1],"ป.3":[7,1],"ป.4":[14,1],"ป.5":[16,1],"ป.6":[11,1]}},{"code":"41010186","name":"นิคมโนนสมบูรณ์","note":"","tambon":"บ้านธาตุ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 2","total":44,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[6,1],"ป.1":[3,1],"ป.2":[7,1],"ป.3":[5,1],"ป.4":[6,1],"ป.5":[5,1],"ป.6":[6,1]}},{"code":"41010187","name":"บ้านนาคอมนาดอกไม้","note":"","tambon":"บ้านธาตุ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 2","total":114,"size":"ขนาดเล็ก","grades":{"อ.2":[13,1],"อ.3":[12,1],"ป.1":[19,1],"ป.2":[22,1],"ป.3":[10,1],"ป.4":[13,1],"ป.5":[14,1],"ป.6":[11,1]}},{"code":"41010188","name":"บ้านดอนแก้ว","note":"","tambon":"บ้านธาตุ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 2","total":36,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[5,1],"ป.1":[6,1],"ป.2":[4,1],"ป.3":[5,1],"ป.4":[7,1],"ป.5":[2,1]}},{"code":"41010189","name":"บ้านยามกาใหญ่","note":"","tambon":"บ้านธาตุ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 2","total":63,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[5,1],"ป.1":[6,1],"ป.2":[12,1],"ป.3":[12,1],"ป.4":[10,1],"ป.5":[5,1],"ป.6":[9,1]}},{"code":"41010190","name":"บ้านนาพูนทรัพย์","note":"","tambon":"บ้านธาตุ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 2","total":61,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[7,1],"ป.1":[12,1],"ป.2":[8,1],"ป.3":[9,1],"ป.4":[6,1],"ป.5":[6,1],"ป.6":[6,1]}},{"code":"41010191","name":"บ้านหมูม่นโพนโนนสะอาด","note":"","tambon":"บ้านธาตุ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 2","total":139,"size":"ขนาดกลาง","grades":{"อ.2":[14,1],"อ.3":[13,1],"ป.1":[18,1],"ป.2":[12,1],"ป.3":[10,1],"ป.4":[14,1],"ป.5":[7,1],"ป.6":[13,1],"ม.1":[13,1],"ม.2":[11,1],"ม.3":[14,1]}},{"code":"41010192","name":"บ้านยามกาโนนคำ","note":"","tambon":"บ้านธาตุ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 2","total":166,"size":"ขนาดกลาง","grades":{"อ.2":[12,1],"อ.3":[17,1],"ป.1":[17,1],"ป.2":[15,1],"ป.3":[12,1],"ป.4":[13,1],"ป.5":[20,1],"ป.6":[26,1],"ม.1":[9,1],"ม.2":[16,1],"ม.3":[9,1]}},{"code":"41010193","name":"บ้านเหล่าดอนเงิน","note":"","tambon":"บ้านเหล่า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":190,"size":"ขนาดกลาง","grades":{"อ.2":[3,1],"อ.3":[15,1],"ป.1":[13,1],"ป.2":[8,1],"ป.3":[11,1],"ป.4":[15,1],"ป.5":[16,1],"ป.6":[13,1],"ม.1":[29,1],"ม.2":[38,1],"ม.3":[29,1]}},{"code":"41010194","name":"บ้านหนองผง","note":"","tambon":"บ้านเหล่า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":51,"size":"ขนาดเล็ก","grades":{"อ.2":[2,1],"อ.3":[6,1],"ป.1":[4,1],"ป.2":[5,1],"ป.3":[16,1],"ป.4":[6,1],"ป.5":[7,1],"ป.6":[5,1]}},{"code":"41010195","name":"บ้านยาง (คุรุราษฎร์วิทยา)","note":"","tambon":"บ้านเหล่า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":86,"size":"ขนาดเล็ก","grades":{"อ.2":[13,1],"อ.3":[13,1],"ป.1":[14,1],"ป.2":[11,1],"ป.3":[6,1],"ป.4":[7,1],"ป.5":[12,1],"ป.6":[10,1]}},{"code":"41010196","name":"บ้านโคกสว่าง","note":"","tambon":"บ้านเหล่า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":95,"size":"ขนาดเล็ก","grades":{"อ.2":[17,1],"อ.3":[11,1],"ป.1":[11,1],"ป.2":[14,1],"ป.3":[11,1],"ป.4":[11,1],"ป.5":[11,1],"ป.6":[9,1]}},{"code":"41010198","name":"บ้านหนองกุง","note":"","tambon":"บ้านเหล่า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":83,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[12,1],"ป.1":[8,1],"ป.2":[14,1],"ป.3":[9,1],"ป.4":[10,1],"ป.5":[13,1],"ป.6":[11,1]}},{"code":"41010199","name":"บ้านดงขันทอง","note":"","tambon":"บ้านเหล่า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":44,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[2,1],"ป.1":[4,1],"ป.2":[10,1],"ป.3":[10,1],"ป.4":[4,1],"ป.5":[3,1],"ป.6":[5,1]}},{"code":"41010200","name":"บ้านดงศรีสําราญ","note":"","tambon":"บ้านเหล่า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 4","total":34,"size":"ขนาดเล็ก","grades":{"อ.2":[2,1],"อ.3":[4,1],"ป.1":[3,1],"ป.2":[4,1],"ป.3":[7,1],"ป.4":[4,1],"ป.5":[5,1],"ป.6":[5,1]}},{"code":"41010201","name":"บ้านนาส่อนโพนทัน","note":"","tambon":"เพ็ญ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":64,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[7,1],"ป.1":[6,1],"ป.2":[7,1],"ป.3":[8,1],"ป.4":[8,1],"ป.5":[9,1],"ป.6":[10,1]}},{"code":"41010202","name":"บ้านใหม่","note":"","tambon":"เพ็ญ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":38,"size":"ขนาดเล็ก","grades":{"อ.2":[2,1],"อ.3":[2,1],"ป.1":[3,1],"ป.2":[8,1],"ป.3":[6,1],"ป.4":[7,1],"ป.5":[5,1],"ป.6":[5,1]}},{"code":"41010203","name":"บ้านศรีสุวรรณโพนสว่าง","note":"","tambon":"เพ็ญ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":86,"size":"ขนาดเล็ก","grades":{"อ.2":[11,1],"อ.3":[4,1],"ป.1":[9,1],"ป.2":[9,1],"ป.3":[8,1],"ป.4":[19,1],"ป.5":[15,1],"ป.6":[11,1]}},{"code":"41010204","name":"บ้านโพนงามหนองตุ","note":"","tambon":"เพ็ญ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":156,"size":"ขนาดกลาง","grades":{"อ.2":[17,1],"อ.3":[25,1],"ป.1":[17,1],"ป.2":[15,1],"ป.3":[20,1],"ป.4":[19,1],"ป.5":[18,1],"ป.6":[25,1]}},{"code":"41010205","name":"อนุบาลเพ็ญประชานุกูล","note":"","tambon":"เพ็ญ","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":1370,"size":"ขนาดใหญ่","grades":{"อ.2":[73,3],"อ.3":[73,3],"ป.1":[120,4],"ป.2":[113,4],"ป.3":[167,4],"ป.4":[133,4],"ป.5":[151,4],"ป.6":[156,4],"ม.1":[123,4],"ม.2":[126,4],"ม.3":[135,4]}},{"code":"41010206","name":"บ้านโนนรังหนองผือวิทยา","note":"","tambon":"สร้างแป้น","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 5","total":58,"size":"ขนาดเล็ก","grades":{"อ.2":[11,1],"อ.3":[5,1],"ป.1":[5,1],"ป.2":[6,1],"ป.3":[5,1],"ป.4":[6,1],"ป.5":[9,1],"ป.6":[11,1]}},{"code":"41010207","name":"บ้านทอนดอนยาว","note":"","tambon":"สร้างแป้น","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 5","total":116,"size":"ขนาดเล็ก","grades":{"อ.2":[16,1],"อ.3":[8,1],"ป.1":[11,1],"ป.2":[13,1],"ป.3":[19,1],"ป.4":[13,1],"ป.5":[18,1],"ป.6":[18,1]}},{"code":"41010208","name":"บ้านสร้างแป้น","note":"","tambon":"สร้างแป้น","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 5","total":136,"size":"ขนาดกลาง","grades":{"อ.2":[19,1],"อ.3":[12,1],"ป.1":[11,1],"ป.2":[14,1],"ป.3":[24,1],"ป.4":[16,1],"ป.5":[18,1],"ป.6":[22,1]}},{"code":"41010209","name":"บ้านหว้าน","note":"","tambon":"สร้างแป้น","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 5","total":67,"size":"ขนาดเล็ก","grades":{"อ.2":[8,1],"อ.3":[12,1],"ป.1":[14,1],"ป.2":[12,1],"ป.3":[6,1],"ป.4":[1,1],"ป.5":[8,1],"ป.6":[6,1]}},{"code":"41010210","name":"สุมเส้าวิทยา","note":"","tambon":"สุมเส้า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":262,"size":"ขนาดกลาง","grades":{"อ.2":[16,1],"อ.3":[14,1],"ป.1":[19,1],"ป.2":[22,1],"ป.3":[22,1],"ป.4":[38,1],"ป.5":[29,1],"ป.6":[28,1],"ม.1":[27,1],"ม.2":[20,1],"ม.3":[27,1]}},{"code":"41010211","name":"บ้านดงปอ","note":"","tambon":"สุมเส้า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":103,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[8,1],"ป.1":[16,1],"ป.2":[14,1],"ป.3":[11,1],"ป.4":[21,1],"ป.5":[14,1],"ป.6":[12,1]}},{"code":"41010212","name":"บ้านหนองนาไฮโนนสะอาด","note":"","tambon":"สุมเส้า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":206,"size":"ขนาดกลาง","grades":{"อ.2":[15,1],"อ.3":[18,1],"ป.1":[20,1],"ป.2":[20,1],"ป.3":[17,1],"ป.4":[24,1],"ป.5":[23,1],"ป.6":[22,1],"ม.1":[14,1],"ม.2":[18,1],"ม.3":[15,1]}},{"code":"41010213","name":"บ้านแพงศรี","note":"","tambon":"สุมเส้า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":34,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[6,1],"ป.1":[3,1],"ป.2":[2,1],"ป.3":[4,1],"ป.4":[9,1],"ป.5":[3,1],"ป.6":[3,1]}},{"code":"41010215","name":"บ้านหนองบัวบาน","note":"","tambon":"สุมเส้า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":47,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[10,1],"ป.1":[3,1],"ป.2":[7,1],"ป.3":[7,1],"ป.4":[6,1],"ป.5":[3,1],"ป.6":[5,1]}},{"code":"41010216","name":"บ้านหนองแสนตอโนนสร้างคำ","note":"","tambon":"สุมเส้า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":99,"size":"ขนาดเล็ก","grades":{"อ.2":[16,1],"อ.3":[11,1],"ป.1":[19,1],"ป.2":[8,1],"ป.3":[4,1],"ป.4":[13,1],"ป.5":[12,1],"ป.6":[16,1]}},{"code":"41010217","name":"ดงยางวังโตนวิทยา","note":"","tambon":"สุมเส้า","amphoe":"เพ็ญ","group":"กลุ่มเพ็ญ 1","total":124,"size":"ขนาดกลาง","grades":{"อ.2":[16,1],"อ.3":[22,1],"ป.1":[15,1],"ป.2":[21,1],"ป.3":[9,1],"ป.4":[17,1],"ป.5":[12,1],"ป.6":[12,1]}},{"code":"41010218","name":"บ้านเชียงดา","note":"","tambon":"เชียงดา","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 1","total":142,"size":"ขนาดกลาง","grades":{"อ.2":[8,1],"อ.3":[9,1],"ป.1":[14,1],"ป.2":[11,1],"ป.3":[9,1],"ป.4":[25,1],"ป.5":[6,1],"ป.6":[11,1],"ม.1":[20,1],"ม.2":[10,1],"ม.3":[19,1]}},{"code":"41010219","name":"บ้านแมดวิทยาคม","note":"","tambon":"เชียงดา","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 1","total":128,"size":"ขนาดกลาง","grades":{"อ.2":[9,1],"อ.3":[15,1],"ป.1":[11,1],"ป.2":[10,1],"ป.3":[13,1],"ป.4":[11,1],"ป.5":[13,1],"ป.6":[11,1],"ม.1":[15,1],"ม.2":[7,1],"ม.3":[13,1]}},{"code":"41010220","name":"บ้านนาหว้า(สันติราษฎร์พิทยาคม)","note":"","tambon":"นาสะอาด","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 1","total":64,"size":"ขนาดเล็ก","grades":{"อ.2":[4,1],"อ.3":[8,1],"ป.1":[10,1],"ป.2":[9,1],"ป.3":[9,1],"ป.4":[5,1],"ป.5":[6,1],"ป.6":[13,1]}},{"code":"41010221","name":"บ้านไชยฟอง","note":"","tambon":"นาสะอาด","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 1","total":26,"size":"ขนาดเล็ก","grades":{"อ.3":[3,1],"ป.1":[3,1],"ป.2":[3,1],"ป.3":[4,1],"ป.4":[4,1],"ป.5":[5,1],"ป.6":[4,1]}},{"code":"41010222","name":"บ้านนาสะอาด","note":"","tambon":"นาสะอาด","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 1","total":28,"size":"ขนาดเล็ก","grades":{"อ.2":[2,1],"อ.3":[3,1],"ป.1":[2,1],"ป.2":[2,1],"ป.3":[2,1],"ป.4":[7,1],"ป.5":[5,1],"ป.6":[5,1]}},{"code":"41010223","name":"บ้านดอนเดื่อ","note":"","tambon":"บ้านโคก","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 2","total":118,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[7,1],"ป.1":[7,1],"ป.2":[9,1],"ป.3":[11,1],"ป.4":[7,1],"ป.5":[9,1],"ป.6":[14,1],"ม.1":[11,1],"ม.2":[16,1],"ม.3":[22,1]}},{"code":"41010224","name":"บ้านดอนบาก","note":"","tambon":"บ้านโคก","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 2","total":73,"size":"ขนาดเล็ก","grades":{"อ.2":[7,1],"อ.3":[11,1],"ป.1":[8,1],"ป.2":[7,1],"ป.3":[4,1],"ป.4":[7,1],"ป.5":[14,1],"ป.6":[15,1]}},{"code":"41010225","name":"โคกโพธิ์วิทยา","note":"","tambon":"บ้านโคก","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 2","total":183,"size":"ขนาดกลาง","grades":{"อ.2":[20,1],"อ.3":[17,1],"ป.1":[28,1],"ป.2":[22,1],"ป.3":[19,1],"ป.4":[16,1],"ป.5":[18,1],"ป.6":[17,1],"ม.1":[8,1],"ม.2":[11,1],"ม.3":[7,1]}},{"code":"41010226","name":"บ้านนาน้ำชุ่ม","note":"","tambon":"บ้านโคก","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 2","total":259,"size":"ขนาดกลาง","grades":{"อ.2":[24,1],"อ.3":[18,1],"ป.1":[21,1],"ป.2":[18,1],"ป.3":[32,1],"ป.4":[26,1],"ป.5":[22,1],"ป.6":[22,1],"ม.1":[32,1],"ม.2":[25,1],"ม.3":[19,1]}},{"code":"41010227","name":"บ้านยวด","note":"","tambon":"บ้านยวด","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 2","total":129,"size":"ขนาดกลาง","grades":{"อ.2":[15,1],"อ.3":[5,1],"ป.1":[17,1],"ป.2":[13,1],"ป.3":[14,1],"ป.4":[16,1],"ป.5":[7,1],"ป.6":[17,1],"ม.1":[10,1],"ม.2":[11,1],"ม.3":[4,1]}},{"code":"41010228","name":"บ้านชาด","note":"","tambon":"บ้านยวด","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 2","total":119,"size":"ขนาดเล็ก","grades":{"อ.2":[17,1],"อ.3":[12,1],"ป.1":[16,1],"ป.2":[11,1],"ป.3":[16,1],"ป.4":[19,1],"ป.5":[16,1],"ป.6":[12,1]}},{"code":"41010229","name":"บ้านนามั่ง","note":"","tambon":"บ้านยวด","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 2","total":219,"size":"ขนาดกลาง","grades":{"อ.2":[15,1],"อ.3":[25,1],"ป.1":[21,1],"ป.2":[19,1],"ป.3":[16,1],"ป.4":[16,1],"ป.5":[18,1],"ป.6":[14,1],"ม.1":[26,1],"ม.2":[27,1],"ม.3":[22,1]}},{"code":"41010230","name":"บ้านน้ำเที่ยง","note":"","tambon":"บ้านหินโงม","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 2","total":66,"size":"ขนาดเล็ก","grades":{"อ.2":[5,1],"อ.3":[12,1],"ป.1":[7,1],"ป.2":[6,1],"ป.3":[7,1],"ป.4":[8,1],"ป.5":[11,1],"ป.6":[10,1]}},{"code":"41010231","name":"บ้านตลิ่งชัน-สร้างแก้ว","note":"","tambon":"บ้านหินโงม","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 2","total":83,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[10,1],"ป.1":[15,1],"ป.2":[10,1],"ป.3":[9,1],"ป.4":[19,1],"ป.5":[8,1],"ป.6":[6,1]}},{"code":"41010232","name":"บ้านศรีชมชื่นบุญชิตวิทยา","note":"","tambon":"บ้านหินโงม","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 2","total":45,"size":"ขนาดเล็ก","grades":{"อ.2":[8,1],"อ.3":[5,1],"ป.1":[3,1],"ป.2":[7,1],"ป.3":[4,1],"ป.4":[10,1],"ป.5":[4,1],"ป.6":[4,1]}},{"code":"41010233","name":"บ้านหินโงม","note":"","tambon":"บ้านหินโงม","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 2","total":122,"size":"ขนาดกลาง","grades":{"อ.2":[10,1],"อ.3":[9,1],"ป.1":[12,1],"ป.2":[12,1],"ป.3":[10,1],"ป.4":[11,1],"ป.5":[9,1],"ป.6":[17,1],"ม.1":[14,1],"ม.2":[4,1],"ม.3":[14,1]}},{"code":"41010234","name":"บ้านโนนนกหอ(เพ็งแสนวิทยา)","note":"เรียนรวมทุกชั้น","tambon":"สร้างคอม","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 1","total":8,"size":"ขนาดเล็ก","grades":{"อ.2":[3,1],"อ.3":[2,1],"ป.3":[1,1],"ป.4":[1,1],"ป.5":[1,1]}},{"code":"41010235","name":"บ้านดงผักเทียม","note":"","tambon":"สร้างคอม","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 1","total":29,"size":"ขนาดเล็ก","grades":{"อ.2":[6,1],"อ.3":[8,1],"ป.1":[2,1],"ป.2":[2,1],"ป.3":[3,1],"ป.4":[3,1],"ป.5":[3,1],"ป.6":[2,1]}},{"code":"41010236","name":"อนุบาลสร้างคอม","note":"","tambon":"สร้างคอม","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 1","total":320,"size":"ขนาดกลาง","grades":{"อ.2":[35,2],"อ.3":[30,2],"ป.1":[35,2],"ป.2":[38,2],"ป.3":[45,2],"ป.4":[39,2],"ป.5":[48,2],"ป.6":[50,2]}},{"code":"41010237","name":"บ้านท่าเสียว","note":"","tambon":"สร้างคอม","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 1","total":107,"size":"ขนาดเล็ก","grades":{"อ.2":[10,1],"อ.3":[11,1],"ป.1":[8,1],"ป.2":[19,1],"ป.3":[12,1],"ป.4":[11,1],"ป.5":[21,1],"ป.6":[15,1]}},{"code":"41010238","name":"บ้านโนนชาดวรุบลวิทยา","note":"","tambon":"สร้างคอม","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 1","total":61,"size":"ขนาดเล็ก","grades":{"อ.2":[9,1],"อ.3":[9,1],"ป.1":[8,1],"ป.2":[10,1],"ป.3":[7,1],"ป.4":[6,1],"ป.5":[7,1],"ป.6":[5,1]}},{"code":"41010239","name":"บ้านโคกสว่าง","note":"เรียนรวมทุกชั้น อนุบาลสร้างคอม","tambon":"สร้างคอม","amphoe":"สร้างคอม","group":"กลุ่มสร้างคอม 1","total":0,"size":"ขนาดเล็ก","grades":{}}];
+
+const ABBR_G = {
+  'อนุบาล 1':'อ.1','อนุบาล 2':'อ.2','อนุบาล 3':'อ.3',
+  'ประถมศึกษาปีที่ 1':'ป.1','ประถมศึกษาปีที่ 2':'ป.2','ประถมศึกษาปีที่ 3':'ป.3',
+  'ประถมศึกษาปีที่ 4':'ป.4','ประถมศึกษาปีที่ 5':'ป.5','ประถมศึกษาปีที่ 6':'ป.6',
+  'มัธยมศึกษาปีที่ 1':'ม.1','มัธยมศึกษาปีที่ 2':'ม.2','มัธยมศึกษาปีที่ 3':'ม.3',
+  'มัธยมศึกษาปีที่ 4':'ม.4','มัธยมศึกษาปีที่ 5':'ม.5','มัธยมศึกษาปีที่ 6':'ม.6'
+};
+const GORDER = ['อ.1','อ.2','อ.3','ป.1','ป.2','ป.3','ป.4','ป.5','ป.6','ม.1','ม.2','ม.3','ม.4','ม.5','ม.6'];
+
+var ROWS = [];          /* ทุกแถวของทั้งเขต */
+var DIST_C = [];        /* ค่าเฉลี่ยรายทักษะของเขต */
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s)
+  .replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const nf = n => Number(n || 0).toLocaleString('th-TH');
+const gi = g => { const i = GORDER.indexOf(ABBR_G[g] || g); return i < 0 ? 99 : i; };
+
+function jsonp(params, cb){
+  const name = 'cb_' + Math.random().toString(36).slice(2);
+  const s = document.createElement('script');
+  const t = setTimeout(function(){ cleanup(); cb({ ok:false, message:'หมดเวลาเชื่อมต่อ' }); }, 40000);
+  function cleanup(){ clearTimeout(t); try{ delete window[name]; }catch(e){} s.remove(); }
+  window[name] = function(r){ cleanup(); cb(r); };
+  s.src = API_URL + '?' + params + '&callback=' + name;
+  s.onerror = function(){ cleanup(); cb({ ok:false, message:'เชื่อมต่อไม่สำเร็จ' }); };
+  document.body.appendChild(s);
+}
+
+/* ค่าเฉลี่ยรายทักษะแบบถ่วงน้ำหนักจำนวนนักเรียน */
+function avgC(rows){
+  const sum = new Array(8).fill(0); var n = 0;
+  rows.forEach(function(r){
+    const w = r.nAll || 0; if (!w) return;
+    n += w;
+    for (var k = 0; k < 8; k++) sum[k] += (r.c[k] || 0) * w;
+  });
+  return n ? sum.map(v => v / n) : new Array(8).fill(0);
+}
+const mean8 = a => a.reduce((x, y) => x + y, 0) / 8;
+const qOf = v => v >= 3.51 ? 'ดีเยี่ยม' : v >= 2.51 ? 'ดี' : v >= 1.51 ? 'พอใช้' : 'ควรพัฒนา';
+
+/* ---------- ตัวกรอง ---------- */
+function fill(sel, items, val){
+  sel.innerHTML = items.map(o => '<option value="' + esc(o.v) + '">' + esc(o.t) + '</option>').join('');
+  if (val != null) sel.value = val;
+}
+
+function setupSchools(){
+  const q = new URLSearchParams(location.search);
+  const list = SCHOOLS.slice().sort((a, b) => a.name.localeCompare(b.name, 'th'));
+  fill($('fSchool'), list.map(s => ({ v: s.code, t: s.name + ' · ' + s.group })));
+  const want = q.get('smis');
+  if (want && SCHOOLS.some(s => s.code === want)) $('fSchool').value = want;
+}
+
+function refreshFilters(){
+  const smis = $('fSchool').value;
+  const mine = ROWS.filter(r => r.smis === smis);
+
+  const years = [...new Set(mine.map(r => r.year))].sort().reverse();
+  const keepY = $('fYear').value;
+  fill($('fYear'), years.map(y => ({ v: y, t: y })), years.includes(keepY) ? keepY : years[0]);
+
+  const terms = [...new Set(mine.filter(r => r.year === $('fYear').value).map(r => r.term))].sort();
+  const keepT = $('fTerm').value;
+  fill($('fTerm'), terms.map(t => ({ v: t, t: 'ภาคเรียนที่ ' + t })), terms.includes(keepT) ? keepT : terms[0]);
+
+  const cur = mine.filter(r => r.year === $('fYear').value && r.term === $('fTerm').value);
+  const grades = [...new Set(cur.map(r => r.grade))].sort((a, b) => gi(a) - gi(b));
+  const keepG = $('fGrade').value;
+  fill($('fGrade'), [{ v: '*', t: 'ทุกระดับชั้น' }].concat(grades.map(g => ({ v: g, t: g }))),
+    grades.includes(keepG) ? keepG : '*');
+
+  const rooms = [...new Set(cur.filter(r => $('fGrade').value === '*' || r.grade === $('fGrade').value)
+    .map(r => r.room))].sort((a, b) => a - b);
+  fill($('fRoom'), [{ v: '*', t: 'ทุกห้อง' }].concat(rooms.map(r => ({ v: r, t: 'ห้องที่ ' + r }))), '*');
+}
+
+function picked(){
+  const smis = $('fSchool').value;
+  return ROWS.filter(r => r.smis === smis
+    && r.year === $('fYear').value && r.term === $('fTerm').value
+    && ($('fGrade').value === '*' || r.grade === $('fGrade').value)
+    && ($('fRoom').value === '*' || String(r.room) === String($('fRoom').value)))
+    .sort((a, b) => gi(a.grade) - gi(b.grade) || a.room - b.room);
+}
+
+/* ---------- ส่วนประกอบของรายงาน ---------- */
+function kpiBlock(row, schoolC){
+  const my = mean8(row.c), sc = mean8(schoolC), dt = mean8(DIST_C);
+  const dS = my - sc, dD = my - dt;
+  const risk = row.dist.reduce((a, d) => a + d[0] + d[1], 0);
+  const totalMarks = row.nAll * 8;
+  const pct = totalMarks ? Math.round(risk / totalMarks * 100) : 0;
+  const sign = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(2);
+  return '<div class="kpi">' +
+    '<div class="k"><div class="t">คะแนนเฉลี่ย 8C ของห้อง</div>' +
+      '<div class="v">' + my.toFixed(2) + ' <span style="font-size:.8rem;font-weight:600;color:var(--ink-3)">/ 4.00</span></div>' +
+      '<div class="d">ระดับคุณภาพ <b>' + qOf(my) + '</b></div></div>' +
+    '<div class="k"><div class="t">เทียบค่าเฉลี่ยโรงเรียน</div>' +
+      '<div class="v ' + (dS >= 0 ? 'up' : 'dn') + '">' + sign(dS) + '</div>' +
+      '<div class="d">โรงเรียน ' + sc.toFixed(2) + '</div></div>' +
+    '<div class="k"><div class="t">เทียบค่าเฉลี่ยเขต</div>' +
+      '<div class="v ' + (dD >= 0 ? 'up' : 'dn') + '">' + sign(dD) + '</div>' +
+      '<div class="d">เขต ' + dt.toFixed(2) + '</div></div>' +
+    '<div class="k"><div class="t">ยังไม่ถึงเกณฑ์ (ระดับ 1–2)</div>' +
+      '<div class="v ' + (pct >= 25 ? 'dn' : '') + '">' + pct + '%</div>' +
+      '<div class="d">' + nf(risk) + ' จาก ' + nf(totalMarks) + ' รายการประเมิน</div></div>' +
+    '</div>';
+}
+
+function skillTable(row, schoolC){
+  var body = '';
+  RUBRIC.forEach(function(r, k){
+    const d = row.dist[k], v = row.c[k] || 0;
+    const need = d[0] + d[1];
+    const pc = row.nAll ? Math.round(need / row.nAll * 100) : 0;
+    const gap = v - (DIST_C[k] || 0);
+    body += '<tr>' +
+      '<td><span class="nm"><i style="background:' + r.color + '"></i>' +
+        '<span><b>' + r.key + '</b> ' + esc(r.short) + '</span></span></td>' +
+      '<td><b>' + v.toFixed(2) + '</b></td>' +
+      '<td class="' + (gap >= 0 ? 'up' : 'dn') + '">' + (gap >= 0 ? '+' : '−') + Math.abs(gap).toFixed(2) + '</td>' +
+      '<td>' + nf(d[0]) + '</td><td>' + nf(d[1]) + '</td><td>' + nf(d[2]) + '</td><td>' + nf(d[3]) + '</td>' +
+      '<td class="risk ' + (pc >= 30 ? 'hi' : pc >= 15 ? 'mid' : '') + '">' + pc + '%</td>' +
+      '</tr>';
+  });
+  return '<table><thead><tr>' +
+    '<th>ทักษะ</th><th>เฉลี่ย</th><th>เทียบเขต</th>' +
+    '<th><span class="pill lv1">1</span></th><th><span class="pill lv2">2</span></th>' +
+    '<th><span class="pill lv3">3</span></th><th><span class="pill lv4">4</span></th>' +
+    '<th>ยังไม่ถึงเกณฑ์</th></tr></thead><tbody>' + body + '</tbody></table>' +
+    '<p class="cap" style="margin-top:8px">ตัวเลขในคอลัมน์ 1–4 คือ <b>จำนวนนักเรียน</b> ในแต่ละระดับคุณภาพ ' +
+    '(1 ควรพัฒนา · 2 พอใช้ · 3 ดี · 4 ดีเยี่ยม)</p>';
+}
+
+function targetBlock(row){
+  const list = RUBRIC.map(function(r, k){
+    const need = row.dist[k][0] + row.dist[k][1];
+    return { r: r, k: k, need: need, pc: row.nAll ? Math.round(need / row.nAll * 100) : 0 };
+  }).filter(x => x.need > 0).sort((a, b) => b.need - a.need);
+
+  if (!list.length) {
+    return '<div class="empty" style="padding:20px">ไม่มีนักเรียนที่อยู่ในระดับ 1–2 ในห้องนี้ 🎉 ' +
+      'ให้เน้นกิจกรรมต่อยอดแทน</div>';
+  }
+  return '<div class="target">' + list.map(x =>
+    '<div class="row"><div class="cnt">' + nf(x.need) + '<small>คน</small></div>' +
+    '<div class="who"><b>' + x.r.key + ' ' + esc(x.r.short) + '</b>' +
+    '<div>ระดับ 1 ควรพัฒนา ' + nf(row.dist[x.k][0]) + ' คน · ระดับ 2 พอใช้ ' + nf(row.dist[x.k][1]) + ' คน</div></div>' +
+    '<div class="pc">' + x.pc + '% ของห้อง</div></div>').join('') + '</div>';
+}
+
+function planBlock(row){
+  const order = RUBRIC.map((r, k) => ({ r: r, k: k, v: row.c[k] || 0 }))
+    .sort((a, b) => a.v - b.v).slice(0, 3);
+  return '<div class="plan">' + order.map(function(x){
+    const lv = Math.max(1, Math.min(4, Math.floor(x.v)));      /* ระดับที่ห้องทำได้แล้ว */
+    const nx = Math.min(4, lv + 1);
+    const a = ACT[x.r.key] || { fix: [], ext: [] };
+    const useFix = x.v < 3;
+    return '<div class="card">' +
+      '<div class="hd"><b>' + x.r.key + ' ' + esc(x.r.short) + '</b>' +
+        '<span>ค่าเฉลี่ยห้อง ' + x.v.toFixed(2) + ' · อยู่ระดับ ' + lv + ' ' + LEVEL_NAME[lv - 1] + '</span></div>' +
+      '<div class="bd">' +
+        '<div class="step"><b>ตอนนี้ (ระดับ ' + lv + '):</b> ' + esc(x.r.levels[lv - 1]) + '</div>' +
+        (lv < 4 ? '<div class="step" style="border-left-color:var(--ok)"><b>เป้าหมายถัดไป (ระดับ ' + nx + '):</b> ' +
+          esc(x.r.levels[nx - 1]) + '</div>' : '') +
+        '<ul>' + (useFix ? a.fix : a.ext).map(t => '<li>' + esc(t) + '</li>').join('') + '</ul>' +
+        (useFix && a.ext.length ? '<div class="ext"><div class="t">สำหรับนักเรียนที่ผ่านเกณฑ์แล้ว (ระดับ 3–4)</div>' +
+          '<ul>' + a.ext.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul></div>' : '') +
+      '</div></div>';
+  }).join('') + '</div>';
+}
+
+function sheetOf(row, school, schoolC){
+  const items = RUBRIC.map((r, k) => ({ key: r.key, short: r.short, label: r.th,
+    v: row.c[k] || 0, extra: ['ยังไม่ถึงเกณฑ์', nf(row.dist[k][0] + row.dist[k][1]) + ' คน'] }));
+  const stamp = new Date().toLocaleDateString('th-TH', { day:'numeric', month:'long', year:'numeric' });
+  return '<div class="sheet">' +
+    '<div class="rhead"><div>' +
+      '<h2>ใบสรุปผลการประเมินทักษะแห่งศตวรรษที่ 21 (8C) รายห้องเรียน</h2>' +
+      '<p class="sub">' + esc(school.name) + ' · ' + esc(school.group) + ' · อำเภอ' + esc(school.amphoe) + '</p>' +
+    '</div><div class="org">สพป.อุดรธานี เขต 1<br>ปีการศึกษา ' + esc(row.year) +
+      ' ภาคเรียนที่ ' + esc(row.term) + '</div></div>' +
+
+    '<div class="meta">' +
+      '<span>ระดับชั้น <b>' + esc(row.grade) + '</b></span>' +
+      '<span>ห้องที่ <b>' + esc(row.room) + '</b></span>' +
+      '<span>จำนวนนักเรียน <b>' + nf(row.nAll) + '</b> คน</span>' +
+      (row.reporter ? '<span>ครูผู้ประเมิน <b>' + esc(row.reporter) + '</b></span>' : '') +
+      (row.updated || row.created ? '<span>บันทึกเมื่อ <b>' + esc(row.updated || row.created) + '</b></span>' : '') +
+    '</div>' +
+
+    kpiBlock(row, schoolC) +
+
+    '<h3 class="sec"><span class="n">1</span> ภาพรวมทักษะ 8 ด้านของห้อง</h3>' +
+    '<p class="cap">ยิ่งกางออกยิ่งดี (เต็ม 4.00) — ด้านที่บุ๋มเข้าหาศูนย์กลางคือด้านที่ต้องเร่งพัฒนาก่อน</p>' +
+    '<div class="two"><div>' + CH.radar(items) + '</div><div>' + skillTable(row, schoolC) + '</div></div>' +
+
+    '<h3 class="sec"><span class="n">2</span> บัญชีกลุ่มเป้าหมายซ่อมเสริม</h3>' +
+    '<p class="cap">เรียงจากด้านที่มีนักเรียนยังไม่ถึงเกณฑ์มากที่สุด ใช้จัดกลุ่มสอนซ่อมเสริมได้ทันที</p>' +
+    targetBlock(row) +
+
+    '<h3 class="sec"><span class="n">3</span> แนวทางพัฒนา 3 ด้านที่ควรเร่งที่สุด</h3>' +
+    '<p class="cap">อ้างอิงเกณฑ์รูบริก 4 ระดับ — แสดงระดับที่ห้องอยู่ตอนนี้และเป้าหมายถัดไป ' +
+    'พร้อมตัวอย่างกิจกรรมที่ครูปรับใช้ได้</p>' +
+    planBlock(row) +
+
+    '<div class="sign">' +
+      '<div><div class="ln"></div>(' + esc(row.reporter || '.....................................') + ')<br>ครูประจำชั้น</div>' +
+      '<div><div class="ln"></div>(.....................................)<br>ผู้อำนวยการโรงเรียน</div>' +
+    '</div>' +
+
+    '<div class="foot"><span>8C SkillTrack · สพป.อุดรธานี เขต 1</span>' +
+      '<span>พิมพ์เมื่อ ' + stamp + '</span></div>' +
+    '</div>';
+}
+
+/* ---------- แสดงผล ---------- */
+function render(){
+  const smis = $('fSchool').value;
+  const school = SCHOOLS.find(s => s.code === smis);
+  const mine = ROWS.filter(r => r.smis === smis
+    && r.year === $('fYear').value && r.term === $('fTerm').value);
+  const schoolC = avgC(mine);
+  const rows = picked();
+
+  if (!rows.length) {
+    $('sheets').innerHTML = '<div class="empty">ยังไม่มีข้อมูลตามเงื่อนไขที่เลือก</div>';
+    $('note').textContent = '';
+    return;
+  }
+  $('note').innerHTML = 'กำลังแสดง <b>' + rows.length + '</b> ห้อง — สั่งพิมพ์ครั้งเดียวได้ทั้งหมด ' +
+    '(ขึ้นหน้าใหม่ทุกห้อง) · เลือก "ทุกระดับชั้น" เพื่อพิมพ์ทั้งโรงเรียนในครั้งเดียว';
+  $('sheets').innerHTML = rows.map(r => sheetOf(r, school, schoolC)).join('');
+  $('sheets').querySelectorAll('.chart').forEach(el => CH.bind(el.parentNode));
+}
+
+function boot(){
+  if (!API_URL) {
+    $('sheets').innerHTML = '<div class="empty">ยังไม่ได้ตั้งค่า API_URL ในไฟล์นี้</div>';
+    return;
+  }
+  setupSchools();
+  jsonp('action=area', function(r){
+    if (!r || !r.ok) {
+      $('sheets').innerHTML = '<div class="empty">โหลดข้อมูลไม่สำเร็จ: ' + esc(r && r.message) + '</div>';
+      return;
+    }
+    ROWS = r.rows || [];
+    DIST_C = avgC(ROWS);
+    refreshFilters();
+    render();
+  });
+}
+
+$('fSchool').addEventListener('change', function(){ refreshFilters(); render(); });
+$('fYear').addEventListener('change', function(){ refreshFilters(); render(); });
+$('fTerm').addEventListener('change', function(){ refreshFilters(); render(); });
+$('fGrade').addEventListener('change', function(){ refreshFilters(); render(); });
+$('fRoom').addEventListener('change', render);
+$('btnPrint').addEventListener('click', function(){ window.print(); });
+$('btnBack').addEventListener('click', function(){
+  location.href = 'school.html?smis=' + encodeURIComponent($('fSchool').value);
+});
+
+boot();
+</script>
+</body>
+</html>
