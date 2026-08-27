@@ -645,17 +645,29 @@ const CH = (function () {
       const anchor = Math.abs(c) < 0.3 ? 'middle' : (c > 0 ? 'start' : 'end');
       s += '<text class="key" x="' + LX.toFixed(1) + '" y="' + (LY - 3).toFixed(1) + '" text-anchor="' + anchor + '">' +
         esc2(x.key) + '</text>';
+      /* ชื่อย่อยาว ๆ ตัดเป็น 2 บรรทัด กันล้นออกนอกกรอบ */
+      const sub = String(x.short || '');
+      var l1 = sub, l2 = '';
+      if (sub.length > 17) {
+        var cut = sub.lastIndexOf(' ', Math.ceil(sub.length / 2) + 4);
+        if (cut < 4) cut = sub.indexOf(' ', Math.ceil(sub.length / 2) - 4);
+        if (cut > 3) { l1 = sub.slice(0, cut); l2 = sub.slice(cut + 1); }
+      }
       s += '<text class="sub" x="' + LX.toFixed(1) + '" y="' + (LY + 9).toFixed(1) + '" text-anchor="' + anchor + '">' +
-        esc2(x.short || '') + '</text>';
+        esc2(l1) + (l2 ? '<tspan x="' + LX.toFixed(1) + '" dy="11">' + esc2(l2) + '</tspan>' : '') + '</text>';
     });
 
     /* ป้ายค่าเฉพาะจุดสูงสุด–ต่ำสุด (ไม่ติดป้ายทุกจุด) */
     [[best, 'สูงสุด'], [worst, 'ต่ำสุด']].forEach(function (pair) {
       const i = pair[0], x = items[i];
       const X = px(i, x.v), Y = py(i, x.v);
-      const c = Math.cos(ang(i)), off = c >= 0 ? 13 : -13;
-      s += '<text class="val pin" x="' + (X + off).toFixed(1) + '" y="' + (Y + 4).toFixed(1) +
-        '" text-anchor="' + (c >= 0 ? 'start' : 'end') + '" stroke="var(--card)" stroke-width="3">' +
+      const c = Math.cos(ang(i)), sn = Math.sin(ang(i));
+      /* แกนบน–ล่างวางป้ายในแนวตั้ง ไม่ให้ทับตัวเลขสเกลกลางภาพ */
+      var tx, ty, anc;
+      if (Math.abs(c) < 0.35) { tx = X; ty = Y + (sn < 0 ? -11 : 16); anc = 'middle'; }
+      else { tx = X + (c >= 0 ? 13 : -13); ty = Y + 4; anc = c >= 0 ? 'start' : 'end'; }
+      s += '<text class="val pin" x="' + tx.toFixed(1) + '" y="' + ty.toFixed(1) +
+        '" text-anchor="' + anc + '" stroke="var(--card)" stroke-width="3">' +
         x.v.toFixed(2) + '</text>';
     });
     s += '</svg>';
